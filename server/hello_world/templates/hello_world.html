@@ -1,0 +1,31 @@
+{% block page_content %}
+
+<div class="col-md-8 offset-md-2">
+
+    <h1>IMC</h1>
+
+    <form action="" method="post">
+
+        {% csrf_token %}
+        <div class="form-group">
+            <a>Seu peso:</a>
+
+            {{ form.peso }}
+
+        </div>
+
+        <div class="form-group">
+            <a>Sua altura:</a>
+
+            {{ form.altura }}
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+    <h3>Seu IMC é {{ imc }}</h3>
+</div>
+
+{% endblock %}
