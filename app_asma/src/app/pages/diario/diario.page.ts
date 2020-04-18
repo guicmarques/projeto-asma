@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./diario.page.scss'],
 })
 export class DiarioPage implements OnInit {
+  imgBuilding: String = '../../../assets/images/em_construcao.jpg';
 
   constructor() { }
 

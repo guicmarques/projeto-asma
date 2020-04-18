@@ -1,0 +1,26 @@
+.building {
+    position: relative;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.building-img {
+    height: 16em;
+    width: 16em;
+}
+
+.oops-text {
+    font-family: 'Segoe UI';
+    font-size: xx-large;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.page-text {
+    font-family: 'Segoe UI';
+    font-size: large;
+    font-weight: 100;
+    margin-top: 0;
+}

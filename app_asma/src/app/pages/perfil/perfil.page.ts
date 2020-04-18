@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
+  imgBuilding: String = '../../../assets/images/em_construcao.jpg';
 
   constructor() { }
 
