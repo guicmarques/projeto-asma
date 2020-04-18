@@ -1,0 +1,20 @@
+{% extends "server/base.html" %}
+{% load static %}{% block body_block %}
+<div class="container">
+    <div class="jumbotron">
+        {% if registered %}
+        <h1>Obrigado por se cadastrar!</h1>
+        {% else %}
+        <h1>Cadastre-se aqui</h1>
+        <h3>Complete os campos.</h3>
+        <form enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <input type="submit" name="" value="Cadastrar">
+        </form>
+
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
