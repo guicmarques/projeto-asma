@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./exercicios.page.scss'],
 })
 export class ExerciciosPage implements OnInit {
-  imgBuilding: String = '../../../assets/images/em_construcao.jpg';
+  imgBuilding: String = '../../../assets/images/em_construcao.svg';
 
   constructor() { }
 
