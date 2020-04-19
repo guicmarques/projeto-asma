@@ -24,3 +24,12 @@
     font-weight: 100;
     margin-top: 0;
 }
+
+.dot {
+    height: 2px;
+    width: 2px;
+    background-color: gray;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 2px;
+}
