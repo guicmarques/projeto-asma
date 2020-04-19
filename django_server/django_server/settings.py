@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'server'
+    'health_team'
 ]
 
 MIDDLEWARE = [
@@ -124,9 +124,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
-LOGIN_URL = '/server/user_login/'
+LOGIN_URL = '/health_team/user_login/'
 
 # User substitution
 # https://docs.djangoproject.com/en/1.11/topics/auth/customizing/#auth-custom-user
 
-AUTH_USER_MODEL = 'server.User'
+AUTH_USER_MODEL = 'health_team.User'

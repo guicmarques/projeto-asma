@@ -14,12 +14,12 @@
         <div class="container">
             <ul class="nav navbar-nav">{# Home Link / Register Link#}
                 <li><a class="navbar-brand" href="{% url 'index' %}">Gerenciador Asma</a></li>
-                <li><a class="navbar-link" href="{% url 'server:register' %}">Register</a></li>
+                <li><a class="navbar-link" href="{% url 'health_team:register' %}">Register</a></li>
                 {# Some logic on what to display for last item#}
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
-                <li><a class="navbar-link" href="{% url 'server:user_login' %}">Login</a></li>
+                <li><a class="navbar-link" href="{% url 'health_team:user_login' %}">Login</a></li>
                 {% endif %}
             </ul>
         </div>

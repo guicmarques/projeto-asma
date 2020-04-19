@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from server.forms import UserForm, UserProfileInfoForm
+from health_team.forms import UserForm, UserProfileInfoForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    return render(request, 'server/index.html')
+    return render(request, 'health_team/index.html')
 
 
 @login_required
@@ -39,10 +39,10 @@ def register(request):
     else:
         user_form = UserForm()
         profile_form = UserProfileInfoForm()
-    return render(request, 'server/registration.html',
+    return render(request, 'health_team/registration.html',
                   {'user_form': user_form,
-                           'profile_form': profile_form,
-                           'registered': registered})
+                   'profile_form': profile_form,
+                   'registered': registered})
 
 
 def user_login(request):
@@ -62,4 +62,4 @@ def user_login(request):
                 username, password))
             return HttpResponse("Invalid login details given")
     else:
-        return render(request, 'server/login.html', {})
+        return render(request, 'health_team/login.html', {})

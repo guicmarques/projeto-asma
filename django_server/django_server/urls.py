@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-from server import views
+from health_team import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
     url(r'^special/', views.special, name='special'),
-    url(r'^server/', include('server.urls')),
+    url(r'^health_team/', include('health_team.urls')),
     url(r'^logout/$', views.user_logout, name='logout'),
 ]

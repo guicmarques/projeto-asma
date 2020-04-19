@@ -1,8 +1,8 @@
 from django.conf.urls import url
-from server import views
+from health_team import views
 
 # SET THE NAMESPACE!
-app_name = 'server'
+app_name = 'health_team'
 
 # Be careful setting the name to just /login use userlogin instead!
 urlpatterns = [

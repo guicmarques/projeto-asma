@@ -1,9 +1,9 @@
-{% extends 'server/base.html' %}
+{% extends 'health_team/base.html' %}
 {% block body_block %}
 <div class="container">
     <div class="jumbotron">
         <h1>Faça o login aqui:</h1>
-        <form method="post" action="{% url 'server:user_login' %}">
+        <form method="post" action="{% url 'health_team:user_login' %}">
             {% csrf_token %}
             {# A more "HTML" way of creating the login form#}
             <label for="username">Username:</label>
