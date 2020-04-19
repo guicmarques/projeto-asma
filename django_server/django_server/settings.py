@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'health_team'
+    'health_team',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -126,7 +127,7 @@ MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 LOGIN_URL = '/health_team/user_login/'
 
-# User substitution
-# https://docs.djangoproject.com/en/1.11/topics/auth/customizing/#auth-custom-user
-
-AUTH_USER_MODEL = 'health_team.User'
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
