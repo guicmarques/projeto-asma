@@ -5,7 +5,7 @@ Projeto do Laboratório de Engenharia de Software da Poli-USP em parceria com a 
 - insira os seguintes comandos:
 
 ```
-$ python manage.py makemigrations server
+$ python manage.py makemigrations
 ```
 ```
 $ python manage.py migrate
@@ -14,4 +14,8 @@ $ python manage.py migrate
 $ python manage.py runserver
 ```
 
-- para o admin do projeto, contate [Guilherme Marques](mailto:guicmarques@usp.br)
+- para criar um usuario de admin do banco de dados, insira o seguinte comando e complete as informações:
+
+```
+python manage.py createsuperuser
+```
