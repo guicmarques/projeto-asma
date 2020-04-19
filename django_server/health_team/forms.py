@@ -1,5 +1,6 @@
 from django import forms
-from health_team.models import UserProfileInfo, User
+from health_team.models import UserProfileInfo
+from django.contrib.auth.models import User
 
 
 class UserForm(forms.ModelForm):
