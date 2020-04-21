@@ -1,5 +1,5 @@
 from django import forms
-from health_team.models import UserProfileInfo, User
+from server.models import UserProfileInfo, User
 
 
 class UserForm(forms.ModelForm):
@@ -13,5 +13,5 @@ class UserForm(forms.ModelForm):
 class UserProfileInfoForm(forms.ModelForm):
     class Meta():
         model = UserProfileInfo
-        fields = ('nome', 'sobrenome', 'rg', 'cpf',
+        fields = ('nome', 'sobrenome', 'rg', 'altura', 'peso',
                   'telefone', 'token')
