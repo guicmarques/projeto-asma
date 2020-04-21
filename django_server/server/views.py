@@ -38,7 +38,3 @@ class RegisterUser(APIView):
             return Response("This user is already created", status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response("New user {} created".format(request.data["username"]))
-        # if serializer.is_valid():
-        #     serializer.save()
-        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
