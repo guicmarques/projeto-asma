@@ -9,14 +9,18 @@ def createUser(userData):
     if all(item in userData.keys() for item in required):
         missingData = False
 
-        username = userData["username"]
-        password = userData["password"]
-        email = userData["email"]
+        username = str(userData["username"]).replace(
+            ".", "").replace("-", "").replace(" ", "")
+        password = str(userData["password"])
+        email = str(userData["email"]).replace(" ", "")
+
+        if username and email and password:
+            user, created = User.objects.get_or_create(username=username,
+                                                       email=email)
+        else:
+            return True, False
 
         pacientes = getGroup('Pacientes')
-
-        user, created = User.objects.get_or_create(username=username,
-                                                   email=email)
 
         if created:
             user.set_password(password)
@@ -47,14 +51,6 @@ def createUser(userData):
             return missingData, False
     else:
         return missingData, False
-    # user.save()
-
-    # u,created = User.objects.get_or_create(userName, userMail)
-    # if created:
-    #     # user was created
-    #     # set the password here
-    # else:
-    #     # user was retrieved
 
 
 def getGroup(groupName):
@@ -64,3 +60,47 @@ def getGroup(groupName):
     if createdGroup:
         print("Created {} group".format(groupName))
     return group
+
+
+def getUserData(user):
+    userData = {}
+
+    userData["username"] = user.username
+    userData["email"] = user.email
+
+    try:
+        profileInfo = UserProfileInfo.objects.get(user=user)
+        userData["nome"] = profileInfo.nome
+        userData["sobrenome"] = profileInfo.sobrenome
+        userData["rg"] = profileInfo.rg
+        userData["telefone"] = profileInfo.telefone
+        userData["altura"] = profileInfo.altura
+        userData["peso"] = profileInfo.peso
+        userData["token"] = profileInfo.token
+
+        return userData
+    except:
+        return userData
+
+
+def updateUserData(user, userData):
+    try:
+        profileInfo, _ = UserProfileInfo.objects.get_or_create(user=user)
+        if "nome" in userData.keys():
+            profileInfo.nome = userData["nome"]
+        if "sobrenome" in userData.keys():
+            profileInfo.sobrenome = userData["sobrenome"]
+        if "rg" in userData.keys():
+            profileInfo.rg = userData["rg"]
+        if "telefone" in userData.keys():
+            profileInfo.telefone = userData["telefone"]
+        if "altura" in userData.keys():
+            profileInfo.altura = userData["altura"]
+        if "peso" in userData.keys():
+            profileInfo.peso = userData["peso"]
+
+        profileInfo.save()
+
+        return True
+    except:
+        return False

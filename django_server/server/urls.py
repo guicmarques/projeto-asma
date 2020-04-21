@@ -8,10 +8,11 @@ from server import views
 # router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
-    path('auth/token/', jwt_views.TokenObtainPairView.as_view(),
+    path('token/', jwt_views.TokenObtainPairView.as_view(),
          name='token_obtain_pair'),
-    path('auth/token/refresh/',
+    path('token/refresh/',
          jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('hello/', views.HelloView.as_view(), name='hello'),
-    path('register/', views.RegisterUser.as_view(), name='register')
+    path('register/', views.RegisterUser.as_view(), name='register'),
+    path('user_data/', views.UserData.as_view(), name='user_data'),
 ]

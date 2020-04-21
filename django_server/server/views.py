@@ -4,12 +4,12 @@ from django.shortcuts import render
 from django.contrib.auth.models import Group, User
 from django.http import Http404
 from rest_framework import viewsets
-from server.serializers import UserSerializer, GroupSerializer
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from server.handleUserData import createUser
+from server.serializers import UserSerializer, GroupSerializer
+from server.handleUserData import createUser, getUserData, updateUserData
 
 
 class HelloView(APIView):
@@ -34,3 +34,17 @@ class RegisterUser(APIView):
         missingData, created = createUser(request.data)
 
         return Response({"missingData": missingData, "created": created})
+
+
+class UserData(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        data = getUserData(request.user)
+
+        return Response(data)
+
+    def put(self, request):
+        updated = updateUserData(request.user, request.data)
+
+        return Response({"updated": updated})

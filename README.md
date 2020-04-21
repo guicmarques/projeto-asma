@@ -21,19 +21,31 @@ python manage.py createsuperuser
 ```
 
 ## API description /rest
- POST requests:
+### POST requests:
 - /rest/token/ - Geração de um token de autenticação
-    - body: ```{"username": username ou cpf, "password": password}```
-    - response: ```{"refresh": refresh_token, "access": acces_token}```
+    - Body: ```{"username": username ou cpf, "password": password}```
+    - Response: ```{"refresh": refresh_token, "access": access_token}```
 
 - /rest/token/refresh/ - Refresh do token de autenticação de um usuário
-    - body: ```{"refresh": refresh_token}```
-    - response: ```{"access": acces_token}```
+    - Body: ```{"refresh": refresh_token}```
+    - Response: ```{"access": access_token}```
 
 - /rest/register/ - Cria um novo usuário
-    - body: ```{"username": cpf, "password": senha, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC}```
-    - campos obrigatórios do body: ```["username", "email", "password"]```
-    - response: ```{"missingData": bool, "created": bool}``` (onde missingData == True indica se falta algum dado obrigatório e created == False indica que o usuário já existe)
+    - Body: ```{"username": cpf, "password": senha, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC}```
+    - campos obrigatórios do Body: ```["username", "email", "password"]```
+    - Response: ```{"missingData": bool, "created": bool}``` (onde missingData == True indica se falta algum dado obrigatório e created == False indica que o usuário já existe)
+
+### GET requests:
+
+- /rest/user_data/ - Retorna as informações do usuário
+    - Authentication: Bearer ```acces_token```
+    - Response: ```{"username": cpf, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC}``` ou ```{"username": cpf, "email": email}``` se as outras informações não estiverem presentes
+
+### PUT requests
+- /rest/user_data/ - Atualiza (ou cria, se não existir) as informações do usuário
+    - Authentication: Bearer ```access_token```
+    - Body: ```{"email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC}```
+    - Response: ```{"updated": bool}``` (booleano indicando se a operação de atualização teve sucesso)
 
 
 ## Configs manuais
