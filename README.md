@@ -32,7 +32,8 @@ python manage.py createsuperuser
 
 - /rest/register/ - Cria um novo usuário
     - body: ```{"username": cpf, "password": senha, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC}```
-    - response: ```{"access": acces_token}```
+    - campos obrigatórios do body: ```["username", "email", "password"]```
+    - response: ```{"missingData": bool, "created": bool}``` (onde missingData == True indica se falta algum dado obrigatório e created == False indica que o usuário já existe)
 
 
 ## Configs manuais

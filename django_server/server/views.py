@@ -32,9 +32,5 @@ class HelloView(APIView):
 class RegisterUser(APIView):
     def post(self, request):
         missingData, created = createUser(request.data)
-        if missingData:
-            return Response("There are missing fields in your request", status=status.HTTP_400_BAD_REQUEST)
-        if not created:
-            return Response("This user is already created", status=status.HTTP_400_BAD_REQUEST)
-        else:
-            return Response("New user {} created".format(request.data["username"]))
+
+        return Response({"missingData": missingData, "created": created})
