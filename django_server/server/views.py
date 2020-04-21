@@ -33,7 +33,12 @@ class RegisterUser(APIView):
     def post(self, request):
         missingData, created = createUser(request.data)
 
-        return Response({"missingData": missingData, "created": created})
+        if missingData or not created:
+            request_status = status.HTTP_400_BAD_REQUEST
+        else:
+            request_status = status.HTTP_200_OK
+
+        return Response({"missingData": missingData, "created": created}, status=request_status)
 
 
 class UserData(APIView):
@@ -47,4 +52,9 @@ class UserData(APIView):
     def put(self, request):
         updated = updateUserData(request.user, request.data)
 
-        return Response({"updated": updated})
+        if not updated:
+            request_status = status.HTTP_500_INTERNAL_SERVER_ERROR
+        else:
+            request_status = status.HTTP_200_OK
+
+        return Response({"updated": updated}, status=request_status)

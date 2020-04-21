@@ -98,6 +98,8 @@ def updateUserData(user, userData):
             profileInfo.altura = userData["altura"]
         if "peso" in userData.keys():
             profileInfo.peso = userData["peso"]
+        if "token" in userData.keys():
+            profileInfo.altura = userData["token"]
 
         profileInfo.save()
 
