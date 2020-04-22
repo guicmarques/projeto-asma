@@ -1,5 +1,5 @@
 from django import forms
-from server.models import UserProfileInfo, User
+from health_team.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile
 
 
 class UserForm(forms.ModelForm):
