@@ -1,5 +1,6 @@
 from django import forms
-from health_team.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile
+from health_team.models import UserProfileInfo
+from django.contrib.auth.models import User
 
 
 class UserForm(forms.ModelForm):
@@ -13,5 +14,5 @@ class UserForm(forms.ModelForm):
 class UserProfileInfoForm(forms.ModelForm):
     class Meta():
         model = UserProfileInfo
-        fields = ('nome', 'sobrenome', 'rg', 'altura', 'peso',
+        fields = ('nome', 'sobrenome', 'rg', 'cpf',
                   'telefone', 'token')

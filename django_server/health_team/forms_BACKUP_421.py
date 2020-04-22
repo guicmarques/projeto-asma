@@ -1,5 +1,10 @@
 from django import forms
+<<<<<<< HEAD
+from health_team.models import UserProfileInfo
+from django.contrib.auth.models import User
+=======
 from health_team.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile
+>>>>>>> restAPI
 
 
 class UserForm(forms.ModelForm):
