@@ -35,9 +35,9 @@ python manage.py createsuperuser
     - campos obrigatórios do Body: ```["username", "email", "password"]```
     - Response: ```{"missingData": bool, "created": bool}``` (onde missingData = True indica se falta algum dado obrigatório e created = False indica que o usuário já existe, se houver algum erro ao salvar, missingData será o erro)
 
-- /rest/questionnaire/ - Registra as respostas do questionário
+- /rest/questionnaire/ - Registra as respostas do questionário, sendo permitido apenas um questionário por dia (chamar o endpoint mais de uma vez no mesmo dia, para o mesmo usuário, atualiza as respostas para aquele dia)
     - Authentication: Bearer ```access_token```
-    - Body: ```{"1": resposta1, "2": resposta 2, "3": resposta3, "4": resposta4, "5": resposta5, "6": resposta6, "7": resposta7}``` (as respostas devem ser, obrigatoriamente, números entre 1 e 6)
+    - Body: ```{"1": resposta1, "2": resposta2, "3": resposta3, "4": resposta4, "5": resposta5, "6": resposta6, "7": resposta7}``` (as respostas devem ser, obrigatoriamente, números entre 1 e 6)
     - Response: ```{"created": bool}``` (criado = True se a operação de salvar no banco de dados tiver funcionado, caso contrário retorna o erro)
 
 ### GET requests:
@@ -46,14 +46,14 @@ python manage.py createsuperuser
     - Authentication: Bearer ```access_token```
     - Response: ```{"username": cpf, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC}``` ou ```{"username": cpf, "email": email}``` se as outras informações não estiverem presentes
 
-### PUT requests
+### PUT requests:
 - /rest/user_data/ - Atualiza (ou cria, se não existir) as informações do usuário
     - Authentication: Bearer ```access_token```
     - Body: ```{"email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC}```
     - Response: ```{"updated": bool}``` (booleano indicando se a operação de atualização teve sucesso)
 
 
-## Configs manuais
+## Configs manuais (opcional)
 - ao criar um novo banco de dados, defina a permissão de alteração dos dados para cada grupo (não obrigatorio para ambiente DEV)
     - localhost:8000/admin -> inserir login de admin
     - Groups -> Pacientes -> Permissions
