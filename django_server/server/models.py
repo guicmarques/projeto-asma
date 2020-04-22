@@ -14,7 +14,7 @@ class UserProfileInfo(models.Model):
     token = models.CharField(max_length=10, blank=True)
 
     def __str__(self):
-        return self.user.username + " profile info"
+        return self.user.username
 
 
 class AsthmaControlQuestionnaire(models.Model):
@@ -32,4 +32,19 @@ class AsthmaControlQuestionnaire(models.Model):
     date = models.DateField()
 
     def __str__(self):
-        return self.user.username + " ACQ"
+        return self.user.username + " " + self.date.strftime("%d/%m/%Y")
+
+
+def fitbit_path(instance, filename):
+    return "fitbit/{}/{}/{}".format(instance.user.username, instance.category, filename)
+
+
+class FitbitFile(models.Model):
+    user = models.ForeignKey(
+        User, unique_for_date="date", on_delete=models.CASCADE)
+    category = models.CharField(max_length=100)
+    path = models.FileField(upload_to=fitbit_path)
+    date = models.DateField()
+
+    def __str__(self):
+        return self.user.username + "-" + self.category + "-" + self.date.strftime("%d/%m/%Y")

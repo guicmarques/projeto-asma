@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User, Group, Permission
-from server.models import UserProfileInfo, AsthmaControlQuestionnaire
+from server.models import UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile
+import pandas as pd
 
 from datetime import datetime, timedelta
 
@@ -51,6 +52,12 @@ def createUser(userData):
                     profileInfo.altura = userData["token"]
 
                 profileInfo.save()
+
+                # ONLY FOR TESTING PURPOSES
+                fitbit = FitbitFile(user=user, category="heart-rate",
+                                    path="fitbit/heart-rate-2019-03-14.csv",
+                                    date=datetime.now().date())
+                fitbit.save()
 
                 return missingData, True
             except Exception as e:
@@ -126,7 +133,7 @@ def createACQ(user, answers):
             user=user, date=datetime.now().date())
         try:
             intAnswers = list(map(int, answers.values()))
-            if all(answer >= 1 for answer in intAnswers) and all(answer <= 6 for answer in intAnswers):
+            if all(answer >= 0 for answer in intAnswers) and all(answer <= 6 for answer in intAnswers):
                 acq.question1 = int(answers["1"])
                 acq.question2 = int(answers["2"])
                 acq.question3 = int(answers["3"])
@@ -137,8 +144,41 @@ def createACQ(user, answers):
                 acq.save()
                 return True
             else:
-                return "Not all answers are integers between 1 and 6"
+                return "Not all answers are integers between 0 and 6"
         except Exception as e:
             return str(e)
     except Exception as e:
         return str(e)
+
+
+def getFitbitData(user, date, category):
+    response = []
+    if date == "" and category == "":
+        files = FitbitFile.objects.filter(user=user)
+        for file in files:
+            content = pd.read_csv(file.path, index_col=0,
+                                  squeeze=True).to_dict()
+            response.append([file.date, file.category, content])
+    elif date != "" and category != "":
+        date = datetime.strptime(date, "%d/%m/%Y").date()
+        files = FitbitFile.objects.filter(
+            user=user, date=date, category=category)
+        for file in files:
+            content = pd.read_csv(file.path, index_col=0,
+                                  squeeze=True).to_dict()
+            response.append([file.date, file.category, content])
+    elif date == "":
+        files = FitbitFile.objects.filter(user=user, category=category)
+        for file in files:
+            content = pd.read_csv(file.path, index_col=0,
+                                  squeeze=True).to_dict()
+            response.append([file.date, file.category, content])
+    elif category == "":
+        date = datetime.strptime(date, "%d/%m/%Y").date()
+        files = FitbitFile.objects.filter(user=user, date=date)
+        for file in files:
+            content = pd.read_csv(file.path, index_col=0,
+                                  squeeze=True).to_dict()
+            response.append([file.date, file.category, content])
+
+    return response

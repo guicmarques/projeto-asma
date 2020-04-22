@@ -74,3 +74,19 @@ class Questionnaire(APIView):
             request_status = status.HTTP_200_OK
 
         return Response({"created": created}, status=request_status)
+
+
+class Fitbit(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        required = ["date", "category"]
+
+        if all(item in request.data.keys() for item in required):
+            date = request.data["date"]
+            category = request.data["category"]
+            files = handleUserData.getFitbitData(request.user, date, category)
+
+            return Response({"data": files}, status=status.HTTP_200_OK)
+        else:
+            return Response({"data": ""}, status=status.HTTP_400_BAD_REQUEST)
