@@ -33,12 +33,17 @@ python manage.py createsuperuser
 - /rest/register/ - Cria um novo usuário
     - Body: ```{"username": cpf, "password": senha, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC}```
     - campos obrigatórios do Body: ```["username", "email", "password"]```
-    - Response: ```{"missingData": bool, "created": bool}``` (onde missingData == True indica se falta algum dado obrigatório e created == False indica que o usuário já existe)
+    - Response: ```{"missingData": bool, "created": bool}``` (onde missingData = True indica se falta algum dado obrigatório e created = False indica que o usuário já existe, se houver algum erro ao salvar, missingData será o erro)
+
+- /rest/questionnaire/ - Registra as respostas do questionário
+    - Authentication: Bearer ```access_token```
+    - Body: ```{"1": resposta1, "2": resposta 2, "3": resposta3, "4": resposta4, "5": resposta5, "6": resposta6, "7": resposta7}``` (as respostas devem ser, obrigatoriamente, números entre 1 e 6)
+    - Response: ```{"created": bool}``` (criado = True se a operação de salvar no banco de dados tiver funcionado, caso contrário retorna o erro)
 
 ### GET requests:
 
 - /rest/user_data/ - Retorna as informações do usuário
-    - Authentication: Bearer ```acces_token```
+    - Authentication: Bearer ```access_token```
     - Response: ```{"username": cpf, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC}``` ou ```{"username": cpf, "email": email}``` se as outras informações não estiverem presentes
 
 ### PUT requests

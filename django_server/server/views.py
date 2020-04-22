@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from server.serializers import UserSerializer, GroupSerializer
-from server.handleUserData import createUser, getUserData, updateUserData
+import server.handleUserData as handleUserData
 
 
 class HelloView(APIView):
@@ -30,8 +30,10 @@ class HelloView(APIView):
 
 
 class RegisterUser(APIView):
+    permission_classes = ()
+
     def post(self, request):
-        missingData, created = createUser(request.data)
+        missingData, created = handleUserData.createUser(request.data)
 
         if missingData or not created:
             request_status = status.HTTP_400_BAD_REQUEST
@@ -45,12 +47,12 @@ class UserData(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        data = getUserData(request.user)
+        data = handleUserData.getUserData(request.user)
 
         return Response(data)
 
     def put(self, request):
-        updated = updateUserData(request.user, request.data)
+        updated = handleUserData.updateUserData(request.user, request.data)
 
         if not updated:
             request_status = status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -58,3 +60,17 @@ class UserData(APIView):
             request_status = status.HTTP_200_OK
 
         return Response({"updated": updated}, status=request_status)
+
+
+class Questionnaire(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        created = handleUserData.createACQ(request.user, request.data)
+
+        if created != True:
+            request_status = status.HTTP_500_INTERNAL_SERVER_ERROR
+        else:
+            request_status = status.HTTP_200_OK
+
+        return Response({"created": created}, status=request_status)

@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User, Group, Permission
-from server.models import UserProfileInfo
+from server.models import UserProfileInfo, AsthmaControlQuestionnaire
+
+from datetime import datetime, timedelta
 
 
 def createUser(userData):
@@ -29,24 +31,30 @@ def createUser(userData):
 
             profileInfo = UserProfileInfo(user=user)
 
-            if "nome" in userData.keys():
-                profileInfo.nome = userData["nome"]
-            if "sobrenome" in userData.keys():
-                profileInfo.sobrenome = userData["sobrenome"]
-            if "rg" in userData.keys():
-                profileInfo.rg = userData["rg"]
-            if "telefone" in userData.keys():
-                profileInfo.telefone = userData["telefone"]
-            if "altura" in userData.keys():
-                profileInfo.altura = userData["altura"]
-            if "peso" in userData.keys():
-                profileInfo.peso = userData["peso"]
-            if "token" in userData.keys():
-                profileInfo.altura = userData["token"]
+            try:
+                if "nome" in userData.keys():
+                    profileInfo.nome = userData["nome"]
+                if "sobrenome" in userData.keys():
+                    profileInfo.sobrenome = userData["sobrenome"]
+                if "rg" in userData.keys():
+                    profileInfo.rg = int(str(userData["rg"]).replace(
+                        ".", "").replace("-", "").replace(" ", ""))
+                if "telefone" in userData.keys():
+                    profileInfo.telefone = userData["telefone"]
+                if "altura" in userData.keys():
+                    profileInfo.altura = round(float(
+                        str(userData["altura"]).replace(",", ".")), 2)
+                if "peso" in userData.keys():
+                    profileInfo.peso = round(float(
+                        str(userData["peso"]).replace(",", ".")), 1)
+                if "token" in userData.keys():
+                    profileInfo.altura = userData["token"]
 
-            profileInfo.save()
+                profileInfo.save()
 
-            return missingData, True
+                return missingData, True
+            except Exception as e:
+                return str(e), False
         else:
             return missingData, False
     else:
@@ -79,7 +87,8 @@ def getUserData(user):
         userData["token"] = profileInfo.token
 
         return userData
-    except:
+    except Exception as e:
+        print(e)
         return userData
 
 
@@ -91,13 +100,16 @@ def updateUserData(user, userData):
         if "sobrenome" in userData.keys():
             profileInfo.sobrenome = userData["sobrenome"]
         if "rg" in userData.keys():
-            profileInfo.rg = userData["rg"]
+            profileInfo.rg = int(str(userData["rg"]).replace(
+                ".", "").replace("-", "").replace(" ", ""))
         if "telefone" in userData.keys():
             profileInfo.telefone = userData["telefone"]
         if "altura" in userData.keys():
-            profileInfo.altura = userData["altura"]
+            profileInfo.altura = round(float(
+                str(userData["altura"]).replace(",", ".")), 2)
         if "peso" in userData.keys():
-            profileInfo.peso = userData["peso"]
+            profileInfo.peso = round(float(
+                str(userData["peso"]).replace(",", ".")), 1)
         if "token" in userData.keys():
             profileInfo.altura = userData["token"]
 
@@ -106,3 +118,27 @@ def updateUserData(user, userData):
         return True
     except:
         return False
+
+
+def createACQ(user, answers):
+    try:
+        acq, _ = AsthmaControlQuestionnaire.objects.get_or_create(
+            user=user, date=datetime.now().date())
+        try:
+            intAnswers = list(map(int, answers.values()))
+            if all(answer >= 1 for answer in intAnswers) and all(answer <= 6 for answer in intAnswers):
+                acq.question1 = int(answers["1"])
+                acq.question2 = int(answers["2"])
+                acq.question3 = int(answers["3"])
+                acq.question4 = int(answers["4"])
+                acq.question5 = int(answers["5"])
+                acq.question6 = int(answers["6"])
+                acq.question7 = int(answers["7"])
+                acq.save()
+                return True
+            else:
+                return "Not all answers are integers between 1 and 6"
+        except Exception as e:
+            return str(e)
+    except Exception as e:
+        return str(e)
