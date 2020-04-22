@@ -1,0 +1,32 @@
+.input-login {
+    border-radius: 25px;
+    background-color: blue;
+    width: 75%;
+    height: 45px;
+    margin-bottom: 12px;
+    left: 12.5%;
+}
+
+.btn-login {
+    border-radius: 25px;
+}
+
+.login-content {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.icon {
+    display: inline-block;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+}
+
+.register-content {
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

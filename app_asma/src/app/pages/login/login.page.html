@@ -1,0 +1,30 @@
+<ion-content scroll="false">
+  <div class="login-content">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Acesse sua conta</ion-card-title>
+      </ion-card-header>
+      <ion-item class="input-login">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-label position="floating">CPF</ion-label>
+        <ion-input [(ngModel)]="username" type="number"></ion-input>
+      </ion-item>  
+      
+      <ion-item class="input-login">
+        <ion-icon name="key-outline" slot="start"></ion-icon>
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input [(ngModel)]="password" type="password"></ion-input>
+      </ion-item>
+  
+      <ion-button class="btn-login ion-no-margin" expand="full" (click)="login()">Iniciar sessão</ion-button>
+    </ion-card>   
+  </div>
+  <div>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col>
+        </ion-col>
+      </ion-row>
+    </ion-grid>    
+  </div> 
+</ion-content>
