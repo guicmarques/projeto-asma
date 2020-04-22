@@ -14,7 +14,6 @@ export class LoginPage implements OnInit{
   constructor(private authService: AuthService, private alertService: AlertService) { }
 
   ngOnInit(){
-    //this.authService.login(12345678910, '123');
   }
 
   login() {

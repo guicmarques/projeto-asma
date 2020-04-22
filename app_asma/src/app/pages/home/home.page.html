@@ -13,5 +13,10 @@
       <span class="dot" #dot2></span>
       <span class="dot" #dot3></span>
     </p>
-  </div>  
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/login" (click)="logout()">
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

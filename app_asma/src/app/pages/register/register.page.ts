@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { User } from './../../models/user.model';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,9 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterPage implements OnInit {
   user: User = {
-    nome: 'cacs',
-    rg: 'cacs',
-    cpf: 123,
+    nome: "Carol",
+    sobrenome: 'marinilson',
+    rg: '1234',
+    cpf: 12345678900,
     peso: 58,
     altura: 1.64,
     email: 'cacs@cacs.com',
@@ -19,10 +21,13 @@ export class RegisterPage implements OnInit {
     estaValidado: false
   }
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private userService: UserService) { }
 
   ngOnInit() {
-    this.authService.register(this.user, 'cacs123', '123');
+    this.userService.register(this.user, 'cacs123', '123')
+    .subscribe(data => {
+      console.log(data);
+    })
   }
 
 }

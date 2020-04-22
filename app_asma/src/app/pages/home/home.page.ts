@@ -1,5 +1,8 @@
+import { UserService } from './../../services/user.service';
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Animation, AnimationController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +19,8 @@ export class HomePage implements OnInit {
   dotB: Animation;
   dotC: Animation;
 
-  constructor(private animationCtrl: AnimationController) { }
+  constructor(private animationCtrl: AnimationController, private authService: AuthService,
+              private userService: UserService) { }
 
   ngOnInit() { }
 
@@ -76,4 +80,17 @@ export class HomePage implements OnInit {
     this.dotB.play();
     this.dotC.play();
   }
+
+  logout() {
+    this.authService.logout();
+    console.log(this.authService.isLoggedIn);
+    console.log(this.authService.credenciais);
+  }
+
+  getUser() {
+    this.userService.getUser().then(user => {
+      console.log(user);
+    });
+  }
+
 }
