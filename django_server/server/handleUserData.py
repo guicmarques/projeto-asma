@@ -82,6 +82,8 @@ def getUserData(user):
 
     userData["username"] = user.username
     userData["email"] = user.email
+    # chumbado enquanto não tiver banco de dados de tokens
+    userData["tokenValidado"] = True
 
     try:
         profileInfo = UserProfileInfo.objects.get(user=user)

@@ -13,20 +13,14 @@ import server.handleUserData as handleUserData
 
 
 class HelloView(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = ()
 
     def get(self, request):
-        content = {'message': 'Hello, World!'}
+        group = User.objects.filter(groups__name="Pacientes")
+        content = []
+        for user in group:
+            content.append(user.username)
         return Response(content)
-
-    def post(self, request):
-        try:
-            print(request.data["teste"])
-            content = {'message': 'Hello, World!',
-                       'data': request.data["teste"]}
-            return Response(content, status=status.HTTP_200_OK)
-        except:
-            return Response("Couldn't get data", status=status.HTTP_400_BAD_REQUEST)
 
 
 class RegisterUser(APIView):
