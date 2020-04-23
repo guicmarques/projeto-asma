@@ -51,7 +51,7 @@ $ python manage.py runserver
 
 - /rest/user_data/ - Retorna as informações do usuário
     - Authentication: Bearer ```access_token```
-    - Response: ```{"username": cpf, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC}``` ou ```{"username": cpf, "email": email}``` se as outras informações não estiverem presentes
+    - Response: ```{"username": cpf, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC, "tokenValidado": bool}``` ou ```{"username": cpf, "email": email, "tokenValidado": bool}``` se as outras informações não estiverem presentes
 
 ### PUT requests:
 - /rest/user_data/ - Atualiza (ou cria, se não existir) as informações do usuário
