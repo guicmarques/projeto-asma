@@ -33,7 +33,7 @@ $ python manage.py runserver
     - Response: ```{"access": access_token}```
 
 - /rest/register/ - Cria um novo usuário
-    - Body: ```{"username": cpf, "password": senha, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC}```
+    - Body: ```{"username": cpf, "password": senha, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "imagem": .jpg em base64, "token": token do HC}```
     - campos obrigatórios do Body: ```["username", "email", "password"]```
     - Response: ```{"missingData": bool, "created": bool}``` (onde missingData = True indica se falta algum dado obrigatório e created = False indica que o usuário já existe, se houver algum erro ao salvar, missingData será o erro)
 
@@ -51,12 +51,12 @@ $ python manage.py runserver
 
 - /rest/user_data/ - Retorna as informações do usuário
     - Authentication: Bearer ```access_token```
-    - Response: ```{"username": cpf, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC, "tokenValidado": bool}``` ou ```{"username": cpf, "email": email, "tokenValidado": bool}``` se as outras informações não estiverem presentes
+    - Response: ```{"username": cpf, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "imagem": .jpg em base64, "token": token do HC, "tokenValidado": bool}``` ou ```{"username": cpf, "email": email, "tokenValidado": bool}``` se as outras informações não estiverem presentes
 
 ### PUT requests:
 - /rest/user_data/ - Atualiza (ou cria, se não existir) as informações do usuário
     - Authentication: Bearer ```access_token```
-    - Body: ```{"email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "token": token do HC}```
+    - Body: ```{"email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "imagem": .jpg em base64, "token": token do HC}```
     - Response: ```{"updated": bool}``` (booleano indicando se a operação de atualização teve sucesso)
 
 

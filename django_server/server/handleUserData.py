@@ -94,7 +94,7 @@ def getUserData(user):
 
     userData["username"] = user.username
     userData["email"] = user.email
-    # chumbado enquanto não tiver banco de dados de tokens
+    # TESTING enquanto não tiver banco de dados de tokens
     userData["tokenValidado"] = True
 
     try:
