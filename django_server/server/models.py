@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 
+def userImage_path(instance, filename):
+    return "userImage/{}".format(filename)
+
+
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nome = models.CharField(max_length=50, blank=True)
@@ -11,6 +15,7 @@ class UserProfileInfo(models.Model):
     telefone = models.CharField(max_length=14, blank=True)
     altura = models.CharField(max_length=4, blank=True)
     peso = models.CharField(max_length=4, blank=True)
+    imagem = models.FileField(upload_to=userImage_path, blank=True)
     token = models.CharField(max_length=10, blank=True)
 
     def __str__(self):

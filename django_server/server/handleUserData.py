@@ -1,8 +1,12 @@
-from django.contrib.auth.models import User, Group, Permission
-from server.models import UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile
-import pandas as pd
-
+import base64
+import os
 from datetime import datetime, timedelta
+
+import pandas as pd
+from django.contrib.auth.models import Group, Permission, User
+
+from server.models import (AsthmaControlQuestionnaire, FitbitFile,
+                           UserProfileInfo)
 
 
 def createUser(userData):
@@ -48,6 +52,14 @@ def createUser(userData):
                 if "peso" in userData.keys():
                     profileInfo.peso = round(float(
                         str(userData["peso"]).replace(",", ".")), 1)
+                if "imagem" in userData.keys():
+                    imgdata = base64.b64decode(userData["imagem"])
+                    filename = user.username + ".jpg"
+                    directory = "./media/userImage/"
+                    filepath = os.path.join(directory, filename)
+                    with open(filepath, 'wb') as f:
+                        f.write(imgdata)
+                    profileInfo.imagem = "userImage/{}".format(filename)
                 if "token" in userData.keys():
                     profileInfo.altura = userData["token"]
 
@@ -61,7 +73,7 @@ def createUser(userData):
 
                 return missingData, True
             except Exception as e:
-                return str(e), False
+                return str(e), True
         else:
             return missingData, False
     else:
@@ -93,6 +105,11 @@ def getUserData(user):
         userData["telefone"] = profileInfo.telefone
         userData["altura"] = profileInfo.altura
         userData["peso"] = profileInfo.peso
+        if profileInfo.imagem != "":
+            with open(profileInfo.imagem.path, "rb") as image_file:
+                userData["imagem"] = base64.b64encode(image_file.read())
+        else:
+            userData["imagem"] = ""
         userData["token"] = profileInfo.token
 
         return userData
@@ -119,6 +136,14 @@ def updateUserData(user, userData):
         if "peso" in userData.keys():
             profileInfo.peso = round(float(
                 str(userData["peso"]).replace(",", ".")), 1)
+        if "imagem" in userData.keys():
+            imgdata = base64.b64decode(userData["imagem"])
+            filename = user.username + ".jpg"
+            directory = "./media/userImage/"
+            filepath = os.path.join(directory, filename)
+            with open(filepath, 'wb') as f:
+                f.write(imgdata)
+            profileInfo.imagem = "userImage/{}".format(filename)
         if "token" in userData.keys():
             profileInfo.altura = userData["token"]
 
