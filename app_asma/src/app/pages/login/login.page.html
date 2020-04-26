@@ -4,11 +4,10 @@
       <ion-card-header>
         <ion-card-title class="ion-text-center">Acesse sua conta</ion-card-title>
       </ion-card-header>
-      <ion-item class="input-login">
-        <ion-icon name="person-outline" slot="start"></ion-icon>
-        <ion-label position="floating">CPF</ion-label>
-        <ion-input [(ngModel)]="username" type="number"></ion-input>
-      </ion-item>  
+      <div class="input-login">
+        <ion-label class="icon-input"><ion-icon name="person-outline" slot="start"></ion-icon></ion-label>
+        <ion-input class="cpf-input" [(ngModel)]="username" type="number" placeholder="Insira seu CPF"></ion-input>
+      </div>  
       
       <ion-item class="input-login">
         <ion-icon name="key-outline" slot="start"></ion-icon>

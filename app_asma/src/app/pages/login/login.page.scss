@@ -1,10 +1,35 @@
 .input-login {
-    border-radius: 25px;
-    background-color: blue;
-    width: 75%;
-    height: 45px;
-    margin-bottom: 12px;
-    left: 12.5%;
+    position: relative;
+}
+
+.icon-input {
+    border-radius: 50%;
+    border: 2px solid gray;
+    background-color: gray;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 15%;
+    width: 46px;
+    height: 46px;
+    z-index: 9;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cpf-input {
+    border: 1px solid;
+    height: 46px;
+    width: 70%;
+    display: block;
+    margin:0 auto;
+    border-radius: 23px;
+    box-sizing: border-box;
+    outline: none;
+    --padding-start: 50px;
+    --padding-top: 14px
 }
 
 .btn-login {
@@ -18,9 +43,4 @@
     transform: translate(-50%, -50%);
 }
 
-.icon {
-    display: inline-block;
-    height: 45px;
-    width: 45px;
-    border-radius: 50%;
-}
+

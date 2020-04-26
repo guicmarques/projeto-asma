@@ -1,9 +1,63 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-card >
+    <ion-card-header mode="ios" class="register-header">
+      <ion-card-title>Crie sua conta</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="register-input">
+        <ion-input placeholder="Nome" type="text" [(ngModel)]="user.nome"></ion-input>
+      </div>
+
+      <div class="register-input">
+        <ion-input placeholder="Sobrenome" type="text" [(ngModel)]="user.sobrenome"></ion-input>
+      </div>
+
+      <div class="register-input">
+        <ion-input placeholder="RG" type="text" [(ngModel)]="user.rg"></ion-input>
+      </div>
+
+      <div class="register-input">
+        <ion-input placeholder="CPF" type="number" [(ngModel)]="user.cpf"></ion-input>
+      </div>
+
+      <div class="register-input">
+        <ion-input placeholder="Peso (kg)" type="number" [(ngModel)]="user.peso"></ion-input>
+      </div>
+
+      <div class="register-input">
+        <ion-input placeholder="Altura (m)" type="number" [(ngModel)]="user.altura"></ion-input>
+      </div>
+
+      <div class="register-input">
+        <ion-input placeholder="E-mail" type="text" [(ngModel)]="user.email"></ion-input>
+      </div>
+
+      <div class="register-input">
+        <ion-input placeholder="Telefone" type="number" [(ngModel)]="user.telefone"></ion-input>
+      </div>
+
+      <div class="register-input">
+        <ion-input placeholder="Senha" type="password" [(ngModel)]="user.senha"></ion-input>
+      </div>
+
+      <div class="register-input">
+        <ion-input placeholder="Confirme sua senha" type="password" [(ngModel)]="senhaConf"></ion-input>
+      </div>
+
+      <ion-item>
+        <ion-label>Possuo um token de acesso</ion-label>
+        <ion-checkbox slot="start" [(ngModel)]="hasTokenHC" mode="ios"></ion-checkbox>
+      </ion-item>
+      
+      <div *ngIf="hasTokenHC" class="register-input">
+        <ion-input placeholder="Token" type="text" [(ngModel)]="user.tokenHC"></ion-input>
+      </div>  
+      
+    </ion-card-content>
+
+    <ion-button expand="full" mode="ios" class="register-btn">Registre-se</ion-button>
+    
+  </ion-card>
 
 </ion-content>

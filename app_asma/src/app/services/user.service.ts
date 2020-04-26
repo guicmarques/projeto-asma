@@ -1,10 +1,10 @@
+import { Register } from './../models/register.model';
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EnvService } from './env.service';
 import { AlertService } from './alert.service';
 import { NavController } from '@ionic/angular';
-import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +18,10 @@ export class UserService {
               private navCtrl: NavController,
               private authService: AuthService) { }
 
-  register(user: User, senha: string, token: string) {
+  register(user: Register) {
     return this.http.post(this.env.API_URL + 'register/', 
-    {'username': user.cpf.toString(), 'password': senha,'email': user.email, 'nome': user.nome, 'sobrenome': user.sobrenome, 'rg': user.rg, 
-    'telefone': user.telefone, 'altura': user.altura, 'peso': user.peso, 'token': token});   
+    {'username': user.cpf.toString(), 'password': user.senha,'email': user.email, 'nome': user.nome, 'sobrenome': user.sobrenome, 'rg': user.rg, 
+    'telefone': user.telefone, 'altura': user.altura, 'peso': user.peso, 'token': user.tokenHC});   
   }
 
   getUser() {
