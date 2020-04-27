@@ -1,51 +1,120 @@
-ion-content {
-    --overflow: hidden;
-    //--background: url('../../../assets/images/2359860.svg');
+* {
+    font-family: 'Segoe UI';
 }
 
-ion-card {
-    max-height: 85%;
+.register-header {  
+    height: 25%;
+    width: 100%;
+    text-align: center;
+}
+
+.upper-elipse {
+    width: 85%;
+    height: 45%;
+    border-radius: 50%;
+    background-color: #2dd2c2;
+    position: absolute;
+    top: -20%;
+    left: 40%;
+}
+
+.bottom-circle {
+    height: 27%;
+    width: 30%;
+    border-radius: 50%;
+    background-color: #2dd2c2;
+    position: absolute;
+    bottom: -13%;
+    left: -12%;
+}
+
+h1 {
+    font-size: 32px;
+    position: relative;
+    top: 50%;
+}
+
+ion-content {
+    --overflow: hidden;
+}
+
+.register-forms {
+    max-height: 75%;
     display: flex;
     flex-direction: column;
     margin-top: 10%;
-    //background-color: #a4dad2, 0.5;
-    //background: rgba(164, 218, 210, 0.75);
-    background: rgba(164, 218, 210, 0.75);
-    color:white;
-}
-
-ion-card-content {
+    color:black;
     overflow-y: auto;
 }
 
-ion-input {
-    border: 1px solid;
+.register-img {
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    background: 
+     linear-gradient(rgb(255, 255, 255),rgb(255, 255, 255)) padding-box,
+     linear-gradient(315deg, rgba(0,252,198,1) 0%, rgba(0,252,233,1) 35%, rgba(0,166,235,1) 100%) border-box;
+    border: 2px solid transparent;
+}
+
+img {
+    object-fit: scale-down;
+    width: 75%;
+}
+
+.register-input {
+    text-align: center;
+    padding-bottom: 5%;
+ }
+
+.register-field {
     height: 46px;
-    width: 92%;
+    width: 80%;
     display: inline-block;
+    box-sizing: border-box;
+    outline: none;
+    --padding-start: 50px;
+    --padding-end: 50px;
+    --padding-top: 14px;
+    text-align: start;
+    background: 
+     linear-gradient(rgb(255, 255, 255),rgb(255, 255, 255)) padding-box,
+     linear-gradient(315deg, rgba(0,252,198,1) 0%, rgba(0,252,233,1) 35%, rgba(0,166,235,1) 100%) border-box;
+    border: 2px solid transparent;
     border-radius: 23px;
+}
+
+ion-checkbox {
+    margin-left: 12%;
+    margin-right: 3%;
+}
+
+.token-field {
+    width: 60%;
+    height: 46px;
+    display: inline-block;
     box-sizing: border-box;
     outline: none;
     --padding-start: 50px;
     --padding-top: 14px;
+    --padding-end: 50px;
     text-align: start;
+    border-bottom: 1px solid;
+    border-image-source: linear-gradient(315deg, rgba(0,252,198,1) 0%, rgba(0,252,233,1) 35%, rgba(0,166,235,1) 100%);
+    border-image-slice: 1;
+    //border-bottom-width: 10px;// solid;
 }
 
-
-.register-header {
-    text-align: center;
+.submit-text {
+    font-size: 20px;
+    font-weight: 500;
+    position: absolute;
+    bottom: 25px;
+    right: 75px;
 }
 
-.register-btn {
-    margin: 0;
+.submit-btn {
     --background: #f9c022;
-}
-
-.register-input {
-   text-align: center;
-   padding-bottom: 5%;
-}
-
-ion-card-title {
-    --color: white;
+    width: 50px;
+    height: 50px;
 }

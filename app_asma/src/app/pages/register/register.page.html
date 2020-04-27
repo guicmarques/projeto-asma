@@ -1,63 +1,76 @@
+<div class="register-header">
+  <div class="upper-elipse"></div>
+  <h1>Crie sua <span style="color: white">conta</span></h1>
+</div>
+
+
 <ion-content>
-  <ion-card >
-    <ion-card-header mode="ios" class="register-header">
-      <ion-card-title>Crie sua conta</ion-card-title>
-    </ion-card-header>
+  <div class="register-forms">
+    <div class="register-input">
+      <ion-avatar class="register-img" (click)="selectImg()">
+        <img *ngIf="profileImg === ''" src="../../../assets/images/defaultProfileImg.jpg">
+      </ion-avatar>
+      <ion-label>Escolha uma imagem</ion-label>
+    </div>
 
-    <ion-card-content>
-      <div class="register-input">
-        <ion-input placeholder="Nome" type="text" [(ngModel)]="user.nome"></ion-input>
-      </div>
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Nome" type="text" [(ngModel)]="user.nome"></ion-input>
+    </div>
 
-      <div class="register-input">
-        <ion-input placeholder="Sobrenome" type="text" [(ngModel)]="user.sobrenome"></ion-input>
-      </div>
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Sobrenome" type="text" [(ngModel)]="user.sobrenome"></ion-input>
+    </div>
 
-      <div class="register-input">
-        <ion-input placeholder="RG" type="text" [(ngModel)]="user.rg"></ion-input>
-      </div>
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="RG" type="text" [(ngModel)]="user.rg"></ion-input>
+    </div>
 
-      <div class="register-input">
-        <ion-input placeholder="CPF" type="number" [(ngModel)]="user.cpf"></ion-input>
-      </div>
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="CPF" type="number" [(ngModel)]="user.cpf"></ion-input>
+    </div>
 
-      <div class="register-input">
-        <ion-input placeholder="Peso (kg)" type="number" [(ngModel)]="user.peso"></ion-input>
-      </div>
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Peso (kg)" type="number" [(ngModel)]="user.peso"></ion-input>
+    </div>
 
-      <div class="register-input">
-        <ion-input placeholder="Altura (m)" type="number" [(ngModel)]="user.altura"></ion-input>
-      </div>
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Altura (m)" type="number" [(ngModel)]="user.altura"></ion-input>
+    </div>
 
-      <div class="register-input">
-        <ion-input placeholder="E-mail" type="text" [(ngModel)]="user.email"></ion-input>
-      </div>
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="E-mail" type="text" [(ngModel)]="user.email"></ion-input>
+    </div>
 
-      <div class="register-input">
-        <ion-input placeholder="Telefone" type="number" [(ngModel)]="user.telefone"></ion-input>
-      </div>
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Telefone" type="number" [(ngModel)]="user.telefone"></ion-input>
+    </div>
 
-      <div class="register-input">
-        <ion-input placeholder="Senha" type="password" [(ngModel)]="user.senha"></ion-input>
-      </div>
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Senha" type="password" [(ngModel)]="user.senha"></ion-input>
+    </div>
 
-      <div class="register-input">
-        <ion-input placeholder="Confirme sua senha" type="password" [(ngModel)]="senhaConf"></ion-input>
-      </div>
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Confirme sua senha" type="password" [(ngModel)]="senhaConf"></ion-input>
+    </div>
 
-      <ion-item>
+    <div>
+      <ion-item lines="none">
         <ion-label>Possuo um token de acesso</ion-label>
-        <ion-checkbox slot="start" [(ngModel)]="hasTokenHC" mode="ios"></ion-checkbox>
+        <ion-checkbox slot="start" [(ngModel)]="hasTokenHC" mode="ios"></ion-checkbox>        
       </ion-item>
       
       <div *ngIf="hasTokenHC" class="register-input">
-        <ion-input placeholder="Token" type="text" [(ngModel)]="user.tokenHC"></ion-input>
-      </div>  
-      
-    </ion-card-content>
-
-    <ion-button expand="full" mode="ios" class="register-btn">Registre-se</ion-button>
-    
-  </ion-card>
+        <ion-input class="token-field" placeholder="Token" type="text" [(ngModel)]="user.tokenHC"></ion-input>
+      </div> 
+    </div>   
+  </div> 
+  
+  <div class="submit-text">Enviar</div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="submit-btn">
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div class="bottom-circle"></div>
 
 </ion-content>
