@@ -1,3 +1,4 @@
+import { User } from './../models/user.model';
 import { Register } from './../models/register.model';
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
@@ -30,7 +31,7 @@ export class UserService {
         const header = new HttpHeaders({
           'Authorization': 'Bearer' + " " + this.authService.token["access"]
         });
-        return this.http.get(this.env.API_URL + 'user_data/', { headers: header }).subscribe(data =>{
+        return this.http.get<User>(this.env.API_URL + 'user_data/', { headers: header }).subscribe(data =>{
           this.user = data;
           resolve(this.user);
         });

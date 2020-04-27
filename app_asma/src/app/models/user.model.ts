@@ -2,10 +2,12 @@ export interface User {
     nome: string,
     sobrenome: string,
     rg: string,
-    cpf: number,
+    username: number,
     peso: number,
     altura: number,
     email: string,
     telefone: number,
-    estaValidado: boolean
+    imagem: string,
+    token: string,
+    tokenValidado: boolean,
 }
