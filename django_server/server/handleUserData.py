@@ -56,6 +56,8 @@ def createUser(userData):
                     imgdata = base64.b64decode(userData["imagem"])
                     filename = user.username + ".jpg"
                     directory = "./media/userImage/"
+                    if not os.path.exists(directory):
+                        os.makedirs(directory)
                     filepath = os.path.join(directory, filename)
                     with open(filepath, 'wb') as f:
                         f.write(imgdata)
