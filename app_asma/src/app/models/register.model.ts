@@ -7,6 +7,7 @@ export interface Register {
     altura: number,
     email: string,
     telefone: number,
+    imagem: string,
     senha: string,
     tokenHC: string
 }

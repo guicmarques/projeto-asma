@@ -21,7 +21,7 @@ export class UserService {
   register(user: Register) {
     return this.http.post(this.env.API_URL + 'register/', 
     {'username': user.cpf.toString(), 'password': user.senha,'email': user.email, 'nome': user.nome, 'sobrenome': user.sobrenome, 'rg': user.rg, 
-    'telefone': user.telefone, 'altura': user.altura, 'peso': user.peso, 'token': user.tokenHC});   
+    'telefone': user.telefone, 'altura': user.altura, 'peso': user.peso, 'imagem': user.imagem,'token': user.tokenHC});   
   }
 
   getUser() {
