@@ -1,3 +1,4 @@
+import { ImageService } from './../../services/image.service';
 import { UserService } from './../../services/user.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';

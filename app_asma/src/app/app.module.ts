@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule }    from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { Base64 } from '@ionic-native/base64/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Base64
   ],
   bootstrap: [AppComponent]
 })
