@@ -28,6 +28,13 @@
     left: -12%;
 }
 
+.back-btn {
+    position: absolute;
+    left: 0;
+    --color: black;
+    --ripple-color: white;
+}
+
 h1 {
     font-size: 32px;
     position: relative;
@@ -87,6 +94,8 @@ img {
 ion-checkbox {
     margin-left: 12%;
     margin-right: 3%;
+    --background-checked: #f9c022;
+    --border-color-checked: #f9c022;
 }
 
 .token-field {
@@ -95,14 +104,14 @@ ion-checkbox {
     display: inline-block;
     box-sizing: border-box;
     outline: none;
-    --padding-start: 50px;
+    --padding-start: 40px;
     --padding-top: 14px;
-    --padding-end: 50px;
+    --padding-end: 40px;
     text-align: start;
     border-bottom: 1px solid;
     border-image-source: linear-gradient(315deg, rgba(0,252,198,1) 0%, rgba(0,252,233,1) 35%, rgba(0,166,235,1) 100%);
     border-image-slice: 1;
-    //border-bottom-width: 10px;// solid;
+    text-align: center;
 }
 
 .submit-text {

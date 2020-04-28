@@ -1,6 +1,7 @@
+import { AlertService } from './../../services/alert.service';
+import { AlertController } from '@ionic/angular';
 import { Register } from './../../models/register.model';
 import { UserService } from './../../services/user.service';
-import { User } from './../../models/user.model';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -14,30 +15,57 @@ export class RegisterPage implements OnInit {
   hasTokenHC: boolean;
   profileImg: string = '';
   user: Register = {
-    nome: "Cascçon",
-    sobrenome: 'Marinilson',
-    rg: '12345678',
-    cpf: 12345678944,
-    peso: 58,
-    altura: 164,
-    email: 'cacs@cacs.com',
-    telefone: 12345678,
+    nome: '',
+    sobrenome: '',
+    rg: '',
+    cpf: null,
+    peso: null,
+    altura: null,
+    email: '',
+    telefone: null,
     imagem: '',
-    senha: 'marley',
-    tokenHC: 'cacsamapeps'
+    senha: '',
+    tokenHC: ''
   }
 
-  constructor(private authService: AuthService, private userService: UserService) { }
+  constructor(private authService: AuthService, 
+              private userService: UserService,
+              private alertService: AlertService,
+              private alertCtrl: AlertController) { }
 
-  ngOnInit() {
-    this.userService.register(this.user)
-    .subscribe(data => {
-      console.log(data);
-    })
-  }
+  ngOnInit() { }
 
   selectImg() {
     console.log("Funcionouuu");
+  }
+
+  confirmSignUp() {
+    this.alertCtrl.create({
+      header: 'Deseja continuar?',
+      message: 'Você confirma todos os seus dados?',
+      buttons: [{
+        text: 'Não',
+        role: 'cancel'
+      },
+      {
+        text: 'Sim',
+        handler: () => {
+          this.signUp()
+        }
+      }]
+    }).then(alertEl => {
+      alertEl.present();
+    });
+  }
+
+  signUp() {
+    this.userService.register(this.user).subscribe(response => {
+      if(response["created"]) {
+        this.authService.login(this.user.cpf, this.user.senha);
+      } else {
+        this.alertService.presentPopUp('Usuário já cadastrado');
+      }    
+    })   
   }
 
 }

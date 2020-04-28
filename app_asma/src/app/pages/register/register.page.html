@@ -1,5 +1,8 @@
 <div class="register-header">
   <div class="upper-elipse"></div>
+  <ion-button class="back-btn" slot="icon-only" fill="clear" size="large" routerLink="/login">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </ion-button>
   <h1>Crie sua <span style="color: white">conta</span></h1>
 </div>
 
@@ -53,6 +56,10 @@
       <ion-input class="register-field" placeholder="Confirme sua senha" type="password" [(ngModel)]="senhaConf"></ion-input>
     </div>
 
+    <div *ngIf="user.senha != '' && user.senha !== senhaConf">
+      <p>*As senhas devem ser idênticas.</p>
+    </div>
+
     <div>
       <ion-item lines="none">
         <ion-label>Possuo um token de acesso</ion-label>
@@ -67,7 +74,7 @@
   
   <div class="submit-text">Enviar</div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button class="submit-btn">
+    <ion-fab-button class="submit-btn" (click)="confirmSignUp()">
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
