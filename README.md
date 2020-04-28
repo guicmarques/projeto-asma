@@ -38,7 +38,7 @@ $ python manage.py runserver
     - Response: ```{"missingData": bool, "created": bool}``` (onde missingData = True indica se falta algum dado obrigatório e created = False indica que o usuário já existe, se houver algum erro ao salvar, missingData será o erro)
 
 - /rest/change_password/ - Altera a senha do usuário
-    - Body: ```{"cpf": cpf ou username, "password": nova senha}```
+    - Body: ```{"username": cpf/username, "password": nova senha}```
     - Response: ```{"updated": True ou mensagem de erro}```
 
 - /rest/questionnaire/ - Registra as respostas do questionário, sendo permitido apenas um questionário por dia (chamar o endpoint mais de uma vez no mesmo dia, para o mesmo usuário, atualiza as respostas para aquele dia)

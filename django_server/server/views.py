@@ -71,7 +71,7 @@ class ChangePassword(APIView):
 
     def post(self, request):
         try:
-            username = request["cpf"]
+            username = request["username"]
             password = request["password"]
             updated = handleUserData.changePassword(username, password)
             if updated == True:
