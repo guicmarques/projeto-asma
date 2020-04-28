@@ -156,6 +156,16 @@ def updateUserData(user, userData):
         return False
 
 
+def changePassword(username, password):
+    try:
+        user = User.objects.get(username=username)
+        user.set_password(password)
+        user.save()
+        return True
+    except Exception as e:
+        return e
+
+
 def createACQ(user, answers):
     try:
         acq, _ = AsthmaControlQuestionnaire.objects.get_or_create(

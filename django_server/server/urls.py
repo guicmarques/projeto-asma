@@ -13,8 +13,10 @@ urlpatterns = [
     path('token/refresh/',
          jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('hello/', views.HelloView.as_view(), name='hello'),
+    path('teste/', views.Test.as_view(), name='teste'),
     path('register/', views.RegisterUser.as_view(), name='register'),
     path('user_data/', views.UserData.as_view(), name='user_data'),
+    path('change_password/', views.UserData.as_view(), name='change_password'),
     path('questionnaire/', views.Questionnaire.as_view(), name='user_data'),
     path('fitbit/', views.Fitbit.as_view(), name="fitbit")
 ]

@@ -23,6 +23,16 @@ class HelloView(APIView):
         return Response(content)
 
 
+class Test(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        return Response("GET ok")
+
+    def post(self, request):
+        return Response(request.data)
+
+
 class RegisterUser(APIView):
     permission_classes = ()
 
@@ -54,6 +64,22 @@ class UserData(APIView):
             request_status = status.HTTP_200_OK
 
         return Response({"updated": updated}, status=request_status)
+
+
+class ChangePassword(APIView):
+    permission_classes = ()
+
+    def post(self, request):
+        try:
+            username = request["cpf"]
+            password = request["password"]
+            updated = handleUserData.changePassword(username, password)
+            if updated == True:
+                return Response({"updated": updated}, status=status.HTTP_200_OK)
+            else:
+                return Response({"updated": updated}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as e:
+            return Response({"updated": e}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class Questionnaire(APIView):
