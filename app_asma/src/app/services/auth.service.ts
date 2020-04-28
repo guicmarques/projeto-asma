@@ -50,7 +50,7 @@ export class AuthService {
       const header = new HttpHeaders({
         'Authorization': 'Bearer' + " " + this.token["access"]
       });
-      return this.http.get(this.env.API_URL + 'hello/', { headers: header })
+      return this.http.get(this.env.API_URL + 'teste/', { headers: header })
       .subscribe(data => {
         console.log(data);
         resolve(data);
