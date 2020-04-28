@@ -17,11 +17,13 @@
     </div>
 
     <div class="register-input">
-      <ion-input class="register-field" placeholder="Nome" type="text" [(ngModel)]="user.nome"></ion-input>
+      <ion-input class="register-field" placeholder="Nome" type="text" [(ngModel)]="user.nome"
+      autocapitalize="on"></ion-input>
     </div>
 
     <div class="register-input">
-      <ion-input class="register-field" placeholder="Sobrenome" type="text" [(ngModel)]="user.sobrenome"></ion-input>
+      <ion-input class="register-field" placeholder="Sobrenome" type="text" [(ngModel)]="user.sobrenome"
+      autocapitalize="on"></ion-input>
     </div>
 
     <div class="register-input">
@@ -49,7 +51,15 @@
     </div>
 
     <div class="register-input">
-      <ion-input class="register-field" placeholder="Senha" type="password" [(ngModel)]="user.senha"></ion-input>
+      <ion-input class="register-field" placeholder="Senha" type="password" [(ngModel)]="user.senha"
+      (ionFocus)="initPwd()" (ionBlur)="validatePwd()"></ion-input>
+    </div>
+
+    <div *ngIf="senhaValida === false">
+      <ul>*A senha:
+        <li>Deve possuir no mínimo 8 caracteres.</li> 
+        <li>Não deve conter espaços.</li>
+      </ul>
     </div>
 
     <div class="register-input">
@@ -74,7 +84,9 @@
   
   <div class="submit-text">Enviar</div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button class="submit-btn" (click)="confirmSignUp()">
+    <ion-fab-button class="submit-btn" (click)="confirmSignUp()" 
+    [attr.disabled]="user.cpf !== null && user.email !== '' && 
+    senhaValida && user.senha === senhaConf ? false : true">
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

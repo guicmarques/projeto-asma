@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  senhaValida: boolean;
   senhaConf: string;
   hasTokenHC: boolean;
   profileImg: string = '';
@@ -37,6 +38,21 @@ export class RegisterPage implements OnInit {
 
   selectImg() {
     console.log("Funcionouuu");
+  }
+
+  initPwd() {
+    console.log('oi');
+    if (this.user.senha === '') {
+      this.senhaValida = false;
+    }
+  }
+
+  validatePwd() {
+    if (this.user.senha.length === this.user.senha.replace(/\s/g, '').length && this.user.senha.length >= 8) {
+      this.senhaValida = true;
+    } else {
+      this.senhaValida = false;
+    }
   }
 
   confirmSignUp() {
