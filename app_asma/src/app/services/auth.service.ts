@@ -50,7 +50,7 @@ export class AuthService {
       const header = new HttpHeaders({
         'Authorization': 'Bearer' + " " + this.token["access"]
       });
-      return this.http.post(this.env.API_URL + 'hello/', {teste: 'Teste de validacao dos Tokens'},{ headers: header })
+      return this.http.get(this.env.API_URL + 'hello/', { headers: header })
       .subscribe(data => {
         console.log(data);
         resolve(data);
