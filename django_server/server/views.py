@@ -13,7 +13,7 @@ import server.handleUserData as handleUserData
 
 
 class HelloView(APIView):
-    permission_classes = ()
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         group = User.objects.filter(groups__name="Pacientes")

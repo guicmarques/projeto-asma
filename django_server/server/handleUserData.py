@@ -63,7 +63,7 @@ def createUser(userData):
                         f.write(imgdata)
                     profileInfo.imagem = "userImage/{}".format(filename)
                 if "token" in userData.keys():
-                    profileInfo.altura = userData["token"]
+                    profileInfo.token = userData["token"]
 
                 profileInfo.save()
 
