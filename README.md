@@ -49,7 +49,7 @@ $ python manage.py runserver 0.0.0.0:8000
 - /rest/fitbit/ - Obtém os dados da fitbit
     - Authentication: Bearer ```access_token```
     - Body: ```{"date": dia/mês/ano, "category": alguma categoria de dados da fitbit}``` - se for passada uma string vazia como category e/ou date, não haverá filtragem do parâmetro, obtendo todas as entradas - em teste, só existe a categoria ```heart-rate```
-    - Response ```{"data":[[data, categoria, "data": dados do sensor], ...]}```
+    - Response ```{"data":[["date": data, "category": categoria, "columns": nome das colunas, "data": dados do sensor], ...]}```
 
 ### GET requests:
 
