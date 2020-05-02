@@ -41,7 +41,6 @@ export class RegisterPage implements OnInit {
   }
 
   initPwd() {
-    console.log('oi');
     if (this.user.senha === '') {
       this.senhaValida = false;
     }
@@ -56,15 +55,18 @@ export class RegisterPage implements OnInit {
   }
 
   confirmSignUp() {
-    this.alertCtrl.create({
+    const alert = this.alertCtrl.create({
+      cssClass: 'signUpAlert',
       header: 'Deseja continuar?',
       message: 'Você confirma todos os seus dados?',
       buttons: [{
         text: 'Não',
-        role: 'cancel'
+        role: 'cancel',
+        cssClass: 'signUpNoBtn'
       },
       {
         text: 'Sim',
+        cssClass: 'signUpYesBtn',
         handler: () => {
           this.signUp()
         }
