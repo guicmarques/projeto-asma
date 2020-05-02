@@ -1,6 +1,7 @@
 import base64
 import os
 from datetime import datetime, timedelta
+from enum import Enum
 
 import pandas as pd
 from django.contrib.auth.models import Group, Permission, User
@@ -191,13 +192,19 @@ def createACQ(user, answers):
 
 
 def getFitbitData(user, date, category):
+    translate = {"heart-rate": ["hour", "heart-rate"]}
     response = []
     if date == "" and category == "":
         files = FitbitFile.objects.filter(user=user)
         for file in files:
             content = pd.read_csv(file.path, index_col=0,
                                   squeeze=True).to_dict()
-            response.append([file.date, file.category, content])
+            if file.category in translate:
+                cols = translate[file.category]
+            else:
+                cols = []
+            response.append(
+                {"date": file.date, "category": file.category, "columns": cols, "data": content})
     elif date != "" and category != "":
         date = datetime.strptime(date, "%d/%m/%Y").date()
         files = FitbitFile.objects.filter(
@@ -205,19 +212,34 @@ def getFitbitData(user, date, category):
         for file in files:
             content = pd.read_csv(file.path, index_col=0,
                                   squeeze=True).to_dict()
-            response.append([file.date, file.category, content])
+            if file.category in translate:
+                cols = translate[file.category]
+            else:
+                cols = []
+            response.append(
+                {"date": file.date, "category": file.category, "columns": cols, "data": content})
     elif date == "":
         files = FitbitFile.objects.filter(user=user, category=category)
         for file in files:
             content = pd.read_csv(file.path, index_col=0,
                                   squeeze=True).to_dict()
-            response.append([file.date, file.category, content])
+            if file.category in translate:
+                cols = translate[file.category]
+            else:
+                cols = []
+            response.append(
+                {"date": file.date, "category": file.category, "columns": cols, "data": content})
     elif category == "":
         date = datetime.strptime(date, "%d/%m/%Y").date()
         files = FitbitFile.objects.filter(user=user, date=date)
         for file in files:
             content = pd.read_csv(file.path, index_col=0,
                                   squeeze=True).to_dict()
-            response.append([file.date, file.category, content])
+            if file.category in translate:
+                cols = translate[file.category]
+            else:
+                cols = []
+            response.append(
+                {"date": file.date, "category": file.category, "columns": cols, "data": content})
 
     return response
