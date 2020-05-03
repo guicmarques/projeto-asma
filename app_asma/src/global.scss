@@ -88,9 +88,34 @@
     }
 }
 
+.popUp .alert-head {
+    background-color: orange;
+    text-align: center;
+    font-family: 'Segoe UI';
 
+    h2 {        
+        font-size: 20px;
+        font-weight: 700;
+        color: white;
+    }  
+}
 
+.popUp .alert-message {
+    margin-top: 6px;
+    background-color: white;
+    font-family: 'Segoe UI';
+    text-align: center;
+}
 
+.popUp .alert-button-group {
+    justify-content: space-evenly;
+    font-family: 'Segoe UI';
 
+}
 
-
+.popUpBtn {
+    span {
+        color: aqua;
+    }
+    
+}

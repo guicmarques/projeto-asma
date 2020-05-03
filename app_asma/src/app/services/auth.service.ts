@@ -32,7 +32,7 @@ export class AuthService {
       this.navCtrl.navigateRoot('/tabs/home');
     }, error => {
       console.log(error);
-      this.alertService.presentPopUp('CPF ou senha inválidos');
+      this.alertService.presentPopUp('Problema ao conectar', 'CPF ou senha inválidos');
     })
   }
 

@@ -18,10 +18,13 @@ export class AlertService {
     toast.present();
   }
 
-  presentPopUp(message: any) {
+  presentPopUp(title: any, message: any) {
     this.alertCtrl.create({
+      cssClass: 'popUp',
+      header: title,
       message: message,
       buttons: [{
+        cssClass: 'popUpBtn',
         text: 'Ok',
         role: 'cancel'
       }]

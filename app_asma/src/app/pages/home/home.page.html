@@ -5,20 +5,11 @@
 </ion-header>
 
 <ion-content>
-  <div class="building">
-    <img [src]="imgBuilding" class="building-img">
-    <p class="oops-text">OOPS! </p>
-    <p class="page-text">Página em construção 
-      <span class="dot" #dot1></span>
-      <span class="dot" #dot2></span>
-      <span class="dot" #dot3></span>
-    </p>
-  </div>
+  <app-steps-canvas [stepCanvas]="stepsData"></app-steps-canvas>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/login" (click)="logout()">
       <ion-icon name="log-out-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-  <ion-button (click)="getUser()">Get User</ion-button>
 </ion-content>

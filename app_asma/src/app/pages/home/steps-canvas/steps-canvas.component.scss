@@ -1,0 +1,39 @@
+*{
+    font-family: 'Segoe UI';
+}
+
+.steps-goal {
+    position: absolute;
+    z-index: 20;
+    top: 62%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.steps-given {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 150%;
+    font-weight: 700;
+}
+
+canvas {
+    position: relative;
+    width: 140% !important;
+    height: 140% !important;
+    margin-left: -20%;
+}
+
+.chart {
+    margin: 0 auto;
+}
+
+.walking-person {
+    position: absolute;
+    z-index: 25;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
