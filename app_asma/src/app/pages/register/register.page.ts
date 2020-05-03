@@ -81,7 +81,7 @@ export class RegisterPage implements OnInit {
       if(response["created"]) {
         this.authService.login(this.user.cpf, this.user.senha);
       } else {
-        this.alertService.presentPopUp('Usuário já cadastrado');
+        this.alertService.presentPopUp('Erro ao cadastrar', 'Usuário já cadastrado');
       }    
     })   
   }
