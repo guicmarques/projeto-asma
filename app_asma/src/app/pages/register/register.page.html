@@ -56,9 +56,11 @@
     </div>
 
     <div *ngIf="senhaValida === false">
-      <ul>*A senha:
-        <li>Deve possuir no mínimo 8 caracteres.</li> 
-        <li>Não deve conter espaços.</li>
+      <ul class="invPsw">* A senha:
+        <li class="invalid" class.valid="this.user.senha.length >= 8">
+          Deve possuir no mínimo 8 caracteres.
+        </li> 
+        <li class="invPsw">Não deve conter espaços.</li>
       </ul>
     </div>
 

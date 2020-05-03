@@ -25,15 +25,28 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+.signUpAlert .alert-wrapper {
+    border-radius: 15px;
+}
+
 .signUpAlert .alert-head {
-    background-color: orange;
+    background-color: white;
     text-align: center;
     font-family: 'Segoe UI';
+    border-bottom: 3px solid;
+    border-image-source: linear-gradient(90deg, white 0%, #ffc862 3%,  orange 10%, orange 90%, #ffc862 97%, white 100%);
+    border-image-slice: 1;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left: 1px;
+    border-right: 1px;
+    margin-left: 12px;
+    margin-right: 12px;
 
     h2 {        
         font-size: 20px;
         font-weight: 700;
-        color: white;
+        color: orange;
     }   
 }
 
@@ -46,21 +59,38 @@
 .signUpAlert .alert-button-group {
     justify-content: space-evenly;
     font-family: 'Segoe UI';
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
 
-}
-
-.signUpNoBtn {
-    span {
-        color: indianred;
+    .alert-button {
+        width: 50%;
+        margin-right: 0; 
+        
+        span {
+            justify-content: center;
+        }
     }
-    
-}
 
-button.signUpYesBtn {
-    span {
-        color: aqua;
+    .signUpNoBtn {
+        background-color: white;  
+        color: orange;
+        border: 2px solid orange;
+        border-bottom-left-radius: 15px;
+        span {
+            text-align: center;
+        }
+    }
+
+    .signUpYesBtn {
+        color: white;
+        background-color: orange;
     }
 }
+
+
+
+
 
 
 
