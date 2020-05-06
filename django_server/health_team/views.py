@@ -63,3 +63,15 @@ def user_login(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'health_team/login.html', {})
+
+
+def table(request):
+    return render(request, 'logged/table.html', {})
+
+
+def profile(request):
+    return render(request, 'logged/profile.html', {})
+
+
+def cadastroPaciente(request):
+    return render(request, 'logged/blank-1.html', {})
