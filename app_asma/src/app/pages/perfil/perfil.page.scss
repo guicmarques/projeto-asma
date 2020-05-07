@@ -33,13 +33,17 @@
     display: inline-block;
     margin-right: 2px;
 }
-.toolbar-text{
+.title-text{
   font-family: 'Segoe UI';
   color: #2DD2C2;
   text-align: center;  
   font-size: 25px;  
 }
+.line-skip{
+   height: 10px;
+   width: 40px; 
 
+}
 
 .toolbar {
     background-color: #2DD2C2;
@@ -73,6 +77,14 @@
     z-index: 20;
     height: 75%;
     width: 115%;
+    background-color: #2DD2C2;
+    border-radius: 50%;
+}
+.elipse {
+    position: absolute;
+    height: 90%;
+    width: 50%;
+    left: 10%;
     background-color: #2DD2C2;
     border-radius: 50%;
 }
