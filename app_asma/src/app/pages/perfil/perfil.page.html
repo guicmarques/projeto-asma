@@ -1,17 +1,111 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
-  </ion-toolbar>
-</ion-header>
 
+<header> <ion-toolbar>
+  <ion-title class="toolbar-text">Perfil</ion-title>
+  </ion-toolbar>
+</header>
 <ion-content>
-  <div class="building">
-    <img [src]="imgBuilding" class="building-img">
-    <p class="oops-text">OOPS! </p>
-    <p class="page-text">Página em construção
-      <span class="dot" #dot1></span>
-      <span class="dot" #dot2></span>
-      <span class="dot" #dot3></span>
-    </p>
-  </div>  
+ 
+
+  <div class="profile-forms">
+    <div class="profile-username">
+      <ion-avatar class="profile-img">
+       <ion-img [src]="user.imagem"></ion-img>
+     </ion-avatar> 
+     <ion-label class="profile-username">{{user.nome}} {{user.sobrenome}}</ion-label>
+    </div>
+  <div>
+    <ion-card class="profile-infocard" nopaddings>
+      <ion-list>
+
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="ion-justify-content-start">
+               <ion-text class="profile-atributes" > Nome</ion-text>
+              </ion-col>
+              <ion-col class="ion-justify-content-center">
+                <ion-text class="user-atributes" >{{user.nome}} {{user.sobrenome}}</ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="ion-justify-content-start">
+               <ion-text class="profile-atributes" > RG </ion-text>
+              </ion-col>
+              <ion-col class="ion-justify-content-center">
+                <ion-text class="user-atributes" >{{user.rg}}</ion-text>
+              </ion-col>
+              </ion-row>
+          </ion-grid>
+        </ion-item>
+
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="ion-justify-content-start">
+               <ion-text class="profile-atributes" > Email</ion-text>
+              </ion-col>
+              <ion-col class="ion-justify-content-center">
+                <ion-text class="user-atributes" >{{user.email}}</ion-text>
+              </ion-col>
+             </ion-row>
+          </ion-grid>
+        </ion-item>
+
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="ion-justify-content-start">
+               <ion-text class="profile-atributes" > Telefone </ion-text>
+              </ion-col>
+              <ion-col class="ion-justify-content-center">
+                <ion-text class="user-atributes" >{{user.telefone}}</ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="ion-justify-content-start">
+               <ion-text class="profile-atributes" > Altura </ion-text>
+              </ion-col>
+              <ion-col class="ion-justify-content-center">
+                <ion-text class="user-atributes" >{{user.altura}} m</ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="ion-justify-content-start">
+               <ion-text class="profile-atributes" > Peso </ion-text>
+              </ion-col>
+              <ion-col class="ion-justify-content-center">
+                <ion-text class="user-atributes" >{{user.peso}} kg</ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+
+
+      </ion-list>
+    </ion-card> 
+
+  </div>
+
+    
+    
+
+
+
+  </div>
+ 
 </ion-content>

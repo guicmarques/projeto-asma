@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Animation, AnimationController } from '@ionic/angular';
+import { User } from './../../models/user.model';
+import { UserService } from './../../services/user.service';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -7,74 +10,28 @@ import { Animation, AnimationController } from '@ionic/angular';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
-  @ViewChild('dot1', {static: false}) dot1: ElementRef;
-  @ViewChild('dot2', {static: false}) dot2: ElementRef;
-  @ViewChild('dot3', {static: false}) dot3: ElementRef;
-  imgBuilding: String = '../../../assets/images/em_construcao.svg';
-  dotA: Animation;
-  dotB: Animation;
-  dotC: Animation;
+  user: User = {
+    nome: "Bill",
+    sobrenome: "Gates",
+    rg: "010010101",
+    username: 33333,
+    peso: 55,
+    altura: 1.75,
+    email: "Bill.Gates@Gmail.com",
+    telefone: 9393939,
+    imagem: "https://upload.wikimedia.org/wikipedia/commons/2/2d/Bill_Gates_2014.jpg",
+    token: "token",
+    tokenValidado: true,
+  };
+  
 
-  constructor(private animationCtrl: AnimationController) { }
 
-  ngOnInit() {
+  constructor(private animationCtrl: AnimationController,
+              private UserService: UserService,
+              private AuthService: AuthService ) { }
+
+  ngOnInit() { 
+    //this.UserService.getUser().then((result) => { this.user = result;});
   }
-
-  ngAfterViewInit() {
-    this.dotA = this.animationCtrl.create()
-      .addElement(this.dot1.nativeElement)
-      .fill('none')
-      .duration(2000)
-      .iterations(Infinity)
-      .keyframes([
-        { offset: 0, transform: 'translateY(0px)' },
-        { offset: 0.125, transform: 'translateY(-5px)' },
-        { offset: 0.25, transform: 'translateY(0px)' },
-        { offset: 0.375, transform: 'translateY(0px)' },
-        { offset: 0.5, transform: 'translateY(0px)' },
-        { offset: 0.625, transform: 'translateY(0px)' },
-        { offset: 0.75, transform: 'translateY(0px)' },
-        { offset: 0.875, transform: 'translateY(0px)' },
-        { offset: 1, transform: 'translateY(0px)' }
-      ]);
-
-      this.dotB = this.animationCtrl.create()
-      .addElement(this.dot2.nativeElement)
-      .fill('none')
-      .duration(2000)
-      .iterations(Infinity)
-      .keyframes([
-        { offset: 0, transform: 'translateY(0px)' },
-        { offset: 0.125, transform: 'translateY(0px)' },
-        { offset: 0.25, transform: 'translateY(0px)' },
-        { offset: 0.375, transform: 'translateY(-5px)' },
-        { offset: 0.5, transform: 'translateY(0px)' },
-        { offset: 0.625, transform: 'translateY(0px)' },
-        { offset: 0.75, transform: 'translateY(0px)' },
-        { offset: 0.875, transform: 'translateY(0px)' },
-        { offset: 1, transform: 'translateY(0px)' }
-      ]);
-
-      this.dotC = this.animationCtrl.create()
-      .addElement(this.dot3.nativeElement)
-      .fill('none')
-      .duration(2000)
-      .iterations(Infinity)
-      .keyframes([
-        { offset: 0, transform: 'translateY(0px)' },
-        { offset: 0.125, transform: 'translateY(0px)' },
-        { offset: 0.25, transform: 'translateY(0px)' },
-        { offset: 0.375, transform: 'translateY(0px)' },
-        { offset: 0.5, transform: 'translateY(0px)' },
-        { offset: 0.625, transform: 'translateY(-5px)' },
-        { offset: 0.75, transform: 'translateY(0px)' },
-        { offset: 0.875, transform: 'translateY(0px)' },
-        { offset: 1, transform: 'translateY(0px)' }
-      ]);
-
-    this.dotA.play();
-    this.dotB.play();
-    this.dotC.play();
-  }
-
+ 
 }
