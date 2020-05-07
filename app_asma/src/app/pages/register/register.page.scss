@@ -2,10 +2,6 @@
     font-family: 'Segoe UI';
 }
 
-.scroll-content {
-    padding-bottom: 0 !important;
-}
-
 .register-header {  
     height: 25%;
     width: 100%;
@@ -23,12 +19,12 @@
 }
 
 .bottom-circle {
-    height: 27%;
+    height: 17%;
     width: 30%;
     border-radius: 50%;
     background-color: #2dd2c2;
     position: absolute;
-    bottom: -13%;
+    bottom: -7%;
     left: -12%;
 }
 
@@ -93,6 +89,12 @@ img {
      linear-gradient(315deg, rgba(0,252,198,1) 0%, rgba(0,252,233,1) 35%, rgba(0,166,235,1) 100%) border-box;
     border: 2px solid transparent;
     border-radius: 23px;
+}
+
+.invPsw {
+    list-style-type: none;
+    color: red;
+    text-align: start;
 }
 
 ion-checkbox {

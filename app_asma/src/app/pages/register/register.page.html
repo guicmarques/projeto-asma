@@ -53,24 +53,27 @@
     <div class="register-input">
       <ion-input class="register-field" placeholder="Senha" type="password" [(ngModel)]="user.senha"
       (ionFocus)="initPwd()" (ionBlur)="validatePwd()"></ion-input>
+
+      <div *ngIf="senhaValida === false">
+        <ul class="invPsw"> <ion-icon name="alert-circle-outline"></ion-icon> A senha:
+          <li> Deve possuir no mínimo 8 caracteres.
+          </li> 
+          <li> Não deve conter espaços.</li>
+        </ul>
+      </div>
     </div>
 
-    <div *ngIf="senhaValida === false">
-      <ul class="invPsw">* A senha:
-        <li class="invalid" class.valid="this.user.senha.length >= 8">
-          Deve possuir no mínimo 8 caracteres.
-        </li> 
-        <li class="invPsw">Não deve conter espaços.</li>
-      </ul>
-    </div>
+    
 
     <div class="register-input">
       <ion-input class="register-field" placeholder="Confirme sua senha" type="password" [(ngModel)]="senhaConf"></ion-input>
+
+      <div *ngIf="user.senha != '' && user.senha !== senhaConf">
+        <ul class="invPsw"> <ion-icon name="alert-circle-outline"></ion-icon> As senhas devem ser idênticas.</ul>
+      </div>
     </div>
 
-    <div *ngIf="user.senha != '' && user.senha !== senhaConf">
-      <p>*As senhas devem ser idênticas.</p>
-    </div>
+    
 
     <div>
       <ion-item lines="none">
@@ -83,7 +86,9 @@
       </div> 
     </div>   
   </div> 
+</ion-content>
   
+<div class="regiser-footer">
   <div class="submit-text">Enviar</div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button class="submit-btn" (click)="confirmSignUp()" 
@@ -93,5 +98,4 @@
     </ion-fab-button>
   </ion-fab>
   <div class="bottom-circle"></div>
-
-</ion-content>
+</div>

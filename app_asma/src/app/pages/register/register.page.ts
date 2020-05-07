@@ -38,6 +38,7 @@ export class RegisterPage implements OnInit {
 
   selectImg() {
     console.log("Funcionouuu");
+    this.alertService.presentPopUp('OOPS!', 'Função não implementada')
   }
 
   initPwd() {
