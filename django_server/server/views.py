@@ -110,3 +110,32 @@ class Fitbit(APIView):
             return Response({"data": files}, status=status.HTTP_200_OK)
         else:
             return Response({"data": ""}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class Goals(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        required = ["activity", "quantity", "daysToEnd"]
+        if all(item in request.data.keys() for item in required):
+            activity = request.data["activity"]
+            quantity = request.data["quantity"]
+            daysToEnd = request.data["daysToEnd"]
+            created = handleUserData.createGoal(
+                request.user, activity, quantity, daysToEnd)
+
+            if created == True:
+                request_status = status.HTTP_200_OK
+            else:
+                request_status = status.HTTP_400_BAD_REQUEST
+
+        else:
+            created = "There are missing keys in request"
+            request_status = status.HTTP_400_BAD_REQUEST
+
+        return Response({"created": created}, status=request_status)
+
+    def get(self, request):
+        goals = handleUserData.getGoals(request.user)
+
+        return Response(goals)

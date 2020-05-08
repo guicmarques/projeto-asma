@@ -7,7 +7,7 @@ import pandas as pd
 from django.contrib.auth.models import Group, Permission, User
 
 from server.models import (AsthmaControlQuestionnaire, FitbitFile,
-                           UserProfileInfo)
+                           UserProfileInfo, Goal)
 
 
 def createUser(userData):
@@ -198,7 +198,7 @@ def getFitbitData(user, date, category):
         for file in files:
             data = {}
             content = pd.read_csv(file.path)
-            for i, col in enumerate(content.columns):
+            for col in content.columns:
                 data[col] = list(content[col])
             response.append(
                 {"date": file.date, "category": file.category, "data": data})
@@ -209,7 +209,7 @@ def getFitbitData(user, date, category):
         for file in files:
             data = {}
             content = pd.read_csv(file.path)
-            for i, col in enumerate(content.columns):
+            for col in content.columns:
                 data[col] = list(content[col])
             response.append(
                 {"date": file.date, "category": file.category, "data": data})
@@ -218,7 +218,7 @@ def getFitbitData(user, date, category):
         for file in files:
             data = {}
             content = pd.read_csv(file.path)
-            for i, col in enumerate(content.columns):
+            for col in content.columns:
                 data[col] = list(content[col])
             response.append(
                 {"date": file.date, "category": file.category, "data": data})
@@ -228,9 +228,53 @@ def getFitbitData(user, date, category):
         for file in files:
             data = {}
             content = pd.read_csv(file.path)
-            for i, col in enumerate(content.columns):
+            for col in content.columns:
                 data[col] = list(content[col])
             response.append(
                 {"date": file.date, "category": file.category, "data": data})
 
     return response
+
+
+def createGoal(user, activity, quantity, daysToEnd):
+    try:
+        goal, _ = Goal.objects.get_or_create(
+            user=user, activity=activity)
+        try:
+            goal.quantity = int(quantity)
+            goal.startDate = datetime.now().date()
+            goal.endDate = datetime.now().date()+timedelta(days=int(daysToEnd))
+            goal.save()
+            return True
+        except Exception as e:
+            return e
+    except Exception as e:
+        return e
+
+
+def getGoals(user):
+    # returns active goals
+    response = {}
+    activeGoals = []
+    inactiveGoals = []
+
+    goals = Goal.objects.filter(user=user)
+    for goal in goals:
+        if datetime.today().date() <= goal.endDate:
+            data = {}
+            data["activity"] = goal.activity
+            data["quantity"] = goal.quantity
+            data["startDate"] = goal.startDate
+            data["endDate"] = goal.endDate
+
+            activeGoals.append(data)
+        else:
+            data = {}
+            data["activity"] = goal.activity
+            data["quantity"] = goal.quantity
+            data["startDate"] = goal.startDate
+            data["endDate"] = goal.endDate
+
+            inactiveGoals.append(data)
+
+    return {"activeGoals": activeGoals, "inactiveGoals": inactiveGoals}

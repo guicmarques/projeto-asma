@@ -18,5 +18,6 @@ urlpatterns = [
     path('user_data/', views.UserData.as_view(), name='user_data'),
     path('change_password/', views.UserData.as_view(), name='change_password'),
     path('questionnaire/', views.Questionnaire.as_view(), name='user_data'),
-    path('fitbit/', views.Fitbit.as_view(), name="fitbit")
+    path('fitbit/', views.Fitbit.as_view(), name="fitbit"),
+    path('goals/', views.Goals.as_view(), name="goals"),
 ]

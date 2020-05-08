@@ -51,24 +51,26 @@ $ python manage.py runserver 0.0.0.0:8000
     - Body: ```{"date": dia/mês/ano, "category": alguma categoria de dados da fitbit}``` - se for passada uma string vazia como category e/ou date, não haverá filtragem do parâmetro, obtendo todas as entradas - em teste, só existe a categoria ```heart-rate```
     - Response ```{"data":[{"date": data, "category": categoria, "data": ["nome da coluna": dados, ...}, ...]}```
 
+- /rest/goals/ - Cria uma meta do usuário:
+    - Authentication: Bearer ```access_token```
+    - Body: ```{"activity": Nome da atividade, "quantity": int(quantidade) (ex.: numero de passos, minutos de caminhada), "daysToEnd": dias até o fim da meta}``` - só pode ser criada uma meta por nome de atividade, os requests seguintes com o mesmo nome serão considerados updates da meta
+    - Response ```{"created": True ou mensagem de erro}```
+
 ### GET requests:
 
 - /rest/user_data/ - Retorna as informações do usuário
     - Authentication: Bearer ```access_token```
     - Response: ```{"username": cpf, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "imagem": .jpg em base64, "token": token do HC, "tokenValidado": bool}``` ou ```{"username": cpf, "email": email, "tokenValidado": bool}``` se as outras informações não estiverem presentes
 
+- /rest/goals/ - Cria uma meta do usuário:
+    - Authentication: Bearer ```access_token```
+    - Response ```{"activeGoals": [{"activity": nome da atividade, "quantity": quantidade, "startDate": dia em que a meta foi criada, "endDate": dia final da meta}, ...], "inactiveGoals": {{"activity": nome da atividade, "quantity": quantidade, "startDate": data em que a meta foi criada, "endDate": data final da meta}, ...]}```
+
 ### PUT requests:
 - /rest/user_data/ - Atualiza (ou cria, se não existir) as informações do usuário
     - Authentication: Bearer ```access_token```
     - Body: ```{"email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "imagem": .jpg em base64, "token": token do HC}```
     - Response: ```{"updated": bool}``` (booleano indicando se a operação de atualização teve sucesso)
-
-
-## Configs manuais (opcional)
-- ao criar um novo banco de dados, defina a permissão de alteração dos dados para cada grupo (não obrigatorio para ambiente DEV)
-    - localhost:8000/admin -> inserir login de admin
-    - Groups -> Pacientes -> Permissions
-    - definir todas as permissões ```server | user profile info``` e a persmissão ```auth | user | Can view user``` para Chosen Permissions
 
 
 ### TODO
