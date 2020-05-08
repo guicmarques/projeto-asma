@@ -8,4 +8,7 @@ app_name = 'health_team'
 urlpatterns = [
     url(r'^register/$', views.register, name='register'),
     url(r'^user_login/$', views.user_login, name='user_login'),
+    url(r'^table.html$', views.table, name='table'),
+    url(r'^profile.html$', views.profile, name='profile'),
+    url(r'^blank-1.html$', views.cadastroPaciente, name='cadastroPaciente'),
 ]
