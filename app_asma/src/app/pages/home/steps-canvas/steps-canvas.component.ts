@@ -21,7 +21,23 @@ export class StepsCanvasComponent implements OnInit {
 
   ngOnInit() {
     this.createDounutChart(this.stepCanvas);
-    this.date = new Date();
+    this.getDate();
+  }
+
+  getDate() {
+    let date = new Date();
+    let dateString = date.toDateString();
+    let fullDate = dateString.split(' ');
+    let dia = fullDate[2];
+    let mesNumber = fullDate[1];
+
+    let meses = {'January': 'Janeiro', 'February': 'Fevereiro', 'March': 'Março', 'April': 'Abril', 'May': 'Maio', 
+                'June':'Junho', 'July': 'Julho', 'August': 'Agosto', 'September': 'Setembro', 'October': 'Outubro', 
+                'November': 'Novembro', 'December': 'Dezembro'};
+
+    let mes = meses[mesNumber];
+
+    this.date =  dia + ' de ' + mes;
   }
 
   createDounutChart(data: any){
@@ -34,7 +50,7 @@ export class StepsCanvasComponent implements OnInit {
           label: '/8000 passos',
           data: [data, (8000-data)],
           backgroundColor: ['rgb(45, 210, 194)', 'rgba(0,0,0,0)'], // array should have same number of elements as number of dataset
-          borderColor: 'rgb(45, 210, 194)',// array should have same number of elements as number of dataset
+          borderColor: ['rgb(45, 210, 194)', 'rgba(0,0,0,0)'],// array should have same number of elements as number of dataset
           borderWidth: 1,
         }]
       },

@@ -1,8 +1,11 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
+<header>
+  <div class="hello-header">
+    Olá, <span class="bold-header" *ngIf="userDefined">{{ user.nome }}</span> !
+  </div>
+  <div class="date-header">
+    {{ date }}
+  </div>
+</header>
 
 <ion-content>
   <app-steps-canvas [stepCanvas]="stepsData"></app-steps-canvas>

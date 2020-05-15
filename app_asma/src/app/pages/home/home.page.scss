@@ -1,3 +1,7 @@
+*{
+    font-family: 'Segoe UI';
+}
+
 .building {
     position: relative;
     top: 45%;
@@ -32,4 +36,24 @@
     border-radius: 50%;
     display: inline-block;
     margin-right: 2px;
+}
+
+header {
+    height: 70px;
+    padding-top: 5%;
+}
+
+.hello-header {
+    font-size: 120%;
+    padding-left: 5%;
+    padding-bottom: 1%;
+}
+
+.bold-header {
+    font-weight: 700;
+}
+
+.date-header {
+    font-size: 80%;
+    padding-left: 5%;
 }
