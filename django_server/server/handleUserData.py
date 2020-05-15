@@ -164,7 +164,7 @@ def changePassword(username, password):
         user.save()
         return True
     except Exception as e:
-        return e
+        return str(e)
 
 
 def createACQ(user, answers):
@@ -247,9 +247,9 @@ def createGoal(user, activity, quantity, daysToEnd):
             goal.save()
             return True
         except Exception as e:
-            return e
+            return str(e)
     except Exception as e:
-        return e
+        return str(e)
 
 
 def getGoals(user):
