@@ -15,6 +15,7 @@ import { Goal } from '../../models/goal.model';
 })
 
 export class HomePage implements OnInit {
+  goalImg:  String = '../../../assets/images/bullseye.png';
   stepsData: any;
   user: any;
   userDefined: boolean = false; 

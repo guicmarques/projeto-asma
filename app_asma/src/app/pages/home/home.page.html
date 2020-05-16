@@ -10,6 +10,26 @@
 <ion-content>
   <app-steps-canvas [stepCanvas]="stepsData"></app-steps-canvas>
 
+  <ion-card>
+    <ion-card-header>
+      <div>
+        <img [src]="goalImg">
+        <span class="meta-text">Defina uma nova meta!</span>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-chip mode="ios">
+        <ion-icon name="walk-outline"></ion-icon>
+        <ion-label>Caminhada</ion-label>
+        <ion-icon name="close"></ion-icon>
+      </ion-chip>
+      <ion-chip outline="true" mode="ios">
+        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+        <ion-label>Outro</ion-label>
+      </ion-chip>
+    </ion-card-content>
+  </ion-card>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/login" (click)="logout()">
       <ion-icon name="log-out-outline"></ion-icon>
