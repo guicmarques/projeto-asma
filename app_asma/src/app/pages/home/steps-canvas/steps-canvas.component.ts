@@ -15,7 +15,7 @@ export class StepsCanvasComponent implements OnInit {
 
   date: any;
 
-  walkingPersonImg:  String = '../../../assets/images/walking_blue_white.png';
+  walkingPersonImg:  String = '../../../assets/images/walking_white_blue.png';
 
   constructor() { }
 
@@ -49,7 +49,7 @@ export class StepsCanvasComponent implements OnInit {
         datasets: [{
           label: '/8000 passos',
           data: [data, (8000-data)],
-          backgroundColor: ['rgb(45, 210, 194)', 'rgba(0,0,0,0)'], // array should have same number of elements as number of dataset
+          backgroundColor: ['rgb(255,255,255)', 'rgba(0,0,0,0)'], // array should have same number of elements as number of dataset
           borderColor: ['rgb(45, 210, 194)', 'rgba(0,0,0,0)'],// array should have same number of elements as number of dataset
           borderWidth: 1,
         }]
