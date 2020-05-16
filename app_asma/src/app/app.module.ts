@@ -13,6 +13,7 @@ import { HttpClientModule }    from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { Base64 } from '@ionic-native/base64/ngx';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

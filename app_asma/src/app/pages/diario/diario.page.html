@@ -1,17 +1,18 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>diario</ion-title>
+    <ion-title>
+      <div class="dateDescr"><b>{{this.dayName}}</b>,  {{this.day}}  de  {{this.month}}</div>
+      <div class="weekdays">
+        <span *ngFor="let wDay of this.week" [ngClass]="{'availDay' : wDay < this.day,
+                                                        'today'     : wDay == this.day,
+                                                        'unavDay'   : wDay > this.day}"> {{wDay}} </span>
+        
+                      
+      </div>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="building">
-    <img [src]="imgBuilding" class="building-img">
-    <p class="oops-text">OOPS! </p>
-    <p class="page-text">Página em construção
-      <span class="dot" #dot1></span>
-      <span class="dot" #dot2></span>
-      <span class="dot" #dot3></span>
-    </p>
-  </div>   
+    
 </ion-content>
