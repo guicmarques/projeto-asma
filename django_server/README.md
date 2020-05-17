@@ -1,6 +1,13 @@
 # projeto-asma
 Projeto do Laboratório de Engenharia de Software da Poli-USP em parceria com a Faculdade de Medicina da USP
 
+## Requerimentos
+
+Para executar esse programa, é necessário ter alguma versão de python > 3.7. Em seguida, basta instalar os pacotes com o seguinte comando:
+```
+pip install -r requirements.txt
+```
+
 ## Rodar o servidor
 - na primeira vez, rode os seguintes comandos:
 
