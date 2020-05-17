@@ -237,19 +237,18 @@ def getFitbitData(user, date, category):
 
 
 def createGoal(user, activity, quantity, daysToEnd):
-    try:
-        goal, _ = Goal.objects.get_or_create(
-            user=user, activity=activity)
-        try:
-            goal.quantity = int(quantity)
-            goal.startDate = datetime.now().date()
-            goal.endDate = datetime.now().date()+timedelta(days=int(daysToEnd))
-            goal.save()
-            return True
-        except Exception as e:
-            return str(e)
-    except Exception as e:
-        return str(e)
+    # try:
+    goal, _ = Goal.objects.get_or_create(user=user, activity=activity)
+    # try:
+    goal.quantity = int(quantity)
+    goal.startDate = datetime.now().date()
+    goal.endDate = datetime.now().date()+timedelta(days=int(daysToEnd))
+    goal.save()
+    return True
+    #     except Exception as e:
+    #         return str(e)
+    # except Exception as e:
+    #     return str(e)
 
 
 def getGoals(user):

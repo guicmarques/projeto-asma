@@ -132,3 +132,6 @@ dmypy.json
 django_server/media/fitbit/*
 !django_server/media/fitbit/heart-rate-2019-03-14.csv
 django_server/media/userImage/*
+*/migrations/*
+!*/__init__.py
+
