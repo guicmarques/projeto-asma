@@ -53,6 +53,11 @@ $ python manage.py runserver 0.0.0.0:8000
     - Body: ```{"1": resposta1, "2": resposta2, "3": resposta3, "4": resposta4, "5": resposta5, "6": resposta6, "7": resposta7}``` (as respostas devem ser, obrigatoriamente, números entre 0 e 6)
     - Response: ```{"created": bool}``` (criado = True se a operação de salvar no banco de dados tiver funcionado, caso contrário retorna o erro)
 
+- /rest/daily/ - Registra diário de sintomas:
+    - Authentication: Bearer ```access_token```
+    - Body: ```{"note": nota escrita do dia, "pico": pico (???), "tosse": "true" ou "false", "chiado": "true" ou "false", "faltaAr": "true" ou "false", "acordar": "true" ou "false", "bombinha": "true" ou "false"}``` - só pode ser criada uma entrada por dia, ao enviar mais de uma, altera a mais recente
+    - Response ```{"created": True ou mensagem de erro}```
+
 - /rest/fitbit/ - Obtém os dados da fitbit
     - Authentication: Bearer ```access_token```
     - Body: ```{"date": dia/mês/ano, "category": alguma categoria de dados da fitbit}``` - se for passada uma string vazia como category e/ou date, não haverá filtragem do parâmetro, obtendo todas as entradas - em teste, só existe a categoria ```heart-rate```
@@ -72,6 +77,12 @@ $ python manage.py runserver 0.0.0.0:8000
 - /rest/goals/ - Cria uma meta do usuário:
     - Authentication: Bearer ```access_token```
     - Response ```{"activeGoals": [{"activity": nome da atividade, "quantity": quantidade, "startDate": dia em que a meta foi criada, "endDate": dia final da meta}, ...], "inactiveGoals": {{"activity": nome da atividade, "quantity": quantidade, "startDate": data em que a meta foi criada, "endDate": data final da meta}, ...]}```
+
+- /rest/daily/ - Cria uma meta do usuário:
+    - Authentication: Bearer ```access_token```
+    - Response ```{yyyy-mm-dd: {"note": nota escrita do dia, "pico": pico (???), "tosse": "true" ou "false", "chiado": "true" ou "false", "faltaAr": "true" ou "false", "acordar": "true" ou "false", "bombinha": "true" ou "false"}, ...}```
+
+
 
 ### PUT requests:
 - /rest/user_data/ - Atualiza (ou cria, se não existir) as informações do usuário
