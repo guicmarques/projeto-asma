@@ -12,14 +12,14 @@ export class DiarioPage implements OnInit {
   dayName: string;
   day: string;
   month: string;
-  week: string[] = ['10','11','12','13','14','15','16'];
+  week: string[];
 
   constructor(private modalController: ModalController,
               private dateService: DateService) { }
 
   ngOnInit() {
     [this.dayName, this.day, this.month] = this.dateService.getDate()
-    //this.week = this.dateService.getWeek();
+    this.week = this.dateService.getWeek();
     //console.log(this.week)
   }
 

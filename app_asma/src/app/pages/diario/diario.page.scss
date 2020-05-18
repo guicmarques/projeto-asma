@@ -1,11 +1,27 @@
+.diaryHeader {
+    background-color: rgb(241, 241, 241);
+}
+
 .dateDescr {
     margin-top: 50px;
     margin-bottom: 10px;
     font-size: 22px;
 }
 
-.weekdays {
+.daysName {
+    display: flex;
+    justify-content: space-around;
+    margin-right: 11px;
     margin-top: 30px;
+
+    span {
+        font-size: 14px;
+        font-weight: 700;
+    }
+}
+
+.weekdays {
+    margin-top: 5px;
     margin-bottom: 10px;
     text-align: center;
 }
@@ -51,11 +67,47 @@
     font-weight: 600;
 }
 
-.dot {
-    height: 2px;
-    width: 2px;
-    background-color: gray;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 2px;
+.yesIcon {
+    color: rgb(70, 228, 220);
+}
+
+.noIcon {
+    color: orange;
+}
+
+.sympCard {
+    border-radius: 25px;
+    margin-top: 30px;
+}
+
+.sympTitle {
+    font-weight: 800;
+    font-size: 22px;
+    margin-top: 4px;
+}
+
+.sympHeader {
+    padding-bottom: 0px;
+}
+
+.sympIcon {
+    width: 80%;
+}
+
+.sympSubt {
+    margin-top: 4px;
+}
+
+.yesSymp {
+    --color-checked: rgb(70, 228, 220);
+}
+
+.noSymp {
+    --color-checked: orange;
+}
+
+ion-fab-button {
+    --background: #f9c022;
+    width: 50px;
+    height: 50px;
 }

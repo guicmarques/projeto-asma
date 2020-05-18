@@ -32,7 +32,6 @@
 .signUpAlert .alert-head {
     background-color: white;
     text-align: center;
-    font-family: 'Segoe UI';
     border-bottom: 3px solid;
     border-image-source: linear-gradient(90deg, white 0%, #ffc862 3%,  orange 10%, orange 90%, #ffc862 97%, white 100%);
     border-image-slice: 1;
@@ -53,12 +52,10 @@
 .signUpAlert .alert-message {
     margin-top: 10px;
     background-color: white;
-    font-family: 'Segoe UI';
 }
 
 .signUpAlert .alert-button-group {
     justify-content: space-evenly;
-    font-family: 'Segoe UI';
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
@@ -91,7 +88,6 @@
 .popUp .alert-head {
     background-color: orange;
     text-align: center;
-    font-family: 'Segoe UI';
 
     h2 {        
         font-size: 20px;
@@ -103,13 +99,11 @@
 .popUp .alert-message {
     margin-top: 6px;
     background-color: white;
-    font-family: 'Segoe UI';
     text-align: center;
 }
 
 .popUp .alert-button-group {
     justify-content: space-evenly;
-    font-family: 'Segoe UI';
 
 }
 
