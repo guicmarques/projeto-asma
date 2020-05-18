@@ -129,9 +129,9 @@ dmypy.json
 .pyre/
 
 .vscode/
-media/fitbit/*
-!media/fitbit/heart-rate-2019-03-14.csv
-media/userImage/*
-*/migrations/*
+django_server/media/fitbit/*
+!django_server/media/fitbit/heart-rate-2019-03-14.csv
+django_server/media/userImage/*
+django_server/server/migrations/*
 !*/__init__.py
 

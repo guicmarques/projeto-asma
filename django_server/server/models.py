@@ -40,6 +40,20 @@ class AsthmaControlQuestionnaire(models.Model):
         return self.user.username + " " + self.date.strftime("%d/%m/%Y")
 
 
+class DailyControl(models.Model):
+    user = models.ForeignKey(
+        User, unique_for_date="date", on_delete=models.CASCADE)
+
+    date = models.DateField(blank=True, null=True)
+    notes = models.CharField(max_length=100)
+    picoDeFluxo = models.CharField(max_length=10)
+    tosse = models.BooleanField(null=True)
+    chiado = models.BooleanField(null=True)
+    faltaDeAr = models.BooleanField(null=True)
+    acordar = models.BooleanField(null=True)
+    bombinha = models.BooleanField(null=True)
+
+
 def fitbit_path(instance, filename):
     return "fitbit/{}/{}/{}".format(instance.user.username, instance.category, filename)
 
@@ -49,7 +63,7 @@ class FitbitFile(models.Model):
         User, unique_for_date="date", on_delete=models.CASCADE)
     category = models.CharField(max_length=100)
     path = models.FileField(upload_to=fitbit_path)
-    date = models.DateField()
+    date = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.user.username + "-" + self.category + "-" + self.date.strftime("%d/%m/%Y")

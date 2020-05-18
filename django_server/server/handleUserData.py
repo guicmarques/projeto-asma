@@ -6,8 +6,8 @@ from enum import Enum
 import pandas as pd
 from django.contrib.auth.models import Group, Permission, User
 
-from server.models import (AsthmaControlQuestionnaire, FitbitFile,
-                           UserProfileInfo, Goal)
+from server.models import (AsthmaControlQuestionnaire, DailyControl,
+                           FitbitFile, Goal, UserProfileInfo)
 
 
 def createUser(userData):
@@ -253,7 +253,6 @@ def createGoal(user, activity, quantity, daysToEnd):
 
 def getGoals(user):
     # returns active goals
-    response = {}
     activeGoals = []
     inactiveGoals = []
 
@@ -277,3 +276,40 @@ def getGoals(user):
             inactiveGoals.append(data)
 
     return {"activeGoals": activeGoals, "inactiveGoals": inactiveGoals}
+
+
+def createDaily(user, date, notes, pico, tosse, chiado, faltaAr, acordar, bombinha):
+    try:
+        control, _ = DailyControl.objects.get_or_create(user=user, date=date)
+        try:
+            control.notes = notes
+            control.picoDeFluxo = pico
+            control.tosse = True if tosse == 'true' else False
+            control.chiado = True if chiado == 'true' else False
+            control.faltaDeAr = True if faltaAr == 'true' else False
+            control.acordar = True if acordar == 'true' else False
+            control.bombinha = True if bombinha == 'true' else False
+            control.save()
+            return True
+        except Exception as e:
+            return str(e)
+    except Exception as e:
+        return str(e)
+
+
+def getDaily(user):
+    response = {}
+
+    controls = DailyControl.objects.filter(user=user)
+    for control in controls:
+        controlResponse = {}
+        controlResponse['notes'] = control.notes
+        controlResponse['picoDeFluxo'] = control.picoDeFluxo
+        controlResponse['tosse'] = control.tosse
+        controlResponse['chiado'] = control.chiado
+        controlResponse['faltaDeAr'] = control.faltaDeAr
+        controlResponse['acordar'] = control.acordar
+        controlResponse['bombinha'] = control.bombinha
+        response[control.date.strftime("%Y-%m-%d")] = controlResponse
+
+    return response

@@ -17,7 +17,8 @@ urlpatterns = [
     path('register/', views.RegisterUser.as_view(), name='register'),
     path('user_data/', views.UserData.as_view(), name='user_data'),
     path('change_password/', views.UserData.as_view(), name='change_password'),
-    path('questionnaire/', views.Questionnaire.as_view(), name='user_data'),
+    path('questionnaire/', views.Questionnaire.as_view(), name='questionnaire'),
+    path('daily/', views.Daily.as_view(), name='daily'),
     path('fitbit/', views.Fitbit.as_view(), name="fitbit"),
     path('goals/', views.Goals.as_view(), name="goals"),
 ]
