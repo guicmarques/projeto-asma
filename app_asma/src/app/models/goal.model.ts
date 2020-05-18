@@ -1,5 +1,5 @@
 export interface Goal {
     activity: string,
-    quantity: string,
-    daysToEnd: string
+    quantity: number,
+    daysToEnd: number
 }

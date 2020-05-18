@@ -18,21 +18,73 @@
       </div>
     </ion-card-header>
     <ion-card-content>
-      <ion-chip mode="ios">
+
+      <ion-chip [ngClass]="{'goalChipSelected' : this.goalType === 'Caminhada',
+                            'goalChipUnselected' : this.goalType !== 'Caminhada' && this.goalType !== 'Outros'}" 
+                outline="true" mode="ios" (click)="setGoalType('Caminhada')">
         <ion-icon name="walk-outline"></ion-icon>
         <ion-label>Caminhada</ion-label>
-        <ion-icon name="close"></ion-icon>
+        <ion-icon name="close" *ngIf="goalTypeSelected && goalType === 'Caminhada'"></ion-icon>
       </ion-chip>
-      <ion-chip outline="true" mode="ios">
+
+      <ion-chip class="goalChipUnselected" [ngClass]="{'goalChipSelected' : this.goalType === 'Outros'}" 
+                outline="true" mode="ios" (click)="setGoalType('Outros')">
         <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
         <ion-label>Outro</ion-label>
+        <ion-icon name="close" *ngIf="goalTypeSelected && goalType === 'Outros'"></ion-icon>
       </ion-chip>
+
+      <div *ngIf="goalTypeSelected">
+        <ion-item class="goal-name">
+          <ion-input [attr.disabled]="goal.activity === 'Caminhada' ? true : false" 
+          placeholder="Tipo de atividade" [(ngModel)]="goal.activity" autocapitalize="on"></ion-input>
+        </ion-item>
+
+        <ion-item lines="none" class="goal-features">
+          <ion-label position="stacked">Quantidade</ion-label>
+          <ion-input placeholder="(ex. passos, minutos)" [(ngModel)]="goal.quantity" type="number">
+            <ion-icon name="bicycle-outline" class="goal-icon"></ion-icon>
+          </ion-input>
+
+          <ion-select value="passos" interface="popover" okText="Okay" cancelText="Dismiss" class="quantity-unity" mode="ios">
+            <ion-select-option value="passos">Passos</ion-select-option>
+            <ion-select-option value="minutos">Minutos</ion-select-option>
+            <ion-select-option value="quilometros">Quilômetros</ion-select-option>
+            <ion-select-option value="horas">Horas</ion-select-option>
+          </ion-select>  
+        </ion-item>
+
+        <ion-item lines="none" class="goal-features">
+          <ion-label position="stacked">Validade em dias</ion-label>
+          <ion-input placeholder="(ex. 7 dias, 30 dias)" [(ngModel)]="goal.daysToEnd" type="number">
+            <ion-icon name="calendar-outline" class="goal-icon"></ion-icon>
+          </ion-input>
+        </ion-item>
+
+        <div>
+          <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button class="submit-btn" (click)="confirmSetGoal()" 
+            [attr.disabled]="goal.activity !== '' && goal.quantity !== null && 
+            goal.daysToEnd !== null ? false : true">
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </div>
+
+      </div>
     </ion-card-content>
   </ion-card>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/login" (click)="logout()">
-      <ion-icon name="log-out-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <ion-card>
+    <ion-card-header>
+      <div>
+        <img src="../../../assets/images/minhas_metas.png" class="my-goals-img">
+        <span class="meta-text">Minhas metas</span>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

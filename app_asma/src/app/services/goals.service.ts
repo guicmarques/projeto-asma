@@ -19,17 +19,22 @@ export class GoalsService {
               private userService: UserService) { }
 
   setGoal(goal: Goal) {
-    this.authService.validateToken().then(data => {
-      const header = new HttpHeaders({
-        'Authorization': 'Bearer' + " " + this.authService.token["access"]
+    return new Promise ((resolve, reject) =>{
+      this.authService.validateToken().then(data => {
+        const header = new HttpHeaders({
+          'Authorization': 'Bearer' + " " + this.authService.token["access"]
+        });
+        return this.http.post(this.env.API_URL + 'goals/', {'activity': goal.activity, 
+                        'quantity': goal.quantity.toString(), 'daysToEnd': goal.daysToEnd.toString()}, { headers: header })
+          .subscribe((data) => {
+          this.alertService.presentPopUp('Meta definida!', 'Sua meta foi definida com sucesso.');
+          resolve(data);
+        }, (error) =>{
+          this.alertService.presentPopUp('Oops!', 'Houve um problema com a definição da sua meta.');
+          reject(error);
+        });
       });
-      return this.http.post(this.env.API_URL + 'goals/', {'activity': goal.activity, 
-                      'quantity': goal.quantity, 'daysToEnd': goal.daysToEnd}, { headers: header }).subscribe((data) => {
-        this.alertService.presentPopUp('Meta definida!', 'Sua meta foi definida com sucesso.');
-      }, (error) =>{
-        this.alertService.presentPopUp('Oops!', 'Houve um problema com a definição da sua meta.');
-      });
-    });
+    })
   }
 
   getGoals() {

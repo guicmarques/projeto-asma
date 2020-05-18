@@ -1,9 +1,10 @@
+import { AlertService } from './../../services/alert.service';
 import { GoalsService } from './../../services/goals.service';
 import { SensorService } from './../../services/sensor.service';
 import { UserService } from './../../services/user.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Animation, AnimationController } from '@ionic/angular';
+import { Animation, AnimationController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { Goal } from '../../models/goal.model';
@@ -18,24 +19,27 @@ export class HomePage implements OnInit {
   goalImg:  String = '../../../assets/images/bullseye.png';
   stepsData: any;
   user: any;
-  userDefined: boolean = false; 
+  userDefined: boolean = false;
+  goalTypeSelected: boolean = false;
+  goalType: string = ''; 
 
   date: any;
 
   goal: Goal = {
-    activity: "Passos",
-    quantity: '8000',
-    daysToEnd: '30'
+    activity: '',
+    quantity: null,
+    daysToEnd: null
   }
 
   constructor(private authService: AuthService, private userService: UserService,
-              private sensorService: SensorService, private goalsService: GoalsService) { }
+              private sensorService: SensorService, private goalsService: GoalsService,
+              private alertService: AlertService, private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.getUser();
     this.getSensorData();
     this.getDate();
-    this.setGoal();
+    this.getGoals();
     this.stepsData = 6500;
    }
 
@@ -65,8 +69,50 @@ export class HomePage implements OnInit {
     })
   }
 
+  confirmSetGoal() {
+    const alert = this.alertCtrl.create({
+      cssClass: 'signUpAlert',
+      header: 'Deseja continuar?',
+      message: 'Você confirma todos os seus dados?',
+      buttons: [{
+        text: 'Não',
+        role: 'cancel',
+        cssClass: 'signUpNoBtn'
+      },
+      {
+        text: 'Sim',
+        cssClass: 'signUpYesBtn',
+        handler: () => {
+          this.setGoal()
+        }
+      }]
+    }).then(alertEl => {
+      alertEl.present();
+    });
+  }
+
   setGoal() {
-    this.goalsService.setGoal(this.goal);
+    this.goalsService.setGoal(this.goal).then(data =>{
+      this.goal = {
+        activity: '',
+        quantity: null,
+        daysToEnd: null
+      }
+      this.goalType = '';
+      this.goalTypeSelected = false;
+    })
+  }
+
+  setGoalType(type: string) {
+    if (this.goalTypeSelected === false) {
+      if (type === 'Caminhada') { this.goal.activity = 'Caminhada'; }
+      this.goalType = type;
+      this.goalTypeSelected = true;
+    } else if (this.goalType === type){
+      this.goalType = '';
+      this.goal.activity = '';
+      this.goalTypeSelected = false;
+    }
   }
 
   getDate() {
