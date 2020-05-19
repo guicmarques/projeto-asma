@@ -1,21 +1,11 @@
-.building {
-    position: relative;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.building-img {
-    height: 16em;
-    width: 16em;
-}
-
-.oops-text {
+*{
     font-family: 'Segoe UI';
-    font-size: xx-large;
-    font-weight: 500;
-    margin-bottom: 0;
+}
+.back-btn {
+    position: absolute;
+    left: 0;
+    --color: black;
+    --ripple-color: white;
 }
 
 .page-text {
@@ -46,7 +36,7 @@
 }
 
 .toolbar {
-    background-color: #2DD2C2;
+    background-color: rgb(162, 163, 163);
 }
 .profile-img {
     margin: auto;
@@ -107,4 +97,10 @@
     text-align: center;
     
    
+}
+.button-profile {
+    margin: auto;
+    width: 150px;
+    height: 40px;
+    
 }

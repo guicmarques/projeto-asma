@@ -16,96 +16,30 @@
   
   <div class="line-skip">
       </div>  
-    <ion-card class="profile-infocard" nopaddings>
-      <ion-list>
 
-        <ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-col class="ion-justify-content-start">
-               <ion-text class="profile-atributes" > Nome</ion-text>
-              </ion-col>
-              <ion-col class="ion-justify-content-center">
-                <ion-text class="user-atributes" >{{user.nome}} {{user.sobrenome}}</ion-text>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-
-        <ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-col class="ion-justify-content-start">
-               <ion-text class="profile-atributes" > RG </ion-text>
-              </ion-col>
-              <ion-col class="ion-justify-content-center">
-                <ion-text class="user-atributes" >{{user.rg}}</ion-text>
-              </ion-col>
-              </ion-row>
-          </ion-grid>
-        </ion-item>
-
-        <ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-col class="ion-justify-content-start">
-               <ion-text class="profile-atributes" > Email</ion-text>
-              </ion-col>
-              <ion-col class="ion-justify-content-center">
-                <ion-text class="user-atributes" >{{user.email}}</ion-text>
-              </ion-col>
-             </ion-row>
-          </ion-grid>
-        </ion-item>
-
-        <ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-col class="ion-justify-content-start">
-               <ion-text class="profile-atributes" > Telefone </ion-text>
-              </ion-col>
-              <ion-col class="ion-justify-content-center">
-                <ion-text class="user-atributes" >{{user.telefone}}</ion-text>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-
-        <ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-col class="ion-justify-content-start">
-               <ion-text class="profile-atributes" > Altura </ion-text>
-              </ion-col>
-              <ion-col class="ion-justify-content-center">
-                <ion-text class="user-atributes" >{{user.altura}} m</ion-text>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-
-        <ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-col class="ion-justify-content-start">
-               <ion-text class="profile-atributes" > Peso </ion-text>
-              </ion-col>
-              <ion-col class="ion-justify-content-center">
-                <ion-text class="user-atributes" >{{user.peso}} kg</ion-text>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-
-
-      </ion-list>
-    </ion-card> 
    
   <ion-text class="title-text">
      Metas & Conquistas
   </ion-text>
-    
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+        <ion-img>
+          
+        </ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+    <ion-fab-button color="light">
+      <ion-icon md="caret-up" ios="chevron-up-circle-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button class= "button-profile">Log-out</ion-fab-button>
+      <ion-fab-button class= "button-profile" routerLink="./change-profile">Editar dados</ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
   
 
     
