@@ -31,7 +31,7 @@ export class PerfilPage implements OnInit {
               private authService: AuthService ) { }
 
   ngOnInit() { 
-    //this.userService.getUser().then((result) => { this.user = result;});
+   // this.userService.getUser().then((result) => { this.user = result;});
   }
 
   logout() {

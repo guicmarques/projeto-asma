@@ -127,3 +127,25 @@ ion-content {
  .achievement-grid {
     --ion-grid-width-sm: 1000px;
  }
+ 
+.register-input {
+    text-align: center;
+    padding-bottom: 5%;
+ }
+
+.register-field {
+    height: 46px;
+    width: 80%;
+    display: inline-block;
+    box-sizing: border-box;
+    outline: none;
+    --padding-start: 50px;
+    --padding-end: 50px;
+    --padding-top: 14px;
+    text-align: start;
+    background: 
+     linear-gradient(rgb(255, 255, 255),rgb(255, 255, 255)) padding-box,
+     linear-gradient(315deg, rgb(255, 200, 81) 0%, rgb(210, 255, 49) 35%, rgb(255, 242, 183) 100%) border-box;
+    border: 2px solid transparent;
+    border-radius: 23px;
+}

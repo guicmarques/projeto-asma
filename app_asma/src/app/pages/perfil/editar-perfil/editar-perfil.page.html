@@ -1,13 +1,48 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-button routerLink="/tabs/perfil">
+<ion-header class="ion-no-border profile-header">
+  
+    <ion-button routerLink="/tabs/perfil" color="clear">
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-title>Editar Perfil</ion-title>
-  </ion-toolbar>
+    <ion-title class="profile-title">
+      <div class="title-text">Editar perfil</div>
+    </ion-title>
+  
 </ion-header>
 
 <ion-content>
+  
+  <div class="register-input">
+    <ion-input class="register-field" placeholder={{user.nome}} type="text"
+    autocapitalize="on"></ion-input>
+  </div>
+
+
+  <div class="register-input">
+    <ion-input class="register-field" placeholder={{user.sobrenome}} type="text" 
+    autocapitalize="on"></ion-input>
+  </div>
+
+  <div class="register-input">
+    <ion-input class="register-field" placeholder={{user.rg}} type="text" ></ion-input>
+  </div>
+
+ 
+  <div class="register-input">
+    <ion-input class="register-field" placeholder={{user.peso}} type="number" ></ion-input>
+  </div>
+
+  <div class="register-input">
+    <ion-input class="register-field" placeholder={{user.altura}} type="number" ></ion-input>
+  </div>
+
+  <div class="register-input">
+    <ion-input class="register-field" placeholder={{user.email}} type="text"></ion-input>
+  </div>
+
+  <div class="register-input">
+    <ion-input class="register-field" placeholder={{user.telefone}} type="number"></ion-input>
+  </div>
+
   <ion-card class="profile-infocard" nopaddings>
     <ion-list>
 

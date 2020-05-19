@@ -32,7 +32,7 @@ export class EditarPerfilPage implements OnInit {
               private AuthService: AuthService ) { }
 
   ngOnInit() { 
-    //this.UserService.getUser().then((result) => { this.user = result;});
+   //this.UserService.getUser().then((result) => { this.user = result;});
   }
  
 }
