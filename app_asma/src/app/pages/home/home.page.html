@@ -10,6 +10,8 @@
 <ion-content>
   <app-steps-canvas [stepCanvas]="stepsData"></app-steps-canvas>
 
+  <app-week-progress-canvas [weekProgressCanvas]="weekProgressData"></app-week-progress-canvas>
+
   <ion-card>
     <ion-card-header>
       <div>
@@ -83,7 +85,28 @@
       </div>
     </ion-card-header>
     <ion-card-content>
-      
+      <div *ngIf="myGoals.activeGoals.length !== 0">
+        <div *ngFor="let meta of myGoals.activeGoals">
+          <ion-item>
+            <ion-label class="my-goal-name">{{ meta.activity }}</ion-label>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-icon name="bicycle-outline" class="my-goal-icon"></ion-icon>
+            <ion-label class="my-goal-feature">Quantidade:</ion-label>
+            <ion-note slot="end" class="my-goal-note"><span class="goal-bold">{{ meta.quantity }}</span> passos</ion-note>
+          </ion-item>
+
+
+          <ion-item lines="none">
+            <ion-icon name="calendar-outline" class="my-goal-icon"></ion-icon>
+            <ion-label class="my-goal-feature">Duração: </ion-label>
+            <ion-note slot="end" class="my-goal-note">
+              <span class="goal-bold">{{ meta.startDate }}</span> a <span class="goal-bold">{{ meta.endDate }}</span>
+            </ion-note>
+          </ion-item>
+        </div>
+      </div>
     </ion-card-content>
   </ion-card>
 

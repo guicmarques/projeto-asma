@@ -58,7 +58,7 @@ export class StepsCanvasComponent implements OnInit {
         legend: {
           display: false,
           labels: {
-            fontFamily: 'Segoe UI'
+            fontFamily: 'Montserrat'
           }
         },
         scales: {

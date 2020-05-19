@@ -1,11 +1,19 @@
-<ion-card class="welcome-card card">
+<ion-card>
   <ion-card-header>
-    <ion-card-title>Seu progrsso nos últimos 7 dias</ion-card-title>
-    <ion-card-subtitle>{{ date | date:'dd MMMM'}}</ion-card-subtitle>
+    <div>
+      <span class="meta-text">Seu progresso nos últimos 4 dias</span>
+    </div>
   </ion-card-header>
   <ion-card-content>
     <div class="chart">
       <canvas #weekProgressChart></canvas>
     </div>
+    <div class="labels">
+      <span *ngFor="let dia of days" class="dias-label" [ngClass]="{'today-label' : dia === 'Hoje', 
+                                                                   'other-label' : dia !== 'Hoje'}">
+        {{ dia }}
+      </span>
+    </div>
+    
   </ion-card-content>
 </ion-card>

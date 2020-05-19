@@ -27,11 +27,17 @@ export class PerfilPage implements OnInit {
 
 
   constructor(private animationCtrl: AnimationController,
-              private UserService: UserService,
-              private AuthService: AuthService ) { }
+              private userService: UserService,
+              private authService: AuthService ) { }
 
   ngOnInit() { 
-    //this.UserService.getUser().then((result) => { this.user = result;});
+    //this.userService.getUser().then((result) => { this.user = result;});
+  }
+
+  logout() {
+    this.authService.logout();
+    console.log(this.authService.isLoggedIn);
+    console.log(this.authService.credenciais);
   }
  
 }

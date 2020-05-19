@@ -1,52 +1,54 @@
-
-<header> <ion-toolbar>
-    <ion-title class="title-text">Perfil</ion-title>
+<ion-header class="ion-no-border profile-header">
+  <ion-toolbar>
+    <ion-title class="profile-title">
+      <div class="title-text">Meu perfil</div>
+    </ion-title>
   </ion-toolbar>
-</header>
-<ion-content>
- 
+</ion-header>
 
-  <div class="profile-forms">
-    <div class="profile-username">
-      <ion-avatar class="profile-img">
-       <ion-img [src]="user.imagem"></ion-img>
-     </ion-avatar> 
-     <ion-label class="profile-username">{{user.nome}} {{user.sobrenome}}</ion-label>
+<ion-content scrollY="false">
+  <div class="profile-block"></div>
+  <div class="profile-background">
+
+    <div class="profile-forms">
+      <div class="profile-username">
+        <ion-avatar class="profile-img">
+         <ion-img [src]="user.imagem"></ion-img>
+       </ion-avatar> 
+       <ion-label class="profile-username">{{user.nome}} {{user.sobrenome}}</ion-label>
+      </div>
     </div>
-  
-  <div class="line-skip">
-      </div>  
 
-   
-  <ion-text class="title-text">
-     Metas & Conquistas
-  </ion-text>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="3">
-        <ion-img>
-          
-        </ion-img>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <div class="line-skip">
+    </div>  
 
-  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
-    <ion-fab-button color="light">
+ 
+    <ion-text class="achievements-title">
+      Metas & Conquistas
+    </ion-text>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3">
+          <ion-img>
+            
+          </ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+
+  <ion-fab horizontal="end" vertical="bottom">
+    <ion-fab-button class="float-btn-profile">
       <ion-icon md="caret-up" ios="chevron-up-circle-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button class= "button-profile">Log-out</ion-fab-button>
-      <ion-fab-button class= "button-profile" routerLink="./change-profile">Editar dados</ion-fab-button>
+      <ion-fab-button (click)="logout()" routerLink="../../../login">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button routerLink="./change-profile">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-  
-
-    
-    
-
-
-
-  </div>
- 
 </ion-content>

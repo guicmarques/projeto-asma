@@ -18,6 +18,7 @@ import { Goal } from '../../models/goal.model';
 export class HomePage implements OnInit {
   goalImg:  String = '../../../assets/images/bullseye.png';
   stepsData: any;
+  weekProgressData: any[];
   user: any;
   userDefined: boolean = false;
   goalTypeSelected: boolean = false;
@@ -31,6 +32,11 @@ export class HomePage implements OnInit {
     daysToEnd: null
   }
 
+  myGoals: any = {
+    activeGoals: [],
+    inactiveGoals: []
+  };
+
   constructor(private authService: AuthService, private userService: UserService,
               private sensorService: SensorService, private goalsService: GoalsService,
               private alertService: AlertService, private alertCtrl: AlertController) { }
@@ -41,6 +47,7 @@ export class HomePage implements OnInit {
     this.getDate();
     this.getGoals();
     this.stepsData = 6500;
+    this.weekProgressData = [1000, 2000, 400, 5000, 8000, 3000, 6500];
    }
 
   logout() {
@@ -66,6 +73,14 @@ export class HomePage implements OnInit {
   getGoals() {
     this.goalsService.getGoals().then(data => {
       console.log('Minhas metas:', data);
+      this.myGoals = data;
+      this.myGoals.activeGoals.forEach(element => {
+        let dateStart = element.startDate.split('-');
+        element.startDate = dateStart[2] + '/' + dateStart[1];
+        let dateEnd = element.endDate.split('-');
+        element.endDate = dateEnd[2] + '/' + dateEnd[1];
+      });
+      console.log(this.myGoals.activeGoals);
     })
   }
 
@@ -100,6 +115,7 @@ export class HomePage implements OnInit {
       }
       this.goalType = '';
       this.goalTypeSelected = false;
+      this.getGoals();
     })
   }
 

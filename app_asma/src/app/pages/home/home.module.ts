@@ -1,3 +1,4 @@
+import { WeekProgressCanvasComponent } from './week-progress-canvas/week-progress-canvas.component';
 import { StepsCanvasComponent } from './steps-canvas/steps-canvas.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,6 +17,6 @@ import { HomePage } from './home.page';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, StepsCanvasComponent]
+  declarations: [HomePage, StepsCanvasComponent, WeekProgressCanvasComponent]
 })
 export class HomePageModule {}
