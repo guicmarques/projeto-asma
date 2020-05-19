@@ -1,16 +1,16 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Animation, AnimationController } from '@ionic/angular';
-import { User } from './../../../models/user.model';
-import { UserService } from './../../../services/user.service';
-import { AuthService } from './../../../services/auth.service';
+import { User } from '../../../models/user.model';
+import { UserService } from '../../../services/user.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
-  selector: 'app-change-profile',
-  templateUrl: './change-profile.page.html',
+  selector: 'app-editar-perfil',
+  templateUrl: './editar-perfil.page.html',
   styleUrls: ['./../perfil.page.scss'],
 })
 
-export class ChangeProfilePage implements OnInit {
+export class EditarPerfilPage implements OnInit {
   user: User = {
     nome: "Bill",
     sobrenome: "Gates",

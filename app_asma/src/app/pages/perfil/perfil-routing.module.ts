@@ -9,8 +9,8 @@ const routes: Routes = [
     component: PerfilPage
   },
   {
-    path: 'change-profile',
-    loadChildren: () => import('./change-profile/change-profile.module').then( m => m.ChangeProfilePageModule)
+    path: 'editar-perfil',
+    loadChildren: () => import('./editar-perfil/editar-perfil.module').then( m => m.EditarPerfilPageModule)
   }
 ];
 
