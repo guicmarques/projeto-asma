@@ -9,20 +9,12 @@
 }
 
 .daysName {
-    display: flex;
-    justify-content: space-around;
-    margin-right: 11px;
-    margin-top: 30px;
-
-    span {
-        font-size: 14px;
-        font-weight: 700;
-    }
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
 }
 
 .weekdays {
-    margin-top: 5px;
-    margin-bottom: 10px;
     text-align: center;
 }
 
@@ -36,7 +28,6 @@
     border-radius: 50%;
     color: black;
     border: 2px solid #76F4ED;
-    margin-right: 10px;
     font-weight: 600;
 }
 
@@ -49,7 +40,6 @@
     background-color: #76F4ED;
     border-radius: 50%;
     color: white;
-    margin-right: 10px;
     font-weight: 600;
 }
 
@@ -63,8 +53,8 @@
     border-radius: 50%;
     color: black;
     border: 2px solid lightgray;
-    margin-right: 10px;
     font-weight: 600;
+    pointer-events: none;
 }
 
 .yesIcon {
@@ -104,6 +94,23 @@
 
 .noSymp {
     --color-checked: orange;
+}
+
+.peakLabel {
+    display: inline-block;
+    margin-left: 70px;
+    margin-right: 5px;
+}
+
+
+.peakValue {
+    text-align: start;
+    margin-right: 20px;
+}
+
+.peakUnit {
+    display: inline-block;
+    margin-top: 10px;
 }
 
 ion-fab-button {
