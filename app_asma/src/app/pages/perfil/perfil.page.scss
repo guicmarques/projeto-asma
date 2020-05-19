@@ -111,8 +111,19 @@ ion-content {
     
 }
 .achievement-img {
-   margin:auto;
+  height: 100%;
+  width: auto;
+  height: 100px;
+  margin: auto;  
 }
 .achievement-button-background {
-    background-color: rgb(162, 163, 163);
+    height: 150px;
+    
+ }
+ .achievement-title {
+    text-align: center;
+    --ion-justify: center;
+ }
+ .achievement-grid {
+    --ion-grid-width-sm: 1000px;
  }
