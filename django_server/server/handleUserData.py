@@ -236,11 +236,12 @@ def getFitbitData(user, date, category):
     return response
 
 
-def createGoal(user, activity, quantity, daysToEnd):
+def createGoal(user, activity, quantity, unit, daysToEnd):
     try:
         goal, _ = Goal.objects.get_or_create(user=user, activity=activity)
         try:
             goal.quantity = int(quantity)
+            goal.unit = unit
             goal.startDate = datetime.now().date()
             goal.endDate = datetime.now().date()+timedelta(days=int(daysToEnd))
             goal.save()
@@ -262,6 +263,7 @@ def getGoals(user):
             data = {}
             data["activity"] = goal.activity
             data["quantity"] = goal.quantity
+            data["unit"] = goal.unit
             data["startDate"] = goal.startDate
             data["endDate"] = goal.endDate
 
@@ -270,6 +272,7 @@ def getGoals(user):
             data = {}
             data["activity"] = goal.activity
             data["quantity"] = goal.quantity
+            data["unit"] = goal.unit
             data["startDate"] = goal.startDate
             data["endDate"] = goal.endDate
 

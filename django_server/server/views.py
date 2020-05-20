@@ -155,13 +155,14 @@ class Goals(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request):
-        required = ["activity", "quantity", "daysToEnd"]
+        required = ["activity", "quantity", "unit", "daysToEnd"]
         if all(item in request.data.keys() for item in required):
             activity = request.data["activity"]
             quantity = request.data["quantity"]
+            unit = request.data["unit"]
             daysToEnd = request.data["daysToEnd"]
             created = handleUserData.createGoal(
-                request.user, activity, quantity, daysToEnd)
+                request.user, activity, quantity, unit, daysToEnd)
 
             if created == True:
                 request_status = status.HTTP_200_OK

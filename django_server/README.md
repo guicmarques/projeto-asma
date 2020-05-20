@@ -65,7 +65,7 @@ $ python manage.py runserver 0.0.0.0:8000
 
 - /rest/goals/ - Cria uma meta do usuário:
     - Authentication: Bearer ```access_token```
-    - Body: ```{"activity": Nome da atividade, "quantity": int(quantidade) (ex.: numero de passos, minutos de caminhada), "daysToEnd": dias até o fim da meta}``` - só pode ser criada uma meta por nome de atividade, os requests seguintes com o mesmo nome serão considerados updates da meta
+    - Body: ```{"activity": Nome da atividade, "quantity": int(quantidade), "unit": str(unidade de medida), "daysToEnd": dias até o fim da meta}``` - só pode ser criada uma meta por nome de atividade, os requests seguintes com o mesmo nome serão considerados updates da meta
     - Response ```{"created": True ou mensagem de erro}```
 
 ### GET requests:
@@ -76,7 +76,7 @@ $ python manage.py runserver 0.0.0.0:8000
 
 - /rest/goals/ - Cria uma meta do usuário:
     - Authentication: Bearer ```access_token```
-    - Response ```{"activeGoals": [{"activity": nome da atividade, "quantity": quantidade, "startDate": dia em que a meta foi criada, "endDate": dia final da meta}, ...], "inactiveGoals": {{"activity": nome da atividade, "quantity": quantidade, "startDate": data em que a meta foi criada, "endDate": data final da meta}, ...]}```
+    - Response ```{"activeGoals": [{"activity": nome da atividade, "quantity": quantidade, "unit": unidade de medida, "startDate": dia em que a meta foi criada, "endDate": dia final da meta}, ...], "inactiveGoals": {{"activity": nome da atividade, "quantity": quantidade, "unit": unidade de medida, "startDate": data em que a meta foi criada, "endDate": data final da meta}, ...]}```
 
 - /rest/daily/ - Cria uma meta do usuário:
     - Authentication: Bearer ```access_token```

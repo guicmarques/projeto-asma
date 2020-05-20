@@ -73,5 +73,6 @@ class Goal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     activity = models.CharField(max_length=100, blank=True)
     quantity = models.CharField(max_length=100, blank=True)
+    unit = models.CharField(max_length=20, blank=True)
     startDate = models.DateField(blank=True, null=True)
     endDate = models.DateField(blank=True, null=True)
