@@ -9,7 +9,7 @@
             <div class="daysName"> {{this.daysName[i]}} </div>
             <div (click)="getDiaryPage(wDay)" [ngClass]="{'availDay'  : wDay < this.day,
                                                         'today'     : wDay == this.day,
-                                                        'unavDay'   : wDay > this.day}"> {{wDay}} </div>
+                                                        'unavDay'   : wDay > this.day}"> {{wDay[0]}} </div>
           </ion-col>
         </ion-row>
       </ion-grid>

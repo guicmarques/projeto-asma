@@ -41,7 +41,7 @@ export class DiarioPage implements OnInit {
     //console.log(this.week)
   }
 
-  getDiaryPage(date: string) {
+  getDiaryPage(date: string[]) {
     console.log('Clicado')
     this.diaryService.getDiary().then(data => {
       console.log('Diário:', data);
