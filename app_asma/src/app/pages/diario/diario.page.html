@@ -7,9 +7,9 @@
         <ion-row>
           <ion-col *ngFor="let wDay of this.week; let i = index" size="1" class="weekdays">
             <div class="daysName"> {{this.daysName[i]}} </div>
-            <div (click)="getDiaryPage(wDay)" [ngClass]="{'availDay'  : wDay < this.day,
-                                                        'today'     : wDay == this.day,
-                                                        'unavDay'   : wDay > this.day}"> {{wDay[0]}} </div>
+            <div (click)="getDiaryPage(wDay)" [ngClass]="{'availDay'  : wDay[3] === 'before',
+                                                          'today'     : wDay[3] === 'today',
+                                                          'unavDay'   : wDay[3] === 'after'}"> {{wDay[0]}} </div>
           </ion-col>
         </ion-row>
       </ion-grid>

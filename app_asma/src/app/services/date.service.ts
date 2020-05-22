@@ -33,6 +33,7 @@ export class DateService {
 
   getWeek() {
     let date = new Date();
+    console.log(date);
     let dateString = date.toDateString();
     let fullDate = dateString.split(' ');
 
@@ -43,50 +44,54 @@ export class DateService {
     let week = [];
 
     let weekDay = day;
-    let dayAux = day;
     let month = curMonth;
     let year = curYear;
     for (let i = 0; i < dayId; i++) {
-      weekDay = dayAux - (dayId - i);
+      weekDay -= 1;
       if (weekDay < 1) {
-        if (month === 1) {
+        if (month === 0) {
           month = 11;
           year -= 1;
-          dayAux = this.mesesLength['Dezembro'];
+          weekDay = this.mesesLength['Dezembro'];
         } else {
           month -= 1;
-          dayAux = this.mesesLength[this.mesesNames[month]];
-        }
-      }
-
-      if (month < 9) {
-        week.push([weekDay.toString(), '0' +(month + 1).toString(), year.toString()]);
-      } else {
-        week.push([weekDay.toString(), (month + 1).toString(), year.toString()]);
-      }
-    }
-    
-    weekDay = day;
-    month = curMonth;
-    year = curYear;
-    for (let i = dayId; i < 7; i++) {
-      weekDay -= (dayId - i);
-      if (weekDay > this.mesesLength[this.mesesNames[month]]) {
-        if (month === 11) {
-          month = 0;
-          year += 1;
-          weekDay = this.mesesLength['Janeiro'];
-        } else {
-          month += 1;
           weekDay = this.mesesLength[this.mesesNames[month]];
         }
       }
 
       if (month < 9) {
-        week.push([weekDay.toString(), '0' +(month + 1).toString(), year.toString()]);
+        week.push([weekDay.toString(), '0' +(month + 1).toString(), year.toString(), 'before']);
       } else {
-        week.push([weekDay.toString(), (month + 1).toString(), year.toString()]);
+        week.push([weekDay.toString(), (month + 1).toString(), year.toString(), 'before']);
       }
+    }
+
+    week = week.reverse();
+    
+    let flag = 'today';
+    weekDay = day;
+    month = curMonth;
+    year = curYear;
+    for (let i = 0; i < 7 - dayId; i++) {
+      if (weekDay > this.mesesLength[this.mesesNames[month]]) {
+        if (month === 11) {
+          month = 0;
+          year += 1;
+          weekDay = 1;
+        } else {
+          month += 1;
+          weekDay = 1;
+        }
+      }
+
+      if (month < 9) {
+        week.push([weekDay.toString(), '0' +(month + 1).toString(), year.toString(), flag]);
+      } else {
+        week.push([weekDay.toString(), (month + 1).toString(), year.toString(), flag]);
+      }
+
+      weekDay += 1;
+      flag = 'after';
     }
 
 
@@ -106,24 +111,20 @@ export class DateService {
 
     let day = +fullDate[2];
     let month = date.getMonth();
-    let year = date.getFullYear();
     let dayPrevious: number = day;
     let monthPrevious: number;
     let days: string[] = ['Hoje'];
-    if (month === 1) {
-      monthPrevious = 12;
+    if (month === 0) {
+      monthPrevious = 11;
     } else {
       monthPrevious = month - 1;
     }
-
-    // Verificação se o ano é bissexto
-    this.getFebLength();
 
     for(let i = 0; i < quantity; i++) {
       if (dayPrevious - 1 > 0) {
         dayPrevious --; 
       } else {
-        dayPrevious = this.mesesLength[monthPrevious];
+        dayPrevious = this.mesesLength[this.mesesNames[month]];
       }
 
       days.push(dayPrevious.toString());
