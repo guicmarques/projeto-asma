@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
+import { D3BarComponent } from './d3-bar/d3-bar.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { HomePage } from './home.page';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, StepsCanvasComponent, WeekProgressCanvasComponent]
+  declarations: [HomePage, StepsCanvasComponent, WeekProgressCanvasComponent, D3BarComponent]
 })
 export class HomePageModule {}
