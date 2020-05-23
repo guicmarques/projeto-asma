@@ -28,12 +28,11 @@ export class DateService {
     let mes: string = this.meses[mesNumber];
     let diaNome: string = this.diasSemana[diaSemana];
 
-    return [diaNome, dia, mes];
+    return [diaNome, dia, mes, date.getFullYear().toString()];
   }
 
   getWeek() {
     let date = new Date();
-    console.log(date);
     let dateString = date.toDateString();
     let fullDate = dateString.split(' ');
 
@@ -94,13 +93,6 @@ export class DateService {
       flag = 'after';
     }
 
-
-    /*for (let i = 0; i < 7; i++) {
-      let weekDay = day - (dayId - i);
-      week.push(weekDay.toString());
-    }*/
-    
-    console.log(week);
     return week;
   }
 
