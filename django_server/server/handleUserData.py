@@ -286,12 +286,17 @@ def createDaily(user, date, notes, pico, tosse, chiado, faltaAr, acordar, bombin
         control, _ = DailyControl.objects.get_or_create(user=user, date=date)
         try:
             control.notes = notes
-            control.picoDeFluxo = pico
-            control.tosse = True if tosse == 'true' else False
-            control.chiado = True if chiado == 'true' else False
-            control.faltaDeAr = True if faltaAr == 'true' else False
-            control.acordar = True if acordar == 'true' else False
-            control.bombinha = True if bombinha == 'true' else False
+            if type(pico) == list and len(pico) == 3:
+                control.pico1 = pico[0]
+                control.pico2 = pico[1]
+                control.pico3 = pico[2]
+            else:
+                return "'pico' should be a 3 item array"
+            control.tosse = True if tosse == 'true' or tosse == True else False
+            control.chiado = True if chiado == 'true' or tosse == True else False
+            control.faltaDeAr = True if faltaAr == 'true' or tosse == True else False
+            control.acordar = True if acordar == 'true' or tosse == True else False
+            control.bombinha = True if bombinha == 'true' or tosse == True else False
             control.save()
             return True
         except Exception as e:
@@ -307,7 +312,9 @@ def getDaily(user):
     for control in controls:
         controlResponse = {}
         controlResponse['notes'] = control.notes
-        controlResponse['picoDeFluxo'] = control.picoDeFluxo
+        if control.pico1 and control.pico2 and control.pico3:
+            controlResponse['pico'] = [
+                control.pico1, control.pico2, control.pico3]
         controlResponse['tosse'] = control.tosse
         controlResponse['chiado'] = control.chiado
         controlResponse['faltaDeAr'] = control.faltaDeAr

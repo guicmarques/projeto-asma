@@ -106,6 +106,7 @@ class Daily(APIView):
                     "chiado", "faltaAr", "acordar", "bombinha"]
 
         if all(item in request.data.keys() for item in required):
+            print(request.data)
             date = datetime.today().date()
             note = request.data["note"]
             pico = request.data["pico"]

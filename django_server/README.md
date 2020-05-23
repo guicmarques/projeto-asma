@@ -55,7 +55,7 @@ $ python manage.py runserver 0.0.0.0:8000
 
 - /rest/daily/ - Registra diário de sintomas:
     - Authentication: Bearer ```access_token```
-    - Body: ```{"note": nota escrita do dia, "pico": pico (???), "tosse": "true" ou "false", "chiado": "true" ou "false", "faltaAr": "true" ou "false", "acordar": "true" ou "false", "bombinha": "true" ou "false"}``` - só pode ser criada uma entrada por dia, ao enviar mais de uma, altera a mais recente
+    - Body: ```{"note": nota escrita do dia, "pico": [pico1, pico2, pico3], "tosse": bool, "chiado": bool, "faltaAr": bool, "acordar": bool, "bombinha": bool}``` - só pode ser criada uma entrada por dia, ao enviar mais de uma, altera a mais recente
     - Response ```{"created": True ou mensagem de erro}```
 
 - /rest/fitbit/ - Obtém os dados da fitbit
@@ -80,7 +80,7 @@ $ python manage.py runserver 0.0.0.0:8000
 
 - /rest/daily/ - Cria uma meta do usuário:
     - Authentication: Bearer ```access_token```
-    - Response ```{yyyy-mm-dd: {"note": nota escrita do dia, "pico": pico (???), "tosse": "true" ou "false", "chiado": "true" ou "false", "faltaAr": "true" ou "false", "acordar": "true" ou "false", "bombinha": "true" ou "false"}, ...}```
+    - Response ```{yyyy-mm-dd: {"note": nota escrita do dia, "pico": [pico1, pico2, pico3], "tosse": bool, "chiado": bool, "faltaAr": bool, "acordar": bool, "bombinha": bool}, ...}```
 
 
 

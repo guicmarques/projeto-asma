@@ -46,7 +46,9 @@ class DailyControl(models.Model):
 
     date = models.DateField(blank=True, null=True)
     notes = models.CharField(max_length=100)
-    picoDeFluxo = models.CharField(max_length=10)
+    pico1 = models.CharField(max_length=10, null=True, blank=True)
+    pico2 = models.CharField(max_length=10, null=True, blank=True)
+    pico3 = models.CharField(max_length=10, null=True, blank=True)
     tosse = models.BooleanField(null=True)
     chiado = models.BooleanField(null=True)
     faltaDeAr = models.BooleanField(null=True)
