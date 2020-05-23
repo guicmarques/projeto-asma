@@ -48,7 +48,8 @@
             <ion-icon name="bicycle-outline" class="goal-icon"></ion-icon>
           </ion-input>
 
-          <ion-select value="passos" interface="popover" okText="Okay" cancelText="Dismiss" class="quantity-unity" mode="ios">
+          <ion-select value="passos" interface="popover" okText="Okay" cancelText="Dismiss" class="quantity-unity" mode="ios"
+          [(ngModel)]="goal.unit" placeholder="Passos">
             <ion-select-option value="passos">Passos</ion-select-option>
             <ion-select-option value="minutos">Minutos</ion-select-option>
             <ion-select-option value="quilometros">Quilômetros</ion-select-option>
@@ -94,7 +95,7 @@
           <ion-item lines="none">
             <ion-icon name="bicycle-outline" class="my-goal-icon"></ion-icon>
             <ion-label class="my-goal-feature">Quantidade:</ion-label>
-            <ion-note slot="end" class="my-goal-note"><span class="goal-bold">{{ meta.quantity }}</span> passos</ion-note>
+            <ion-note slot="end" class="my-goal-note"><span class="goal-bold">{{ meta.quantity }}</span> {{ meta.unit }}</ion-note>
           </ion-item>
 
 

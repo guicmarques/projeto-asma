@@ -30,6 +30,7 @@ export class HomePage implements OnInit {
   goal: Goal = {
     activity: '',
     quantity: null,
+    unit: 'passos',
     daysToEnd: null
   }
 
@@ -113,6 +114,7 @@ export class HomePage implements OnInit {
       this.goal = {
         activity: '',
         quantity: null,
+        unit: 'passos',
         daysToEnd: null
       }
       this.goalType = '';
