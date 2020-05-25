@@ -1,3 +1,4 @@
+import { DescricaoSintomasComponent } from './pages/diario/descricao-sintomas/descricao-sintomas.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -15,8 +16,8 @@ import { Base64 } from '@ionic-native/base64/ngx';
 
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, DescricaoSintomasComponent],
+  entryComponents: [DescricaoSintomasComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, 
     IonicStorageModule.forRoot({name: 'app-asma',
                                 driverOrder: ['indexeddb', 'sqlite', 'websql']})],

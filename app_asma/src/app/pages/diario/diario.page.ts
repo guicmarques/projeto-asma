@@ -1,7 +1,7 @@
+import { AlertService } from './../../services/alert.service';
 import { DiaryService } from './../../services/diary.service';
 import { Diary } from './../../models/diary.model';
 import { DateService } from './../../services/date.service';
-import { CalendarioComponent } from './calendario/calendario.component';
 import { ModalController } from '@ionic/angular';
 import { Component, OnInit} from '@angular/core';
 
@@ -29,10 +29,10 @@ export class DiarioPage implements OnInit {
     bombinha: ''
   }
 
-
   constructor(private modalController: ModalController,
               private dateService: DateService,
-              private diaryService: DiaryService) { }
+              private diaryService: DiaryService,
+              private alertService: AlertService) { }
 
   ngOnInit() {
     [this.dayName, this.day, this.month, this.year] = this.dateService.getDate()
@@ -93,18 +93,10 @@ export class DiarioPage implements OnInit {
     });
   }
 
-  
-
-  openCalend() {
-    this.presentModal();
+  presentPopover(event: any, cardSelected: string) {
+    console.log(event);
+    this.diaryService.selectCard(cardSelected);
+    
+    this.diaryService.presentPopover(event)
   }
-
-  presentModal() {
-    const modal =  this.modalController.create({
-      component: CalendarioComponent
-    }).then(modal => {
-      modal.present();
-    });
-  }
-
 }

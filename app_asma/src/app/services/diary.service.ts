@@ -1,20 +1,26 @@
+import { DescricaoSintomasComponent } from '../pages/diario/descricao-sintomas/descricao-sintomas.component'
 import { AlertService } from './alert.service';
 import { EnvService } from './env.service';
 import { AuthService } from './auth.service';
 import { Diary } from './../models/diary.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiaryService {
   diary: any;
+  cardChange: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  selectedCard = this.cardChange.asObservable();
 
   constructor(private http: HttpClient,
               private env: EnvService,
               private authService: AuthService,
-              private alertService: AlertService) { }
+              private alertService: AlertService,
+              private popoverController: PopoverController) { }
 
   setDiaryPage(diaryPage: Diary) {
     return new Promise ((resolve, reject) => {
@@ -52,5 +58,20 @@ export class DiaryService {
     })
   }
 
+  selectCard(selected: string) {
+    this.cardChange.next(selected);
+  }
+
+  presentPopover(ev: any) {
+    console.log('Criação do popover!')
+    this.popoverController.create({
+      component: DescricaoSintomasComponent,
+      cssClass: 'sintomasPopover',
+      event: ev,
+      translucent: true
+    }).then(popover => {
+      popover.present();
+    });
+  }
 
 }
