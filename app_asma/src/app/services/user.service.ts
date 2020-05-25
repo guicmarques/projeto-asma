@@ -24,7 +24,28 @@ export class UserService {
     {'username': user.cpf.toString(), 'password': user.senha,'email': user.email, 'nome': user.nome, 'sobrenome': user.sobrenome, 'rg': user.rg, 
     'telefone': user.telefone, 'altura': user.altura, 'peso': user.peso, 'imagem': user.imagem,'token': user.tokenHC});   
   }
-
+  putUser(user: User) {
+    return new Promise ((resolve, reject) =>{
+      this.authService.validateToken().then(data => {
+        const header = new HttpHeaders({
+          'Authorization': 'Bearer' + " " + this.authService.token["access"]
+        });
+        return this.http.put(this.env.API_URL + 'user_data/', {
+          'email': user.email, 'nome': user.nome, 'sobrenome': user.sobrenome,        
+          'rg': user.rg, 'telefone': user.telefone, 'altura': user.altura,
+          'peso': user.peso, 'imagem': user.imagem, 'token': user.token,
+            }, { headers: header })
+          .subscribe((data) => {
+            this.alertService.presentPopUp('Alterações salvas!', 'Alterações salvas com sucesso.');
+            resolve(data);
+          }, (error) =>{
+            this.alertService.presentPopUp('Erro!', 'Não foi possivel fazer as alterações.');
+            reject(error);
+          });
+        });
+      });
+    
+  }
   getUser() {
     return new Promise ((resolve, reject) =>{
       this.authService.validateToken().then(data => {
@@ -38,5 +59,6 @@ export class UserService {
       })
     })      
   }
-
 }
+    
+
