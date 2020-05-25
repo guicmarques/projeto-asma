@@ -67,7 +67,7 @@ export class DateService {
 
     week = week.reverse();
     
-    let flag = 'today';
+    let flag = 'selected';
     weekDay = day;
     month = curMonth;
     year = curYear;
@@ -140,5 +140,15 @@ export class DateService {
     }
 
     return 28;
+  }
+
+  getMonthNumber(monthName: string) {
+    let index = this.mesesNames.indexOf(monthName) + 1
+
+    if (index < 10) {
+      return '0' + index.toString();
+    }
+    
+    return index.toString();
   }
 }

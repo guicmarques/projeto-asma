@@ -17,7 +17,7 @@ export class DiarioPage implements OnInit {
   day: string;
   month: string;
   year: string;
-  week: string[];
+  week: string[][];
   pageView: string[];
   diaryPage: Diary = {
     note: '',
@@ -37,7 +37,7 @@ export class DiarioPage implements OnInit {
   ngOnInit() {
     [this.dayName, this.day, this.month, this.year] = this.dateService.getDate()
     this.week = this.dateService.getWeek();
-    this.getDiaryPage([this.day, this.month, this.year, 'today'])
+    this.getDiaryPage([this.day, this.dateService.getMonthNumber(this.month), this.year, 'selected'])
 
     //console.log(this.week)
   }
@@ -51,6 +51,7 @@ export class DiarioPage implements OnInit {
       let fullDate = date[2] + '-' + date[1] + '-' + date[0];
       if (data[fullDate] === undefined) {
         this.diaryPage = {
+
           note: '',
           pico: [null, null, null],
           tosse: '',
@@ -70,7 +71,16 @@ export class DiarioPage implements OnInit {
           bombinha: data[fullDate].bombinha.toString()
         };
       }
-      
+
+      this.week.forEach(element => { 
+        if (element[3] === 'selected' && element[0] !== date[0]) {
+          element[3] = 'before';
+        } else if (element[0] === date[0]) {
+          element[3] = 'selected';
+        }
+      });
+
+      console.log('Week: ', this.week);
       console.log('Page:', this.diaryPage);
       console.log(this.diaryPage.pico)
     });

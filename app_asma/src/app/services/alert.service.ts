@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { ToastController, AlertController } from '@ionic/angular';
+import { ToastController, AlertController, PopoverController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
 
-  constructor(private toastController: ToastController, private alertCtrl: AlertController) { }
+  constructor(private toastController: ToastController, 
+              private alertCtrl: AlertController,
+              private popoverController: PopoverController) { }
 
   async presentToast(message: any) {
     const toast = await this.toastController.create({
@@ -32,5 +34,16 @@ export class AlertService {
       alertEl.present();
     });
   }
+
+  /*
+  presentPopover(ev: any) {
+    this.popoverController.create({
+      component: PopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return popover.present();
+  }*/
 
 }
