@@ -2,204 +2,276 @@
   <ion-toolbar>
     <ion-title class="diaryHeader">
       <div class="dateDescr"><b>{{this.dayName}}</b>,  {{this.day}}  de  {{this.month}}</div>
-      <div class="daysName">
-        <span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span>
-      </div>
-      <div class="weekdays">
-        <span *ngFor="let wDay of this.week" [ngClass]="{'availDay' : wDay < this.day,
-                                                        'today'     : wDay == this.day,
-                                                        'unavDay'   : wDay > this.day}"> {{wDay}} </span>              
-      </div>
+    
+      <ion-grid class="viewDays">
+        <ion-row>
+          <ion-col *ngFor="let wDay of this.week; let i = index" size="1" class="weekdays">
+            <div class="daysName"> {{this.daysName[i]}} </div>
+            <div (click)="getDiaryPage(wDay)" [ngClass]="{'availDay'  : wDay[3] === 'before',
+                                                          'today'     : wDay[3] === 'today',
+                                                          'unavDay'   : wDay[3] === 'after'}"> {{wDay[0]}} </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card class="sympCard">
-      <ion-card-header class="sympHeader">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="3">
-              <img src="../../../assets/images/cough_icon.png" class="sympIcon">
-            </ion-col>
-            
-            <ion-col size="9">
-              <ion-card-title class="sympTitle">Tosse</ion-card-title>
-              <ion-card-subtitle class="sympSubt">Você teve tosse hoje?</ion-card-subtitle>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-header>
+  <div *ngIf="pageView[3] !== 'today'"> {{pageView[0]}}/{{pageView[1]}} </div>
 
-      <ion-card-content>
-        <ion-list>
-          <ion-radio-group>
-            <ion-item lines="none">
-              <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
-              <ion-label>Sim</ion-label>
-              <ion-radio slot="end" class="yesSymp" value="sim"></ion-radio>
-            </ion-item>
-    
-            <ion-item lines="none">
-              <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
-              <ion-label>Não</ion-label>
-              <ion-radio slot="end" class="noSymp" value="nao"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+  <ion-card class="sympCard">
+    <ion-card-header class="sympHeader">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <img src="../../../assets/images/cough_icon.png" class="sympIcon">
+          </ion-col>
           
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
+          <ion-col size="9">
+            <ion-card-title class="sympTitle">Tosse</ion-card-title>
+            <ion-card-subtitle class="sympSubt">Você teve tosse hoje?</ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-radio-group [(ngModel)]="diaryPage.tosse">
+          <ion-item lines="none">
+            <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[3] !== 'today' ? true : false"></ion-radio>
+          </ion-item>
+  
+          <ion-item lines="none">
+            <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[3] !== 'today' ? true : false"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
 
-    <ion-card class="sympCard">
-      <ion-card-header class="sympHeader">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="3">
-              <img src="../../../assets/images/lungs_icon.png" class="sympIcon">
-            </ion-col>
-            
-            <ion-col size="9">
-              <ion-card-title class="sympTitle">Chiado</ion-card-title>
-              <ion-card-subtitle class="sympSubt">Você teve chiado hoje?</ion-card-subtitle>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-header>
-
-      <ion-card-content>
-        <ion-list>
-          <ion-radio-group>
-            <ion-item lines="none">
-              <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
-              <ion-label>Sim</ion-label>
-              <ion-radio slot="end" class="yesSymp" value="sim"></ion-radio>
-            </ion-item>
-    
-            <ion-item lines="none">
-              <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
-              <ion-label>Não</ion-label>
-              <ion-radio slot="end" class="noSymp" value="nao"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+  <ion-card class="sympCard">
+    <ion-card-header class="sympHeader">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <img src="../../../assets/images/lungs_icon.png" class="sympIcon">
+          </ion-col>
           
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
+          <ion-col size="9">
+            <ion-card-title class="sympTitle">Chiado</ion-card-title>
+            <ion-card-subtitle class="sympSubt">Você teve chiado hoje?</ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-radio-group [(ngModel)]="diaryPage.chiado">
+          <ion-item lines="none">
+            <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[3] !== 'today' ? true : false"></ion-radio>
+          </ion-item>
+  
+          <ion-item lines="none">
+            <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[3] !== 'today' ? true : false"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
 
-    <ion-card class="sympCard">
-      <ion-card-header class="sympHeader">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="3">
-              <img src="../../../assets/images/air_icon.png" class="sympIcon">
-            </ion-col>
-            
-            <ion-col size="9">
-              <ion-card-title class="sympTitle">Falta de ar</ion-card-title>
-              <ion-card-subtitle class="sympSubt">Você teve falta de ar hoje?</ion-card-subtitle>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-header>
-
-      <ion-card-content>
-        <ion-list>
-          <ion-radio-group>
-            <ion-item lines="none">
-              <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
-              <ion-label>Sim</ion-label>
-              <ion-radio slot="end" class="yesSymp" value="sim"></ion-radio>
-            </ion-item>
-    
-            <ion-item lines="none">
-              <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
-              <ion-label>Não</ion-label>
-              <ion-radio slot="end" class="noSymp" value="nao"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+  <ion-card class="sympCard">
+    <ion-card-header class="sympHeader">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <img src="../../../assets/images/air_icon.png" class="sympIcon">
+          </ion-col>
           
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
+          <ion-col size="9">
+            <ion-card-title class="sympTitle">Falta de ar</ion-card-title>
+            <ion-card-subtitle class="sympSubt">Você teve falta de ar hoje?</ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
 
-    <ion-card class="sympCard">
-      <ion-card-header class="sympHeader">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="3">
-              <img src="../../../assets/images/sleep_icon.png" class="sympIcon">
-            </ion-col>
-            
-            <ion-col size="9">
-              <ion-card-title class="sympTitle">Acordar</ion-card-title>
-              <ion-card-subtitle class="sympSubt">Você acordou por causa da asma hoje?</ion-card-subtitle>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-radio-group [(ngModel)]="diaryPage.faltaAr">
+          <ion-item lines="none">
+            <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[3] !== 'today' ? true : false"></ion-radio>
+          </ion-item>
+  
+          <ion-item lines="none">
+            <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[3] !== 'today' ? true : false"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
-      <ion-card-content>
-        <ion-list>
-          <ion-radio-group>
-            <ion-item lines="none">
-              <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
-              <ion-label>Sim</ion-label>
-              <ion-radio slot="end" class="yesSymp" value="sim"></ion-radio>
-            </ion-item>
-    
-            <ion-item lines="none">
-              <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
-              <ion-label>Não</ion-label>
-              <ion-radio slot="end" class="noSymp" value="nao"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+  <ion-card class="sympCard">
+    <ion-card-header class="sympHeader">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <img src="../../../assets/images/sleep_icon.png" class="sympIcon">
+          </ion-col>
           
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
+          <ion-col size="9">
+            <ion-card-title class="sympTitle">Acordar</ion-card-title>
+            <ion-card-subtitle class="sympSubt">Você acordou por causa da asma hoje?</ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
 
-    <ion-card class="sympCard">
-      <ion-card-header class="sympHeader">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="3">
-              <img src="../../../assets/images/inhaler_icon.png" class="sympIcon">
-            </ion-col>
-            
-            <ion-col size="9">
-              <ion-card-title class="sympTitle">Bombinha</ion-card-title>
-              <ion-card-subtitle class="sympSubt">Você usou a bombinha hoje?</ion-card-subtitle>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-radio-group [(ngModel)]="diaryPage.acordar"> 
+          <ion-item lines="none">
+            <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[3] !== 'today' ? true : false"></ion-radio>
+          </ion-item>
+  
+          <ion-item lines="none">
+            <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[3] !== 'today' ? true : false"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
-      <ion-card-content>
-        <ion-list>
-          <ion-radio-group>
-            <ion-item lines="none">
-              <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
-              <ion-label>Sim</ion-label>
-              <ion-radio slot="end" class="yesSymp" value="sim"></ion-radio>
-            </ion-item>
-    
-            <ion-item lines="none">
-              <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
-              <ion-label>Não</ion-label>
-              <ion-radio slot="end" class="noSymp" value="nao"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+  <ion-card class="sympCard">
+    <ion-card-header class="sympHeader">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <img src="../../../assets/images/inhaler_icon.png" class="sympIcon">
+          </ion-col>
           
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
+          <ion-col size="9">
+            <ion-card-title class="sympTitle">Bombinha</ion-card-title>
+            <ion-card-subtitle class="sympSubt">Você usou a bombinha hoje?</ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
 
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button>
-        <ion-icon name="arrow-forward-outline"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+    <ion-card-content>
+      <ion-list>
+        <ion-radio-group [(ngModel)]="diaryPage.bombinha">
+          <ion-item lines="none">
+            <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[3] !== 'today' ? true : false"></ion-radio>
+          </ion-item>
+  
+          <ion-item lines="none">
+            <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[3] !== 'today' ? true : false"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="sympCard">
+    <ion-card-header class="sympHeader">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <img src="../../../assets/images/peak_icon.png" class="sympIcon">
+          </ion-col>
+          
+          <ion-col size="9">
+            <ion-card-title class="sympTitle">Pico de fluxo</ion-card-title>
+            <ion-card-subtitle class="sympSubt">Quais foram os seus picos de fluxo hoje?</ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item lines="none">
+          <ion-label class="peakLabel">1ª Medição: </ion-label>
+          <ion-textarea inputmode="text" maxlength="4" cols="4" rows="1" class="peakValue" 
+          [(ngModel)]="diaryPage.pico[0]" [disabled]="pageView[3] !== 'today' ? true : false"></ion-textarea>
+          <div class="peakUnit">L/min</div>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label class="peakLabel">2ª Medição: </ion-label>
+          <ion-textarea inputmode="text" maxlength="4" cols="4" rows="1" class="peakValue" 
+          [(ngModel)]="diaryPage.pico[1]" [disabled]="pageView[3] !== 'today' ? true : false"></ion-textarea>
+          <div class="peakUnit">L/min</div>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label class="peakLabel">3ª Medição: </ion-label>
+          <ion-textarea inputmode="text" maxlength="4" cols="4" rows="1" class="peakValue" 
+          [(ngModel)]="diaryPage.pico[2]" [disabled]="pageView[3] !== 'today' ? true : false"></ion-textarea>
+          <div class="peakUnit">L/min</div>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="sympCard">
+    <ion-card-header class="sympHeader">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <img src="../../../assets/images/sticky_note_icon.png" class="sympIcon">
+          </ion-col>
+          
+          <ion-col size="9">
+            <ion-card-title class="sympTitle">Anotações</ion-card-title>
+            <ion-card-subtitle class="sympSubt">Você gostaria de fazer mais alguma observação?</ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-textarea placeholder="Até 100 caracteres" inputmode="text" maxlength="100" rows="2" 
+        [(ngModel)]="diaryPage.note" [disabled]="pageView[3] !== 'today' ? true : false"></ion-textarea>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="setDiaryPage()" [disabled]="pageView[3] !== 'today' ? true : false">
+      <ion-icon name="save-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

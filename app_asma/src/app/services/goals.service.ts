@@ -24,8 +24,8 @@ export class GoalsService {
         const header = new HttpHeaders({
           'Authorization': 'Bearer' + " " + this.authService.token["access"]
         });
-        return this.http.post(this.env.API_URL + 'goals/', {'activity': goal.activity, 
-                        'quantity': goal.quantity.toString(), 'daysToEnd': goal.daysToEnd.toString()}, { headers: header })
+        return this.http.post(this.env.API_URL + 'goals/', {'activity': goal.activity, 'quantity': goal.quantity.toString(), 
+                              'unit': goal.unit, 'daysToEnd': goal.daysToEnd.toString()}, { headers: header })
           .subscribe((data) => {
           this.alertService.presentPopUp('Meta definida!', 'Sua meta foi definida com sucesso.');
           resolve(data);

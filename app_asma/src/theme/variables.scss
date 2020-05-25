@@ -76,6 +76,11 @@
   --ion-color-light-tint: #f5f6f9;
 
   --ion-font-family: 'Montserrat';
+
+  .viewDays {
+    --ion-grid-columns: 7;
+  }
+  
 }
 
 @font-face {

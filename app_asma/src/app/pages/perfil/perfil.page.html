@@ -61,10 +61,11 @@
       <ion-icon md="caret-up" ios="chevron-up-circle-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button (click)="logout()" routerLink="../../../login">
+      <ion-fab-button (click)="logout()" data-desc="Logout">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button routerLink="./editar-perfil">
+
+      <ion-fab-button routerLink="./editar-perfil" data-desc="Editar Perfil">
         <ion-icon name="create-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>

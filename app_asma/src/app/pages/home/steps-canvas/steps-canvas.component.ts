@@ -50,11 +50,20 @@ export class StepsCanvasComponent implements OnInit {
           label: '/8000 passos',
           data: [data, (8000-data)],
           backgroundColor: ['rgb(255,255,255)', 'rgba(0,0,0,0)'], // array should have same number of elements as number of dataset
-          borderColor: ['rgb(45, 210, 194)', 'rgba(0,0,0,0)'],// array should have same number of elements as number of dataset
-          borderWidth: 1,
+          borderColor: ['rgb(255, 255, 255)', 'rgba(0,0,0,0)'],// array should have same number of elements as number of dataset
+          borderWidth: 7,
         }]
       },
       options: {
+        elements: {
+          point: {
+            pointStyle: 'rectRounded',
+            hitRadius: 50, 
+          },
+          line: {
+            borderJoinStyle: "round"
+          }
+        },
         legend: {
           display: false,
           labels: {
@@ -66,7 +75,7 @@ export class StepsCanvasComponent implements OnInit {
             display: false,
           }
         },
-        cutoutPercentage: 85,
+        cutoutPercentage: 95,
       }
     });
   }

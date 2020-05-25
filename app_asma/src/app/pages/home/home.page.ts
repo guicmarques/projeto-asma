@@ -8,6 +8,7 @@ import { Animation, AnimationController, AlertController } from '@ionic/angular'
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { Goal } from '../../models/goal.model';
+import { DateService } from '../../services/date.service';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +30,7 @@ export class HomePage implements OnInit {
   goal: Goal = {
     activity: '',
     quantity: null,
+    unit: 'passos',
     daysToEnd: null
   }
 
@@ -39,7 +41,8 @@ export class HomePage implements OnInit {
 
   constructor(private authService: AuthService, private userService: UserService,
               private sensorService: SensorService, private goalsService: GoalsService,
-              private alertService: AlertService, private alertCtrl: AlertController) { }
+              private alertService: AlertService, private alertCtrl: AlertController,
+              private dateService: DateService) { }
 
   ngOnInit() {
     this.getUser();
@@ -111,6 +114,7 @@ export class HomePage implements OnInit {
       this.goal = {
         activity: '',
         quantity: null,
+        unit: 'passos',
         daysToEnd: null
       }
       this.goalType = '';
@@ -132,23 +136,10 @@ export class HomePage implements OnInit {
   }
 
   getDate() {
-    let date = new Date();
-    let dateString = date.toDateString();
-    let fullDate = dateString.split(' ');
-    let diaSemana = fullDate[0];
-    let dia = fullDate[2];
-    let mesNumber = fullDate[1];
+    let  date = []
+    date = this.dateService.getDate();
 
-    let meses = {'January': 'Janeiro', 'February': 'Fevereiro', 'March': 'Março', 'April': 'Abril', 'May': 'Maio', 
-                'June':'Junho', 'July': 'Julho', 'August': 'Agosto', 'September': 'Setembro', 'October': 'Outubro', 
-                'November': 'Novembro', 'December': 'Dezembro'};
-
-    let diasSemana = {'Mon': 'Segunda-feira', 'Tue': 'Terça-feira', 'Wed': 'Quarta-feira', 'Thu': 'Quinta-feira',
-                      'Fri': 'Sexta-feira', 'Sat': 'Sábado', 'Sun': 'Domingo'}
-
-    let mes = meses[mesNumber];
-
-    this.date = diasSemana[diaSemana] +', ' + dia + ' de ' + mes
+    this.date = date[0] +', ' + date[1] + ' de ' + date[2];
   }
 
 }

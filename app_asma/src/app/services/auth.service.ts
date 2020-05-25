@@ -97,6 +97,7 @@ export class AuthService {
     this.isLoggedIn = false;
     this.credenciais = null;
     delete this.token;
+    this.navCtrl.navigateRoot('/login');
   }
 
 }
