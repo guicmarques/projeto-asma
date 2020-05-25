@@ -10,7 +10,7 @@ import { AuthService } from './../../services/auth.service';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
-  user: User = {
+  user: any;/* = {
     nome: "Bill",
     sobrenome: "Gates",
     rg: "010010101",
@@ -22,7 +22,8 @@ export class PerfilPage implements OnInit {
     imagem: "https://upload.wikimedia.org/wikipedia/commons/2/2d/Bill_Gates_2014.jpg",
     token: "token",
     tokenValidado: true,
-  };
+  };*/
+  userDefined: boolean = false;
   
 
 
@@ -31,7 +32,11 @@ export class PerfilPage implements OnInit {
               private authService: AuthService ) { }
 
   ngOnInit() { 
-   // this.userService.getUser().then((result) => { this.user = result;});
+    this.userService.getUser().then(user => {
+      this.user = user;
+      this.userDefined = true;
+      console.log(user);
+    });
   }
 
   logout() {

@@ -13,18 +13,22 @@
     <div class="profile-forms">
       <div class="profile-username">
         <ion-avatar class="profile-img">
-         <ion-img [src]="user.imagem"></ion-img>
+         <ion-img [src]="user.imagem"  *ngIf="userDefined"></ion-img>
        </ion-avatar> 
-       <ion-label class="profile-username">{{user.nome}} {{user.sobrenome}}</ion-label>
+       <ion-label class="profile-username"  *ngIf="userDefined">{{user.nome}} {{user.sobrenome}}</ion-label>
       </div>
     
 
     <div class="line-skip">
     </div>  
+    <div class="line-skip">
+    </div>
+    <div class="line-skip">
+    </div>
 
  
     <ion-text class="achievements-title" >
-      Metas & Conquistas
+      CONQUISTAS  
     </ion-text>
   
     <ion-grid class="achievement-grid">
