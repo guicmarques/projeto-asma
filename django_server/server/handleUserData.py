@@ -68,11 +68,19 @@ def createUser(userData):
 
                 profileInfo.save()
 
-                # ONLY FOR TESTING PURPOSES
-                fitbit = FitbitFile(user=user, category="heart-rate",
-                                    path="fitbit/heart-rate-2019-03-14.csv",
-                                    date=datetime.now().date())
-                fitbit.save()
+                # FOR TESTING PURPOSES ONLY
+                heartRate = FitbitFile(user=user, category="heart-rate",
+                                       path="fitbit/heart-rate-2019-03-14.csv",
+                                       date=datetime.now().date())
+                heartRate.save()
+                dailySteps = FitbitFile(user=user, category="daily-steps",
+                                        path="fitbit/daily-steps-2020-05-26.csv",
+                                        date=datetime(year=2020, month=5, day=26).date())
+                dailySteps.save()
+                dailySteps = FitbitFile(user=user, category="daily-steps",
+                                        path="fitbit/daily-steps-2020-06-04.csv",
+                                        date=datetime(year=2020, month=6, day=4).date())
+                dailySteps.save()
 
                 return missingData, True
             except Exception as e:

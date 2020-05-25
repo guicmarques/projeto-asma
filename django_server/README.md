@@ -60,7 +60,7 @@ $ python manage.py runserver 0.0.0.0:8000
 
 - /rest/fitbit/ - Obtém os dados da fitbit
     - Authentication: Bearer ```access_token```
-    - Body: ```{"date": dia/mês/ano, "category": alguma categoria de dados da fitbit}``` - se for passada uma string vazia como category e/ou date, não haverá filtragem do parâmetro, obtendo todas as entradas - em teste, só existe a categoria ```heart-rate```
+    - Body: ```{"date": dia/mês/ano, "category": alguma categoria de dados da fitbit}``` - se for passada uma string vazia como category e/ou date, não haverá filtragem do parâmetro, obtendo todas as entradas - em teste, só existem as categorias ```heart-rate``` e ```daily-steps```
     - Response ```{"data":[{"date": data, "category": categoria, "data": ["nome da coluna": dados, ...}, ...]}```
 
 - /rest/goals/ - Cria uma meta do usuário:
@@ -93,3 +93,4 @@ $ python manage.py runserver 0.0.0.0:8000
 
 ### TODO
 - [api fitbit](https://github.com/iccir919/pulseWatch/blob/master/public/intraday.js)
+- [dados fitbit](https://www.fitabase.com/resources/knowledge-base/exporting-data/example-data-sets/)
