@@ -9,38 +9,38 @@
   
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="userDefined">
   
-  <div class="register-input">
+  <div class="register-input" *ngIf="userDefined" >
     <ion-input class="register-field" placeholder={{user.nome}} type="text"
-    autocapitalize="on"></ion-input>
+    autocapitalize="on" ></ion-input>
   </div>
 
 
   <div class="register-input">
     <ion-input class="register-field" placeholder={{user.sobrenome}} type="text" 
-    autocapitalize="on"></ion-input>
+    autocapitalize="on" *ngIf="userDefined"></ion-input>
   </div>
 
   <div class="register-input">
-    <ion-input class="register-field" placeholder={{user.rg}} type="text" ></ion-input>
+    <ion-input class="register-field" placeholder={{user.rg}} type="text" *ngIf="userDefined"></ion-input>
   </div>
 
  
   <div class="register-input">
-    <ion-input class="register-field" placeholder={{user.peso}} type="number" ></ion-input>
+    <ion-input class="register-field" placeholder={{user.peso}} type="number" *ngIf="userDefined"></ion-input>
   </div>
 
   <div class="register-input">
-    <ion-input class="register-field" placeholder={{user.altura}} type="number" ></ion-input>
+    <ion-input class="register-field" placeholder={{user.altura}} type="number" *ngIf="userDefined"></ion-input>
   </div>
 
   <div class="register-input">
-    <ion-input class="register-field" placeholder={{user.email}} type="text"></ion-input>
+    <ion-input class="register-field" placeholder={{user.email}} type="text" *ngIf="userDefined"></ion-input>
   </div>
 
   <div class="register-input">
-    <ion-input class="register-field" placeholder={{user.telefone}} type="number"></ion-input>
+    <ion-input class="register-field" placeholder={{user.telefone}} type="number" *ngIf="userDefined"></ion-input>
   </div>
 
   <ion-card class="profile-infocard" nopaddings>
@@ -53,7 +53,7 @@
              <ion-text class="profile-atributes" > Nome</ion-text>
             </ion-col>
             <ion-col class="ion-justify-content-center">
-              <ion-text class="user-atributes" >{{user.nome}} {{user.sobrenome}}</ion-text>
+              <ion-text class="user-atributes" *ngIf="userDefined">{{user.nome}} {{user.sobrenome}}</ion-text>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -66,7 +66,7 @@
              <ion-text class="profile-atributes" > RG </ion-text>
             </ion-col>
             <ion-col class="ion-justify-content-center">
-              <ion-text class="user-atributes" >{{user.rg}}</ion-text>
+              <ion-text class="user-atributes" *ngIf="userDefined" >{{user.rg}}</ion-text>
             </ion-col>
             </ion-row>
         </ion-grid>
@@ -79,7 +79,7 @@
              <ion-text class="profile-atributes" > Email</ion-text>
             </ion-col>
             <ion-col class="ion-justify-content-center">
-              <ion-text class="user-atributes" >{{user.email}}</ion-text>
+              <ion-text class="user-atributes" *ngIf="userDefined">{{user.email}}</ion-text>
             </ion-col>
            </ion-row>
         </ion-grid>
@@ -92,7 +92,7 @@
              <ion-text class="profile-atributes" > Telefone </ion-text>
             </ion-col>
             <ion-col class="ion-justify-content-center">
-              <ion-text class="user-atributes" >{{user.telefone}}</ion-text>
+              <ion-text class="user-atributes" *ngIf="userDefined">{{user.telefone}}</ion-text>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -105,7 +105,7 @@
              <ion-text class="profile-atributes" > Altura </ion-text>
             </ion-col>
             <ion-col class="ion-justify-content-center">
-              <ion-text class="user-atributes" >{{user.altura}} m</ion-text>
+              <ion-text class="user-atributes" *ngIf="userDefined">{{user.altura}} m</ion-text>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -118,7 +118,7 @@
              <ion-text class="profile-atributes" > Peso </ion-text>
             </ion-col>
             <ion-col class="ion-justify-content-center">
-              <ion-text class="user-atributes" >{{user.peso}} kg</ion-text>
+              <ion-text class="user-atributes" *ngIf="userDefined">{{user.peso}} kg</ion-text>
             </ion-col>
           </ion-row>
         </ion-grid>

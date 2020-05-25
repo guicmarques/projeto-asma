@@ -11,28 +11,21 @@ import { AuthService } from '../../../services/auth.service';
 })
 
 export class EditarPerfilPage implements OnInit {
-  user: User = {
-    nome: "Bill",
-    sobrenome: "Gates",
-    rg: "010010101",
-    username: 33333,
-    peso: 55,
-    altura: 1.75,
-    email: "Bill.Gates@Gmail.com",
-    telefone: 9393939,
-    imagem: "https://upload.wikimedia.org/wikipedia/commons/2/2d/Bill_Gates_2014.jpg",
-    token: "token",
-    tokenValidado: true,
-  };
-  
+  user: any;
+  userDefined: boolean = false;
 
 
-  constructor(private animationCtrl: AnimationController,
-              private UserService: UserService,
+
+  constructor(
+              private userService: UserService,
               private AuthService: AuthService ) { }
 
   ngOnInit() { 
-   //this.UserService.getUser().then((result) => { this.user = result;});
+    this.userService.getUser().then(user => {
+      this.user = user;
+      this.userDefined = true;
+      console.log(user);
+    });
   }
  
 }
