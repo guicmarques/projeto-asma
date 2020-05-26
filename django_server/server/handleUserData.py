@@ -74,7 +74,7 @@ def createUser(userData):
                                        date=datetime.now().date())
                 heartRate.save()
                 dailySteps = FitbitFile(user=user, category="daily-steps",
-                                        path="fitbit/daily-steps-2020-05-26.csv",
+                                        path="fitbit/daily-steps-2020-05-28.csv",
                                         date=datetime(year=2020, month=5, day=26).date())
                 dailySteps.save()
                 dailySteps = FitbitFile(user=user, category="daily-steps",
@@ -156,7 +156,7 @@ def updateUserData(user, userData):
                 f.write(imgdata)
             profileInfo.imagem = "userImage/{}".format(filename)
         if "token" in userData.keys():
-            profileInfo.altura = userData["token"]
+            profileInfo.token = userData["token"]
 
         profileInfo.save()
 
