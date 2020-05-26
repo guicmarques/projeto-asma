@@ -1,3 +1,4 @@
+import { SensorService } from './../../../services/sensor.service';
 import { Chart } from 'chart.js';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DateService } from '../../../services/date.service';
@@ -16,12 +17,30 @@ export class WeekProgressCanvasComponent implements OnInit {
 
   days: string[];
 
-  constructor(private dateService: DateService) { }
+  today: any;
+
+  constructor(private dateService: DateService, private sensorService: SensorService) { }
 
   ngOnInit() {
-    this.days = this.dateService.getLastDays(3);
+    this.sensorService.getSensorData('', 'daily-steps').then(data =>{
+      console.log(data);
+      this.getDate();
+      data.data.forEach(element => {
+        if (element.date === this.today) {
+          this.weekProgressCanvas = element.data.StepTotal.slice(-4);
+          this.days = this.dateService.getLastDays(3);
+          this.createLineChart(this.weekProgressCanvas);
+        }
+      });
+    })
+
     console.log('Dias considerados: ',this.days);
-    this.createLineChart(this.weekProgressCanvas);
+  }
+
+  getDate() {
+    let  date = []
+    date = this.dateService.getDate();
+    this.today = date[3] + '-' + date[4] + '-' + date[1];
   }
 
   createLineChart(chart){
@@ -31,7 +50,7 @@ export class WeekProgressCanvasComponent implements OnInit {
       data: {
         labels: ['', '', '', ''],
         datasets: [{
-          data: [5000, 8000, 3000, 6500],
+          data: this.weekProgressCanvas,
           backgroundColor: 'rgba(45, 210, 194, 0.3)', // array should have same number of elements as number of dataset
           borderColor: 'rgb(45, 210, 194)',// array should have same number of elements as number of dataset
           borderWidth: 2,

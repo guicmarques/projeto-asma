@@ -18,7 +18,7 @@ import { DateService } from '../../services/date.service';
 
 export class HomePage implements OnInit {
   goalImg:  String = '../../../assets/images/bullseye.png';
-  stepsData: any;
+  stepsData: number = null;
   weekProgressData: any[];
   user: any;
   userDefined: boolean = false;
@@ -26,6 +26,7 @@ export class HomePage implements OnInit {
   goalType: string = ''; 
 
   date: any;
+  today: string;
 
   goal: Goal = {
     activity: '',
@@ -46,11 +47,9 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.getUser();
-    this.getSensorData();
-    this.getDate();
+    this.getDate()
     this.getGoals();
-    this.stepsData = 6500;
-    this.weekProgressData = [1000, 2000, 400, 5000, 8000, 3000, 6500];
+
    }
 
   logout() {
@@ -67,11 +66,6 @@ export class HomePage implements OnInit {
     });
   }
 
-  getSensorData() {
-    this.sensorService.getSensorData('', '').then(data =>{
-      console.log(data);
-    })
-  }
 
   getGoals() {
     this.goalsService.getGoals().then(data => {
@@ -140,6 +134,7 @@ export class HomePage implements OnInit {
     date = this.dateService.getDate();
 
     this.date = date[0] +', ' + date[1] + ' de ' + date[2];
+    this.today = date[3] + '-' + date[4] + '-' + date[1];
   }
 
 }

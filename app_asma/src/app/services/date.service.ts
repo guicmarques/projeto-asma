@@ -23,12 +23,17 @@ export class DateService {
     let fullDate = dateString.split(' ');
     let diaSemana = fullDate[0];
     let dia: string = fullDate[2];
-    let mesNumber = fullDate[1];
+    let mesAbrv = fullDate[1];
+    let mesNumber = date.getMonth() + 1;
+    let mesNumberStr = mesNumber.toString();
+    if (mesNumber < 10){
+      mesNumberStr = '0' + mesNumberStr;
+    }
 
-    let mes: string = this.meses[mesNumber];
+    let mes: string = this.meses[mesAbrv];
     let diaNome: string = this.diasSemana[diaSemana];
 
-    return [diaNome, dia, mes, date.getFullYear().toString()];
+    return [diaNome, dia, mes, date.getFullYear().toString(), mesNumberStr];
   }
 
   getWeek() {

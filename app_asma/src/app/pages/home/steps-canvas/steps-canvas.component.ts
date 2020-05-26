@@ -1,3 +1,5 @@
+import { DateService } from './../../../services/date.service';
+import { SensorService } from './../../../services/sensor.service';
 import { Chart } from 'chart.js';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
@@ -14,33 +16,36 @@ export class StepsCanvasComponent implements OnInit {
   data: any;
 
   date: any;
+  today: any;
 
   walkingPersonImg:  String = '../../../assets/images/walking_white_blue.png';
 
-  constructor() { }
+  constructor(private sensorService: SensorService, private dateService: DateService) { }
 
   ngOnInit() {
-    this.createDounutChart(this.stepCanvas);
-    this.getDate();
+    this.sensorService.getSensorData('', 'daily-steps').then(data =>{
+      console.log(data);
+      this.getDate();
+      data.data.forEach(element => {
+        if (element.date === this.today) {
+          this.stepCanvas = element.data.StepTotal[6];
+          this.createDounutChart(this.stepCanvas);
+          console.log(typeof(this.stepCanvas));
+        }
+      });
+    })
   }
 
   getDate() {
-    let date = new Date();
-    let dateString = date.toDateString();
-    let fullDate = dateString.split(' ');
-    let dia = fullDate[2];
-    let mesNumber = fullDate[1];
+    let  date = []
+    date = this.dateService.getDate();
 
-    let meses = {'January': 'Janeiro', 'February': 'Fevereiro', 'March': 'Março', 'April': 'Abril', 'May': 'Maio', 
-                'June':'Junho', 'July': 'Julho', 'August': 'Agosto', 'September': 'Setembro', 'October': 'Outubro', 
-                'November': 'Novembro', 'December': 'Dezembro'};
-
-    let mes = meses[mesNumber];
-
-    this.date =  dia + ' de ' + mes;
+    this.date =  date[1] + ' de ' + date[2];
+    this.today = date[3] + '-' + date[4] + '-' + date[1];
   }
 
   createDounutChart(data: any){
+    console.log(data);
     this.data = data;
     this.doughnut = new Chart(this.stepsChart.nativeElement, {
       type: 'doughnut',
