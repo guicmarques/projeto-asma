@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^table.html$', views.table, name='table'),
     url(r'^profile.html$', views.profile, name='profile'),
     url(r'^blank-1.html$', views.cadastroPaciente, name='cadastroPaciente'),
+    url(r'^pacienteGraficos.html$', views.pacienteGraficos, name='pacienteGraficos'),
+
 ]
