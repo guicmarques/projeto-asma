@@ -4,7 +4,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
+from plotly.offline import plot
+from plotly.graph_objs import Scatter
+from plotly.graph_objs import Line
+import plotly.graph_objects as go
+import numpy as np
+import pandas as pd
 
 def index(request):
     return render(request, 'health_team/index.html')
@@ -65,13 +70,45 @@ def user_login(request):
         return render(request, 'health_team/login.html', {})
 
 
+@login_required
 def table(request):
     return render(request, 'logged/table.html', {})
 
 
+@login_required
 def profile(request):
     return render(request, 'logged/profile.html', {})
 
 
+@login_required
 def cadastroPaciente(request):
     return render(request, 'logged/blank-1.html', {})
+
+
+@login_required
+def pacienteGraficos(request):
+    #https://www.youtube.com/watch?v=vCX6Tpb9sP8
+    #https://www.youtube.com/watch?v=B4Vmm3yZPgc
+    #https://stackoverflow.com/questions/55832576/how-to-integrate-chart-js-in-django
+    #https://www.codingwithricky.com/2019/08/28/easy-django-plotly/
+
+
+    
+    #Grafico Demo
+    x_data = [0,1,2,3]
+    y_data = [x**2 for x in x_data]
+    plot_div = plot([Scatter(x=x_data, y=y_data,
+                        mode='lines', name='test',
+                        opacity=0.8, marker_color='green')],
+               output_type='div', include_plotlyjs=False, show_link=False, link_text="", auto_open=False)
+    ##################
+    fig2 = go.Bar(y=[2, 1, 3])
+    fig2 = plot([fig2],
+               output_type='div', include_plotlyjs=False, show_link=False, link_text="", auto_open=False)
+
+    ##################
+    fig3 = go.Bar(y=[7, 5, 4])
+    fig3 = plot([fig3],
+               output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+    
+    return render(request, "logged/pacienteGraficos.html", context={'plot_div': plot_div, 'fig':fig2, 'fig3':fig3})
