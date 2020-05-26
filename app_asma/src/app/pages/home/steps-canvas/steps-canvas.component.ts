@@ -2,6 +2,7 @@ import { DateService } from './../../../services/date.service';
 import { SensorService } from './../../../services/sensor.service';
 import { Chart } from 'chart.js';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { GoalsService } from 'src/app/services/goals.service';
 
 @Component({
   selector: 'app-steps-canvas',
@@ -18,21 +19,39 @@ export class StepsCanvasComponent implements OnInit {
   date: any;
   today: any;
 
+  myGoals: any = {
+    activeGoals: [],
+    inactiveGoals: []
+  };
+
+  goal: number = 0;
+
   walkingPersonImg:  String = '../../../assets/images/walking_white_blue.png';
 
-  constructor(private sensorService: SensorService, private dateService: DateService) { }
+  constructor(private sensorService: SensorService, private dateService: DateService,
+              private goalsService: GoalsService) { }
+
 
   ngOnInit() {
     this.sensorService.getSensorData('', 'daily-steps').then(data =>{
       console.log(data);
-      this.getDate();
-      data.data.forEach(element => {
-        if (element.date === this.today) {
-          this.stepCanvas = element.data.StepTotal[6];
-          this.createDounutChart(this.stepCanvas);
-          console.log(typeof(this.stepCanvas));
-        }
-      });
+      this.goalsService.getGoals().then(goals => {
+        console.log('Minhas metas:', goals);
+        this.myGoals = goals;
+        this.myGoals.activeGoals.forEach(element => {
+          if (element.activity === 'Caminhada') {
+            this.goal = element.quantity;
+          }
+        });
+        this.getDate();
+        data.data.forEach(element => {
+          if (element.date === this.today) {
+            this.stepCanvas = element.data.StepTotal[6];
+            this.createDounutChart(this.stepCanvas);
+            console.log(typeof(this.stepCanvas));
+          }
+        });
+      })
     })
   }
 
@@ -53,7 +72,7 @@ export class StepsCanvasComponent implements OnInit {
         labels: ['Passos diários', '/8000 passos'],
         datasets: [{
           label: '/8000 passos',
-          data: [data, (8000-data)],
+          data: [data, (this.goal-data)],
           backgroundColor: ['rgb(255,255,255)', 'rgba(0,0,0,0)'], // array should have same number of elements as number of dataset
           borderColor: ['rgb(255, 255, 255)', 'rgba(0,0,0,0)'],// array should have same number of elements as number of dataset
           borderWidth: 7,
