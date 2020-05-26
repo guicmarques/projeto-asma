@@ -72,7 +72,7 @@ export class DiarioPage implements OnInit {
       } else {
         this.diaryPage = {
           note: data[fullDate].notes,
-          pico: data[fullDate].picoDeFluxo.substring(2, data[fullDate].picoDeFluxo.length - 2).split("', '").map(x => +x),
+          pico: data[fullDate].pico.map(x => +x),
           tosse: data[fullDate].tosse.toString(),
           chiado: data[fullDate].chiado.toString(),
           faltaAr: data[fullDate].faltaDeAr.toString(),
