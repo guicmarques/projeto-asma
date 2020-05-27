@@ -74,8 +74,12 @@ def createUser(userData):
                                        date=datetime.now().date())
                 heartRate.save()
                 dailySteps = FitbitFile(user=user, category="daily-steps",
+                                        path="fitbit/daily-steps-2020-05-27.csv",
+                                        date=datetime(year=2020, month=5, day=27).date())
+                dailySteps.save()
+                dailySteps = FitbitFile(user=user, category="daily-steps",
                                         path="fitbit/daily-steps-2020-05-28.csv",
-                                        date=datetime(year=2020, month=5, day=26).date())
+                                        date=datetime(year=2020, month=5, day=28).date())
                 dailySteps.save()
                 dailySteps = FitbitFile(user=user, category="daily-steps",
                                         path="fitbit/daily-steps-2020-06-04.csv",
