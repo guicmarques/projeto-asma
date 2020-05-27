@@ -1,149 +1,84 @@
-<ion-header class="ion-no-border profile-header">
-  
-    <ion-button routerLink="/tabs/perfil" color="clear">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-button>
-    <ion-title class="profile-title">
+<ion-header>
+  <ion-grid><ion-row>
+  <ion-button routerLink="/tabs/perfil" fill="clear" class="backbtn"><ion-icon name="arrow-back-outline" class="back-arrow"></ion-icon></ion-button>
+    <ion-title>
       <div class="title-text">Editar perfil</div>
     </ion-title>
+    </ion-row></ion-grid>
   
 </ion-header>
-
 <ion-content>
-  
-  <div class="edit-input" *ngIf="userDefined" >
+<div class="edit">
+<div class="edit-input">
     <ion-text class="field-title" >NOME</ion-text>
     <br>
     <ion-input class="edit-field" placeholder={{user.nome}} type="text" 
-    autocapitalize="on" [(ngModel)]="newData.nome" ></ion-input>
+    autocapitalize *ngIf="userDefined" [(ngModel)]="newData.nome" 
+    [ngClass]="{
+      'edit-field-empty': newData.nome==='',
+      'edit-field' : newData.nome!==''}"> </ion-input>
   </div>
-  
+
   <div class="edit-input">
-    <ion-text class="field-title" >SOBRENOME</ion-text>
+    <ion-text class="field-title" clear-input="true" >SOBRENOME</ion-text>
     <br>
     <ion-input class="edit-field" placeholder={{user.sobrenome}} type="text" 
-    autocapitalize="on" *ngIf="userDefined" [(ngModel)]="newData.sobrenome"></ion-input>
+    autocapitalize="on" *ngIf="userDefined" [(ngModel)]="newData.sobrenome"
+    [ngClass]="{
+      'edit-field-empty': newData.sobrenome==='',
+      'edit-field' : newData.sobrenome!==''}"></ion-input>
   </div>
-
-  <div class="edit-input" >
-    
-    
+  <div class="edit-input">
     <ion-text class="field-title" >RG</ion-text>
     <br>
-    
-    <ion-input class="edit-field" placeholder={{user.rg}} type="text" *ngIf="userDefined" [(ngModel)]="newData.rg"></ion-input>
+    <ion-input class="edit-field-empty" placeholder={{user.rg}} readonly
+    autocapitalize="on" *ngIf="userDefined" ></ion-input>
   </div>
-
+  <div class="edit-input">
+    <ion-text class="field-title" >CPF</ion-text>
+    <br>
+    <ion-input class="edit-field-empty" placeholder={{user.username}} type="text" readonly
+    autocapitalize="on" *ngIf="userDefined" ></ion-input>
+  </div>
  
   <div class="edit-input">
-    <ion-text class="field-title" >NUMERO DE TELEFONE</ion-text>
+    <ion-text class="field-title" >PESO</ion-text>
     <br>
-    <ion-input class="edit-field" placeholder={{user.peso}} type="number" *ngIf="userDefined" [(ngModel)]="newData.peso"></ion-input>
+    <ion-input class="edit-field" placeholder={{user.peso}} type="number" *ngIf="userDefined" [(ngModel)]="newData.peso"
+    [ngClass]="{
+      'edit-field-empty': newData.peso===null,
+      'edit-field' : newData.peso!==null}"></ion-input>
   </div>
 
   <div class="edit-input">
     <ion-text class="field-title" >ALTURA</ion-text>
     <br>
-    <ion-input class="edit-field" placeholder={{user.altura}} type="number" *ngIf="userDefined" [(ngModel)]="newData.altura"></ion-input>
+    <ion-input class="edit-field" placeholder={{user.altura}} type="number" *ngIf="userDefined" [(ngModel)]="newData.altura"
+    [ngClass]="{
+      'edit-field-empty': newData.altura===null,
+      'edit-field' : newData.altura!==null}"></ion-input>
   </div>
 
   <div class="edit-input">
     <ion-text class="field-title" >EMAIL</ion-text>
     <br>
-    <ion-input class="edit-field" placeholder={{user.email}} type="text" *ngIf="userDefined" [(ngModel)]="newData.email"></ion-input>
+    <ion-input class="edit-field" placeholder={{user.email}} type="text" *ngIf="userDefined" [(ngModel)]="newData.email"
+    [ngClass]="{
+      'edit-field-empty': newData.email==='',
+      'edit-field' : newData.email!==''}"></ion-input>
   </div>
 
   <div class="edit-input">
-    
-    <ion-input class="edit-field" placeholder={{user.telefone}} type="number" *ngIf="userDefined" [(ngModel)]="newData.telefone"></ion-input>
+    <ion-text class="field-title" >TELEFONE</ion-text>
+    <ion-input class="edit-field" placeholder={{user.telefone}} type="number" *ngIf="userDefined" [(ngModel)]="newData.telefone"
+    [ngClass]="{
+      'edit-field-empty': newData.telefone===null,
+      'edit-field' : newData.telefone!==null}"></ion-input>
   </div>
+</div>
 
-  <ion-card class="profile-infocard" nopaddings>
-    <ion-list>
-
-      <ion-item>
-        <ion-grid>
-          <ion-row>
-            <ion-col class="ion-justify-content-start">
-             <ion-text class="profile-atributes" > Nome</ion-text>
-            </ion-col>
-            <ion-col class="ion-justify-content-center">
-              <ion-text class="user-atributes" *ngIf="userDefined">{{newData.nome}} {{newData.sobrenome}}</ion-text>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-
-      <ion-item>
-        <ion-grid>
-          <ion-row>
-            <ion-col class="ion-justify-content-start">
-             <ion-text class="profile-atributes" > RG </ion-text>
-            </ion-col>
-            <ion-col class="ion-justify-content-center">
-              <ion-text class="user-atributes" *ngIf="userDefined" >{{newData.rg}}</ion-text>
-            </ion-col>
-            </ion-row>
-        </ion-grid>
-      </ion-item>
-
-      <ion-item>
-        <ion-grid>
-          <ion-row>
-            <ion-col class="ion-justify-content-start">
-             <ion-text class="profile-atributes" > Email</ion-text>
-            </ion-col>
-            <ion-col class="ion-justify-content-center">
-              <ion-text class="user-atributes" *ngIf="userDefined">{{newData.email}}</ion-text>
-            </ion-col>
-           </ion-row>
-        </ion-grid>
-      </ion-item>
-
-      <ion-item>
-        <ion-grid>
-          <ion-row>
-            <ion-col class="ion-justify-content-start">
-             <ion-text class="profile-atributes" > Telefone </ion-text>
-            </ion-col>
-            <ion-col class="ion-justify-content-center">
-              <ion-text class="user-atributes" *ngIf="userDefined">{{newData.telefone}}</ion-text>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-
-      <ion-item>
-        <ion-grid>
-          <ion-row>
-            <ion-col class="ion-justify-content-start">
-             <ion-text class="profile-atributes" > Altura </ion-text>
-            </ion-col>
-            <ion-col class="ion-justify-content-center">
-              <ion-text class="user-atributes" *ngIf="userDefined">{{newData.altura}} m</ion-text>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-
-      <ion-item>
-        <ion-grid>
-          <ion-row>
-            <ion-col class="ion-justify-content-start">
-             <ion-text class="profile-atributes" > Peso </ion-text>
-            </ion-col>
-            <ion-col class="ion-justify-content-center">
-              <ion-text class="user-atributes" *ngIf="userDefined">{{newData.peso}} kg</ion-text>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-
-
-    </ion-list>
-  </ion-card> 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="saveChanges()" >
+    <ion-fab-button (click)="confirmChanges()"  class="save-button" >
       <ion-icon name="save-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

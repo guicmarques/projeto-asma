@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Animation, AnimationController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { User } from '../../../models/user.model';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth.service';
+import { isEmpty } from 'rxjs/operators';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -12,9 +13,9 @@ import { AuthService } from '../../../services/auth.service';
 
 export class EditarPerfilPage implements OnInit {
   user: any;
-  newData: User;
+  dataSent: User;
   userDefined: boolean = false;
-  temp: User = {
+  newData: User = {
     nome: '',
     sobrenome: '',
     rg: null,
@@ -32,21 +33,64 @@ export class EditarPerfilPage implements OnInit {
 
   constructor(
               private userService: UserService,
-              private AuthService: AuthService ) { }
+              private AuthService: AuthService,
+              private alertCtrl: AlertController,
+               ) { }
 
   ngOnInit() { 
     this.userService.getUser().then(user => {
       this.user = user;
       this.userDefined = true;
       console.log(user);
-      this.newData = this.user;
+      this.dataSent = this.user;
     });
   }
-  
+  updateData(){
+    if (this.newData.nome !==''){
+      this.dataSent.nome = this.newData.nome;
+    }
+    if (this.newData.sobrenome !==''){
+      this.dataSent.sobrenome = this.newData.sobrenome;
+    }
+    if (this.newData.email !==''){
+      this.dataSent.email = this.newData.email;
+    }
+    if (this.newData.peso !==null){
+      this.dataSent.peso = this.newData.peso;
+    }
+    if (this.newData.altura !==null){
+      this.dataSent.altura = this.newData.altura;
+    }
+    if (this.newData.telefone !==null){
+      this.dataSent.telefone = this.newData.telefone;
+    }
+  }
+  confirmChanges() {
+    const alert = this.alertCtrl.create({
+      cssClass: 'signUpAlert',
+      header: 'Deseja continuar?',
+      message: 'Você confirma todos os seus dados?',
+      buttons: [{
+        text: 'Não',
+        role: 'cancel',
+        cssClass: 'signUpNoBtn'
+      },
+      {
+        text: 'Sim',
+        cssClass: 'signUpYesBtn',
+        handler: () => {
+          this.saveChanges()
+        }
+      }]
+    }).then(alertEl => {
+      alertEl.present();
+    });
+  }
   saveChanges(){
     console.log(this.newData);
-    this.userService.putUser(this.newData);
-    // pra checar
+    this.updateData();
+    console.log(this.dataSent);
+    this.userService.putUser(this.dataSent);
     this.userService.getUser().then(user => {
       this.user = user;
       console.log(user);
@@ -57,3 +101,4 @@ export class EditarPerfilPage implements OnInit {
   }
  
 }
+

@@ -1,54 +1,33 @@
 .profile-title {
-    padding-top: 15%;
-    padding-left: 8%;
-    background-color: #FFB347;
+       padding-left: 15%;
+    
 }
 
 .title-text{
-    font-size: 26px;
+    font-size: 18px;
     font-weight: 700;
-    color: white;  
+    padding: 0;
+   
 }
 
 .profile-header {
     padding-bottom: 10%;
-    background-color: #FFB347;
+   
+}
+.edit{
+    padding-top: 40px;
+}
+
+.backbtn{
+    --ripple-color: #2dd2c2;
 }
 
 
 
-.profile-background {
-    background-color: white;
-    position: absolute;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-    width: 100%;
-    height: 100%;
-}
-
-.profile-block {
-    width: 100%;
-    height: 10%;
-    background-color: #FFB347;
-}
-
-.achievements-title {
-    font-size: 23px;
-    text-align: center;
-    color: #474a51;
-    bottom: 10px;
-}
-
-.float-btn-profile {
-    --background: #FFB347;
-}
-
-.back-btn {
-    position: absolute;
-    left: 0;
-    --color: black;
-    --ripple-color: white;
-}
+.back-arrow {
+    
+    color: #2dd2c2;
+    }
 
 .page-text {
     font-size: large;
@@ -62,70 +41,7 @@
 
 }
 
-.toolbar {
-    background-color: rgb(162, 163, 163);
-}
-.profile-img {
-    margin: auto;
-    width: 125px;
-    height: 125px;
-    background: white;
-    border: 4px solid transparent;
-}
-.profile-forms {
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-top: -10%;
-    color:black;
-    overflow-y: auto;
-    z-index: 10;
-}
-.profile-username {
-    font-size: 20px;
-    text-align: center;
-   
-}
 
-.profile-infocard{
-    
-    background:#2dd2c2;
-    
-     
-}
-.profile-atributes {
-    font-size: 10px;
-    color:gray;
-   
-}
-.user-atributes {
-    font-size: 15px;
-    color:black;
-    text-align: center;   
-}
-.button-profile {
-    margin: auto;
-    width: 150px;
-    height: 40px;
-    
-}
-.achievement-img {
-  height: 100%;
-  width: auto;
-  height: 100px;
-  margin: auto;  
-}
-.achievement-button-background {
-    height: 150px;
-    
- }
- .achievement-title {
-    text-align: center;
-    --ion-justify: center;
- }
- .achievement-grid {
-    --ion-grid-width-sm: 1000px;
- }
 
  ion-fab-button[data-desc] {
     position: relative;
@@ -144,7 +60,7 @@ ion-fab-button[data-desc]::after {
     box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
 }
 .edit-input {
-    padding-left: 20%;
+    padding-left: 10%;
     padding-bottom: 5%;
  }
 
@@ -165,11 +81,30 @@ ion-fab-button[data-desc]::after {
     border: 2px solid transparent;
     border-radius: 23px;
 }
+.edit-field-empty {
+    text-align: center;
+    height: 46px;
+    width: 80%;
+    display: inline-block;
+    box-sizing: border-box;
+    outline: none;
+    --padding-start: 50px;
+    --padding-end: 50px;
+    --padding-top: 14px;
+    text-align: start;
+    background:
+    linear-gradient(rgb(255, 255, 255),rgb(255, 255, 255)) padding-box,
+    gray border-box;
+    border: 2px solid transparent;
+    border-radius: 23px;
+}
+
 .field-title{
-    font: 10px;
+    padding-left: 15px;
+    font-size: 12px;
     color: gray;
     
-
-
-
+}
+.save-button{
+    --background:#FFB347;
 }
