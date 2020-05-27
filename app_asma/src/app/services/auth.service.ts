@@ -7,6 +7,7 @@ import { EnvService } from './env.service';
 import { NavController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { resolve } from 'url';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class AuthService {
               private storage: Storage,
               private env: EnvService,
               private alertService: AlertService,
-              private navCtrl: NavController) { }
+              private navCtrl: NavController,
+              private router: Router) { }
 
   login(username: number, password: string) {
     return this.http.post(this.env.API_URL + 'token/', {'username': username, 'password': password})
@@ -30,6 +32,7 @@ export class AuthService {
       console.log(this.token["refresh"]);
       this.storage.set('credenciais', {username: username, password: password}).then(() => {this.getCredenciais()});
       this.navCtrl.navigateRoot('/tabs/home');
+      //this.router.navigate(['/tabs'])
     }, error => {
       console.log(error);
       this.alertService.presentPopUp('Problema ao conectar', 'CPF ou senha inválidos');
