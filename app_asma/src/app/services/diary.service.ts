@@ -26,8 +26,12 @@ export class DiaryService {
                               'tosse': diaryPage.tosse, 'chiado': diaryPage.chiado, 'faltaAr': diaryPage.faltaAr,
                               'acordar': diaryPage.acordar, 'bombinha': diaryPage.bombinha}, {headers: header})
           .subscribe((data) => {
-            this.alertService.presentPopUp('Diário atualizado!', 'Suas respostas foram salvas com sucesso.')
+            /*this.alertService.presentPopUp('Diário atualizado!', 'Suas respostas foram salvas com sucesso.')
+            resolve(data);*/
             resolve(data);
+            setTimeout(() => {
+              this.alertService.presentPopUp('Diário atualizado!', 'Suas respostas foram salvas com sucesso.')
+            }, 3000)
           }, (error) => {
             this.alertService.presentPopUp('Oops!', 'Houve um problema ao salvar suas respostas. Por favor, tente novamente.')
             reject(error);
