@@ -9,6 +9,7 @@
 
 <ion-content>
   <div class="register-forms">
+    <ion-text>NOME</ion-text>
     <div class="register-input">
       <ion-avatar class="register-img" (click)="selectImg()">
         <img *ngIf="profileImg === ''" src="../../../assets/images/defaultProfileImg.jpg">
@@ -17,6 +18,7 @@
     </div>
 
     <div class="register-input">
+      <ion-text>NOME</ion-text>
       <ion-input class="register-field" placeholder="Nome" type="text" [(ngModel)]="user.nome"
       autocapitalize="on"></ion-input>
     </div>

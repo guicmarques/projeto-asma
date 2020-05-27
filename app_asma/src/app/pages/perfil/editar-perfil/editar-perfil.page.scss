@@ -15,9 +15,7 @@
     background-color: #FFB347;
 }
 
-ion-content {
-    --background: #FFB347;
-}
+
 
 .profile-background {
     background-color: white;
@@ -145,12 +143,13 @@ ion-fab-button[data-desc]::after {
     color: black;
     box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
 }
-.register-input {
-    text-align: center;
+.edit-input {
+    padding-left: 20%;
     padding-bottom: 5%;
  }
 
-.register-field {
+.edit-field {
+    text-align: center;
     height: 46px;
     width: 80%;
     display: inline-block;
@@ -165,4 +164,12 @@ ion-fab-button[data-desc]::after {
      linear-gradient(315deg, rgba(0,252,198,1) 0%, rgba(0,252,233,1) 35%, rgba(0,166,235,1) 100%) border-box;
     border: 2px solid transparent;
     border-radius: 23px;
+}
+.field-title{
+    font: 10px;
+    color: gray;
+    
+
+
+
 }

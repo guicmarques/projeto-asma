@@ -11,35 +11,51 @@
 
 <ion-content>
   
-  <div class="register-input" *ngIf="userDefined" >
-    <ion-input class="register-field" placeholder={{user.nome}} type="text" 
+  <div class="edit-input" *ngIf="userDefined" >
+    <ion-text class="field-title" >NOME</ion-text>
+    <br>
+    <ion-input class="edit-field" placeholder={{user.nome}} type="text" 
     autocapitalize="on" [(ngModel)]="newData.nome" ></ion-input>
   </div>
   
-  <div class="register-input">
-    <ion-input class="register-field" placeholder={{user.sobrenome}} type="text" 
+  <div class="edit-input">
+    <ion-text class="field-title" >SOBRENOME</ion-text>
+    <br>
+    <ion-input class="edit-field" placeholder={{user.sobrenome}} type="text" 
     autocapitalize="on" *ngIf="userDefined" [(ngModel)]="newData.sobrenome"></ion-input>
   </div>
 
-  <div class="register-input">
-    <ion-input class="register-field" placeholder={{user.rg}} type="text" *ngIf="userDefined" [(ngModel)]="newData.rg"></ion-input>
+  <div class="edit-input" >
+    
+    
+    <ion-text class="field-title" >RG</ion-text>
+    <br>
+    
+    <ion-input class="edit-field" placeholder={{user.rg}} type="text" *ngIf="userDefined" [(ngModel)]="newData.rg"></ion-input>
   </div>
 
  
-  <div class="register-input">
-    <ion-input class="register-field" placeholder={{user.peso}} type="number" *ngIf="userDefined" [(ngModel)]="newData.peso"></ion-input>
+  <div class="edit-input">
+    <ion-text class="field-title" >NUMERO DE TELEFONE</ion-text>
+    <br>
+    <ion-input class="edit-field" placeholder={{user.peso}} type="number" *ngIf="userDefined" [(ngModel)]="newData.peso"></ion-input>
   </div>
 
-  <div class="register-input">
-    <ion-input class="register-field" placeholder={{user.altura}} type="number" *ngIf="userDefined" [(ngModel)]="newData.altura"></ion-input>
+  <div class="edit-input">
+    <ion-text class="field-title" >ALTURA</ion-text>
+    <br>
+    <ion-input class="edit-field" placeholder={{user.altura}} type="number" *ngIf="userDefined" [(ngModel)]="newData.altura"></ion-input>
   </div>
 
-  <div class="register-input">
-    <ion-input class="register-field" placeholder={{user.email}} type="text" *ngIf="userDefined" [(ngModel)]="newData.email"></ion-input>
+  <div class="edit-input">
+    <ion-text class="field-title" >EMAIL</ion-text>
+    <br>
+    <ion-input class="edit-field" placeholder={{user.email}} type="text" *ngIf="userDefined" [(ngModel)]="newData.email"></ion-input>
   </div>
 
-  <div class="register-input">
-    <ion-input class="register-field" placeholder={{user.telefone}} type="number" *ngIf="userDefined" [(ngModel)]="newData.telefone"></ion-input>
+  <div class="edit-input">
+    
+    <ion-input class="edit-field" placeholder={{user.telefone}} type="number" *ngIf="userDefined" [(ngModel)]="newData.telefone"></ion-input>
   </div>
 
   <ion-card class="profile-infocard" nopaddings>

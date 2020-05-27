@@ -13,7 +13,10 @@
     <div class="profile-forms">
       <div class="profile-username">
         <ion-avatar class="profile-img">
-         <ion-img [src]="user.imagem"  *ngIf="userDefined"></ion-img>
+         <ion-img [src]="user.imagem"  *ngIf="(userDefined)&&(user.imagem!== '');else semImagem" ></ion-img>
+         <ng-template #semImagem>
+         <ion-img src="../../../assets/images/robot_icon.png"></ion-img>
+        </ng-template>
        </ion-avatar> 
        <ion-label class="profile-username"  *ngIf="userDefined">{{user.nome}} {{user.sobrenome}}</ion-label>
       </div>
