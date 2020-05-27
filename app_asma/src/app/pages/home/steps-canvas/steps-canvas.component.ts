@@ -25,6 +25,7 @@ export class StepsCanvasComponent implements OnInit {
   };
 
   goal: number = 0;
+  goalPrevious: number = 0;
 
   walkingPersonImg:  String = '../../../assets/images/walking_white_blue.png';
 
@@ -41,6 +42,7 @@ export class StepsCanvasComponent implements OnInit {
         this.myGoals.activeGoals.forEach(element => {
           if (element.activity === 'Caminhada') {
             this.goal = element.quantity;
+            this.goalPrevious = this.goal;
           }
         });
         this.getDate();
@@ -51,8 +53,34 @@ export class StepsCanvasComponent implements OnInit {
             console.log(typeof(this.stepCanvas));
           }
         });
+        setInterval(() => { this.reloadChart() }, 1800000);
       })
     })
+  }
+
+  reloadChart() {
+    this.sensorService.getSensorData('', 'daily-steps').then(steps => {
+      this.goalsService.getGoals().then(metas => {
+        this.myGoals = metas;
+        this.myGoals.activeGoals.forEach(element => {
+          if (element.activity === 'Caminhada') {
+            this.goal = element.quantity;
+          }
+        });
+        if (this.goalPrevious !== this.goal) {
+          this.createDounutChart(this.stepCanvas);
+          this.goalPrevious = this.goal;
+        }
+
+        this.getDate();
+        steps.data.forEach(element => {
+          if (element.date === this.today) {
+            this.stepCanvas = element.data.StepTotal[6];
+            this.createDounutChart(this.stepCanvas);
+          }
+        });
+      });
+    });
   }
 
   getDate() {
