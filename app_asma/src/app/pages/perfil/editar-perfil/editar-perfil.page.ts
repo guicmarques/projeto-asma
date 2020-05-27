@@ -3,7 +3,9 @@ import { AlertController } from '@ionic/angular';
 import { User } from '../../../models/user.model';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth.service';
-import { isEmpty } from 'rxjs/operators';
+import { AlertService } from '../../../services/alert.service';
+
+
 
 @Component({
   selector: 'app-editar-perfil',
@@ -13,6 +15,7 @@ import { isEmpty } from 'rxjs/operators';
 
 export class EditarPerfilPage implements OnInit {
   user: any;
+  classChange: boolean = false;
   dataSent: User;
   userDefined: boolean = false;
   newData: User = {
@@ -35,6 +38,7 @@ export class EditarPerfilPage implements OnInit {
               private userService: UserService,
               private AuthService: AuthService,
               private alertCtrl: AlertController,
+              private alertService: AlertService
                ) { }
 
   ngOnInit() { 
@@ -44,6 +48,11 @@ export class EditarPerfilPage implements OnInit {
       console.log(user);
       this.dataSent = this.user;
     });
+  }
+  selectImg(){
+    this.alertService.presentPopUp('Oops!', 'Função ainda não impementada.');
+
+
   }
   updateData(){
     if (this.newData.nome !==''){
@@ -65,6 +74,7 @@ export class EditarPerfilPage implements OnInit {
       this.dataSent.telefone = this.newData.telefone;
     }
   }
+
   confirmChanges() {
     const alert = this.alertCtrl.create({
       cssClass: 'signUpAlert',
@@ -85,6 +95,12 @@ export class EditarPerfilPage implements OnInit {
     }).then(alertEl => {
       alertEl.present();
     });
+  }
+  changeClass(){
+    
+    this.classChange = true;
+    console.log(this.classChange);
+  
   }
   saveChanges(){
     console.log(this.newData);

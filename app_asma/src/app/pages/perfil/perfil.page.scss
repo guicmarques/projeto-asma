@@ -45,12 +45,6 @@ ion-content {
     --background: #FFB347;
 }
 
-.back-btn {
-    position: absolute;
-    left: 0;
-    --color: black;
-    --ripple-color: white;
-}
 
 .page-text {
     font-size: large;
@@ -87,29 +81,23 @@ ion-content {
     font-size: 20px;
     text-align: center;
    
-}
-
-.profile-infocard{
-    
-    background:#2dd2c2;
-    
-     
-}
-.profile-atributes {
-    font-size: 10px;
-    color:gray;
    
 }
-.user-atributes {
-    font-size: 15px;
-    color:black;
-    text-align: center;   
-}
+
 .button-profile {
     margin: auto;
     width: 150px;
     height: 40px;
     
+}
+ion-slides {
+    height: 100%;
+    padding-top: 20px;
+  }
+
+.achievements-card{
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 .achievement-img {
   height: 100%;
@@ -122,12 +110,12 @@ ion-content {
     
  }
  .achievement-title {
+    
     text-align: center;
     --ion-justify: center;
+    
  }
- .achievement-grid {
-    --ion-grid-width-sm: 1000px;
- }
+
 
  ion-fab-button[data-desc] {
     position: relative;
@@ -144,25 +132,4 @@ ion-fab-button[data-desc]::after {
     border-radius: 15px;
     color: black;
     box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
-}
-.register-input {
-    text-align: center;
-    padding-bottom: 5%;
- }
-
-.register-field {
-    height: 46px;
-    width: 80%;
-    display: inline-block;
-    box-sizing: border-box;
-    outline: none;
-    --padding-start: 50px;
-    --padding-end: 50px;
-    --padding-top: 14px;
-    text-align: start;
-    background: 
-     linear-gradient(rgb(255, 255, 255),rgb(255, 255, 255)) padding-box,
-     linear-gradient(315deg, rgba(0,252,198,1) 0%, rgba(0,252,233,1) 35%, rgba(0,166,235,1) 100%) border-box;
-    border: 2px solid transparent;
-    border-radius: 23px;
 }

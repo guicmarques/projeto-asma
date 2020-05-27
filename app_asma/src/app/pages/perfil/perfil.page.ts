@@ -4,11 +4,13 @@ import { User } from './../../models/user.model';
 import { UserService } from './../../services/user.service';
 import { AuthService } from './../../services/auth.service';
 
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.page.scss'],
 })
+
 export class PerfilPage implements OnInit {
   user: any;/* = {
     nome: "Bill",
@@ -24,7 +26,15 @@ export class PerfilPage implements OnInit {
     tokenValidado: true,
   };*/
   userDefined: boolean = false;
-  
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    slidesPerView: 3,
+    parallax:true,
+    depth: 100,
+    modifier: 1,
+    slideShadows: true
+  }; 
 
 
   constructor(private animationCtrl: AnimationController,
