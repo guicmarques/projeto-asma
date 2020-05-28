@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AlertService } from './../../services/alert.service';
 import { AlertController } from '@ionic/angular';
 import { Register } from './../../models/register.model';
@@ -32,7 +33,8 @@ export class RegisterPage implements OnInit {
   constructor(private authService: AuthService, 
               private userService: UserService,
               private alertService: AlertService,
-              private alertCtrl: AlertController) { }
+              private alertCtrl: AlertController,
+              private router: Router) { }
 
   ngOnInit() { }
 
@@ -80,7 +82,9 @@ export class RegisterPage implements OnInit {
   signUp() {
     this.userService.register(this.user).subscribe(response => {
       if(response["created"]) {
-        this.authService.login(this.user.cpf, this.user.senha);
+        this.authService.login(this.user.cpf, this.user.senha).then(data => {
+          this.router.navigateByUrl('/tabs');
+        });
       } else {
         this.alertService.presentPopUp('Erro ao cadastrar', 'Usuário já cadastrado');
       }    

@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { AlertService } from './../../services/alert.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +13,9 @@ export class LoginPage implements OnInit{
   username: number;
   password: string;
 
-  constructor(private authService: AuthService, private alertService: AlertService) { }
+  constructor(private authService: AuthService, 
+              private alertService: AlertService,
+              private router: Router) { }
 
   ngOnInit(){
   }
@@ -22,7 +26,9 @@ export class LoginPage implements OnInit{
     } else if(this.password === '') {
       this.alertService.presentToast('Por favor insira sua senha.');
     } else {
-      this.authService.login(this.username, this.password);
+      this.authService.login(this.username, this.password).then(data => {
+        this.router.navigateByUrl('/tabs');
+      });
     }
   }
 }

@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { EnvService } from './env.service';
-import { NavController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { resolve } from 'url';
 import { Router } from '@angular/router';
@@ -21,21 +20,23 @@ export class AuthService {
               private storage: Storage,
               private env: EnvService,
               private alertService: AlertService,
-              private navCtrl: NavController,
               private router: Router) { }
 
   login(username: number, password: string) {
-    return this.http.post(this.env.API_URL + 'token/', {'username': username, 'password': password})
-    .subscribe(token => {
-      this.token = token;
-      this.isLoggedIn = true;
-      console.log(this.token["refresh"]);
-      this.storage.set('credenciais', {username: username, password: password}).then(() => {this.getCredenciais()});
-      this.navCtrl.navigateRoot('/tabs/home');
-      //this.router.navigate(['/tabs'])
-    }, error => {
-      console.log(error);
-      this.alertService.presentPopUp('Problema ao conectar', 'CPF ou senha inválidos');
+    return new Promise((resolve, reject) => {
+      return this.http.post(this.env.API_URL + 'token/', {'username': username, 'password': password})
+      .subscribe(token => {
+        this.token = token;
+        this.isLoggedIn = true;
+        console.log(this.token["refresh"]);
+        this.storage.set('credenciais', {username: username, password: password}).then(() => {this.getCredenciais()});
+        //this.router.navigate(['/tabs'])
+        resolve(token);
+      }, error => {
+        console.log(error);
+        this.alertService.presentPopUp('Problema ao conectar', 'CPF ou senha inválidos');
+        reject(error);
+      })
     })
   }
 
@@ -100,7 +101,7 @@ export class AuthService {
     this.isLoggedIn = false;
     this.credenciais = null;
     delete this.token;
-    this.navCtrl.navigateRoot('/login');
+    this.router.navigateByUrl('/login');
   }
 
 }
