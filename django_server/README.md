@@ -8,6 +8,16 @@ Para executar esse programa, é necessário ter alguma versão de python > 3.7. 
 pip install -r requirements.txt
 ```
 
+É necessário instalar a biblioteca responsável pela conexão à fitbit.
+
+- À partir da pasta projeto-asma, insira os seguintes comandos
+```
+cd fitbit
+```
+```
+python setup.py install
+```
+
 ## Rodar o servidor
 - na primeira vez, rode os seguintes comandos:
 

@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from server.serializers import UserSerializer, GroupSerializer
 import server.handleUserData as handleUserData
+import server.fitbitHandler as fitbitHandler
 
 from datetime import datetime
 
@@ -150,6 +151,12 @@ class Fitbit(APIView):
             return Response({"data": files}, status=status.HTTP_200_OK)
         else:
             return Response({"data": "There are missing keys in request"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class FitbitAuth(APIView):
+    def get(self, request):
+
+        pass
 
 
 class Goals(APIView):
