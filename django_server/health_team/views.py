@@ -58,7 +58,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect(reverse('index'))
+                return HttpResponseRedirect(reverse('table'))
             else:
                 return HttpResponse("Your account was inactive.")
         else:
@@ -69,6 +69,32 @@ def user_login(request):
     else:
         return render(request, 'health_team/login.html', {})
 
+def forgot_password(request):
+    return render(request, 'health_team/forgot-password.html', {})
+
+def register_account2(request):
+    return render(request, 'health_team/register.html', {})
+
+def register_account(request):
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        if user_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            registered = True
+        else:
+            print(user_form.errors)
+    else:
+        user_form = UserForm()
+    return render(request, 'health_team/register2.html',
+                  {'user_form': user_form,
+                   'registered': registered})
+    #return render(request, 'health_team/register.html', {})
+
+def erro_404(request):
+    return render(request, 'health_team/404_error.html', {})
 
 @login_required
 def table(request):
@@ -81,8 +107,33 @@ def profile(request):
 
 
 @login_required
-def cadastroPaciente(request):
+def cadastroPaciente2(request):
     return render(request, 'logged/blank-1.html', {})
+
+@login_required
+def cadastroPaciente(request):
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        profile_form = UserProfileInfoForm(data=request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+            registered = True
+        else:
+            print(user_form.errors, profile_form.errors)
+    else:
+        user_form = UserForm()
+        profile_form = UserProfileInfoForm()
+    return render(request, 'logged/blank-12.html',
+                  {'user_form': user_form,
+                   'profile_form': profile_form,
+                   'registered': registered})
+    #return render(request, 'logged/blank-12.html', {})
 
 
 @login_required
@@ -97,17 +148,24 @@ def pacienteGraficos(request):
     #Grafico Demo
     x_data = [0,1,2,3]
     y_data = [x**2 for x in x_data]
-    plot_div = plot([Scatter(x=x_data, y=y_data,
+    """plot_div = plot([Scatter(x=x_data, y=y_data,
                         mode='lines', name='test',
                         opacity=0.8, marker_color='green')],
-               output_type='div', include_plotlyjs=False, show_link=False, link_text="", auto_open=False)
+               output_type='div', include_plotlyjs=False, show_link=False, link_text="", auto_open=False)"""
+
+    labels = ['Fuera del intervalo','Quema de grasas','Zona cardio','Zona máxima']
+    values = [462, 84, 3, 0]
+
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    plot_div = plot(go.Figure(data=[go.Pie(labels=labels, values=values, title = "Tempo de atividades (minutos)")]),
+               output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
     ##################
-    fig2 = go.Bar(y=[2, 1, 3])
+    fig2 = go.Bar(y=[7, 5, 4], x=["Dormindo","Exercicio","Parado"])
     fig2 = plot([fig2],
                output_type='div', include_plotlyjs=False, show_link=False, link_text="", auto_open=False)
 
     ##################
-    fig3 = go.Bar(y=[7, 5, 4])
+    fig3 = go.Bar(y=[240, 659, 881], x=["activityCalories","caloriesBMR","caloriesOut"])
     fig3 = plot([fig3],
                output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
     
