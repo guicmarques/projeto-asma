@@ -43,23 +43,40 @@
       <!--</ion-input> onchange="changeClass()"  
     [ngClass]="classChange ? 'edit-field' : 'edit-field-empty'">-->
   </div>
-  <div class="edit-input">
+  <div class="edit-input-with-warning">
     <ion-text class="field-title" >RG</ion-text>
     <br>
-    <ion-input class="edit-field-empty" placeholder={{user.rg}} readonly
-    autocapitalize="on" *ngIf="userDefined" ></ion-input>
+    <ion-input class="edit-field-empty" [(ngModel)]="user.rg" 
+    autocapitalize="on" *ngIf="userDefined" readonly 
+    (ionFocus)="warning(true,0)" (ionBlur)="warning(false,0)"></ion-input>
+    <br>
+    <ion-text class="warning" color="danger"
+     [ngStyle]="{
+      'visibility': showhelp[0] ? 'visible' : 'hidden'
+    }">
+      <ion-icon name="alert-circle-outline"></ion-icon> Para editar essa informação contate o suporte
+    </ion-text>
   </div>
-  <div class="edit-input">
+  <div class="edit-input-with-warning">
     <ion-text class="field-title" >CPF</ion-text>
     <br>
-    <ion-input class="edit-field-empty" placeholder={{user.username}} type="text" readonly
-    autocapitalize="on" *ngIf="userDefined" ></ion-input>
+    <ion-input class="edit-field-empty" type="text" readonly
+    autocapitalize="on" *ngIf="userDefined"  [(ngModel)]="user.username"
+    (ionFocus)="warning(true,1)" (ionBlur)="warning(false,1)"></ion-input>
+    <br>
+    <ion-text class="warning" color="danger"
+     [ngStyle]="{
+      'visibility': showhelp[1] ? 'visible' : 'hidden'
+    }">
+      <ion-icon name="alert-circle-outline"></ion-icon> Para editar essa informação contate o suporte
+    </ion-text>
   </div>
  
   <div class="edit-input">
     <ion-text class="field-title" >PESO</ion-text>
     <br>
-    <ion-input class="edit-field" placeholder={{user.peso}} type="number" *ngIf="userDefined" [(ngModel)]="newData.peso"
+    <ion-input class="edit-field" placeholder={{user.peso}} type="number" 
+    *ngIf="userDefined" [(ngModel)]="newData.peso"
     (ionBlur)="focus(false, 2)" (ionFocus)="focus(true, 2)"
     [ngClass]="{
       'edit-field': classChange[2],
@@ -76,12 +93,22 @@
       'edit-field-empty' : !(classChange[3])}"></ion-input>
   </div>
 
-  <div class="edit-input">
+  <div class="edit-input-with-warning">
     <ion-text class="field-title" >EMAIL</ion-text>
     <br>
-    <ion-input class="edit-field-empty" placeholder={{user.email}} type="text" *ngIf="userDefined" 
-    readonly (ionFocus)="teste()" ></ion-input>
+    <ion-input class="edit-field-empty" [(ngModel)]="user.email" type="text" *ngIf="userDefined" readonly 
+    (ionFocus)="warning(true,2)" (ionBlur)="warning(false,2)"></ion-input>
+    <br>
+    <ion-text class="warning" color="danger"
+     [ngStyle]="{
+      'visibility': showhelp[2] ? 'visible' : 'hidden'
+    }">
+      <ion-icon name="alert-circle-outline"></ion-icon> Para editar essa informação contate o suporte
+    </ion-text>
   </div>
+    
+  
+
 
   <div class="edit-input">
     <ion-text class="field-title" >TELEFONE</ion-text>
@@ -92,6 +119,8 @@
       'edit-field-empty' : !(classChange[4])}"></ion-input>
   </div>
 </div>
+
+  
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="confirmChanges()"  class="save-button" >

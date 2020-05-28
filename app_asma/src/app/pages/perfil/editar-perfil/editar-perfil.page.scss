@@ -74,7 +74,11 @@ ion-fab-button[data-desc]::after {
 }
 .edit-input {
     padding-left: 10%;
-    padding-bottom: 5%;
+    padding-bottom: 18px;
+ }
+ .edit-input-with-warning {
+    padding-left: 10%;
+    padding-bottom: 2px;
  }
 
 .edit-field {
@@ -111,6 +115,11 @@ ion-fab-button[data-desc]::after {
     border: 2px solid transparent;
     border-radius: 23px;
 }
+.warning{
+    font-size: 12px;
+    visibility: hidden;
+
+}
 
 .field-title{
     padding-left: 15px;
@@ -121,3 +130,4 @@ ion-fab-button[data-desc]::after {
 .save-button{
     --background:#FFB347;
 }
+

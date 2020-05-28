@@ -17,6 +17,7 @@ export class EditarPerfilPage implements OnInit {
   user: any;
   classChange = [false,false,false,false,false];
   dataSent: User;
+  showhelp=[false,false,false];
   userDefined: boolean = false;
   newData: User = {
     nome: '',
@@ -105,8 +106,8 @@ export class EditarPerfilPage implements OnInit {
     
   
   }
-  teste(){
-    console.log("teste se funciona")
+  warning(show, i){
+    this.showhelp[i]= show;
 
   }
 
