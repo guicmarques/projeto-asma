@@ -13,8 +13,11 @@
   <ion-avatar class="edit-image" (click)="selectImg()">
     <ion-img [src]="user.imagem"  *ngIf="(userDefined)&&(user.imagem!== '');else semImagem" ></ion-img>
          <ng-template #semImagem>
-         <ion-img src="../../../assets/images/robot_icon.png"></ion-img>
+         <ion-img src="../../../assets/images/robot_icon.png" class="imageborder"></ion-img>
         </ng-template>
+        <!--
+        <ion-button class="camera-btn" fill="clear">
+        <ion-icon name="camera-outline" ></ion-icon></ion-button>-->
   </ion-avatar>
  
 </div>

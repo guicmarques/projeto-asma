@@ -51,7 +51,7 @@ export class EditarPerfilPage implements OnInit {
     });
   }
   selectImg(){
-    this.alertService.presentPopUp('Oops!', 'Função ainda não impementada.');
+    this.alertService.presentPopUp('Oops!', 'Função ainda não implementada.');
 
 
   }

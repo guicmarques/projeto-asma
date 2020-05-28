@@ -152,9 +152,11 @@
       <ion-fab-button (click)="logout()" data-desc="Logout">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-fab-button>
-
       <ion-fab-button routerLink="./editar-perfil" data-desc="Editar Perfil">
         <ion-icon name="create-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button data-desc="Atualizar Perfil" (click)="updateUser()">
+        <ion-icon name="refresh-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>

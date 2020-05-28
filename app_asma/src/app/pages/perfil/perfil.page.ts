@@ -50,6 +50,15 @@ export class PerfilPage implements OnInit {
       console.log(user);
     });
   }
+  updateUser(){
+    this.userService.getUser().then(user => {
+      this.user = user;
+      this.userDefined = true;
+      console.log(user);
+    });
+
+
+  }
   openPopup(){
     this.alertService.presentPopUp('Oops!', 'Função ainda não impementada.');
   }
