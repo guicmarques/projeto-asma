@@ -17,16 +17,16 @@
   <title>test</title>
 </head>
   <body>
-    <div class="container">
+    <div >
       <div class="row">
-        <div class="col-sm">
-          {% autoescape off %}
-          {{ plot_div }}
-          {% endautoescape %}
-        </div>
-        <div class="col-sm">
+        <div class="col-md-6">
           {% autoescape off %}
           {{ fig }}
+          {% endautoescape %}
+        </div>
+        <div class="col-md-6">
+          {% autoescape off %}
+          {{ plot_div }}
           {% endautoescape %}
         </div>
       </div>

@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^$', views.table, name='index'),
     url(r'^table.html$', views.table, name='table'),
     url(r'^blank-1.html$', views.cadastroPaciente, name='cadastroPaciente'),
+    url(r'^blank-12.html$', views.cadastroPaciente2, name='cadastroPaciente2'),
     url(r'^404$', views.erro_404, name='erro_404'),
     # Uso Interno
     re_path(r'^favicon\.ico$', favicon_view),

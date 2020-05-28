@@ -24,11 +24,10 @@
                             <form class="user"enctype="multipart/form-data" method="POST">
                                 {% csrf_token %}
                                 {{ user_form.as_p }}
-                                {{ profile_form.as_p }}
                                 <input type="submit" name="" value="Cadastrar">
                             </form>
                             <div class="text-center"><a class="small" href="forgot-password.html">Esqueceu sua senha?</a></div>
-                            <div class="text-center"><a class="small" href="/health_team/user_login/">Esqueceu sua senha? Entre!</a></div>
+                            <div class="text-center"><a class="small" href="/health_team/user_login/">Já tem uma conta? Entre!</a></div>
                         </div>
                     </div>
                 </div>
