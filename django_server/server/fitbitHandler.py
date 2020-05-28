@@ -4,7 +4,7 @@ import urllib.request
 import pandas as pd
 
 from fitbit.api import Fitbit
-import gather_keys_oauth2 as Oauth2
+import server.gather_keys_oauth2 as Oauth2
 
 CLIENT_ID = '22BLM2'
 CLIENT_SECRET = 'cc2624c521d83c8ac8058c1e276d4614'
@@ -15,7 +15,7 @@ def getAddress():
         'https://api.ipify.org').read().decode('utf8')
 
     if external_ip == "3.225.179.134":
-        return "https://"+external_ip+
+        return "https://"+external_ip
     else:
         return "localhost"
 
