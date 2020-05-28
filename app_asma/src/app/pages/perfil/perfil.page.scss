@@ -91,7 +91,7 @@ ion-content {
     
 }
 ion-slides {
-    height: 100%;
+    height: 120%;
     padding-top: 20px;
   }
 
@@ -115,6 +115,26 @@ ion-slides {
     --ion-justify: center;
     
  }
+.achievement-name{
+    font-size:20px;
+    font-weight: bold;
+    color:black;
+
+}
+.achievement-subtitle{
+    font-size:15px;
+    color:gray;
+}
+.get-info-button{
+    --ripple-color:#FFB347;
+    padding-top: 0;
+    height: 18px;
+
+}
+.get-info-arrow{
+    color:#FFB347;
+
+}
 
 
  ion-fab-button[data-desc] {

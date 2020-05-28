@@ -3,6 +3,7 @@ import { Animation, AnimationController } from '@ionic/angular';
 import { User } from './../../models/user.model';
 import { UserService } from './../../services/user.service';
 import { AuthService } from './../../services/auth.service';
+import { AlertService } from './../../services/alert.service';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class PerfilPage implements OnInit {
 
   constructor(private animationCtrl: AnimationController,
               private userService: UserService,
-              private authService: AuthService ) { }
+              private authService: AuthService,
+              private alertService: AlertService) { }
 
   ngOnInit() { 
     this.userService.getUser().then(user => {
@@ -48,7 +50,9 @@ export class PerfilPage implements OnInit {
       console.log(user);
     });
   }
-
+  openPopup(){
+    this.alertService.presentPopUp('Oops!', 'Função ainda não impementada.');
+  }
   logout() {
     this.authService.logout();
     console.log(this.authService.isLoggedIn);
