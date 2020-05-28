@@ -32,14 +32,26 @@ export class WeekProgressCanvasComponent implements OnInit {
       this.weekProgress = data;
       this.weekProgress.data.forEach(element => {
         if (element.date === this.today) {
-          this.weekProgressCanvas = element.data.StepTotal.slice(-4);
-          this.days = this.dateService.getLastDays(3);
+          if (element.data.StepTotal.length >= 4){
+            this.weekProgressCanvas = element.data.StepTotal.slice(-4);
+          } else if (element.data.StepTotal.length === 3) {
+            this.weekProgressCanvas = [0];
+            this.weekProgressCanvas = this.weekProgressCanvas.concat(element.data.StepTotal);
+          } else if (element.data.StepTotal.length === 2) {
+            this.weekProgressCanvas = [0, 0];
+            this.weekProgressCanvas = this.weekProgressCanvas.concat(element.data.StepTotal);
+          } else {
+            this.weekProgressCanvas = [0, 0, 0];
+            this.weekProgressCanvas = this.weekProgressCanvas.concat(element.data.StepTotal);
+          }
           this.createLineChart(this.weekProgressCanvas);
         }
       });
     })
 
     console.log('Dias considerados: ',this.days);
+    this.days = this.dateService.getLastDays(3);
+    this.createLineChart(this.weekProgressCanvas);
   }
 
   getDate() {
