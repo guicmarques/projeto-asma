@@ -19,13 +19,18 @@ export class WeekProgressCanvasComponent implements OnInit {
 
   today: any;
 
+  weekProgress: any = {
+    data: [],
+  };
+
   constructor(private dateService: DateService, private sensorService: SensorService) { }
 
   ngOnInit() {
     this.sensorService.getSensorData('', 'daily-steps').then(data =>{
       console.log(data);
       this.getDate();
-      data.data.forEach(element => {
+      this.weekProgress = data;
+      this.weekProgress.data.forEach(element => {
         if (element.date === this.today) {
           this.weekProgressCanvas = element.data.StepTotal.slice(-4);
           this.days = this.dateService.getLastDays(3);

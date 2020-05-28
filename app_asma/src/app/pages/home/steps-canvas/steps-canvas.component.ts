@@ -24,6 +24,10 @@ export class StepsCanvasComponent implements OnInit {
     inactiveGoals: []
   };
 
+  dailySteps: any = {
+    data: [],
+  };
+
   goal: number = 0;
   goalPrevious: number = 0;
 
@@ -46,7 +50,8 @@ export class StepsCanvasComponent implements OnInit {
           }
         });
         this.getDate();
-        data.data.forEach(element => {
+        this.dailySteps = data;
+        this.dailySteps.data.forEach(element => {
           if (element.date === this.today) {
             this.stepCanvas = element.data.StepTotal[6];
             this.createDounutChart(this.stepCanvas);
@@ -73,7 +78,8 @@ export class StepsCanvasComponent implements OnInit {
         }
 
         this.getDate();
-        steps.data.forEach(element => {
+        this.dailySteps = steps;
+        this.dailySteps.data.forEach(element => {
           if (element.date === this.today) {
             this.stepCanvas = element.data.StepTotal[6];
             this.createDounutChart(this.stepCanvas);
