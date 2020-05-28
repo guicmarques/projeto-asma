@@ -15,7 +15,7 @@ import { AlertService } from '../../../services/alert.service';
 
 export class EditarPerfilPage implements OnInit {
   user: any;
-  classChange: boolean = false;
+  classChange = [false,false,false,false,false];
   dataSent: User;
   userDefined: boolean = false;
   newData: User = {
@@ -61,9 +61,10 @@ export class EditarPerfilPage implements OnInit {
     if (this.newData.sobrenome !==''){
       this.dataSent.sobrenome = this.newData.sobrenome;
     }
+    /* por enquanto nao editaremos o email
     if (this.newData.email !==''){
       this.dataSent.email = this.newData.email;
-    }
+    }*/
     if (this.newData.peso !==null){
       this.dataSent.peso = this.newData.peso;
     }
@@ -96,12 +97,19 @@ export class EditarPerfilPage implements OnInit {
       alertEl.present();
     });
   }
-  changeClass(){
+  focus(focus, i){
+    // Definido como i=0-> Nome, i=1 ->sobrenome, i=2-> peso, i=3->altura, i=4->telefone
+    console.log(focus);
+    this.classChange[i] = focus;
+   
     
-    this.classChange = true;
-    console.log(this.classChange);
   
   }
+  teste(){
+    console.log("teste se funciona")
+
+  }
+
   saveChanges(){
     console.log(this.newData);
     this.updateData();
