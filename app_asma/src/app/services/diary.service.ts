@@ -31,7 +31,7 @@ export class DiaryService {
             resolve(data);
             setTimeout(() => {
               this.alertService.presentPopUp('Diário atualizado!', 'Suas respostas foram salvas com sucesso.')
-            }, 3000)
+            }, 2500)
           }, (error) => {
             this.alertService.presentPopUp('Oops!', 'Houve um problema ao salvar suas respostas. Por favor, tente novamente.')
             reject(error);
