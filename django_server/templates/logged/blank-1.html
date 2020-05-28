@@ -16,12 +16,12 @@
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0">
                 <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
-                    <div class="sidebar-brand-text mx-3"><span>Brand</span></div>
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-stethoscope"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>AsmaHC</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item" role="presentation"></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="table.html"><i class="fas fa-table"></i><span>Pacientes</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="blank-1.html"><i class="fas fa-user-plus"></i><span>Cadastrar</span></a></li>
                 </ul>
@@ -53,73 +53,72 @@
                             </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow" role="presentation">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span></a>
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">{{ user.username }}</span></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"
                                         role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
-                                        <a
-                                            class="dropdown-item" role="presentation" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
-                                </div>
-                            </li>
-                        </ul>
+                                        <div
+                                            class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
                     </div>
-                </nav>
-                <div class="container col-xs-12" id="cadastroPaciente">
-                    <h3 class="text-dark mb-1">Cadastro de Pacientes</h3>
-                    <form class="form-horizontal">
-                        <div class="form-group"><label class="col-xs-2 control-label">Nome</label>
-                            <div class="col-xs-10"><input class="form-control" type="text"></div>
-                        </div>
-                        <div class="form-group"><label class="col-xs-2 control-label">Sobrenome</label>
-                            <div class="col-xs-10"><input class="form-control" type="text"></div>
-                        </div>
-                        <div class="form-group"><label class="col-xs-2 control-label">E-mail</label>
-                            <div class="col-xs-10"><input class="form-control" type="email"></div>
-                        </div>
-                        <div class="form-group"><label class="col-xs-2 control-label">Senha</label>
-                            <div class="col-xs-10"><input class="form-control" type="password"></div>
-                        </div>
-                        <div class="form-group"><label class="col-xs-2 control-label">RG</label>
-                            <div class="col-xs-10"><input class="form-control" type="text"></div>
-                        </div>
-                        <div class="form-group"><label class="col-xs-2 control-label">CPF</label>
-                            <div class="col-xs-10"><input class="form-control" type="text"></div>
-                        </div>
-                        <div class="form-group"><label class="col-xs-2 control-label">Telefone</label>
-                            <div class="col-xs-10"><input class="form-control" type="tel"></div>
-                        </div>
-                        <div class="form-group"><label class="col-xs-2 control-label">Data de Nascimento</label>
-                            <div class="col-xs-10"><input class="form-control" type="date"></div>
-                        </div>
-                        <div class="form-group"><label class="col-xs-2 control-label">rgHC</label>
-                            <div class="col-xs-10"><input class="form-control" type="text"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col col-sm">
-                                <div class="form-group">
-                                    <div class="form-group"><label class="col-xs-2 control-label" step="&quot;0.01&quot;">Altura</label>
-                                        <div class="col-xs-10"><input class="form-control" type="number" step="&quot;0.010&quot;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-sm">
-                                <div class="form-group">
-                                    <div class="form-group"><label class="col-xs-2 control-label">Peso</label>
-                                        <div class="col-xs-10"><input class="form-control" type="number"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-right"><button class="btn btn-primary" type="button">Cadastrar Paciente</button></div>
-                    </form>
-                </div>
+                    </li>
+                    </ul>
             </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2020</span></div>
-                </div>
-            </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+            </nav>
+            <div class="container col-xs-12" id="cadastroPaciente">
+                <h3 class="text-dark mb-1">Cadastro de Pacientes</h3>
+                <form class="form-horizontal">
+                    <div class="form-group"><label class="col-xs-2 control-label">Nome</label>
+                        <div class="col-xs-10"><input class="form-control" type="text"></div>
+                    </div>
+                    <div class="form-group"><label class="col-xs-2 control-label">Sobrenome</label>
+                        <div class="col-xs-10"><input class="form-control" type="text"></div>
+                    </div>
+                    <div class="form-group"><label class="col-xs-2 control-label">E-mail</label>
+                        <div class="col-xs-10"><input class="form-control" type="email"></div>
+                    </div>
+                    <div class="form-group"><label class="col-xs-2 control-label">Senha</label>
+                        <div class="col-xs-10"><input class="form-control" type="password"></div>
+                    </div>
+                    <div class="form-group"><label class="col-xs-2 control-label">RG</label>
+                        <div class="col-xs-10"><input class="form-control" type="text"></div>
+                    </div>
+                    <div class="form-group"><label class="col-xs-2 control-label">CPF</label>
+                        <div class="col-xs-10"><input class="form-control" type="text"></div>
+                    </div>
+                    <div class="form-group"><label class="col-xs-2 control-label">Telefone</label>
+                        <div class="col-xs-10"><input class="form-control" type="tel"></div>
+                    </div>
+                    <div class="form-group"><label class="col-xs-2 control-label">Data de Nascimento</label>
+                        <div class="col-xs-10"><input class="form-control" type="date"></div>
+                    </div>
+                    <div class="form-group"><label class="col-xs-2 control-label">rgHC</label>
+                        <div class="col-xs-10"><input class="form-control" type="text"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-sm">
+                            <div class="form-group">
+                                <div class="form-group"><label class="col-xs-2 control-label" step="&quot;0.01&quot;">Altura (cm)</label>
+                                    <div class="col-xs-10"><input class="form-control" type="number" step="&quot;0.010&quot;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-sm">
+                            <div class="form-group">
+                                <div class="form-group"><label class="col-xs-2 control-label">Peso (Kg)</label>
+                                    <div class="col-xs-10"><input class="form-control" type="number"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right"><button class="btn btn-primary" type="button">Cadastrar Paciente</button></div>
+                </form>
+            </div>
+        </div>
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright"></div>
+            </div>
+        </footer>
+    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
     <script src="/static/assets/js/jquery.min.js"></script>
     <script src="/static/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/static/assets/js/chart.min.js"></script>

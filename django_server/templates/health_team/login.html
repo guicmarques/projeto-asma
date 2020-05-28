@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/static/assets/css/styles.min.css">
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary jumbotron vertical-center">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-9 col-lg-12 col-xl-10">
@@ -23,7 +23,7 @@
                                     <div class="text-center">
                                         <h4 class="text-dark mb-4">Seja bem vindo!</h4>
                                     </div>
-                                    <form method="post" action="{% url 'health_team:user_login' %}">
+                                    <form class="user" method="post" action="{% url 'health_team:user_login' %}">
                                         {% csrf_token %}
                                         {# A more "HTML" way of creating the login form#}
                                         <div class="form-group"><input class="form-control form-control-user" type="text" id="username" placeholder="Digite seu usuário" name="username"></div>
