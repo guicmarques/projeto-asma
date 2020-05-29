@@ -20,5 +20,7 @@ urlpatterns = [
     path('questionnaire/', views.Questionnaire.as_view(), name='questionnaire'),
     path('daily/', views.Daily.as_view(), name='daily'),
     path('fitbit/', views.Fitbit.as_view(), name="fitbit"),
+    path('fitbit/login/', views.FitbitLogin.as_view(), name='fitbit_login'),
+    path('fitbit/auth/', views.FitbitAuth.as_view(), name='fitbit_auth'),
     path('goals/', views.Goals.as_view(), name="goals"),
 ]

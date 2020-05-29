@@ -1,18 +1,17 @@
-from django.shortcuts import render
+from datetime import datetime
 
 # Create your views here.
 from django.contrib.auth.models import Group, User
 from django.http import Http404
-from rest_framework import viewsets
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from django.shortcuts import redirect, render
+from rest_framework import status, viewsets
 from rest_framework.permissions import IsAuthenticated
-from server.serializers import UserSerializer, GroupSerializer
-import server.handleUserData as handleUserData
-import server.fitbitHandler as fitbitHandler
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from datetime import datetime
+import server.fitbitHandler as fitbitHandler
+import server.handleUserData as handleUserData
+from server.serializers import GroupSerializer, UserSerializer
 
 
 class HelloView(APIView):
@@ -153,10 +152,51 @@ class Fitbit(APIView):
             return Response({"data": "There are missing keys in request"}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class FitbitAuth(APIView):
-    def get(self, request):
+# guarda o ip da pessoa que realizou a autenticação
+fitbitAuths = {}
 
-        pass
+
+class FitbitLogin(APIView):
+    permission_classes = ()
+    global fitbitAuths
+
+    # recebe cpf da pessoa que deseja cadastrar a fitbit à conta
+    def get(self, request):
+        args = {
+            'message': "Insira aqui o CPF utilizado no cadastro do app"}
+        return render(request, "health_team/fitbit_login.html", args)
+
+    def post(self, request):
+        cpf = request.POST.get('cpf_number')
+        fitbitAPI = fitbitHandler.getFitbitAPI(cpf)
+        if fitbitAPI is not None:
+            ip = fitbitHandler.get_client_ip(request)
+            fitbitAuths[ip] = [fitbitAPI, cpf]
+            url, _ = fitbitAPI.client.authorize_token_url()
+            return redirect(url)
+        else:
+            args = {'message': f"O CPF {cpf} nao esta cadastrado, insira outro"}
+            return render(request, "health_team/fitbit_login.html", args)
+
+
+class FitbitAuth(APIView):
+    permission_classes = ()
+
+    def get(self, request):
+        code = request.GET.get("code", None)
+        ip = fitbitHandler.get_client_ip(request)
+        fitbitAPI = fitbitAuths[ip][0]
+        cpf = fitbitAuths[ip][1]
+        accessToken, refreshToken, userId = fitbitHandler.getTokens(
+            fitbitAPI, code)
+        if accessToken is not None:
+            created = fitbitHandler.updateFbProfile(
+                accessToken, refreshToken, userId, cpf)
+            if created:
+                return Response("Autenticacao concluida. Pode retornar ao app!")
+
+        text = "Autenticacao nao pode ser concluida, tente novamente"
+        return Response(text, status.HTTP_401_UNAUTHORIZED)
 
 
 class Goals(APIView):

@@ -2,9 +2,10 @@ import datetime
 import urllib.request
 
 import pandas as pd
+from django.contrib.auth.models import User
 
-from fitbit.api import Fitbit
-import server.gather_keys_oauth2 as Oauth2
+import fitbit
+from server.models import FitbitProfile
 
 CLIENT_ID = '22BLM2'
 CLIENT_SECRET = 'cc2624c521d83c8ac8058c1e276d4614'
@@ -15,34 +16,54 @@ def getAddress():
         'https://api.ipify.org').read().decode('utf8')
 
     if external_ip == "3.225.179.134":
-        return "https://"+external_ip
+        return "https://"+external_ip+"/rest/fitbit/auth/"
     else:
-        return "localhost"
+        return "https://localhost:8000/rest/fitbit/auth/"
 
 
-def getAuthURL():
-    ipGlobal = getIP()
-    if ipGlobal == "3.225.179.134":
-        ip = ipGlobal
+def getFitbitAPI(cpf):
+    users = User.objects.filter(username=cpf)
+    if len(users) > 0:
+        redirect_uri = getAddress()
+
+        fitbitAPI = fitbit.api.Fitbit(CLIENT_ID, CLIENT_SECRET,
+                                      redirect_uri=redirect_uri, timeout=10)
+
+        return fitbitAPI
     else:
-        ip = localhost
-
-    fitbit = Fitbit(client_id, client_secret,
-                    redirect_uri=redirect_uri, timeout=10)
+        return None
 
 
-if __name__ == "__main__":
-    server = Oauth2.OAuth2Server(CLIENT_ID, CLIENT_SECRET)
-    server.browser_authorize()
-    ACCESS_TOKEN = str(server.fitbit.client.session.token['access_token'])
-    REFRESH_TOKEN = str(server.fitbit.client.session.token['refresh_token'])
-    auth2_client = fitbit.Fitbit(CLIENT_ID, CLIENT_SECRET, oauth2=True,
-                                 access_token=ACCESS_TOKEN, refresh_token=REFRESH_TOKEN)
+def getTokens(fitbitAPI, code):
+    try:
+        fitbitAPI.client.fetch_access_token(code)
+    except:
+        return None, None, None
 
-    profile = server.fitbit.user_profile_get()
-    print('You are authorized to access data for the user: {}'.format(
-        profile['user']['fullName']))
+    accessToken = str(fitbitAPI.client.session.token['access_token'])
+    refreshToken = str(fitbitAPI.client.session.token['refresh_token'])
+    userId = str(fitbitAPI.client.session.token['user_id'])
 
-    print('TOKEN\n=====\n')
-    for key, value in server.fitbit.client.session.token.items():
-        print('{} = {}'.format(key, value))
+    return accessToken, refreshToken, userId
+
+
+def updateFbProfile(accessToken=None, refreshToken=None, userId=None, cpf=None):
+    if (accessToken or cpf) is not None:
+        user = User.objects.get(username=cpf)
+        fbProfile, _ = FitbitProfile.objects.get_or_create(
+            user=user, userId=userId)
+        fbProfile.access_token = accessToken
+        fbProfile.refresh_token = refreshToken
+        fbProfile.save()
+        return True
+
+    return False
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip

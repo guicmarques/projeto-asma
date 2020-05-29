@@ -71,6 +71,13 @@ class FitbitFile(models.Model):
         return self.user.username + "-" + self.category + "-" + self.date.strftime("%d/%m/%Y")
 
 
+class FitbitProfile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    accessToken = models.CharField(max_length=500, blank=True)
+    refreshToken = models.CharField(max_length=200, blank=True)
+    userId = models.CharField(max_length=50, blank=True)
+
+
 class Goal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     activity = models.CharField(max_length=100, blank=True)
