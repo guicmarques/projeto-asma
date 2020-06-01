@@ -48,12 +48,14 @@ def getTokens(fitbitAPI, code):
 
 
 def updateFbProfile(accessToken=None, refreshToken=None, userId=None, cpf=None):
-    if (accessToken or cpf) is not None:
+    print(f"Access token: {accessToken}\n")
+    if accessToken is not None and cpf is not None:
         user = User.objects.get(username=cpf)
-        fbProfile, _ = FitbitProfile.objects.get_or_create(
-            user=user, userId=userId)
-        fbProfile.access_token = accessToken
-        fbProfile.refresh_token = refreshToken
+        fbProfile, created = FitbitProfile.objects.get_or_create(user=user)
+        print(created)
+        fbProfile.accessToken = accessToken
+        fbProfile.refreshToken = refreshToken
+        fbProfile.userId = userId
         fbProfile.save()
         return True
 

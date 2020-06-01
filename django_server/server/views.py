@@ -170,9 +170,9 @@ class FitbitLogin(APIView):
         cpf = request.POST.get('cpf_number')
         fitbitAPI = fitbitHandler.getFitbitAPI(cpf)
         if fitbitAPI is not None:
-            ip = fitbitHandler.get_client_ip(request)
-            fitbitAuths[ip] = [fitbitAPI, cpf]
             url, _ = fitbitAPI.client.authorize_token_url()
+            state = url.split("state=")[1]
+            fitbitAuths[state] = [fitbitAPI, cpf]
             return redirect(url)
         else:
             args = {'message': f"O CPF {cpf} nao esta cadastrado, insira outro"}
@@ -184,9 +184,9 @@ class FitbitAuth(APIView):
 
     def get(self, request):
         code = request.GET.get("code", None)
-        ip = fitbitHandler.get_client_ip(request)
-        fitbitAPI = fitbitAuths[ip][0]
-        cpf = fitbitAuths[ip][1]
+        state = request.GET.get("state", None)
+        fitbitAPI = fitbitAuths[state][0]
+        cpf = fitbitAuths[state][1]
         accessToken, refreshToken, userId = fitbitHandler.getTokens(
             fitbitAPI, code)
         if accessToken is not None:
