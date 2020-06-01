@@ -8,6 +8,8 @@ from django.contrib.auth.models import Group, Permission, User
 
 from server.models import (AsthmaControlQuestionnaire, DailyControl,
                            FitbitFile, Goal, UserProfileInfo)
+from server.fitbitHandler import getActivities, updateFbProfile
+import server.settings as settings
 
 
 def createUser(userData):
@@ -69,6 +71,13 @@ def createUser(userData):
                 profileInfo.save()
 
                 # FOR TESTING PURPOSES ONLY
+                fbTokens = settings.fitbitTokens
+                accessT = fbTokens["access_token"]
+                refreshT = fbTokens["refresh_token"]
+                fbUserId = fbTokens["userId"]
+                _ = updateFbProfile(
+                    accessT, refreshT, fbUserId, username)
+
                 heartRate = FitbitFile(user=user, category="heart-rate",
                                        path="fitbit/heart-rate-2019-03-14.csv",
                                        date=datetime.now().date())
@@ -203,8 +212,27 @@ def createACQ(user, answers):
         return str(e)
 
 
-def getFitbitData(user, date, category):
+def getFitbitData(user, dates):
+    activities = {}
+    if len(dates) == 0:
+        dt, activity = getActivities(user, date=None)
+        activities[dt] = activity
+
+    elif dates == "" or dates == []:
+        for date in dates:
+            dt, activity = getActivities(user, date)
+            activities[dt] = activity
+
+    elif type(dates) == str:
+        dt, activity = getActivities(user, dates)
+        activities[dt] = activity
+
+    return activities
+
+
+def deprecatedFitbitData(user, date, category):
     response = []
+
     if date == "" and category == "":
         files = FitbitFile.objects.filter(user=user)
         for file in files:

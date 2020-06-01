@@ -35,7 +35,7 @@ python manage.py createsuperuser
 
 - para rodar o servidor de fato:
 ```
-$ python manage.py runserver 0.0.0.0:8000
+$ python manage.py runsslserver 0.0.0.0:8000
 ```
 
 
@@ -70,8 +70,12 @@ $ python manage.py runserver 0.0.0.0:8000
 
 - /rest/fitbit/ - Obtém os dados da fitbit
     - Authentication: Bearer ```access_token```
+    - Body: ```{"date": ["yyyy-mm-dd", ...] ou "yyyy-mm-dd"}``` - se date for passada como uma string vazia, retornará o dia de hoje, se for passada como uma lista, retornará todos os dias como chaves do dicionário e se for passada uma string, retornará o dia correspondente
+    - Response: o formato especificado se encontra na seção "Formato do payload Fitbit Activity"
+
+    **DEPRECADO - utilize o outro método para dados reais**
     - Body: ```{"date": dia/mês/ano, "category": alguma categoria de dados da fitbit}``` - se for passada uma string vazia como category e/ou date, não haverá filtragem do parâmetro, obtendo todas as entradas - em teste, só existem as categorias ```heart-rate``` e ```daily-steps```
-    - Response ```{"data":[{"date": data, "category": categoria, "data": ["nome da coluna": dados, ...}, ...]}```
+    - Response: ```{"data":[{"date": data, "category": categoria, "data": ["nome da coluna": dados, ...}, ...]}```
 
 - /rest/goals/ - Cria uma meta do usuário:
     - Authentication: Bearer ```access_token```
@@ -100,7 +104,63 @@ $ python manage.py runserver 0.0.0.0:8000
     - Body: ```{"email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "imagem": .jpg em base64, "token": token do HC}```
     - Response: ```{"updated": bool}``` (booleano indicando se a operação de atualização teve sucesso)
 
-
-### TODO
-- [api fitbit](https://github.com/iccir919/pulseWatch/blob/master/public/intraday.js)
-- [dados fitbit](https://www.fitabase.com/resources/knowledge-base/exporting-data/example-data-sets/)
+## Formato do payload Fitbit Activity (dados padrão)
+```
+{
+    "2020-06-01": {
+        "activities": [],
+        "goals": {
+            "activeMinutes": 30,
+            "caloriesOut": 3021,
+            "distance": 5,
+            "steps": 10000
+        },
+        "summary": {
+            "activeScore": -1,
+            "activityCalories": 0,
+            "caloriesBMR": 1513,
+            "caloriesOut": 1513,
+            "distances": [
+                {
+                    "activity": "total",
+                    "distance": 0
+                },
+                {
+                    "activity": "tracker",
+                    "distance": 0
+                },
+                {
+                    "activity": "loggedActivities",
+                    "distance": 0
+                },
+                {
+                    "activity": "veryActive",
+                    "distance": 0
+                },
+                {
+                    "activity": "moderatelyActive",
+                    "distance": 0
+                },
+                {
+                    "activity": "lightlyActive",
+                    "distance": 0
+                },
+                {
+                    "activity": "sedentaryActive",
+                    "distance": 0
+                }
+            ],
+            "fairlyActiveMinutes": 0,
+            "lightlyActiveMinutes": 0,
+            "marginalCalories": 0,
+            "sedentaryMinutes": 1183,
+            "steps": 0,
+            "veryActiveMinutes": 0
+        }
+    }
+    "2020-06-02": ...
+    .
+    .
+    .
+}
+```

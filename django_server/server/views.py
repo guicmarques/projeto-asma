@@ -139,19 +139,25 @@ class Fitbit(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request):
-        required = ["date", "category"]
+        required = ["date"]
 
         if all(item in request.data.keys() for item in required):
             date = request.data["date"]
-            category = request.data["category"]
-            files = handleUserData.getFitbitData(request.user, date, category)
+            if "category" not in request.data:
+                activity = handleUserData.getFitbitData(request.user, date)
+            else:
+                # DEPRECATED
+                category = request.data["category"]
+                data = handleUserData.deprecatedFitbitData(
+                    request.user, date, category)
+                activity = {"data": data}
 
-            return Response({"data": files}, status=status.HTTP_200_OK)
+            return Response(activity, status=status.HTTP_200_OK)
         else:
             return Response({"data": "There are missing keys in request"}, status=status.HTTP_400_BAD_REQUEST)
 
 
-# guarda o ip da pessoa que realizou a autenticação
+# guarda o state do request da pessoa que realizou a autenticação
 fitbitAuths = {}
 
 

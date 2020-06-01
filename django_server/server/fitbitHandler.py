@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, timedelta
 import urllib.request
 
 import pandas as pd
@@ -6,16 +6,20 @@ from django.contrib.auth.models import User
 
 import fitbit
 from server.models import FitbitProfile
+import server.settings as settings
 
-CLIENT_ID = '22BLM2'
-CLIENT_SECRET = 'cc2624c521d83c8ac8058c1e276d4614'
+clientSettings = settings.fitbitClient
+CLIENT_ID = clientSettings["CLIENT_ID"]
+CLIENT_SECRET = clientSettings["CLIENT_SECRET"]
+
+server_ip = settings.server_ip
 
 
 def getAddress():
     external_ip = urllib.request.urlopen(
         'https://api.ipify.org').read().decode('utf8')
 
-    if external_ip == "3.225.179.134":
+    if external_ip == server_ip:
         return "https://"+external_ip+"/rest/fitbit/auth/"
     else:
         return "https://localhost:8000/rest/fitbit/auth/"
@@ -60,10 +64,27 @@ def updateFbProfile(accessToken=None, refreshToken=None, userId=None, cpf=None):
     return False
 
 
-def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
+def updateTokens(user, tokenDict):
+    profile = FitbitProfile.objects.get(user=user)
+    if "refresh_token" in tokenDict:
+        profile.refreshToken = tokenDict["refresh_token"]
+    if "access_token" in tokenDict:
+        profile.accessToken = tokenDict["access_token"]
+    profile.save()
+
+
+def getActivities(user, date=None):
+    profile = FitbitProfile.objects.get(user=user)
+    accessT = profile.accessToken
+    refreshT = profile.refreshToken
+
+    if date is None:
+        date = datetime.today().strftime("%Y-%m-%d")
+
+    client = fitbit.Fitbit(CLIENT_ID, CLIENT_SECRET, oauth2=True,
+                           access_token=accessT, refresh_token=refreshT,
+                           refresh_cb=updateTokens)
+
+    activities = client.activities(date=date)
+
+    return date, activities
