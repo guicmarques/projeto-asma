@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class EnvService {
-  API_URL = 'http://3.225.179.134/rest/';
+  API_URL = 'https://3.225.179.134/rest/';
 
   constructor() { }
 }
