@@ -214,7 +214,7 @@ class FitbitAuth(APIView):
                 return Response("Autenticacao concluida. Pode retornar ao app!")
         else:
             logging.warn(f"error gathering fitbit tokens: {userId}")
-        text = "Autenticacao nao pode ser concluida, tente novamente"
+        text = userId
         return Response(text, status.HTTP_401_UNAUTHORIZED)
 
 

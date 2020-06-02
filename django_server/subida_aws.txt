@@ -6,8 +6,6 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 python3 manage.py migrate --run-syncdb
 screen
-sudo fuser -k 80/tcp
-sudo python3 manage.py runserver 0.0.0.0:80
-
-sudo python3 manage.py runsslserver 0.0.0.0:80
+sudo fuser -k 443/tcp
+sudo python3 manage.py runsslserver 0.0.0.0:443
 
