@@ -75,7 +75,14 @@ def updateFbProfile(accessToken=None, refreshToken=None, userId=None, cpf=None):
     return False
 
 
-def updateTokens(user, tokenDict):
+actualUser = None
+
+
+def updateTokens(tokenDict):
+    global actualUser
+    user = actualUser
+    print(tokenDict)
+    logging.debug(f"tokenDict: {tokenDict}")
     profile = FitbitProfile.objects.get(user=user)
     if "refresh_token" in tokenDict:
         profile.refreshToken = tokenDict["refresh_token"]
@@ -85,6 +92,7 @@ def updateTokens(user, tokenDict):
 
 
 def getActivities(user, date=None):
+    global actualUser
     profile = FitbitProfile.objects.get(user=user)
     accessT = profile.accessToken
     refreshT = profile.refreshToken
@@ -92,9 +100,10 @@ def getActivities(user, date=None):
     if date is None:
         date = datetime.today().strftime("%Y-%m-%d")
 
+    actualUser = user
+
     client = fitbit.Fitbit(CLIENT_ID, CLIENT_SECRET, oauth2=True,
-                           access_token=accessT, refresh_token=refreshT,
-                           refresh_cb=updateTokens)
+                           access_token=accessT, refresh_token=refreshT)
 
     activities = client.activities(date=date)
 
