@@ -16,7 +16,11 @@ CLIENT_SECRET = clientSettings["CLIENT_SECRET"]
 server_ip = settings.server_ip
 
 
-logging.basicConfig(filename="fitbit.log")
+logFile = 'server.log'
+datefmt = '%d/%m/%Y %H:%M:%S'
+fmt = '[%(asctime)s] %(levelname)s: %(message)s'
+logging.basicConfig(filename=logFile, filemode='a',
+                    level=logging.DEBUG, datefmt=datefmt, format=fmt)
 
 
 def getAddress():
@@ -45,8 +49,9 @@ def getFitbitAPI(cpf):
 def getTokens(fitbitAPI, code):
     try:
         fitbitAPI.client.fetch_access_token(code)
-    except:
-        return None, None, None
+    except Exception as e:
+        logging.warn(str(e))
+        return None, None, str(e)
 
     accessToken = str(fitbitAPI.client.session.token['access_token'])
     refreshToken = str(fitbitAPI.client.session.token['refresh_token'])

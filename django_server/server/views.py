@@ -14,8 +14,6 @@ import server.handleUserData as handleUserData
 from server.serializers import GroupSerializer, UserSerializer
 import logging
 
-logging.basicConfig(filename="views.log", level=logging.DEBUG)
-
 
 class HelloView(APIView):
     permission_classes = (IsAuthenticated,)
@@ -206,15 +204,16 @@ class FitbitAuth(APIView):
 
         accessToken, refreshToken, userId = fitbitHandler.getTokens(
             fitbitAPI, code)
-        logging.debug(
-            f"userid: {userId}; refresh: {refreshToken}; AT: {accessToken}")
 
         if accessToken is not None:
+            logging.debug(
+                f"userid: {userId}; refresh: {refreshToken}; AT: {accessToken}")
             created = fitbitHandler.updateFbProfile(
                 accessToken, refreshToken, userId, cpf)
             if created:
                 return Response("Autenticacao concluida. Pode retornar ao app!")
-
+        else:
+            logging.warn(f"error gathering fitbit tokens: {userId}")
         text = "Autenticacao nao pode ser concluida, tente novamente"
         return Response(text, status.HTTP_401_UNAUTHORIZED)
 
