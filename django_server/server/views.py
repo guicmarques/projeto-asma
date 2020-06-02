@@ -12,6 +12,9 @@ from rest_framework.views import APIView
 import server.fitbitHandler as fitbitHandler
 import server.handleUserData as handleUserData
 from server.serializers import GroupSerializer, UserSerializer
+import logging
+
+logging.basicConfig(filename="views.log", level=logging.DEBUG)
 
 
 class HelloView(APIView):
@@ -43,6 +46,7 @@ class RegisterUser(APIView):
 
         if missingData or not created:
             request_status = status.HTTP_400_BAD_REQUEST
+            logging.warn(f"REGISTER error: {missingData}")
         else:
             request_status = status.HTTP_200_OK
 
@@ -62,6 +66,7 @@ class UserData(APIView):
 
         if not updated:
             request_status = status.HTTP_500_INTERNAL_SERVER_ERROR
+            logging.warn(f"CHANGE USER DATA error: {updated}")
         else:
             request_status = status.HTTP_200_OK
 
@@ -79,6 +84,7 @@ class ChangePassword(APIView):
             if updated == True:
                 return Response({"updated": updated}, status=status.HTTP_200_OK)
             else:
+                logging.warn(f"PASSWORD CHANGE error: {updated}")
                 return Response({"updated": updated}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as e:
             return Response({"updated": e}, status=status.HTTP_400_BAD_REQUEST)
@@ -91,6 +97,7 @@ class Questionnaire(APIView):
         created = handleUserData.createACQ(request.user, request.data)
 
         if created != True:
+            logging.warn(f"QUESTIONNAIRE created error: {created}")
             request_status = status.HTTP_500_INTERNAL_SERVER_ERROR
         else:
             request_status = status.HTTP_200_OK
@@ -121,10 +128,12 @@ class Daily(APIView):
             if created == True:
                 request_status = status.HTTP_200_OK
             else:
+                logging.warn(created)
                 request_status = status.HTTP_400_BAD_REQUEST
 
         else:
             created = "There are missing keys in request"
+            logging.warn(f"DAILY created error: {created}")
             request_status = status.HTTP_400_BAD_REQUEST
 
         return Response({"created": created}, status=request_status)
@@ -157,7 +166,7 @@ class Fitbit(APIView):
             return Response({"data": "There are missing keys in request"}, status=status.HTTP_400_BAD_REQUEST)
 
 
-# guarda o state do request da pessoa que realizou a autenticação
+# guarda o state do request da pessoa que realizou a autenticaï¿½ï¿½o
 fitbitAuths = {}
 
 
@@ -165,7 +174,7 @@ class FitbitLogin(APIView):
     permission_classes = ()
     global fitbitAuths
 
-    # recebe cpf da pessoa que deseja cadastrar a fitbit à conta
+    # recebe cpf da pessoa que deseja cadastrar a fitbit ï¿½ conta
     def get(self, request):
         args = {
             'message': "Insira aqui o CPF utilizado no cadastro do app"}
@@ -178,6 +187,7 @@ class FitbitLogin(APIView):
             url, _ = fitbitAPI.client.authorize_token_url()
             state = url.split("state=")[1]
             fitbitAuths[state] = [fitbitAPI, cpf]
+            logging.debug(f"FITBIT LOGIN url: {url}; state: {state}")
             return redirect(url)
         else:
             args = {'message': f"O CPF {cpf} nao esta cadastrado, insira outro"}
@@ -192,8 +202,13 @@ class FitbitAuth(APIView):
         state = request.GET.get("state", None)
         fitbitAPI = fitbitAuths[state][0]
         cpf = fitbitAuths[state][1]
+        logging.debug(f"cpf: {cpf}; fitbit code: {code}; state: {state}")
+
         accessToken, refreshToken, userId = fitbitHandler.getTokens(
             fitbitAPI, code)
+        logging.debug(
+            f"userid: {userId}; refresh: {refreshToken}; AT: {accessToken}")
+
         if accessToken is not None:
             created = fitbitHandler.updateFbProfile(
                 accessToken, refreshToken, userId, cpf)
@@ -221,6 +236,7 @@ class Goals(APIView):
                 request_status = status.HTTP_200_OK
             else:
                 request_status = status.HTTP_400_BAD_REQUEST
+                logging.warn(f"GOALS created error: {created}")
 
         else:
             created = "There are missing keys in request"

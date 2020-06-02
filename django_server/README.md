@@ -5,17 +5,17 @@ Projeto do Laboratório de Engenharia de Software da Poli-USP em parceria com a 
 
 Para executar esse programa, é necessário ter alguma versão de python > 3.7. Em seguida, basta instalar os pacotes com o seguinte comando:
 ```
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
 É necessário instalar a biblioteca responsável pela conexão à fitbit.
 
 - À partir da pasta projeto-asma, insira os seguintes comandos
 ```
-cd fitbit
+$ cd fitbit
 ```
 ```
-python setup.py install
+$ python setup.py install
 ```
 
 ## Rodar o servidor
@@ -30,7 +30,7 @@ $ python manage.py migrate
 - para criar um usuario de admin do banco de dados, insira o seguinte comando e complete as informações:
 
 ```
-python manage.py createsuperuser
+$ python manage.py createsuperuser
 ```
 
 - para rodar o servidor de fato:

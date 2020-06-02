@@ -1,18 +1,22 @@
-from datetime import datetime, timedelta
+import logging
 import urllib.request
+from datetime import datetime, timedelta
 
 import pandas as pd
 from django.contrib.auth.models import User
 
 import fitbit
-from server.models import FitbitProfile
 import server.settings as settings
+from server.models import FitbitProfile
 
 clientSettings = settings.fitbitClient
 CLIENT_ID = clientSettings["CLIENT_ID"]
 CLIENT_SECRET = clientSettings["CLIENT_SECRET"]
 
 server_ip = settings.server_ip
+
+
+logging.basicConfig(filename="fitbit.log")
 
 
 def getAddress():
@@ -52,6 +56,8 @@ def getTokens(fitbitAPI, code):
 
 
 def updateFbProfile(accessToken=None, refreshToken=None, userId=None, cpf=None):
+    logging.warn(
+        f"Username: {cpf}; Refresh token:{refreshToken}; Access token:{accessToken}")
     if accessToken is not None and cpf is not None:
         user = User.objects.get(username=cpf)
         fbProfile, _ = FitbitProfile.objects.get_or_create(user=user)
