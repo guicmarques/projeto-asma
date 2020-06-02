@@ -63,11 +63,7 @@ export class DateService {
         }
       }
 
-      if (month < 9) {
-        week.push([weekDay.toString(), '0' +(month + 1).toString(), year.toString(), 'before']);
-      } else {
-        week.push([weekDay.toString(), (month + 1).toString(), year.toString(), 'before']);
-      }
+      week.push([weekDay.toString(), (month + 1).toString().padStart(2, '0'), year.toString(), 'before']);
     }
 
     week = week.reverse();
@@ -88,11 +84,7 @@ export class DateService {
         }
       }
 
-      if (month < 9) {
-        week.push([weekDay.toString(), '0' +(month + 1).toString(), year.toString(), flag]);
-      } else {
-        week.push([weekDay.toString(), (month + 1).toString(), year.toString(), flag]);
-      }
+      week.push([weekDay.toString(), (month + 1).toString().padStart(2, '0'), year.toString(), flag]);
 
       weekDay += 1;
       flag = 'after';
@@ -108,6 +100,8 @@ export class DateService {
 
     let day = +fullDate[2];
     let month = date.getMonth();
+    let year = date.getFullYear();
+    let yearPrevious = year - 1;
     let dayPrevious: number = day;
     let monthPrevious: number;
     let days: string[] = ['Hoje'];
@@ -117,14 +111,21 @@ export class DateService {
       monthPrevious = month - 1;
     }
 
+
     for(let i = 0; i < quantity; i++) {
       if (dayPrevious - 1 > 0) {
         dayPrevious --; 
+        days.push(year.toString() + '-' + (month + 1).toString().padStart(2, '0') + '-' + dayPrevious.toString().padStart(2, '0'));
       } else {
+        month = monthPrevious;
         dayPrevious = this.mesesLength[this.mesesNames[month]];
+        if (monthPrevious === 11) {
+           year = yearPrevious;
+           days.push(year.toString() + '-' + (month + 1).toString().padStart(2, '0') + '-' + dayPrevious.toString().padStart(2, '0'));
+        } else {
+           days.push(year.toString() + '-' + (month + 1).toString().padStart(2, '0') + '-' + dayPrevious.toString().padStart(2, '0'));
+        }
       }
-
-      days.push(dayPrevious.toString());
     }
 
     return days.reverse();
@@ -150,10 +151,6 @@ export class DateService {
   getMonthNumber(monthName: string) {
     let index = this.mesesNames.indexOf(monthName) + 1
 
-    if (index < 10) {
-      return '0' + index.toString();
-    }
-    
-    return index.toString();
+    return index.toString().padStart(2, '0')
   }
 }

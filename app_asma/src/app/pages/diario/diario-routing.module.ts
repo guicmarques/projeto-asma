@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: DiarioPage
+  },  {
+    path: 'questionario',
+    loadChildren: () => import('./questionario/questionario.module').then( m => m.QuestionarioPageModule)
   }
+
 ];
 
 @NgModule({

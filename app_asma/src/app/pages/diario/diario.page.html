@@ -19,6 +19,27 @@
 </ion-header>
 
 <ion-content>
+  <div>
+    <ion-card class="QACard">
+      <ion-card-header>
+        <ion-card-title class="QATitle">Questionário de Controle da Asma (ACQ)</ion-card-title>
+        
+        
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-card-subtitle class="QASubt">Você possui um questionário não respondido!</ion-card-subtitle>
+            </ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
   <div style="position: relative;">
     <button class="infoCard" (click)="presentPopUp('Tosse', 'tosse')">?</button>
     <ion-card class="sympCard">
@@ -43,13 +64,13 @@
             <ion-item lines="none">
               <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
               <ion-label>Sim</ion-label>
-              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0] !== this.day ? true : false"></ion-radio>
+              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
     
             <ion-item lines="none">
               <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
               <ion-label>Não</ion-label>
-              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0] !== this.day ? true : false"></ion-radio>
+              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
           </ion-radio-group>
           
@@ -70,7 +91,7 @@
             
             <ion-col size="9">
               <ion-card-title class="sympTitle">Chiado</ion-card-title>
-              <ion-card-subtitle class="sympSubt">Você sentiu chiados (sons de “gatinhos”) no peito hoje?</ion-card-subtitle>
+              <ion-card-subtitle class="sympSubt">Você sentiu chiados no peito hoje?</ion-card-subtitle>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -82,13 +103,13 @@
             <ion-item lines="none">
               <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
               <ion-label>Sim</ion-label>
-              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0] !== this.day ? true : false"></ion-radio>
+              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
 
             <ion-item lines="none">
               <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
               <ion-label>Não</ion-label>
-              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0] !== this.day ? true : false"></ion-radio>
+              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
           </ion-radio-group>
           
@@ -121,13 +142,13 @@
             <ion-item lines="none">
               <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
               <ion-label>Sim</ion-label>
-              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0] !== this.day ? true : false"></ion-radio>
+              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
     
             <ion-item lines="none">
               <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
               <ion-label>Não</ion-label>
-              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0] !== this.day ? true : false"></ion-radio>
+              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
           </ion-radio-group>
           
@@ -160,13 +181,13 @@
             <ion-item lines="none">
               <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
               <ion-label>Sim</ion-label>
-              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0] !== this.day ? true : false"></ion-radio>
+              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
 
             <ion-item lines="none">
               <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
               <ion-label>Não</ion-label>
-              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0] !== this.day ? true : false"></ion-radio>
+              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
           </ion-radio-group>
           
@@ -199,13 +220,13 @@
             <ion-item lines="none">
               <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
               <ion-label>Sim</ion-label>
-              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0] !== this.day ? true : false"></ion-radio>
+              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
     
             <ion-item lines="none">
               <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
               <ion-label>Não</ion-label>
-              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0] !== this.day ? true : false"></ion-radio>
+              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
           </ion-radio-group>
           
@@ -237,21 +258,21 @@
           <ion-item lines="none">
             <ion-label class="peakLabel">1ª Medição: </ion-label>
             <ion-textarea inputmode="text" maxlength="6" cols="4" rows="1" class="peakValue" 
-            [(ngModel)]="diaryPage.pico[0]" [disabled]="pageView[0] !== this.day ? true : false"></ion-textarea>
+            [(ngModel)]="diaryPage.pico[0]" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-textarea>
             <div class="peakUnit">L/min</div>
           </ion-item>
 
           <ion-item lines="none">
             <ion-label class="peakLabel">2ª Medição: </ion-label>
             <ion-textarea inputmode="text" maxlength="6" cols="4" rows="1" class="peakValue" 
-            [(ngModel)]="diaryPage.pico[1]" [disabled]="pageView[0] !== this.day ? true : false"></ion-textarea>
+            [(ngModel)]="diaryPage.pico[1]" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-textarea>
             <div class="peakUnit">L/min</div>
           </ion-item>
 
           <ion-item lines="none">
             <ion-label class="peakLabel">3ª Medição: </ion-label>
             <ion-textarea inputmode="text" maxlength="6" cols="4" rows="1" class="peakValue" 
-            [(ngModel)]="diaryPage.pico[2]" [disabled]="pageView[0] !== this.day ? true : false"></ion-textarea>
+            [(ngModel)]="diaryPage.pico[2]" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-textarea>
             <div class="peakUnit">L/min</div>
           </ion-item>
         </ion-list>
@@ -280,14 +301,14 @@
       <ion-card-content>
         <ion-item>
           <ion-textarea placeholder="Até 100 caracteres" inputmode="text" maxlength="100" rows="2" 
-          [(ngModel)]="diaryPage.note" [disabled]="pageView[0] !== this.day ? true : false"></ion-textarea>
+          [(ngModel)]="diaryPage.note" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-textarea>
         </ion-item>
       </ion-card-content>
     </ion-card>
   </div>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="setDiaryPage()" [disabled]="pageView[0] !== this.day ? true : false">
+    <ion-fab-button (click)="setDiaryPage()" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false">
       <img src="../../../../assets/images/save_icon.png" #saveIcon style="z-index: 10; width: 24px;">
       <div class="rect" style="width: 50px; height: 50px; background-color: #FFB000; position: absolute; left: -50px;" #loadingBack></div>
       <img src="../../../../assets/images/tick_icon.png" #checkIcon style="position: absolute; top: 50px; width: 24px;"> 

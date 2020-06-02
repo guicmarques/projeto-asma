@@ -31,12 +31,12 @@ export class DiarioPage implements OnInit {
   }
   description = {
     note: 'É importante detalhar o máximo possível os seus sintomas para que seu médico possa lhe dar um tratamento mais personalizado.',
-    pico: 'Medir o pico de fluxo expiratório é importante para acompanhar a sua saúde respiratória, deve-se anotar o valor indicado no medidor seguindo as orientações da equipe de saúde. Essas informações ajudam os profissionais de saúde a acompanhar sua saúde e, assim, escolher o melhor tratamento da asma para você.',
-    tosse: 'Tosse é uma forma de expulsar o ar para fora dos pulmões. Ocorre normalmente de forma involuntária e não deve ser contida. É um dos principais sintomas da asma e pode ser mais frequente no período da noite ou de manhã cedo.',
-    chiado: 'O Chiado (também chamado de Sibilância) corresponde ao som agudo ao respirar, ocorre devido a diminuição do tamanho tubos por onde passa o ar nos pulmões (chamados de vias aéreas). É um sintoma frequente em pessoas com asma, e a frequência que você sente o chiado deve ser comunicado aos profissionais de saúde.',
-    faltaAr: 'A falta de ar é marcada pela dificuldade de respirar. Pode ser sentida como sensação de peso no peito, muito esforço para respirar e/ou quando não consegue respirar fundo. Devido a asma, os tubos que transportam o ar nos pulmões (chamados de vias aéreas) se estreitam mais do que o normal, dificultando a passagem de ar, resultando na sensação de falta de ar. É um sintoma importante e quando intenso, deve-se aliviar os sintomas usando a “bombinha”. Caso não esteja com ela, ou você não se sentir melhor após usá-la, procurar ajuda médica no pronto socorro imediatamente.',
-    acordar: 'Os sintomas da asma podem influenciar a qualidade do seu sono. Uma noite mal dormida pode afetar as atividades do seu dia a dia e dificultar, também, a melhora da asma. Por isso, é importante seguir o programa de tratamento, buscando controlar os sintomas e, assim, melhorar suas noites de sono.',
-    bombinha: 'A “bombinha” contém um remédio (broncodilatadores) muito usado para aliviar os sintomas da asma. Para o medicamento fazer efeito, é importante usá-lo corretamente, de acordo com as orientações dos profissionais de saúde. Os broncodilatadores são inalados e vão para dentro dos pulmões, lá atuam relaxando os músculos responsáveis pelo estreitamento dos tubos (vias aéreas) do pulmão, melhorando a passagem de ar e aliviando os sintomas imediatamente.'
+    pico: 'Serve para medir a facilidade do ar passar nos brônquios (vias aéreas). É importante seguir as orientações dos profissionais da saúde e anotar o valor do pico de fluxo (ou peakflow) diariamente. Essas informações ajudarão o médico a escolher o melhor tratamento da sua asma.',
+    tosse: 'A tosse é uma reação involuntária e um dos principais sintomas da asma. Acontece mais frequentemente no período da noite ou de manhã cedo.',
+    chiado: 'O chiado no peito também pode ser chamado de “gatinhos no peito” ou “sibilância”, é um sintoma que acontece frequentemente quando os sintomas da asma pioram. O ruído (barulho) é agudo e acontece, principalmente, quando o ar entra nos pulmões. Isto acontece porque o tamanho dos brônquios (vias aéreas) diminui (broncoconstrição).',
+    faltaAr: 'A falta de ar é a dificuldade de respirar. Algumas pessoas sentem como uma sensação de peso no peito, esforço para respirar e até mesmo quando não consegue respirar fundo. Acontece porque os brônquios (ou vias aéreas) se fecham e dificultam a passagem de ar. Muitas vezes vem junto com o chiado. Costuma aliviar quando usa a “bombinha” (broncodilatador).',
+    acordar: 'Os sintomas da asma podem mudar a qualidade do seu sono. Uma noite mal dormida pode afetar as atividades do seu dia-a-dia e piorar os sintomas de asma. Por isso, é importante seguir o tratamento, buscando controlar os sintomas e melhorar as noites de sono.',
+    bombinha: 'A “bombinha” (ou broncodilatador) é usado para aliviar os sintomas da asma. Para o medicamento fazer efeito, é importante seguir as orientações dos profissionais de saúde e usá-lo corretamente. O efeito da “bombinha” (ou broncodilatador) é relaxar os músculos dos brônquios (vias aéreas) e facilitar a passagem de ar e aliviar os sintomas.'
   }
   @ViewChild('saveIcon', {static: false}) saveIcon: ElementRef;
   @ViewChild('loadingBack', {static: false}) loadingBack: ElementRef;
@@ -54,6 +54,8 @@ export class DiarioPage implements OnInit {
     this.week = this.dateService.getWeek();
     this.getDiaryPage([this.day, this.dateService.getMonthNumber(this.month), this.year, 'selected'])
 
+    console.log('Teste: ' + this.dateService.getLastDays(3));
+
     //console.log(this.week)
   }
 
@@ -63,10 +65,9 @@ export class DiarioPage implements OnInit {
 
     this.diaryService.getDiary().then(data => {
       console.log('Diário:', data);
-      let fullDate = date[2] + '-' + date[1] + '-' + date[0];
+      let fullDate = date[2] + '-' + date[1] + '-' + date[0].padStart(2, '0');
       if (data[fullDate] === undefined) {
         this.diaryPage = {
-
           note: '',
           pico: [null, null, null],
           tosse: '',
@@ -88,9 +89,9 @@ export class DiarioPage implements OnInit {
       }
 
       this.week.forEach(element => { 
-        if (element[3] === 'selected' && element[0] !== date[0]) {
+        if (element[3] === 'selected' && element[0].padStart(2, '0') !== date[0].padStart(2, '0')) {
           element[3] = 'before';
-        } else if (element[0] === date[0]) {
+        } else if (element[0].padStart(2, '0') === date[0].padStart(2, '0')) {
           element[3] = 'selected';
         }
       });

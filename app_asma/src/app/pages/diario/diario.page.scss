@@ -83,6 +83,25 @@ button {
     right: 0;
 }
 
+.QACard {
+    border-radius: 25px;
+    margin-top: 30px;
+    background-color: rgb(5, 181, 163);
+}
+
+.QATitle {
+    font-weight: 700;
+    font-size: 22px;
+    margin-top: 4px;
+    color: white;
+}
+
+.QASubt {
+    color: white;
+    margin-top: 4px;
+    text-align: justify;
+}
+
 .sympCard {
     border-radius: 25px;
     margin-top: 30px;
