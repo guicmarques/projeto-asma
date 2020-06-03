@@ -38,7 +38,7 @@ export class StepsCanvasComponent implements OnInit {
 
 
   ngOnInit() {
-    this.sensorService.getSensorData('', 'daily-steps').then(data =>{
+    this.sensorService.getSensorData('').then(data =>{
       console.log(data);
       this.goalsService.getGoals().then(goals => {
         console.log('Minhas metas:', goals);
@@ -50,21 +50,26 @@ export class StepsCanvasComponent implements OnInit {
           }
         });
         this.getDate();
-        this.dailySteps = data;
-        this.dailySteps.data.forEach(element => {
+        /*this.dailySteps = data;
+        this.dailySteps.forEach(element => {
           if (element.date === this.today) {
             this.stepCanvas = element.data.StepTotal[6];
             this.createDounutChart(this.stepCanvas);
             console.log(typeof(this.stepCanvas));
           }
-        });
+        });*/
+        let result = JSON.stringify(data);
+        this.dailySteps = JSON.parse(result);
+        this.stepCanvas = this.dailySteps[this.today].summary.steps;
+        this.createDounutChart(this.stepCanvas);
+        console.log(this.stepCanvas);
         setInterval(() => { this.reloadChart() }, 1800000);
       })
     })
   }
 
   reloadChart() {
-    this.sensorService.getSensorData('', 'daily-steps').then(steps => {
+    this.sensorService.getSensorData('').then(steps => {
       this.goalsService.getGoals().then(metas => {
         this.myGoals = metas;
         this.myGoals.activeGoals.forEach(element => {
@@ -78,13 +83,18 @@ export class StepsCanvasComponent implements OnInit {
         }
 
         this.getDate();
-        this.dailySteps = steps;
+        /*this.dailySteps = steps;
         this.dailySteps.data.forEach(element => {
           if (element.date === this.today) {
             this.stepCanvas = element.data.StepTotal[6];
             this.createDounutChart(this.stepCanvas);
           }
-        });
+        });*/
+        let result = JSON.stringify(steps);
+        this.dailySteps = JSON.parse(result);
+        this.stepCanvas = this.dailySteps[this.today].summary.steps;
+        this.createDounutChart(this.stepCanvas);
+        console.log(this.stepCanvas);
       });
     });
   }

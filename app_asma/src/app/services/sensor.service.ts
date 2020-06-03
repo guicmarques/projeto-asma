@@ -15,13 +15,13 @@ export class SensorService {
               private alertService: AlertService,
               private authService: AuthService) { }
 
-  getSensorData(date: string, category: string) {
+  getSensorData(date) {
     return new Promise ((resolve, reject) => {
       this.authService.validateToken().then(data => {
         const header = new HttpHeaders({
           'Authorization': 'Bearer' + " " + this.authService.token["access"]
         });
-        return this.http.post<Fitbit>(this.env.API_URL + 'fitbit/', {'date': date, 'category': category}, { headers: header })
+        return this.http.post<Fitbit>(this.env.API_URL + 'fitbit/', {'date': date}, { headers: header })
         .subscribe(data =>{
           console.log(data);
           resolve(data);
