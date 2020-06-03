@@ -89,17 +89,27 @@ button {
     background-color: rgb(5, 181, 163);
 }
 
+.QAHeader {
+    padding-right: 5px;
+}
+
+.QAContainer {
+    display: flex;
+    align-items: flex-start;
+}
+
 .QATitle {
     font-weight: 700;
-    font-size: 22px;
+    font-size: 19px;
     margin-top: 4px;
     color: white;
 }
 
-.QASubt {
-    color: white;
-    margin-top: 4px;
-    text-align: justify;
+.QAImg {
+    padding-right: 0px;
+    padding-left: 10px;
+    padding-bottom: 0px;
+    padding-top: 9%;
 }
 
 .sympCard {

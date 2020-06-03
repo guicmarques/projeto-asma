@@ -20,23 +20,21 @@
 
 <ion-content>
   <div>
-    <ion-card class="QACard">
-      <ion-card-header>
-        <ion-card-title class="QATitle">Questionário de Controle da Asma (ACQ)</ion-card-title>
-        
-        
-      </ion-card-header>
-    
-      <ion-card-content>
+    <ion-card class="QACard" routerLink="./questionario">
+      <ion-card-header class="QAHeader">
         <ion-grid>
-          <ion-row>
-            <ion-col>
-              <ion-card-subtitle class="QASubt">Você possui um questionário não respondido!</ion-card-subtitle>
-            </ion-col>
-            <ion-col></ion-col>
+          <ion-row class="QAContainer">
+              <ion-col>
+                <ion-card-title class="QATitle">Questionário de Controle da Asma (ACQ)</ion-card-title>
+              </ion-col>
+
+              <ion-col class="QAImg">
+                <img src="../../../assets/images/survey_flat.jpeg">
+              </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-card-content>
+        
+      </ion-card-header>
     </ion-card>
   </div>
 
