@@ -55,6 +55,7 @@ export class WeekProgressCanvasComponent implements OnInit {
           let result = JSON.stringify(daysSteps);
           this.weekProgress = JSON.parse(result);
           this.weekProgressCanvas = [];
+          console.log(this.weekProgress);
           for (let i = 0; i < 3; i++) {
             this.days.push(this.lastDays[i].split('-')[2]);
             if (this.weekProgress[dates[i]] != undefined) {
