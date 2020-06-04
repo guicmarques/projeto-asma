@@ -70,9 +70,9 @@ def updateFbProfile(accessToken=None, refreshToken=None, userId=None, cpf=None):
         fbProfile.refreshToken = refreshToken
         fbProfile.userId = userId
         fbProfile.save()
-        return True
+        return True, user
 
-    return False
+    return False, None
 
 
 actualUser = None
@@ -103,7 +103,8 @@ def getActivities(user, date=None):
     actualUser = user
 
     client = fitbit.Fitbit(CLIENT_ID, CLIENT_SECRET, oauth2=True,
-                           access_token=accessT, refresh_token=refreshT)
+                           access_token=accessT, refresh_token=refreshT,
+                           refresh_cb=updateTokens)
 
     activities = client.activities(date=date)
 

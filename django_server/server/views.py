@@ -208,10 +208,11 @@ class FitbitAuth(APIView):
         if accessToken is not None:
             logging.debug(
                 f"userid: {userId}; refresh: {refreshToken}; AT: {accessToken}")
-            created = fitbitHandler.updateFbProfile(
+            created, user = fitbitHandler.updateFbProfile(
                 accessToken, refreshToken, userId, cpf)
             if created:
-                return Response("Autenticacao concluida. Pode retornar ao app!")
+                date, fitbitData = fitbitHandler.getActivities(user)
+                return Response(fitbitData)
         else:
             logging.warn(f"error gathering fitbit tokens: {userId}")
         text = userId
