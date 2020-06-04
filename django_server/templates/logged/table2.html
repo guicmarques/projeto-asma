@@ -12,23 +12,24 @@
 
     <script>
         function myFunction() {
-          // Declare variables
-          var input, filter, table, tr, td, i, txtValue;
+          var input, filter, table, tr, td, i, txtValue, txtValue2;
           input = document.getElementById("myInput");
           filter = input.value.toUpperCase();
           table = document.getElementById("dataTable");
           tr = table.getElementsByTagName("tr");
-        
-          // Loop through all table rows, and hide those who don't match the search query
           for (i = 0; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[0];
+            td2 = tr[i].getElementsByTagName("td")[1];
             if (td) {
               txtValue = td.textContent || td.innerText;
+              txtValue2 = td2.textContent || td2.innerText;
               if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              }else{ if (txtValue2.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
               } else {
                 tr[i].style.display = "none";
-              }
+              }}
             }
           }
         }
@@ -122,28 +123,28 @@
                                     </tr>
                                     <tr>
                                         <td><a href="/health_team/pacienteGraficos.html" target="_blank">Ashton Cox</a></td>
-                                        <td>a.a@a.com<br></td>
+                                        <td>ad.a@a.com<br></td>
                                         <td>00000000000<br></td>
                                         <td>66</td>
                                         <td>00000000000<br></td>
                                     </tr>
                                     <tr>
                                         <td><a href="/health_team/pacienteGraficos.html" target="_blank">Bradley Greer</a></td>
-                                        <td>a.a@a.com<br></td>
+                                        <td>ac.a@a.com<br></td>
                                         <td>00000000000<br></td>
                                         <td>41</td>
                                         <td>00000000000<br></td>
                                     </tr>
                                     <tr>
                                         <td><a href="/health_team/pacienteGraficos.html" target="_blank">Brenden Wagner</a></td>
-                                        <td>a.a@a.com<br></td>
+                                        <td>ab.a@a.com<br></td>
                                         <td>00000000000<br></td>
                                         <td>28</td>
                                         <td>00000000000<br></td>
                                     </tr>
                                     <tr>
                                         <td><a href="/health_team/pacienteGraficos.html" target="_blank">Brielle Williamson</a></td>
-                                        <td>a.a@a.com<br></td>
+                                        <td>aa.a@a.com<br></td>
                                         <td>00000000000<br></td>
                                         <td>61</td>
                                         <td>00000000000<br></td>
