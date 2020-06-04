@@ -214,6 +214,8 @@ def createACQ(user, answers):
 
 def getFitbitData(user, dates):
     activities = {}
+    # TESTE COM AUTENTICAÇÃO DO MICHELET
+    user = User.objects.get(username='Michelet')
     if len(dates) == 0:
         dt, activity = getActivities(user, date=None)
         activities[dt] = activity

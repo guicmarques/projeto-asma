@@ -78,18 +78,6 @@ def updateFbProfile(accessToken=None, refreshToken=None, userId=None, cpf=None):
 actualUser = None
 
 
-# def updateTokens(tokenDict):
-#     global actualUser
-#     user = actualUser
-#     print(tokenDict)
-#     logging.debug(f"tokenDict: {tokenDict}")
-#     profile = FitbitProfile.objects.get(user=user)
-#     if "refresh_token" in tokenDict:
-#         profile.refreshToken = tokenDict["refresh_token"]
-#     if "access_token" in tokenDict:
-#         profile.accessToken = tokenDict["access_token"]
-#     profile.save()
-
 def r_cb(token):
     """ Called when the OAuth token has been refreshed """
     global actualUser
@@ -98,7 +86,6 @@ def r_cb(token):
     logging.debug(f"tokenDict: {token}")
     access_token = token['access_token']
     refresh_token = token['refresh_token']
-    expires_at = token['expires_at']
     profile = FitbitProfile.objects.get(user=user)
     profile.refreshToken = refresh_token
     profile.accessToken = access_token
