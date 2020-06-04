@@ -218,7 +218,7 @@ def getFitbitData(user, dates):
         dt, activity = getActivities(user, date=None)
         activities[dt] = activity
 
-    elif dates == "" or dates == []:
+    elif type(dates) == list:
         for date in dates:
             dt, activity = getActivities(user, date)
             activities[dt] = activity
