@@ -217,18 +217,18 @@ def getFitbitData(user, dates):
     # TESTE COM AUTENTICAÇÃO DO MICHELET
     # user = User.objects.get(username='Michelet')
     if len(dates) == 0:
-        print(user.Username)
+        print(user.username)
         dt, activity = getActivities(user, date=None)
         activities[dt] = activity
 
     elif type(dates) == list:
-        print(user.Username)
+        print(user.username)
         for date in dates:
             dt, activity = getActivities(user, date)
             activities[dt] = activity
 
     elif type(dates) == str:
-        print(user.Username)
+        print(user.username)
         dt, activity = getActivities(user, dates)
         activities[dt] = activity
 
