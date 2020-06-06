@@ -98,7 +98,7 @@ def register_account(request):
 def erro_404(request):
     return render(request, 'health_team/404_error.html', {})
 
-#@login_required
+@login_required
 def table(request):
     lista = UserProfileInfo.objects.all()
     print(len(lista))
@@ -114,7 +114,7 @@ def profile(request):
 def cadastroPaciente2(request):
     return render(request, 'logged/blank-1.html', {})
 
-#@login_required
+@login_required
 def cadastroPaciente(request):
     registered = False
     if request.method == 'POST':
@@ -140,7 +140,7 @@ def cadastroPaciente(request):
     #return render(request, 'logged/blank-12.html', {})
 
 
-#@login_required
+@login_required
 def pacienteGraficos(request):
     #https://www.youtube.com/watch?v=vCX6Tpb9sP8
     #https://www.youtube.com/watch?v=B4Vmm3yZPgc
