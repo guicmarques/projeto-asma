@@ -11,6 +11,8 @@ import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
 
+from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile
+
 def index(request):
     return render(request, 'health_team/index.html')
 
@@ -98,7 +100,9 @@ def erro_404(request):
 
 #@login_required
 def table(request):
-    return render(request, 'logged/table2.html', {})
+    lista = UserProfileInfo.objects.all()
+    print(len(lista))
+    return render(request, 'logged/table2.html', {'lista':lista})
 
 
 @login_required
@@ -173,4 +177,9 @@ def pacienteGraficos(request):
 
 
 def tableTest(request):
+    return render(request, 'logged/table_test.html', {})
+
+
+def tableTest2(request,id):
+    print(id)
     return render(request, 'logged/table_test.html', {})

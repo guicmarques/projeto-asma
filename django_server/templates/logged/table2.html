@@ -149,34 +149,15 @@
                                         <td>61</td>
                                         <td>00000000000<br></td>
                                     </tr>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Bruno Mars</a><br></td>
-                                        <td>a.a@a.com<br></td>
-                                        <td>00000000000<br></td>
-                                        <td>38</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Caesar Vance</a></td>
-                                        <td>a.a@a.com<br></td>
-                                        <td>00000000000<br></td>
-                                        <td>21</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Cara Stevens</a></td>
-                                        <td>a.a@a.com<br></td>
-                                        <td>00000000000<br></td>
-                                        <td>46</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Cedric Kelly</a></td>
-                                        <td>a.a@a.com<br></td>
-                                        <td>00000000000<br></td>
-                                        <td>22</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
+                                    {% for linha in lista %}
+                                        <tr>
+                                            <td><a href="/health_team/pacienteGraficos.html" target="_blank">{{linha.nome}}</a></td>
+                                            <td>{{linha.sobrenome}}<br></td>
+                                            <td>{{linha.telefone}}<br></td>
+                                            <td>{{linha.peso}}</td>
+                                            <td>{{linha.rg}}<br></td>
+                                        </tr>
+                                    {% endfor %}
                                 </tbody>
                                 <tfoot>
                                     <tr></tr>
