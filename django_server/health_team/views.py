@@ -182,7 +182,6 @@ def pacienteGraficos2(request,id):
     #https://stackoverflow.com/questions/55832576/how-to-integrate-chart-js-in-django
     #https://www.codingwithricky.com/2019/08/28/easy-django-plotly/
 
-    user_profile = UserForm.objects.get(user = id)
     user_data = UserProfileInfo.objects.get(user = id)
     
     #Grafico Demo
@@ -213,7 +212,6 @@ def pacienteGraficos2(request,id):
         request,
         "logged/graphs-data-1.html",
         context={
-            'user_data' : user_data,
             'user_profile' : user_profile,
             'plot_div': plot_div,
             'fig':fig2,
