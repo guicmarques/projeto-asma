@@ -176,7 +176,7 @@ def pacienteGraficos(request):
     return render(request, "logged/view-graph.html", context={'plot_div': plot_div, 'fig':fig2, 'fig3':fig3})
 
 @login_required
-def pacienteGraficos2(request,id):
+def pacienteGraficos2(request,username):
     #https://www.youtube.com/watch?v=vCX6Tpb9sP8
     #https://www.youtube.com/watch?v=B4Vmm3yZPgc
     #https://stackoverflow.com/questions/55832576/how-to-integrate-chart-js-in-django
@@ -223,6 +223,6 @@ def tableTest(request):
     return render(request, 'logged/table_test.html', {})
 
 
-def tableTest2(request,id):
-    print(id)
+def tableTest2(request,username):
+    print(username)
     return render(request, 'logged/table_test.html', {})
