@@ -3,6 +3,7 @@ import { SensorService } from './../../../services/sensor.service';
 import { Chart } from 'chart.js';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { GoalsService } from 'src/app/services/goals.service';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-steps-canvas',
@@ -34,7 +35,9 @@ export class StepsCanvasComponent implements OnInit {
   walkingPersonImg:  String = '../../../assets/images/walking_white_blue.png';
 
   constructor(private sensorService: SensorService, private dateService: DateService,
-              private goalsService: GoalsService) { }
+              private goalsService: GoalsService, private evntService: EventService) {
+                this.goalUpdated();
+               }
 
 
   ngOnInit() {
@@ -97,6 +100,21 @@ export class StepsCanvasComponent implements OnInit {
         console.log(this.stepCanvas);
       });
     });
+  }
+
+  goalUpdated() {
+    this.evntService.subscribe('goalUpdated', (data: any) => {
+      this.myGoals = data.goal;
+      this.myGoals.activeGoals.forEach(element => {
+        if (element.activity === 'Caminhada') {
+          this.goal = element.quantity;
+        }
+      });
+      if (this.goalPrevious !== this.goal) {
+        this.createDounutChart(this.stepCanvas);
+        this.goalPrevious = this.goal;
+      }
+    })
   }
 
   getDate() {

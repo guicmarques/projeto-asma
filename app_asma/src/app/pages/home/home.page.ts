@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { Goal } from '../../models/goal.model';
 import { DateService } from '../../services/date.service';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-home',
@@ -40,10 +41,11 @@ export class HomePage implements OnInit {
     inactiveGoals: []
   };
 
+
   constructor(private authService: AuthService, private userService: UserService,
               private sensorService: SensorService, private goalsService: GoalsService,
               private alertService: AlertService, private alertCtrl: AlertController,
-              private dateService: DateService) { }
+              private dateService: DateService, private eventService: EventService) { }
 
   ngOnInit() {
     this.getUser();
@@ -78,6 +80,9 @@ export class HomePage implements OnInit {
         element.endDate = dateEnd[2] + '/' + dateEnd[1];
       });
       console.log(this.myGoals.activeGoals);
+      this.eventService.publish('goalUpdated', {
+        goal: data,
+      });
     })
   }
 
