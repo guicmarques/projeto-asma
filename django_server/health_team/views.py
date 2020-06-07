@@ -141,7 +141,7 @@ def cadastroPaciente(request):
 
 
 @login_required
-def pacienteGraficos(request):
+def pacienteGraficos(request,id):
     #https://www.youtube.com/watch?v=vCX6Tpb9sP8
     #https://www.youtube.com/watch?v=B4Vmm3yZPgc
     #https://stackoverflow.com/questions/55832576/how-to-integrate-chart-js-in-django
