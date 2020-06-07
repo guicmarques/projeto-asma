@@ -212,7 +212,7 @@ def pacienteGraficos2(request,username):
         request,
         "logged/graphs-data-1.html",
         context={
-            'user_profile' : user_profile,
+            'user_data' : user_data,
             'plot_div': plot_div,
             'fig':fig2,
             'fig3':fig3
