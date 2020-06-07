@@ -33,7 +33,7 @@
             <span class="exercise-infos-key">Duração: </span>
             <span class="exercise-infos-value">{{ exercicio.tempo }}</span> minutos
           </div>
-          <button class="saiba-mais-btn">
+          <button class="saiba-mais-btn" [routerLink]="['./', exercicio.id]">
             <ion-icon name="ellipsis-vertical"></ion-icon>
           </button>
 
@@ -53,7 +53,7 @@
           </ion-card>
           <div class="grid-exercise-name">
             {{ exercise.nome }}
-            <button class="grid-info-btn">
+            <button class="grid-info-btn" [routerLink]="['./', exercise.id]">
               <ion-icon name="ellipsis-vertical"></ion-icon>
             </button>
           </div>

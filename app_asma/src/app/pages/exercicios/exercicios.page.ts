@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Animation, AnimationController } from '@ionic/angular';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { ExerciseService } from 'src/app/services/exercise.service';
 
 @Component({
   selector: 'app-exercicios',
@@ -23,52 +24,19 @@ export class ExerciciosPage implements OnInit {
 
   exercicios: any = [
     {
-      video: 'https://www.youtube.com/embed/T6Ftl5KfoYc',
-      nome: 'Embrasa',
-      repeticoes: 10,
-      tempo: 15,
-      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dignissim mollis sem, vitae gravida magna auctor vitae. Curabitur feugiat et nibh a tincidunt. Curabitur id nulla tellus. Nam nec orci felis.'
-    },
-    {
-      video: 'https://www.youtube.com/embed/I4hb1SqkQ_w',
-      nome: 'Te Liguei',
-      repeticoes: 8,
-      tempo: 20,
-      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dignissim mollis sem, vitae gravida magna auctor vitae. Curabitur feugiat et nibh a tincidunt. Curabitur id nulla tellus. Nam nec orci felis.'
-    },
-    {
-      video: 'https://www.youtube.com/embed/pZXcv8bcJaM',
-      nome: 'Um pouco de você',
-      repeticoes: 15,
-      tempo: 10,
-      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dignissim mollis sem, vitae gravida magna auctor vitae. Curabitur feugiat et nibh a tincidunt. Curabitur id nulla tellus. Nam nec orci felis.'
-    },
-    {
-      video: 'https://www.youtube.com/embed/qIOC6-jClWc',
-      nome: 'Café',
-      repeticoes: 20,
-      tempo: 5,
-      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dignissim mollis sem, vitae gravida magna auctor vitae. Curabitur feugiat et nibh a tincidunt. Curabitur id nulla tellus. Nam nec orci felis.'
-    },
-    {
-      video: 'https://www.youtube.com/embed/xT9DEweoXYo',
-      nome: 'Calma',
-      repeticoes: 15,
-      tempo: 3,
-      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dignissim mollis sem, vitae gravida magna auctor vitae. Curabitur feugiat et nibh a tincidunt. Curabitur id nulla tellus. Nam nec orci felis.'
-    },
-    {
-      video: 'https://www.youtube.com/embed/l5ulL5j3FYw',
-      nome: 'Alô',
-      repeticoes: 25,
-      tempo: 5,
-      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dignissim mollis sem, vitae gravida magna auctor vitae. Curabitur feugiat et nibh a tincidunt. Curabitur id nulla tellus. Nam nec orci felis.'
-    },
+      id: null,
+      video: '',
+      nome: '',
+      repeticoes: null,
+      tempo: null,
+      descricao: ''
+    }
   ];
 
-  constructor(private domSanitizer: DomSanitizer) { }
+  constructor(private domSanitizer: DomSanitizer, private exerciseService: ExerciseService) { }
 
   ngOnInit() {
+    this.exercicios = this.exerciseService.getAllExercises();
     this.getTrustUrl();
   }
 
