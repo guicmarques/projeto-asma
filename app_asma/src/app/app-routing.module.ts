@@ -18,6 +18,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
   {
+    path: 'tabs/diario/questionario',
+    loadChildren: () => import('./pages/diario/questionario/questionario.module').then( m => m.QuestionarioPageModule)
+  },
+  {
     path: 'tabs',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
     pathMatch: 'full'

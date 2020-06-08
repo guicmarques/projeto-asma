@@ -15,6 +15,7 @@ const routes: Routes = [
       {path: 'diario', loadChildren: '../diario/diario.module#DiarioPageModule'},
     ]
   },
+  {path: 'diario', redirectTo: '/tabs/diario', pathMatch: 'full'},
   {path: '', redirectTo: '/tabs/home', pathMatch: 'full'}
 ];
 

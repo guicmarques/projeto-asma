@@ -26,8 +26,6 @@ export class DiaryService {
                               'tosse': diaryPage.tosse, 'chiado': diaryPage.chiado, 'faltaAr': diaryPage.faltaAr,
                               'acordar': diaryPage.acordar, 'bombinha': diaryPage.bombinha}, {headers: header})
           .subscribe((data) => {
-            /*this.alertService.presentPopUp('Diário atualizado!', 'Suas respostas foram salvas com sucesso.')
-            resolve(data);*/
             resolve(data);
             setTimeout(() => {
               this.alertService.presentPopUp('Diário atualizado!', 'Suas respostas foram salvas com sucesso.')

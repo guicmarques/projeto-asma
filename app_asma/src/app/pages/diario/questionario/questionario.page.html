@@ -1,9 +1,91 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="questionnaireHeader">
-    <ion-title class="questionnaireTitle">Questionário de Controle da Asma (ACQ)</ion-title>
+    <ion-buttons class="btnContainer">
+      <ion-button routerLink=".." class="backBtn">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="questionnaireTitle">Questionário de Controle da Asma</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="questionnaireContent">
+<ion-content class="questionnaireContent" scroll-y="false">
+  <ion-slides pager="true" [options]="slideOpts" class="questionnaireSlides" #slides>
+    <ion-slide>
+      <ion-card class="introCard">
+        <ion-card-header class="introCardHeader">
+          <ion-card-title>Questionário de Controle da Asma (ACQ)</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="introCardContent">
+          <p class="introText">As perguntas a seguir visam avaliar os sintomas relacionados à asma nos últimos 7 dias</p>
+          <ion-button class="startBtn" (click)="nextSlide()" expand="block">Iniciar</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide *ngFor="let question of this.questions; let i = index">
+      <ion-card>
+        <ion-card-header class="cardHeader">
+          <ion-card-title class="cardTitle"> {{question}} </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="answersContainer">
+            <ion-radio-group [(ngModel)]="this.answers[i + 1]">        
+              <ion-item class="answer" lines="none">
+                <ion-label class="ion-text-wrap">{{this.choices[i + 1][0]}}</ion-label>
+                <ion-radio slot="start" [value]=0></ion-radio>
+              </ion-item>
+          
+              <ion-item class="answer" lines="none">
+                <ion-label class="ion-text-wrap">{{this.choices[i + 1][1]}}</ion-label>
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label class="ion-text-wrap">{{this.choices[i + 1][2]}}</ion-label>
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label class="ion-text-wrap">{{this.choices[i + 1][3]}}</ion-label>
+                <ion-radio slot="start" [value]=3></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label class="ion-text-wrap">{{this.choices[i + 1][4]}}</ion-label>
+                <ion-radio slot="start" [value]=4></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label class="ion-text-wrap">{{this.choices[i + 1][5]}}</ion-label>
+                <ion-radio slot="start" [value]=5></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label class="ion-text-wrap">{{this.choices[i + 1][6]}}</ion-label>
+                <ion-radio slot="start" [value]=6></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="previousBtn" (click)="prevSlide()" fill="outline">
+            <ion-icon name="chevron-back-outline" slot="start"></ion-icon>
+            Anterior
+          </ion-button>
+          <ion-button *ngIf="i < 6" class="nextBtn" (click)="nextSlide()">
+            <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+            Próximo
+          </ion-button>
+          <ion-button *ngIf="i == 6" class="sendBtn" (click)="sendAnswers()" 
+          [attr.disabled]="answers[1] == null || answers[2] == null || answers[3] == null ||
+          answers[4] == null || answers[5] == null ||answers[6] == null || answers[7] == null">
+            Enviar
+          </ion-button>
+        </div>
+      </ion-card>
+    </ion-slide>
+
+  </ion-slides>
 
 </ion-content>

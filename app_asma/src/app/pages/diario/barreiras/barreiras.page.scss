@@ -1,0 +1,62 @@
+.btnContainer {
+    position: absolute; 
+    top: 9%; 
+    left: -1.4%;
+}
+
+.backBtn {
+    --background: rgba(0, 0, 0, 0);
+    --box-shadow: 0;
+}
+
+.questionnaireHeader {
+    --background: #05b5a3;
+    --color: white;
+    text-align: center;
+}
+
+.questionnaireTitle {
+    font-size: 14px;
+}
+
+.questionnaireContent {
+    --background: #05b5a3;
+}
+
+.cardsContainer {
+    position: relative;
+}
+
+.card {
+    position: absolute;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: white;
+    border-radius: 25px;
+}
+
+.cardHeader {
+    font-size: 16px;
+    text-align: justify;
+    padding: 10% 10% 5% 10%;
+}
+
+.cardAnswers {
+    border-radius: 25px;
+}
+
+.answersContainer {
+    padding: 0;
+    border-radius: 25px;
+}
+
+.answer {
+    font-size: 14px;
+    --min-height: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+

@@ -1,0 +1,64 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="questionnaireHeader">
+    <ion-buttons class="btnContainer">
+      <ion-button routerLink=".." class="backBtn">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="questionnaireTitle">Questionário de Controle da Asma</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="questionnaireContent">
+  <div class="cardsContainer">
+
+    <div class="card" #Q1>
+      <div class="cardHeader">
+        Em média, durante os últimos sete dias, o quão frequentemente você se acordou por causa de sua asma, durante a noite? 
+      </div>
+      <div class="cardAnswers">
+        <ion-list class="answersContainer">
+          <ion-radio-group value="Q1">        
+            <ion-item class="answer" lines="none">
+              <ion-label>Nunca</ion-label>
+              <ion-radio slot="start" [value]=0></ion-radio>
+            </ion-item>
+        
+            <ion-item class="answer" lines="none">
+              <ion-label>Quase nunca</ion-label>
+              <ion-radio slot="start" [value]=1></ion-radio>
+            </ion-item>
+
+            <ion-item class="answer" lines="none">
+              <ion-label>Poucas vezes</ion-label>
+              <ion-radio slot="start" [value]=2></ion-radio>
+            </ion-item>
+
+            <ion-item class="answer" lines="none">
+              <ion-label>Várias vezes</ion-label>
+              <ion-radio slot="start" [value]=3></ion-radio>
+            </ion-item>
+
+            <ion-item class="answer" lines="none">
+              <ion-label>Muitas vezes</ion-label>
+              <ion-radio slot="start" [value]=4></ion-radio>
+            </ion-item>
+
+            <ion-item class="answer" lines="none">
+              <ion-label>Muitíssimas vezes</ion-label>
+              <ion-radio slot="start" [value]=5></ion-radio>
+            </ion-item>
+
+            <ion-item class="answer" lines="none">
+              <ion-label class="ion-text-wrap">Incapaz de dormir devido à asma</ion-label>
+              <ion-radio slot="start" [value]=6></ion-radio>
+            </ion-item>
+        
+          </ion-radio-group>
+        </ion-list>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

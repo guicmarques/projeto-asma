@@ -114,5 +114,4 @@ export class DiarioPage implements OnInit {
     this.alertService.presentNoButtonPopUp(cardTitle, this.description[cardSelected]);
   }
 
-  
 }
