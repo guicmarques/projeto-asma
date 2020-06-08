@@ -33,16 +33,15 @@
             }
           }
         }
+        $(document).ready(function() {
+            $('#dataTable').DataTable( {
+                "scrollY": 200,
+                "scrollX": true
+            } );
+        } );
+
     </script>
 
-    <style>
-        .table-fixed tbody{
-            height:50px;
-            overflow-y:auto;
-            width: 100%;
-        }
-
-    </style>
 
 </head>
 
