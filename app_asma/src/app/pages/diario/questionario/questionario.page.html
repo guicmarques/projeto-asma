@@ -69,13 +69,11 @@
           </ion-list>
         </ion-card-content>
         <div class="btnGroup">
-          <ion-button class="previousBtn" (click)="prevSlide()" fill="outline">
-            <ion-icon name="chevron-back-outline" slot="start"></ion-icon>
-            Anterior
+          <ion-button class="previousBtn" (click)="prevSlide()">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
           </ion-button>
           <ion-button *ngIf="i < 6" class="nextBtn" (click)="nextSlide()">
-            <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-            Próximo
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
           </ion-button>
           <ion-button *ngIf="i == 6" class="sendBtn" (click)="sendAnswers()" 
           [attr.disabled]="answers[1] == null || answers[2] == null || answers[3] == null ||

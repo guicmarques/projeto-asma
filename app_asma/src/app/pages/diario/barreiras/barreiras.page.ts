@@ -6,6 +6,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./barreiras.page.scss'],
 })
 export class BarreirasPage implements OnInit {
+  motives = [
+    'Não tenho interesse.',
+    'Falta de tempo.',
+    'Sinto que não tenho energia ou disposição.',
+    'Tenho medo de sentir falta de ar.',
+    'Não tenho companhia ou incentivo de amigos/família.',
+    'Não tenho dinheiro.',
+    'Tenho muitas coisas para fazer.',
+    'Não tenho um local seguro disponível.',
+    'Por causa do clima (por exemplo: frio, calor, chuva).',
+    'Não tenho equipamentos para praticar.'
+  ];
+
+  type = [
+    'Fatores pessoais',
+    'Fatores pessoais',
+    'Fatores pessoais',
+    'Fatores pessoais',
+    'Fatores sociais',
+    'Fatores sociais',
+    'Fatores sociais',
+    'Fatores ambientais',
+    'Fatores ambientais',
+    'Fatores ambientais'
+  ];
 
   constructor() { }
 

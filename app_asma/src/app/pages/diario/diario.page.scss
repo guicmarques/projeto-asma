@@ -5,7 +5,8 @@
 .dateDescr {
     margin-top: 50px;
     margin-bottom: 10px;
-    font-size: 22px;
+    font-size: 20px;
+    font-size: 5.4vw;
 }
 
 .daysName {
@@ -21,7 +22,7 @@
 .availDay {
     display: inline-block;
     font-size: 15px;
-    line-height: 30px;
+    height: 35px;
     width: 35px;
     text-align: center;
     background-color: white;
@@ -72,7 +73,7 @@ button {
 .infoCard {
     display: inline-block;
     width: 30px;
-    line-height: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: #ffb546;
     color: white;

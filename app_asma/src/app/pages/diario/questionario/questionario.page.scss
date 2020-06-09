@@ -126,15 +126,18 @@ ion-radio {
 
 .previousBtn {
     --color: #f0892a;
-    --border-color: #f0892a;
+    --background: rgba(255, 255, 255, 0);
+    --box-shadow: 0;
     font-size: 12px;
-    margin-right: 6%;
+    margin-right: 20%;
 
 }
 
 .nextBtn {
-    --background: #f0892a;
-    margin-left: 6%;
+    --color: #f0892a;
+    --background: rgba(255, 255, 255, 0);
+    --box-shadow: 0;
+    margin-left: 20%;
     font-size: 12px;
 }
 
