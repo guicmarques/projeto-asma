@@ -4,7 +4,7 @@ import { User } from './../../models/user.model';
 import { UserService } from './../../services/user.service';
 import { AuthService } from './../../services/auth.service';
 import { AlertService } from './../../services/alert.service';
-
+import {GlobalUser} from './global-user'
 
 @Component({
   selector: 'app-perfil',
@@ -13,7 +13,7 @@ import { AlertService } from './../../services/alert.service';
 })
 
 export class PerfilPage implements OnInit {
-  user: any;/* = {
+ /* = {
     nome: "Bill",
     sobrenome: "Gates",
     rg: "010010101",
@@ -41,23 +41,25 @@ export class PerfilPage implements OnInit {
   constructor(private animationCtrl: AnimationController,
               private userService: UserService,
               private authService: AuthService,
-              private alertService: AlertService) { }
-
-  ngOnInit() { 
-    this.userService.getUser().then(user => {
-      this.user = user;
-      this.userDefined = true;
-      console.log(user);
-    });
-  }
-  updateUser(){
-    this.userService.getUser().then(user => {
-      this.user = user;
-      this.userDefined = true;
-      console.log(user);
-    });
+              private alertService: AlertService,
+              public globalUser: GlobalUser) { }
 
 
+
+ngOnInit() { 
+  console.log(this.userDefined);
+  this.userService.getUser().then(user => {
+    this.globalUser.user = user;
+    this.userDefined = true;
+    console.log(user);
+  });
+}
+updateUser(){
+  this.userService.getUser().then(user => {
+    this.globalUser.user = user;
+    this.userDefined = true;
+    console.log(user);
+  });
   }
   openPopup(){
     this.alertService.presentPopUp('Oops!', 'Função ainda não impementada.');

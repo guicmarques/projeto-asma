@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border profile-header">
-  <ion-toolbar>
+  <ion-toolbar class="ion-no-border" >
     <ion-title class="profile-title">
-      <div class="title-text">Meu perfil</div>
+      <div class="title-text">Meu Perfil</div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,13 +12,13 @@
 
     <div class="profile-forms"></div>
         <ion-avatar class="profile-img">
-         <ion-img [src]="user.imagem"  *ngIf="(userDefined)&&(user.imagem!== '');else semImagem" ></ion-img>
+         <ion-img [src]="globalUser.user.imagem"  *ngIf="(userDefined)&&(globalUser.user.imagem!== '');else semImagem" ></ion-img>
          <ng-template #semImagem>
          <ion-img src="../../../assets/images/robot_icon.png"></ion-img>
         </ng-template>
        </ion-avatar> 
        <div class="profile-username">
-       <ion-label class="profile-username"  *ngIf="userDefined">{{user.nome}} {{user.sobrenome}}</ion-label>
+       <ion-label class="profile-username"  *ngIf="userDefined">{{globalUser.user.nome}} {{globalUser.user.sobrenome}}</ion-label>
        </div>
     
 
@@ -36,10 +36,10 @@
 
           <ion-slide>
             <div data-swiper-parallax-y="70%">
-              <ion-img src="../../../assets/images/achievements/running_achievement.svg" class= "achievement-img" size="large"></ion-img>
+              <ion-img src="../../../assets/images/achievements/achievement_metas.svg" class= "achievement-img" size="large"></ion-img>
               
               <ion-text class="achievement-name">
-                Explorador
+                Metas
               </ion-text>           
               <br>
               <ion-button fill="clear" class="get-info-button" (onclick)="openPopup()">
@@ -51,10 +51,10 @@
           </ion-slide>
           <ion-slide>
             <div data-swiper-parallax-y="70%">
-              <ion-img src="../../../assets/images/achievements/achievement_research.png" class= "achievement-img" size="large"></ion-img>
+              <ion-img src="../../../assets/images/achievements/achievement_passos.svg" class= "achievement-img" size="large"></ion-img>
               
               <ion-text class="achievement-name">
-                Explorador
+                Passos
               </ion-text>           
               <br>
               <ion-button fill="clear" class="get-info-button" (onclick)="openPopup()">
@@ -67,9 +67,9 @@
           </ion-slide>
           <ion-slide>
             <div data-swiper-parallax-y="70%">
-            <ion-img src="../../../assets/images/achievements/achievement_triumph.png" class= "achievement-img" size="large"></ion-img>
+            <ion-img src="../../../assets/images/achievements/achievement_diario.svg" class= "achievement-img" size="large"></ion-img>
             <ion-text class="achievement-name">
-              Triunfante
+              Diario
             </ion-text>           
             <br>
             <ion-button fill="clear" class="get-info-button" (onclick)="openPopup()">
@@ -81,9 +81,9 @@
           </ion-slide>
           <ion-slide>
             <div data-swiper-parallax-y="70%">
-              <ion-img src="../../../assets/images/achievements/achievement_fist.png" class= "achievement-img" size="large"></ion-img>
+              <ion-img src="../../../assets/images/achievements/achievement_treino.svg" class= "achievement-img" size="large"></ion-img>
               <ion-text class="achievement-name">
-                Explorador
+                Treino
               </ion-text>           
               <br>
               <ion-button fill="clear" class="get-info-button" (onclick)="openPopup()">
@@ -95,9 +95,9 @@
           </ion-slide>
           <ion-slide>
             <div data-swiper-parallax-y="70%">
-              <ion-img src="../../../assets/images/achievements/running_achievement.svg" class= "achievement-img" size="large"></ion-img>
+              <ion-img src="../../../assets/images/achievements/achievement_questionario.svg" class= "achievement-img" size="large"></ion-img>
               <ion-text class="achievement-name">
-                Explorador
+               Questionário
               </ion-text>           
               <br>
               <ion-button fill="clear" class="get-info-button" (onclick)="openPopup()">
@@ -155,9 +155,7 @@
       <ion-fab-button routerLink="./editar-perfil" data-desc="Editar Perfil">
         <ion-icon name="create-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button data-desc="Atualizar Perfil" (click)="updateUser()">
-        <ion-icon name="refresh-outline"></ion-icon>
-      </ion-fab-button>
+      
     </ion-fab-list>
   </ion-fab>
 
