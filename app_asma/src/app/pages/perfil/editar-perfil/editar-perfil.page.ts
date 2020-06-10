@@ -4,7 +4,7 @@ import { User } from '../../../models/user.model';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth.service';
 import { AlertService } from '../../../services/alert.service';
-import {GlobalUser} from '../global-user'
+
 
 
 @Component({
@@ -53,8 +53,7 @@ export class EditarPerfilPage implements OnInit {
               private userService: UserService,
               private AuthService: AuthService,
               private alertCtrl: AlertController,
-              private alertService: AlertService,
-              private globalUser: GlobalUser
+              private alertService: AlertService
                ) { }
 
   ngOnInit() { 
@@ -150,7 +149,7 @@ export class EditarPerfilPage implements OnInit {
     this.userService.putUser(this.dataSent);
     this.userService.getUser().then(user => {
       this.user = user;
-      this.globalUser.user = user;
+      this.user = user;
       this.newData= this.emptyData;
     });
     
