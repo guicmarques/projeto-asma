@@ -384,8 +384,8 @@ def getDaily(user):
 
 
 def getExercises():
-    with open('media/exercicios.json') as json_file:
-        data = json.load(json_file)
+    with open('media/exercicios.json', encoding="ISO-8859-1") as json_file:
+        data = json.load(json_file, ensure)
 
     return data
 
