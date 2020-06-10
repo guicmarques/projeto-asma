@@ -262,3 +262,41 @@ class Exercises(APIView):
         exercicios = handleUserData.getExercises()
 
         return Response(exercicios)
+
+
+class Milestones(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        if "info" in request.data:
+            weekly, daily, steps = handleUserData.getMilestonesInfo(
+                request.user)
+            data = {"weekly": weekly, "daily": daily, "steps": steps}
+
+            return Response(data=data)
+        elif "find" in request.data:
+            data = handleUserData.getMilestones(request.user)
+            return Response(data=data)
+
+    def post(self, request):
+        required = ["name", "level", "quantity"]
+        if all(item in request.data.keys() for item in required):
+            activity = request.data["name"]
+            level = request.data["level"]
+            quantity = request.data["quantity"]
+            created = handleUserData.createMilestone(
+                request.user, name,  level, quantity)
+
+            if created == True:
+                request_status = status.HTTP_200_OK
+            else:
+                request_status = status.HTTP_400_BAD_REQUEST
+                logging.warn(f"MILESTONES created error: {created}")
+
+        else:
+            created = "There are missing keys in request"
+            request_status = status.HTTP_400_BAD_REQUEST
+
+        return Response({"created": created}, status=request_status)
+
+    # def post(self, request):

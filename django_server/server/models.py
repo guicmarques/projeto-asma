@@ -78,24 +78,6 @@ class FitbitProfile(models.Model):
     userId = models.CharField(max_length=50, blank=True)
 
 
-class PracticeBarriers(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField(blank=True, null=True)
-    # fatores pessoais
-    interesse = models.CharField(max_length=1, blank=True, null=True)
-    tempo = models.CharField(max_length=1, blank=True, null=True)
-    energia = models.CharField(max_length=1, blank=True, null=True)
-    faltaAr = models.CharField(max_length=1, blank=True, null=True)
-    # fatores sociais
-    companhia = models.CharField(max_length=1, blank=True, null=True)
-    dinheiro = models.CharField(max_length=1, blank=True, null=True)
-    coisas = models.CharField(max_length=1, blank=True, null=True)
-    # fatores ambientais
-    seguranca = models.CharField(max_length=1, blank=True, null=True)
-    clima = models.CharField(max_length=1, blank=True, null=True)
-    equipamentos = models.CharField(max_length=1, blank=True, null=True)
-
-
 class Goal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     activity = models.CharField(max_length=100, blank=True)
@@ -103,3 +85,27 @@ class Goal(models.Model):
     unit = models.CharField(max_length=20, blank=True)
     startDate = models.DateField(blank=True, null=True)
     endDate = models.DateField(blank=True, null=True)
+
+
+# class PracticeBarriers(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     date = models.DateField(blank=True, null=True)
+#     # fatores pessoais
+#     interesse = models.CharField(max_length=1, blank=True, null=True)
+#     tempo = models.CharField(max_length=1, blank=True, null=True)
+#     energia = models.CharField(max_length=1, blank=True, null=True)
+#     faltaAr = models.CharField(max_length=1, blank=True, null=True)
+#     # fatores sociais
+#     companhia = models.CharField(max_length=1, blank=True, null=True)
+#     dinheiro = models.CharField(max_length=1, blank=True, null=True)
+#     coisas = models.CharField(max_length=1, blank=True, null=True)
+#     # fatores ambientais
+#     seguranca = models.CharField(max_length=1, blank=True, null=True)
+#     clima = models.CharField(max_length=1, blank=True, null=True)
+#     equipamentos = models.CharField(max_length=1, blank=True, null=True)
+
+class Milestone(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, blank=True)
+    level = models.CharField(max_length=10, blank=True)
+    quantity = models.CharField(max_length=10, blank=True)

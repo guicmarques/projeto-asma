@@ -73,13 +73,18 @@ $ python manage.py runsslserver 0.0.0.0:8000
     - Body: ```{"date": ["yyyy-mm-dd", ...] ou "yyyy-mm-dd"}``` - se date for passada como uma string vazia, retornará o dia de hoje, se for passada como uma lista, retornará todos os dias como chaves do dicionário e se for passada uma string, retornará o dia correspondente
     - Response: o formato especificado se encontra na seção "Formato do payload Fitbit Activity"
 
-    **DEPRECADO - utilize o outro método para dados reais**
+    **DEPRECADO - utilize o método acima para dados reais**
     - Body: ```{"date": dia/mês/ano, "category": alguma categoria de dados da fitbit}``` - se for passada uma string vazia como category e/ou date, não haverá filtragem do parâmetro, obtendo todas as entradas - em teste, só existem as categorias ```heart-rate``` e ```daily-steps```
     - Response: ```{"data":[{"date": data, "category": categoria, "data": ["nome da coluna": dados, ...}, ...]}```
 
 - /rest/goals/ - Cria uma meta do usuário:
     - Authentication: Bearer ```access_token```
     - Body: ```{"activity": Nome da atividade, "quantity": int(quantidade), "unit": str(unidade de medida), "daysToEnd": dias até o fim da meta}``` - só pode ser criada uma meta por nome de atividade, os requests seguintes com o mesmo nome serão considerados updates da meta
+    - Response ```{"created": True ou mensagem de erro}```
+
+- /rest/milestones/ - Cria uma nova conquista (só pode haver uma conquista com o mesmo nome)
+    - Authentication: Bearer ```access_token```
+    - Body: ```{"name": nome da conquista, "level": nivel da conquista (máx. 10 digitos), "quantity": quantidade para obter a conquista (máx. 10 digitos)}```
     - Response ```{"created": True ou mensagem de erro}```
 
 ### GET requests:
@@ -90,7 +95,7 @@ $ python manage.py runsslserver 0.0.0.0:8000
 
 - /rest/questionnaire
     - Authentication: Bearer ```access_token```
-    - Response: ```{"dates": [lista de datas no formato yyyy-mm-dd]}```
+    - Response: ```{"dates": ["yyyy-mm-dd", ...]}```
 
 - /rest/goals/ - Cria uma meta do usuário:
     - Authentication: Bearer ```access_token```
@@ -103,6 +108,16 @@ $ python manage.py runsslserver 0.0.0.0:8000
 - /rest/exercises - Obtém exercícios à partir de um arquivo JSON
     - Authentication: Bearer ```access_token```
     - Response: será retornado o dicionário presente em ```media/exercicios.json```
+
+- /rest/milestones/ - Obtém dados de conquista de acordo com o valor passado no body
+    - Authentication: Bearer ```access_token```
+    - Body: ```{"info": True}``` - será retornados dados sobre a performance da pessoa
+    - Response ```{"weekly": máximo de semanas consecutivas respondendo questionário semanal, "daily": máximo de dias consecutivos respondendo questionário diário, "steps": máximo de dias consecutivos batendo meta de passos}```
+    
+    **ou**
+    
+    - Body: ```{"find": True}``` - serão retornados as conquistas do usuário
+    - Response ```{nome da conquista 1: {"level": nivel da conquista, "quantity": quantidade para obter a conquista}, nome da conquista 2: ...}```
 
 
 ### PUT requests:

@@ -1,9 +1,12 @@
 import base64
 import json
+import operator
 import os
-from datetime import datetime, timedelta
+from collections import Counter
+from datetime import date, datetime, timedelta
 from enum import Enum
 
+import numpy as np
 import pandas as pd
 from django.contrib.auth.models import Group, Permission, User
 
@@ -343,6 +346,8 @@ def createDaily(user, date, notes, pico, tosse, chiado, faltaAr, acordar, bombin
                 control.pico1 = pico[0]
                 control.pico2 = pico[1]
                 control.pico3 = pico[2]
+            elif type(pico) == list and len(pico) == 1:
+                control.pico1 = pico[0]
             else:
                 return "'pico' should be a 3 item array"
             control.tosse = True if tosse == 'true' or tosse == True else False
@@ -381,5 +386,115 @@ def getDaily(user):
 def getExercises():
     with open('media/exercicios.json') as json_file:
         data = json.load(json_file)
+
+    return data
+
+
+def consecutiveDates(dates):
+    dates = sorted([datetime.strptime(date, "%Y-%m-%d").date()
+                    for date in dates])
+
+    consecutive = 0
+
+    if len(dates) > 0:
+        first_date = dates[0]
+        dates_delta = [(date - first_date).days for date in dates]
+
+        # uses index to decrement delta
+        sequence = [e - i for i, e in enumerate(dates_delta)]
+        # counts each value in list
+        counter = Counter(sequence)
+        # gets max key
+        max_key = max(counter.items(), key=operator.itemgetter(1))[0]
+        # gets max key value
+        consecutive = counter[max_key]
+
+        # for i, seq in enumerate(sequence):
+        #     if start == None and seq == max_key:
+        #         start = dates[i]
+        #     if seq == max_key:
+        #         end = dates[i]
+
+    return consecutive
+
+
+def consecutiveWeeks(dates):
+    dates = sorted([datetime.strptime(date, "%Y-%m-%d").date()
+                    for date in dates])
+    consecutive = 0
+
+    if len(dates) > 0:
+        week_numbers = [date.isocalendar()[1] for date in dates]
+        week_numbers = list(np.unique(week_numbers))
+
+        # uses index to decrement delta
+        sequence = [e - i for i, e in enumerate(week_numbers)]
+        # counts each value in list
+        counter = Counter(sequence)
+        # gets max key
+        max_key = max(counter.items(), key=operator.itemgetter(1))[0]
+        # gets max key value
+        consecutive = counter[max_key]
+
+    return consecutive
+
+
+def getConsecStepsDays(user):
+    goals = Goal.objects.filter(user=user, activity="Caminhada")
+    maxDays = 0
+    for goal in goals:
+        start = goal.startDate
+        end = goal.endDate
+        noSteps = goal.quantity
+        dateRange = pd.date_range(start=start, end=end).to_list()
+
+        fitbitData = getFitbitData(user, dateRange)
+        steps = {date: fitbitData[date]["summary"]["steps"]
+                 for date in fitbitData}
+
+        completeDays = [date for date in steps if steps[date] > noSteps]
+        consecDays = consecutiveDates(completeDays)
+
+        if consecDays > maxDays:
+            maxDays = consecDays
+
+    return maxDays
+
+
+def getMilestonesInfo(user):
+    # questionario semanal
+    weeklyDates = getACQ(user)
+    consecWeekly = consecutiveWeeks(weeklyDates)
+    # questionario diario
+    dailyDates = list(getDaily(user).keys())
+    consecDaily = consecutiveDates(dailyDates)
+    # dias que andou 5000 passos
+    consecSteps = getConsecStepsDays(user)
+
+    return consecWeekly, consecDaily, consecSteps
+
+
+def createMilestone(user, name, level, quantity):
+    try:
+        milestone, _ = Milestone.objects.get_or_create(user=user, name=name)
+        try:
+            milestone.level = level
+            milestone.quantity = quantity
+            milestone.save()
+            return True
+        except Exception as e:
+            return str(e)
+    except Exception as e:
+        return str(e)
+
+
+def getMilestones(user):
+    milestones = Milestone.objects.filter(user=user)
+    data = {}
+    for milestone in milestones:
+        name = milestone.name
+        level = milestone.level
+        quantity = milestone.quantity
+        data[name] = {"level": level, "quantity": quantity}
 
     return data
