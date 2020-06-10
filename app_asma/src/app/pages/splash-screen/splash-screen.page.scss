@@ -1,0 +1,23 @@
+ion-content {
+    --background: white;
+}
+
+.logo {
+    position: relative;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.imagem {
+    height: 16em;
+    width: 16em;
+}
+
+.spinner {
+    --color: rgb(35, 185, 235);
+    position: absolute;
+    left: 50%;
+    bottom: 30%;
+}

@@ -29,9 +29,11 @@ export class AuthService {
         this.token = token;
         this.isLoggedIn = true;
         console.log(this.token["refresh"]);
-        this.storage.set('credenciais', {username: username, password: password}).then(() => {this.getCredenciais()});
+        this.storage.set('credenciais', {username: username, password: password}).then(() => {
+          this.getCredenciais();
+          resolve(token);
+        });
         //this.router.navigate(['/tabs'])
-        resolve(token);
       }, error => {
         console.log(error);
         this.alertService.presentPopUp('Problema ao conectar', 'CPF ou senha inválidos');
@@ -45,6 +47,7 @@ export class AuthService {
       (data) => {
         console.log(data);
         this.credenciais = data;
+        console.log(this.credenciais);
       }
     );
   }
@@ -97,11 +100,14 @@ export class AuthService {
   }
 
   logout() {
-    this.storage.remove('credendiais');
-    this.isLoggedIn = false;
-    this.credenciais = null;
-    delete this.token;
-    this.router.navigateByUrl('/login');
+    this.storage.remove('credenciais').then(() => {
+      this.isLoggedIn = false;
+      this.credenciais = null;
+      delete this.token;
+      this.router.navigateByUrl('/login');
+      console.log(this.credenciais);
+    });
+    
   }
 
 }

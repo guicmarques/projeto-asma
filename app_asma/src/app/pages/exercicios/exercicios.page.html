@@ -18,9 +18,9 @@
 
   <ion-slides pager="false" [options]="slideOpts" *ngIf="filterMode === 'slides'">
     <ion-slide class="exercise-slide" *ngFor="let exercicio of this.exercicios">
-      <ion-card>
+      <ion-card class="slide-card">
         <ion-card-header class="exercise-card-header">
-          <iframe width="100%" height="340" [src]="exercicio.trustedVideoUrl" frameborder="0" 
+          <iframe width="100%" height="300" [src]="exercicio.trustedVideoUrl" frameborder="0" 
             allow="autoplay; encrypted-media" allowfullscreen>
           </iframe>
         </ion-card-header>

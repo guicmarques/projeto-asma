@@ -6,9 +6,10 @@ const routes: Routes = [
   //{path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule'},
   {
     path: '', 
-    redirectTo: 'login', 
+    redirectTo: 'splash-screen', 
     pathMatch: 'full'
   },
+  {path: '', loadChildren: './pages/login/login.module#LoginPageModule'},
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
@@ -22,11 +23,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/diario/questionario/questionario.module').then( m => m.QuestionarioPageModule)
   },
   {
+    path: 'splash-screen',
+    loadChildren: () => import('./pages/splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
+  },
+  {
     path: 'tabs',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
     pathMatch: 'full'
   },
   {path: '', loadChildren: './pages/tabs/tabs.module#TabsPageModule'},
+
 ];
 
 @NgModule({
