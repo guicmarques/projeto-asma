@@ -274,9 +274,13 @@ class Milestones(APIView):
             data = {"weekly": weekly, "daily": daily, "steps": steps}
 
             return Response(data=data)
+
         elif "find" in request.data:
             data = handleUserData.getMilestones(request.user)
             return Response(data=data)
+        else:
+            return Response({"error": "You must select either info or find"},
+                            status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request):
         required = ["name", "level", "quantity"]

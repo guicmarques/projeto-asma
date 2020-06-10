@@ -13,7 +13,7 @@ from django.contrib.auth.models import Group, Permission, User
 import server.settings as settings
 from server.fitbitHandler import getActivities, updateFbProfile
 from server.models import (AsthmaControlQuestionnaire, DailyControl,
-                           FitbitFile, Goal, UserProfileInfo)
+                           FitbitFile, Goal, Milestone, UserProfileInfo)
 
 
 def createUser(userData):
