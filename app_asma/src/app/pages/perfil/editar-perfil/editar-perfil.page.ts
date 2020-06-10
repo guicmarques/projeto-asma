@@ -15,11 +15,25 @@ import {GlobalUser} from '../global-user'
 
 export class EditarPerfilPage implements OnInit {
   user: any;
+  
   classChange = [false,false,false,false,false];
   dataSent: User;
   showhelp=[false,false,false];
   userDefined: boolean = false;
   newData: User = {
+    nome: '',
+    sobrenome: '',
+    rg: null,
+    username: null,
+    peso: null,
+    altura: null,
+    email: '',
+    telefone: null,
+    imagem: '',
+    token: '',
+    tokenValidado: true,
+  }
+  emptyData: User = {
     nome: '',
     sobrenome: '',
     rg: null,
@@ -111,6 +125,23 @@ export class EditarPerfilPage implements OnInit {
     this.showhelp[i]= show;
 
   }
+  clearUser(user){
+    user = {
+      nome: '',
+      sobrenome: '',
+      rg: null,
+      username: null,
+      peso: null,
+      altura: null,
+      email: '',
+      telefone: null,
+      imagem: '',
+      token: '',
+      tokenValidado: true,
+    }
+  
+
+  }
 
   saveChanges(){
     console.log(this.newData);
@@ -120,8 +151,7 @@ export class EditarPerfilPage implements OnInit {
     this.userService.getUser().then(user => {
       this.user = user;
       this.globalUser.user = user;
-      console.log(user);
-      this.newData = this.user;
+      this.newData= this.emptyData;
     });
     
 
