@@ -88,9 +88,13 @@ $ python manage.py runsslserver 0.0.0.0:8000
     - Authentication: Bearer ```access_token```
     - Response: ```{"username": cpf, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "imagem": .jpg em base64, "token": token do HC, "tokenValidado": bool}``` ou ```{"username": cpf, "email": email, "tokenValidado": bool}``` se as outras informações não estiverem presentes
 
+- /rest/questionnaire
+    - Authentication: Bearer ```access_token```
+    - Response: ```{"dates": [lista de datas no formato yyyy-mm-dd]}```
+
 - /rest/goals/ - Cria uma meta do usuário:
     - Authentication: Bearer ```access_token```
-    - Response ```{"activeGoals": [{"activity": nome da atividade, "quantity": quantidade, "unit": unidade de medida, "startDate": dia em que a meta foi criada, "endDate": dia final da meta}, ...], "inactiveGoals": {{"activity": nome da atividade, "quantity": quantidade, "unit": unidade de medida, "startDate": data em que a meta foi criada, "endDate": data final da meta}, ...]}```
+    - Response: ```{"activeGoals": [{"activity": nome da atividade, "quantity": quantidade, "unit": unidade de medida, "startDate": dia em que a meta foi criada, "endDate": dia final da meta}, ...], "inactiveGoals": {{"activity": nome da atividade, "quantity": quantidade, "unit": unidade de medida, "startDate": data em que a meta foi criada, "endDate": data final da meta}, ...]}```
 
 - /rest/daily/ - Cria uma meta do usuário:
     - Authentication: Bearer ```access_token```

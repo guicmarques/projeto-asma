@@ -212,6 +212,16 @@ def createACQ(user, answers):
         return str(e)
 
 
+def getACQ(user):
+    dates = []
+
+    questionnaires = AsthmaControlQuestionnaire.objects.filter(user=user)
+    for quest in questionnaires:
+        dates.append(quest.date.strftime("%Y-%m-%d"))
+
+    return sorted(dates)
+
+
 def getFitbitData(user, dates):
     activities = {}
     # TESTE COM AUTENTICAÇÃO DO MICHELET

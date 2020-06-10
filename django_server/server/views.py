@@ -102,6 +102,11 @@ class Questionnaire(APIView):
 
         return Response({"created": created}, status=request_status)
 
+    def get(self, request):
+        dates = handleUserData.getACQ(request.user)
+
+        return Response({"dates": dates}, status=status.HTTP_200_OK)
+
 
 class Daily(APIView):
     permission_classes = (IsAuthenticated,)
