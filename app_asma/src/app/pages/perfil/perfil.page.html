@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border profile-header">
-  <ion-toolbar class="ion-no-border" >
+  
     <ion-title class="profile-title">
       <div class="title-text">Meu Perfil</div>
     </ion-title>
-  </ion-toolbar>
+  
 </ion-header>
 
 <ion-content scrollY="false">
@@ -27,9 +27,11 @@
     <br>
     <ion-card class="achievements-card">
     <div  class="achievements-title">
+    <ion-card-header>
     <ion-text ><ion-icon name="reorder-two-outline"></ion-icon>
       CONQUISTAS  <ion-icon name="reorder-two-outline"></ion-icon>
     </ion-text>
+    </ion-card-header>
     </div>
      
       <ion-slides [options]="slideOpts" >
