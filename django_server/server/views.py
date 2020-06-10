@@ -281,11 +281,11 @@ class Milestones(APIView):
     def post(self, request):
         required = ["name", "level", "quantity"]
         if all(item in request.data.keys() for item in required):
-            activity = request.data["name"]
+            name = request.data["name"]
             level = request.data["level"]
             quantity = request.data["quantity"]
             created = handleUserData.createMilestone(
-                request.user, name,  level, quantity)
+                request.user, name, level, quantity)
 
             if created == True:
                 request_status = status.HTTP_200_OK
