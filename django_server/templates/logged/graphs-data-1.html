@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Cadastro</title>
+    <title>Blank Page - Brand</title>
     <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="/static/assets/fonts/fontawesome-all.min.css">
@@ -63,15 +63,45 @@
                     </ul>
             </div>
             </nav>
-            <div class="container col-xs-12" id="cadastroPaciente">
-                <h3 class="text-dark mb-1">Cadastro de Pacientes</h3>
-                <form class="form-horizontal"enctype="multipart/form-data" method="POST">
-                    {% csrf_token %}
-                    {{ user_form.as_p }}
-                    {{ profile_form.as_p }}
-                    <input hidden type="submit" name="" value="Cadastrar">
-                    <div class="text-right"><button class="btn btn-primary" type="submit" name="">Cadastrar Paciente</button></div>
-                </form>
+            <div class="container col-md-12" id="graph">
+                <div class="row">
+                    <h1>{{user_data.nome}} {{user_data.sobrenome}} - {{user_data.user}}</h1>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="text-center">Telefone:  {{user_data.telefone}}</p>
+                    </div>
+                    <div class="col">
+                        <p class="text-center">Altura: {{user_data.altura}}</p>
+                    </div>
+                    <div class="col">
+                        <p class="text-center">Peso: {{user_data.peso}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container col-md-12" id="graph">
+                <div >
+                    <div class="row"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% autoescape off %}
+                            {{ plot_div }}
+                            {% endautoescape %}
+                        </div>
+                        <div class="col-md-6">
+                            {% autoescape off %}
+                            {{ fig }}
+                            {% endautoescape %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            {% autoescape off %}
+                            {{ fig3 }}
+                            {% endautoescape %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <footer class="sticky-footer">

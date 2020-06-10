@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Brand</title>
+    <title>Table</title>
     <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="/static/assets/fonts/fontawesome-all.min.css">
@@ -33,7 +33,22 @@
             }
           }
         }
+        $(document).ready(function() {
+            $('#dataTable').DataTable( {
+                "scrollY": 200,
+                "scrollX": true
+            } );
+        } );
+
     </script>
+    
+    <style>
+        .scrollable{
+         height: 100px;
+         overflow: scroll;
+    }
+
+    </style>
 
 </head>
 
@@ -95,15 +110,15 @@
                                 <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" id="myInput" onkeyup="myFunction()" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
                             </div>
                         </div>
-                        <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                        <div class="tableFixHead table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info" style="tbody{overflow-y: scroll;height: 200px; width: 100%;position: absolute;}">
                             <table class="table dataTable my-0" id="dataTable">
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
-                                        <th>E-mail</th>
+                                        <th>RG</th>
                                         <th>Telefone</th>
-                                        <th>idade</th>
-                                        <th>rgHC</th>
+                                        <th>Peso</th>
+                                        <th>Altura</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -114,69 +129,15 @@
                                         <td>33</td>
                                         <td>00000000000<br></td>
                                     </tr>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Angelica Ramos</a></td>
-                                        <td>a.a@a.com<br></td>
-                                        <td>00000000000<br></td>
-                                        <td>47</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Ashton Cox</a></td>
-                                        <td>ad.a@a.com<br></td>
-                                        <td>00000000000<br></td>
-                                        <td>66</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Bradley Greer</a></td>
-                                        <td>ac.a@a.com<br></td>
-                                        <td>00000000000<br></td>
-                                        <td>41</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Brenden Wagner</a></td>
-                                        <td>ab.a@a.com<br></td>
-                                        <td>00000000000<br></td>
-                                        <td>28</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Brielle Williamson</a></td>
-                                        <td>aa.a@a.com<br></td>
-                                        <td>00000000000<br></td>
-                                        <td>61</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Bruno Mars</a><br></td>
-                                        <td>a.a@a.com<br></td>
-                                        <td>00000000000<br></td>
-                                        <td>38</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Caesar Vance</a></td>
-                                        <td>a.a@a.com<br></td>
-                                        <td>00000000000<br></td>
-                                        <td>21</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Cara Stevens</a></td>
-                                        <td>a.a@a.com<br></td>
-                                        <td>00000000000<br></td>
-                                        <td>46</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Cedric Kelly</a></td>
-                                        <td>a.a@a.com<br></td>
-                                        <td>00000000000<br></td>
-                                        <td>22</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
+                                    {% for linha in lista %}
+                                        <tr>
+                                            <td><a href="/health_team/graphs/{{linha.user}}" target="_blank">{{linha.nome}} {{linha.sobrenome}}</a></td>
+                                            <td>{{linha.rg}}<br></td>
+                                            <td>{{linha.telefone}}<br></td>
+                                            <td>{{linha.peso}}</td>
+                                            <td>{{linha.altura}}<br></td>
+                                        </tr>
+                                    {% endfor %}
                                 </tbody>
                                 <tfoot>
                                     <tr></tr>
