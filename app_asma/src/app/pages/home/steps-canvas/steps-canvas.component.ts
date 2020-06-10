@@ -126,6 +126,7 @@ export class StepsCanvasComponent implements OnInit {
   }
 
   createDounutChart(data: any){
+    let complemento = Math.max(0, (this.goal-data))
     console.log(data);
     this.data = data;
     this.doughnut = new Chart(this.stepsChart.nativeElement, {
@@ -134,7 +135,7 @@ export class StepsCanvasComponent implements OnInit {
         labels: ['Passos diários', '/8000 passos'],
         datasets: [{
           label: '/8000 passos',
-          data: [data, (this.goal-data)],
+          data: [data, complemento],
           backgroundColor: ['rgb(255,255,255)', 'rgba(0,0,0,0)'], // array should have same number of elements as number of dataset
           borderColor: ['rgb(255, 255, 255)', 'rgba(0,0,0,0)'],// array should have same number of elements as number of dataset
           borderWidth: 7,
