@@ -100,6 +100,9 @@ $ python manage.py runsslserver 0.0.0.0:8000
     - Authentication: Bearer ```access_token```
     - Response ```{yyyy-mm-dd: {"note": nota escrita do dia, "pico": [pico1, pico2, pico3], "tosse": bool, "chiado": bool, "faltaAr": bool, "acordar": bool, "bombinha": bool}, ...}```
 
+- /rest/exercises - Obtém exercícios à partir de um arquivo JSON
+    - Authentication: Bearer ```access_token```
+    - Response: será retornado o dicionário presente em ```media/exercicios.json```
 
 
 ### PUT requests:

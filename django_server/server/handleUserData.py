@@ -1,4 +1,5 @@
 import base64
+import json
 import os
 from datetime import datetime, timedelta
 from enum import Enum
@@ -6,10 +7,10 @@ from enum import Enum
 import pandas as pd
 from django.contrib.auth.models import Group, Permission, User
 
+import server.settings as settings
+from server.fitbitHandler import getActivities, updateFbProfile
 from server.models import (AsthmaControlQuestionnaire, DailyControl,
                            FitbitFile, Goal, UserProfileInfo)
-from server.fitbitHandler import getActivities, updateFbProfile
-import server.settings as settings
 
 
 def createUser(userData):
@@ -375,3 +376,10 @@ def getDaily(user):
         response[control.date.strftime("%Y-%m-%d")] = controlResponse
 
     return response
+
+
+def getExercises():
+    with open('media/exercicios.json') as json_file:
+        data = json.load(json_file)
+
+    return data

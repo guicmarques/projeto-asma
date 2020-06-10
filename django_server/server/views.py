@@ -253,3 +253,12 @@ class Goals(APIView):
         goals = handleUserData.getGoals(request.user)
 
         return Response(goals)
+
+
+class Exercises(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        exercicios = handleUserData.getExercises()
+
+        return Response(exercicios)

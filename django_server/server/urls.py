@@ -23,4 +23,5 @@ urlpatterns = [
     path('fitbit/login/', views.FitbitLogin.as_view(), name='fitbit_login'),
     path('fitbit/auth/', views.FitbitAuth.as_view(), name='fitbit_auth'),
     path('goals/', views.Goals.as_view(), name="goals"),
+    path('exercises/', views.Exercises.as_view(), name="exercises"),
 ]
