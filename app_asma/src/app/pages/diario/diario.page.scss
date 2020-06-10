@@ -87,7 +87,18 @@ button {
 .QACard {
     border-radius: 25px;
     margin-top: 30px;
+}
+
+.questionnaire {
     background-color: rgb(5, 181, 163);
+}
+
+.barrier {
+    background-color: #ff7868;
+}
+
+.barrierCard {
+    padding-bottom: 0;
 }
 
 .QAHeader {
@@ -106,11 +117,15 @@ button {
     color: white;
 }
 
-.QAImg {
+.questionnaireImg {
     padding-right: 0px;
     padding-left: 10px;
     padding-bottom: 0px;
     padding-top: 9%;
+}
+
+.barrierImg {
+    width: 90%;
 }
 
 .sympCard {

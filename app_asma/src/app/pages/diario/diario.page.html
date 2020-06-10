@@ -20,7 +20,7 @@
 
 <ion-content>
   <div>
-    <ion-card class="QACard" routerLink="./questionario">
+    <ion-card class="QACard questionnaire" routerLink="./questionario">
       <ion-card-header class="QAHeader">
         <ion-grid>
           <ion-row class="QAContainer">
@@ -28,8 +28,27 @@
                 <ion-card-title class="QATitle">Questionário de Controle da Asma (ACQ)</ion-card-title>
               </ion-col>
 
-              <ion-col class="QAImg">
-                <img src="../../../assets/images/survey_flat.jpeg">
+              <ion-col class="questionnaireImg">
+                <img src="../../../assets/images/survey_flat.png">
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+        
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <div>
+    <ion-card class="QACard barrier" routerLink="./barreiras">
+      <ion-card-header class="QAHeader barrierCard">
+        <ion-grid>
+          <ion-row class="QAContainer">
+              <ion-col>
+                <ion-card-title class="QATitle">Questionário de Barreiras</ion-card-title>
+              </ion-col>
+
+              <ion-col>
+                <img src="../../../assets/images/barriers_flat.png" class="barrierImg">
               </ion-col>
           </ion-row>
         </ion-grid>

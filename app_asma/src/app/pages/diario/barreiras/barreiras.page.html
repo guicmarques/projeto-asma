@@ -12,51 +12,114 @@
 <ion-content class="barrierContent">
   <div class="cardsContainer">
 
+    <div class="card" #Q0>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="infoTitle">Motivos que dificultaram a realização da atividade física</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="infoContent">
+          Dentre os fatores a seguir, selecione os mais comuns para você não praticar atividades físicas
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="startBtn" (click)="nextCard()">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+
     <div class="card" #Q1>
-      <div class="cardHeader">
-        Em média, durante os últimos sete dias, o quão frequentemente você se acordou por causa de sua asma, durante a noite? 
-      </div>
-      <div class="cardAnswers">
-        <ion-list class="answersContainer">
-          <ion-radio-group value="Q1">        
-            <ion-item class="answer" lines="none">
-              <ion-label>Nunca</ion-label>
-              <ion-radio slot="start" [value]=0></ion-radio>
-            </ion-item>
-        
-            <ion-item class="answer" lines="none">
-              <ion-label>Quase nunca</ion-label>
-              <ion-radio slot="start" [value]=1></ion-radio>
-            </ion-item>
-
-            <ion-item class="answer" lines="none">
-              <ion-label>Poucas vezes</ion-label>
-              <ion-radio slot="start" [value]=2></ion-radio>
-            </ion-item>
-
-            <ion-item class="answer" lines="none">
-              <ion-label>Várias vezes</ion-label>
-              <ion-radio slot="start" [value]=3></ion-radio>
-            </ion-item>
-
-            <ion-item class="answer" lines="none">
-              <ion-label>Muitas vezes</ion-label>
-              <ion-radio slot="start" [value]=4></ion-radio>
-            </ion-item>
-
-            <ion-item class="answer" lines="none">
-              <ion-label>Muitíssimas vezes</ion-label>
-              <ion-radio slot="start" [value]=5></ion-radio>
-            </ion-item>
-
-            <ion-item class="answer" lines="none">
-              <ion-label class="ion-text-wrap">Incapaz de dormir devido à asma</ion-label>
-              <ion-radio slot="start" [value]=6></ion-radio>
-            </ion-item>
-        
-          </ion-radio-group>
-        </ion-list>
-      </div>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle class="cardSubtitle">Fatores pessoais</ion-card-subtitle>
+          <ion-card-title class="cardTitle">Não tenho interesse.</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="answersContainer">
+            <ion-radio-group>        
+              <ion-item class="answer" lines="none">
+                <ion-label>Sempre</ion-label>
+                <ion-radio slot="start" [value]=4></ion-radio>
+              </ion-item>
+          
+              <ion-item class="answer" lines="none">
+                <ion-label>Quase sempre</ion-label>
+                <ion-radio slot="start" [value]=3></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Às vezes</ion-label>
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Raramente</ion-label>
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Nunca</ion-label>
+                <ion-radio slot="start" [value]=0></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="previousBtn" (click)="prevCard()">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button class="nextBtn" (click)="nextCard()">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+    
+    <div class="card" #Q2>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle class="cardSubtitle">Fatores pessoais</ion-card-subtitle>
+          <ion-card-title class="cardTitle">Falta de tempo.</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="answersContainer">
+            <ion-radio-group>        
+              <ion-item class="answer" lines="none">
+                <ion-label>Sempre</ion-label>
+                <ion-radio slot="start" [value]=4></ion-radio>
+              </ion-item>
+          
+              <ion-item class="answer" lines="none">
+                <ion-label>Quase sempre</ion-label>
+                <ion-radio slot="start" [value]=3></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Às vezes</ion-label>
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Raramente</ion-label>
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Nunca</ion-label>
+                <ion-radio slot="start" [value]=0></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="previousBtn" (click)="prevCard()">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button class="nextBtn" (click)="nextCard()">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card>
     </div>
 
   </div>
