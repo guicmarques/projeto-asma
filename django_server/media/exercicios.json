@@ -1,6 +1,7 @@
 {
     "0": {
-        "video": "https://www.youtube.com/watch?v=74G6kn0vjPQ",
+        "id": 0,
+        "video": "https://www.youtube.com/embed/74G6kn0vjPQ",
         "nome": "Flexão",
         "repeticoes": 30,
         "tempo": 5,

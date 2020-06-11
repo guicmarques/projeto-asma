@@ -383,9 +383,16 @@ def getDaily(user):
     return response
 
 
-def getExercises():
+def getExercises(exercise_id=None):
     with open('media/exercicios.json', encoding="ISO-8859-1") as json_file:
         data = json.load(json_file)
+
+    if exercise_id is not None:
+        exercise_id = str(exercise_id)
+        if exercise_id in data:
+            data = data[exercise_id]
+        else:
+            data = f"There are no exercises with id {exercise_id}"
 
     return data
 

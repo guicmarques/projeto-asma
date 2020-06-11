@@ -107,7 +107,8 @@ $ python manage.py runsslserver 0.0.0.0:8000
 
 - /rest/exercises - Obtém exercícios à partir de um arquivo JSON
     - Authentication: Bearer ```access_token```
-    - Response: será retornado o dicionário presente em ```media/exercicios.json```
+    - Body: ```{"id": id do exercício}``` - caso nada seja passado, será entregue o dicionário completo
+    - Response: será retornado o dicionário presente em ```media/exercicios.json``` ou o corpo do id correspondente
 
 - /rest/milestones/ - Obtém dados de conquista de acordo com o valor passado no body
     - Authentication: Bearer ```access_token```

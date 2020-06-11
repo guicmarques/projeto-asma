@@ -259,7 +259,11 @@ class Exercises(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        exercicios = handleUserData.getExercises()
+        if "id" in request.data:
+            exercise_id = request.data["id"]
+        else:
+            exercise_id = None
+        exercicios = handleUserData.getExercises(exercise_id)
 
         return Response(exercicios)
 
