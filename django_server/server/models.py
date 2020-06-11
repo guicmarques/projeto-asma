@@ -87,22 +87,23 @@ class Goal(models.Model):
     endDate = models.DateField(blank=True, null=True)
 
 
-# class PracticeBarriers(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     date = models.DateField(blank=True, null=True)
-#     # fatores pessoais
-#     interesse = models.CharField(max_length=1, blank=True, null=True)
-#     tempo = models.CharField(max_length=1, blank=True, null=True)
-#     energia = models.CharField(max_length=1, blank=True, null=True)
-#     faltaAr = models.CharField(max_length=1, blank=True, null=True)
-#     # fatores sociais
-#     companhia = models.CharField(max_length=1, blank=True, null=True)
-#     dinheiro = models.CharField(max_length=1, blank=True, null=True)
-#     coisas = models.CharField(max_length=1, blank=True, null=True)
-#     # fatores ambientais
-#     seguranca = models.CharField(max_length=1, blank=True, null=True)
-#     clima = models.CharField(max_length=1, blank=True, null=True)
-#     equipamentos = models.CharField(max_length=1, blank=True, null=True)
+class PracticeBarriers(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField(blank=True, null=True)
+    # fatores pessoais
+    interesse = models.CharField(max_length=1, blank=True, null=True)
+    tempo = models.CharField(max_length=1, blank=True, null=True)
+    energia = models.CharField(max_length=1, blank=True, null=True)
+    faltaAr = models.CharField(max_length=1, blank=True, null=True)
+    # fatores sociais
+    companhia = models.CharField(max_length=1, blank=True, null=True)
+    dinheiro = models.CharField(max_length=1, blank=True, null=True)
+    coisas = models.CharField(max_length=1, blank=True, null=True)
+    # fatores ambientais
+    seguranca = models.CharField(max_length=1, blank=True, null=True)
+    clima = models.CharField(max_length=1, blank=True, null=True)
+    equipamentos = models.CharField(max_length=1, blank=True, null=True)
+
 
 class Milestone(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

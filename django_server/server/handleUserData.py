@@ -13,7 +13,8 @@ from django.contrib.auth.models import Group, Permission, User
 import server.settings as settings
 from server.fitbitHandler import getActivities, updateFbProfile
 from server.models import (AsthmaControlQuestionnaire, DailyControl,
-                           FitbitFile, Goal, Milestone, UserProfileInfo)
+                           FitbitFile, Goal, Milestone, UserProfileInfo,
+                           PracticeBarriers)
 
 
 def createUser(userData):
@@ -505,3 +506,26 @@ def getMilestones(user):
         data[name] = {"level": level, "quantity": quantity}
 
     return data
+
+
+def createBarrier(user, barriers):
+    try:
+        praticeBarrier, _ = PracticeBarriers.objects.get_or_create(
+            user=user, date=datetime.now().date())
+        try:
+            praticeBarrier.interesse = barriers["interesse"]
+            praticeBarrier.tempo = barriers["tempo"]
+            praticeBarrier.energia = barriers["energia"]
+            praticeBarrier.faltaAr = barriers["faltaAr"]
+            praticeBarrier.companhia = barriers["companhia"]
+            praticeBarrier.dinheiro = barriers["dinheiro"]
+            praticeBarrier.coisas = barriers["coisas"]
+            praticeBarrier.seguranca = barriers["seguranca"]
+            praticeBarrier.clima = barriers["clima"]
+            praticeBarrier.equipamentos = barriers["equipamentos"]
+            praticeBarrier.save()
+            return True
+        except Exception as e:
+            return str(e)
+    except Exception as e:
+        return str(e)

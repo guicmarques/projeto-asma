@@ -268,6 +268,30 @@ class Exercises(APIView):
         return Response(exercicios)
 
 
+class Barriers(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        required = ["interesse", "tempo", "energia", "faltaAr", "companhia",
+                    "dinheiro", "coisas", "seguranca", "clima", "equipamentos"]
+
+        if all(item in request.data.keys() for item in required):
+
+            created = handleUserData.createBarrier(request.user, request.data)
+
+            if created == True:
+                request_status = status.HTTP_200_OK
+            else:
+                request_status = status.HTTP_400_BAD_REQUEST
+                logging.warn(f"MILESTONES created error: {created}")
+
+        else:
+            created = "There are missing keys in request"
+            request_status = status.HTTP_400_BAD_REQUEST
+
+        return Response({"created": created}, status=request_status)
+
+
 class Milestones(APIView):
     permission_classes = (IsAuthenticated,)
 
