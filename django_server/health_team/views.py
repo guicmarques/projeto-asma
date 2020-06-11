@@ -182,7 +182,12 @@ def pacienteGraficos2(request,username):
     #https://stackoverflow.com/questions/55832576/how-to-integrate-chart-js-in-django
     #https://www.codingwithricky.com/2019/08/28/easy-django-plotly/
 
-    user_data = UserProfileInfo.objects.get_or_create(user=username)
+    #print((UserProfileInfo.objects))
+
+    #asthmaQuestionaire = AsthmaControlQuestionnaire.objects.get_or_create(id=username)
+    user_data = UserProfileInfo.objects.get(user_id=username)
+    print(user_data.user, user_data.user_id, UserProfileInfo.objects.get(user_id=username).user_id)
+
     
     #Grafico Demo
     x_data = [0,1,2,3]
