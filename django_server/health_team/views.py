@@ -183,9 +183,9 @@ def pacienteGraficos2(request,username):
     #https://www.codingwithricky.com/2019/08/28/easy-django-plotly/
 
     print(dir(UserProfileInfo.objects))
-    
-    asthmaQuestionaire = AsthmaControlQuestionnaire.objects.get_or_create(user=username)
-    user_data = UserProfileInfo.objects.get_or_create(User='fhts5')
+
+    asthmaQuestionaire = AsthmaControlQuestionnaire.objects.get_or_create(id=username)
+    user_data = UserProfileInfo.objects.get_or_create(id=username)
 
     
     #Grafico Demo
