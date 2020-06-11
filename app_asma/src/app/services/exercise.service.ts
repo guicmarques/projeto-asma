@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { EnvService } from './env.service';
+import { AlertService } from './alert.service';
+import { NavController } from '@ionic/angular';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExerciseService {
+  exercises: any;
 
   private exercicios: any = [
     {
@@ -56,11 +63,30 @@ export class ExerciseService {
     },
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient,
+              private env: EnvService,
+              private alertService: AlertService,
+              private authService: AuthService) { }
 
   getAllExercises() {
     return [...this.exercicios];
   }
+
+  /*getExercises() {
+    return new Promise ((resolve, reject) =>{
+      this.authService.validateToken().then(data => {
+        const header = new HttpHeaders({
+          'Authorization': 'Bearer' + " " + this.authService.token["access"]
+        });
+        return this.http.get(this.env.API_URL + 'exercises/', { headers: header }).subscribe(data =>{
+          this.exercises = data;
+          resolve(this.exercises);
+        }, (error) => {
+          this.alertService.presentPopUp('Oops!', 'Não conseguimos acessar os exercícios. Tente novamente mais tarde.');
+        });
+      })
+    }) 
+  }*/
 
   getExercise(exerciseId: number) {
     return {

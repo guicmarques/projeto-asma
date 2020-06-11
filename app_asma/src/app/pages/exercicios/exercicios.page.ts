@@ -36,6 +36,13 @@ export class ExerciciosPage implements OnInit {
   constructor(private domSanitizer: DomSanitizer, private exerciseService: ExerciseService) { }
 
   ngOnInit() {
+    /*this.exerciseService.getExercises().then(data => {
+      let result = JSON.stringify(data);
+      result = JSON.parse(result);
+      console.log(result);
+      console.log(data);
+      
+    });*/
     this.exercicios = this.exerciseService.getAllExercises();
     this.getTrustUrl();
   }

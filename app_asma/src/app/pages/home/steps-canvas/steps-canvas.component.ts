@@ -29,6 +29,9 @@ export class StepsCanvasComponent implements OnInit {
     data: [],
   };
 
+  distance: any = 0;
+  activeMinutes: any = 0;
+
   goal: number = 0;
   goalPrevious: number = 0;
 
@@ -63,6 +66,9 @@ export class StepsCanvasComponent implements OnInit {
         });*/
         let result = JSON.stringify(data);
         this.dailySteps = JSON.parse(result);
+        this.distance = this.dailySteps[this.today].summary.distances[0].distance;
+        this.activeMinutes = this.dailySteps[this.today].summary.fairlyActiveMinutes + this.dailySteps[this.today].summary.lightlyActiveMinutes;
+        this.activeMinutes += this.dailySteps[this.today].summary.veryActiveMinutes;
         this.stepCanvas = this.dailySteps[this.today].summary.steps;
         this.createDounutChart(this.stepCanvas);
         console.log(this.stepCanvas);
@@ -95,6 +101,9 @@ export class StepsCanvasComponent implements OnInit {
         });*/
         let result = JSON.stringify(steps);
         this.dailySteps = JSON.parse(result);
+        this.distance = this.dailySteps[this.today].summary.distances[0].distance;
+        this.activeMinutes = this.dailySteps[this.today].summary.fairlyActiveMinutes + this.dailySteps[this.today].summary.lightlyActiveMinutes;
+        this.activeMinutes += this.dailySteps[this.today].summary.veryActiveMinutes;
         this.stepCanvas = this.dailySteps[this.today].summary.steps;
         this.createDounutChart(this.stepCanvas);
         console.log(this.stepCanvas);
