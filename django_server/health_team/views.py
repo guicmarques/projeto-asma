@@ -182,7 +182,7 @@ def pacienteGraficos2(request,username):
     #https://stackoverflow.com/questions/55832576/how-to-integrate-chart-js-in-django
     #https://www.codingwithricky.com/2019/08/28/easy-django-plotly/
 
-    user_data = UserProfileInfo.objects.get_or_create(user=username)
+    user_data = UserProfileInfo.objects.get_or_create(User=username)
     
     #Grafico Demo
     x_data = [0,1,2,3]
