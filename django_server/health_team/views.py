@@ -184,7 +184,7 @@ def pacienteGraficos2(request,username):
 
     print(dir(UserProfileInfo.objects))
 
-    asthmaQuestionaire = AsthmaControlQuestionnaire.objects.get_or_create(id=username)
+    #asthmaQuestionaire = AsthmaControlQuestionnaire.objects.get_or_create(id=username)
     user_data = UserProfileInfo.objects.get_or_create(id=username)
 
     
