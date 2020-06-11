@@ -185,7 +185,8 @@ def pacienteGraficos2(request,username):
     #print((UserProfileInfo.objects))
 
     #asthmaQuestionaire = AsthmaControlQuestionnaire.objects.get_or_create(id=username)
-    user_data = UserProfileInfo.objects.get_or_create(user_id=username)
+    user_data = UserProfileInfo.objects.get(user_id=username)
+    print(user_data.user, user_data.user_id, UserProfileInfo.objects.get(user_id=username).user_id)
 
     
     #Grafico Demo
@@ -230,7 +231,3 @@ def tableTest(request):
 def tableTest2(request,username):
     print(username)
     return render(request, 'logged/table_test.html', {})
-
-def logtest(request, username):
-    print(dir(UserProfileInfo.objects))
-    return render(request)
