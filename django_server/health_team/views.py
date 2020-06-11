@@ -182,6 +182,8 @@ def pacienteGraficos2(request,username):
     #https://stackoverflow.com/questions/55832576/how-to-integrate-chart-js-in-django
     #https://www.codingwithricky.com/2019/08/28/easy-django-plotly/
 
+    print(dir(UserProfileInfo.objects))
+    
     asthmaQuestionaire = AsthmaControlQuestionnaire.objects.get_or_create(user=username)
     user_data = UserProfileInfo.objects.get_or_create(User='fhts5')
 
@@ -228,3 +230,7 @@ def tableTest(request):
 def tableTest2(request,username):
     print(username)
     return render(request, 'logged/table_test.html', {})
+
+def logtest(request, username):
+    print(dir(UserProfileInfo.objects))
+    return render(request)
