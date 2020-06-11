@@ -8,10 +8,6 @@ const routes: Routes = [
     path: '',
     component: DiarioPage
   },  
-  {
-    path: 'barreiras',
-    loadChildren: () => import('./barreiras/barreiras.module').then( m => m.BarreirasPageModule)
-  }
 ];
 
 @NgModule({

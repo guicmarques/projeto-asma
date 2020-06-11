@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/diario/questionario/questionario.module').then( m => m.QuestionarioPageModule)
   },
   {
+    path: 'tabs/diario/barreiras',
+    loadChildren: () => import('./pages/diario/barreiras/barreiras.module').then( m => m.BarreirasPageModule)
+  },
+  {
     path: 'splash-screen',
     loadChildren: () => import('./pages/splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
   },

@@ -31,13 +31,14 @@
 .card {
     position: absolute;
     width: 100%;
+    opacity: 0;
 }
 
 ion-card {
     margin-left: 10%;
     margin-right: 10%;
     border-radius: 25px;
-    min-height: 65vh;
+    min-height: 67vh;
     position: relative;
 }
 
@@ -104,8 +105,14 @@ ion-card {
 }
 
 .nextBtn {
-    color: #ff7868;
+    --color: #ff7868;
     --background: rgba(255, 255, 255, 0);
     --box-shadow: 0;
     margin-left: 20%;
+}
+
+.sendBtn {
+    --background: #ff7868;
+    font-size: 12px;
+    margin-left: 12%;
 }
