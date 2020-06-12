@@ -193,7 +193,7 @@ def pacienteGraficos2(request,username):
 
     except:
         dailycontrol = False
-    print(dailycontrol)
+    print(len(dailycontrol))
     
     #Grafico Demo
     x_data = [0,1,2,3]
