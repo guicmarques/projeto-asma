@@ -6,7 +6,9 @@ import { Subject, Subscription } from 'rxjs';
 })
 export class EventService {
 
-  private channels: any = { goalUpdated: new Subject<any>() };
+  private channels: any = { goalUpdated: new Subject<any>(),
+                            userUpdated: new Subject<any>()};
+
 
   /**
    * Subscribe to a topic and provide a single handler/observer.

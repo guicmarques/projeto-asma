@@ -4,7 +4,7 @@ import { User } from './../../models/user.model';
 import { UserService } from './../../services/user.service';
 import { AuthService } from './../../services/auth.service';
 import { AlertService } from './../../services/alert.service';
-
+import { EventService } from './../../services/event.service';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
@@ -41,7 +41,14 @@ export class PerfilPage implements OnInit {
   constructor(private animationCtrl: AnimationController,
               private userService: UserService,
               private authService: AuthService,
-              private alertService: AlertService) { }
+              private alertService: AlertService,
+              private eventService: EventService) { 
+                this.eventService.subscribe('userUpdated', (data : any) =>{
+                  this.user=data.user;
+                  
+
+                })
+              }
 
 
 

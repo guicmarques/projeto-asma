@@ -4,6 +4,7 @@ import { User } from '../../../models/user.model';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth.service';
 import { AlertService } from '../../../services/alert.service';
+import { EventService } from '../../../services/event.service';
 
 
 
@@ -53,7 +54,8 @@ export class EditarPerfilPage implements OnInit {
               private userService: UserService,
               private AuthService: AuthService,
               private alertCtrl: AlertController,
-              private alertService: AlertService
+              private alertService: AlertService,
+              private eventService: EventService
                ) { }
 
   ngOnInit() { 
@@ -151,6 +153,10 @@ export class EditarPerfilPage implements OnInit {
       this.user = user;
       this.user = user;
       this.newData= this.emptyData;
+      this.eventService.publish('userUpdated', {
+        user: user,
+      });
+      
     });
     
 
