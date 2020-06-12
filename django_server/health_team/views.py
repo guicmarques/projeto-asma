@@ -204,6 +204,15 @@ def pacienteGraficos2(request,username):
     #GRafico
     # Create figure
     fig = go.Figure()
+    steps = []
+    for i in range(10):
+        step = dict(
+            method="update",
+            args=[{"visible": [False] * 10},
+                {"title": "Slider switched to step: " + str(i)}],  # layout attribute
+        )
+        step["args"][0]["visible"][i] = True  # Toggle i'th trace to "visible"
+        steps.append(step)
 
     sliders = [dict(
         active=10,
