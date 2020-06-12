@@ -26,15 +26,12 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 .signUpAlert .alert-wrapper {
-    border-radius: 15px;
+    border-radius: 5vw;
 }
 
 .signUpAlert .alert-head {
     background-color: white;
     text-align: center;
-    border-bottom: 3px solid;
-    border-image-source: linear-gradient(90deg, white 0%, #ffc862 3%,  orange 10%, orange 90%, #ffc862 97%, white 100%);
-    border-image-slice: 1;
     padding-left: 10px;
     padding-right: 10px;
     border-left: 1px;
@@ -43,25 +40,28 @@
     margin-right: 12px;
 
     h2 {        
-        font-size: 20px;
+        font-size: 5vw;
         font-weight: 700;
-        color: orange;
-    }   
+        color: black;
+    } 
 }
 
 .signUpAlert .alert-message {
     margin-top: 10px;
     background-color: white;
+    font-size: 4vw;
+    text-align: center;
+    color: #a09a9a;
 }
 
 .signUpAlert .alert-button-group {
     justify-content: space-evenly;
     padding-left: 0;
     padding-right: 0;
-    padding-bottom: 0;
+    padding-bottom: 5%;
 
     .alert-button {
-        width: 50%;
+        width: 37%;
         margin-right: 0; 
         
         span {
@@ -70,48 +70,66 @@
     }
 
     .signUpNoBtn {
-        background-color: white;  
         color: orange;
         border: 2px solid orange;
-        border-bottom-left-radius: 15px;
+        border-radius: 6vw;
+
         span {
             text-align: center;
         }
     }
 
     .signUpYesBtn {
-        color: white;
         background-color: orange;
+        color: white;
+        border: 1px solid orange;
+        border-radius: 6vw;
     }
 }
 
+.popUp .alert-wrapper {
+    border-radius: 5vw;
+}
+
 .popUp .alert-head {
-    background-color: orange;
+    background-color: white;
     text-align: center;
 
     h2 {        
-        font-size: 20px;
+        font-size: 5vw;
         font-weight: 700;
-        color: white;
-    }  
+        color: black;
+    }
 }
 
 .popUp .alert-message {
     margin-top: 6px;
     background-color: white;
+    font-size: 4vw;
     text-align: center;
+    color: #a09a9a;
 }
 
 .popUp .alert-button-group {
     justify-content: space-evenly;
+    padding-bottom: 5%;
 
-}
-
-.popUpBtn {
-    span {
-        color: aqua;
+    .alert-button {
+        width: 60%;
+        margin-right: 0; 
+        
+        span {
+            justify-content: center;
+        }
     }
-    
+
+    .popUpBtn {
+        background-color: orange;
+        color: white;
+        border: 1px solid orange;
+        border-radius: 6vw;
+    }
+
 }
 
 .noButtonPopUp .alert-wrapper {
@@ -133,4 +151,66 @@
 
 .questionnaireSlides .swiper-pagination {
     bottom: 97%;
+}
+
+.QAAlert .alert-wrapper {
+    border-radius: 5vw;
+}
+
+.QAAlert .alert-head {
+    background-color: white;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left: 1px;
+    border-right: 1px;
+    margin-left: 12px;
+    margin-right: 12px;
+
+    h2 {        
+        font-size: 5vw;
+        font-weight: 700;
+        color: black;
+    }   
+}
+
+.QAAlert .alert-message {
+    margin-top: 10px;
+    background-color: white;
+    font-size: 4vw;
+    text-align: center;
+    color: #a09a9a;
+}
+
+.QAAlert .alert-button-group {
+    justify-content: space-evenly;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 5%;
+
+    .alert-button {
+        width: 37%;
+        margin-right: 0; 
+        
+        span {
+            justify-content: center;
+        }
+    }
+
+    .QANoBtn {
+        color: orange;
+        border: 2px solid orange;
+        border-radius: 6vw;
+
+        span {
+            text-align: center;
+        }
+    }
+
+    .QAYesBtn {
+        background-color: orange;
+        color: white;
+        border: 1px solid orange;
+        border-radius: 6vw;
+    }
 }

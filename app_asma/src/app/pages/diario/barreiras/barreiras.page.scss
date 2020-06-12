@@ -90,6 +90,20 @@ ion-card {
     border-radius: 10px;
 }
 
+ion-radio {
+    --color: lightgray;
+    --color-checked: #ff7868;
+
+    .radio-checked {
+        --color: #ff7868;
+    }
+}
+
+.item-radio-checked {
+    --background: #fff3db;
+    color: black;
+}
+
 .btnGroup {
     position: absolute;
     bottom: 1%;

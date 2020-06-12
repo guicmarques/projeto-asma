@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { QuestionnaireService } from './../../../services/questionnaire.service';
 import { Questionnaire } from './../../../models/questionnaire.mode';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-questionario',
@@ -49,7 +49,8 @@ export class QuestionarioPage implements OnInit {
   @ViewChild('slides', {static: false}) slides: IonSlides
 
   constructor(private questionnaireService: QuestionnaireService,
-              private router: Router) {}
+              private router: Router,
+              private alertCtrl: AlertController) {}
 
   ngOnInit() {}
 
@@ -66,6 +67,28 @@ export class QuestionarioPage implements OnInit {
 
   nextSlide() {
     this.slides.slideNext();
+  }
+
+  confirmAnswers() {
+    this.alertCtrl.create({
+      cssClass: 'QAAlert',
+      header: 'Deseja continuar?',
+      message: 'Você confirma todas as suas respostas?',
+      buttons: [{
+        text: 'Não',
+        role: 'cancel',
+        cssClass: 'QANoBtn'
+      },
+      {
+        text: 'Sim',
+        cssClass: 'QAYesBtn',
+        handler: () => {
+          this.sendAnswers()
+        }
+      }]
+    }).then(alertEl => {
+      alertEl.present();
+    });
   }
   
   sendAnswers() {

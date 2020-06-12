@@ -75,7 +75,7 @@
           <ion-button *ngIf="i < 6" class="nextBtn" (click)="nextSlide()">
             <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
           </ion-button>
-          <ion-button *ngIf="i == 6" class="sendBtn" (click)="sendAnswers()" 
+          <ion-button *ngIf="i == 6" class="sendBtn" (click)="confirmAnswers()" 
           [attr.disabled]="answers[1] == null || answers[2] == null || answers[3] == null ||
           answers[4] == null || answers[5] == null ||answers[6] == null || answers[7] == null">
             Enviar

@@ -1,4 +1,7 @@
-import { GestureController, Gesture } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { BarrierService } from './../../../services/barrier.service';
+import { Barriers } from './../../../models/barriers.model';
+import { GestureController, Gesture, AlertController } from '@ionic/angular';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
@@ -21,8 +24,24 @@ export class BarreirasPage implements OnInit {
   @ViewChild('Q9', {static: false}) Q9: ElementRef;
   @ViewChild('Q10', {static: false}) Q10: ElementRef;
 
+  answers: Barriers =  {
+    interesse: null,
+    tempo: null,
+    energia: null,
+    faltaAr: null,
+    companhia: null,
+    dinheiro: null,
+    coisas: null,
+    seguranca: null,
+    clima: null,
+    equipamentos: null
+}
+
   constructor(private gestureCtrl: GestureController,
-              private renderer: Renderer2) { }
+              private renderer: Renderer2,
+              private barrierService: BarrierService,
+              private router: Router,
+              private alertCtrl: AlertController) { }
 
   ngOnInit() {
   }
@@ -541,8 +560,33 @@ export class BarreirasPage implements OnInit {
     this.updateCardView();
   }
 
-  sendBarriers() {
+  confirmAnswers() {
+    this.alertCtrl.create({
+      cssClass: 'QAAlert',
+      header: 'Deseja continuar?',
+      message: 'Você confirma todas as suas respostas?',
+      buttons: [{
+        text: 'Não',
+        role: 'cancel',
+        cssClass: 'QANoBtn'
+      },
+      {
+        text: 'Sim',
+        cssClass: 'QAYesBtn',
+        handler: () => {
+          this.sendBarriers()
+        }
+      }]
+    }).then(alertEl => {
+      alertEl.present();
+    });
+  }
 
+  sendBarriers() {
+    console.log('Barreiras:', this.answers);
+    this.barrierService.setAnswers(this.answers).then(data => {
+      this.router.navigateByUrl('tabs/diario')
+    })
   }
 }
 

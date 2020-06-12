@@ -23,11 +23,11 @@ export class QuestionnaireService {
         });
         return this.http.post(this.env.API_URL + 'questionnaire/', {'1': answers[1], '2': answers[2], '3': answers[3],
                               '4': answers[4], '5': answers[5], '6': answers[6], '7': answers[7]}, {headers: header})
-          .subscribe(date => {
+          .subscribe(data => {
             this.alertService.presentPopUp('Questionário enviado!', 'Suas respostas foram registradas.');
             resolve(data);
           }, (error) => {
-            this.alertService.presentPopUp('Oops!', 'Houve um problema ao salvar suas respostas. Por favor, tente novamente.')
+            this.alertService.presentPopUp('Oops!', 'Houve um problema ao salvar suas respostas. Por favor, tente novamente.');
             reject(error);
           });
       });
