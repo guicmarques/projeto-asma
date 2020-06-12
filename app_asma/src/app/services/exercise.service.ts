@@ -1,3 +1,4 @@
+import { DomSanitizer } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -66,13 +67,14 @@ export class ExerciseService {
   constructor(private http: HttpClient,
               private env: EnvService,
               private alertService: AlertService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private domSanitizer: DomSanitizer) { }
+
+  /*getAllExercises() {
+    return [...this.exercicios];
+  }*/
 
   getAllExercises() {
-    return [...this.exercicios];
-  }
-
-  /*getExercises() {
     return new Promise ((resolve, reject) =>{
       this.authService.validateToken().then(data => {
         const header = new HttpHeaders({
@@ -86,13 +88,22 @@ export class ExerciseService {
         });
       })
     }) 
-  }*/
+  }
 
-  getExercise(exerciseId: number) {
+  /*getExercise(exerciseId: number) {
     return {
       ...this.exercicios.find(exercicio => {
         return exercicio.id === exerciseId;
       })
     };
+  }*/
+
+  getExercise(exerciseId: number) {
+    console.log(this.exercises);
+    let result = JSON.stringify(this.exercises);
+    result = JSON.parse(result);
+    let exe = this.exercises[exerciseId];
+    exe.trustedVideoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(exe.video);
+    return exe;
   }
 }
