@@ -192,6 +192,7 @@ def pacienteGraficos2(request,username):
         print(dailycontrol)
         print(len(dailycontrol))
         print(dailycontrol[0])
+        print(dir(dailycontrol[0]))
         print(dailycontrol[0].all())
 
     except:
