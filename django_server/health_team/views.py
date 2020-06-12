@@ -11,7 +11,7 @@ import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
 
-from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, server_dailycontrol
+from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, DailyControl
 
 def index(request):
     return render(request, 'health_team/index.html')
