@@ -1,3 +1,4 @@
+import { Exercise } from './../../models/exercise.model';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Animation, AnimationController } from '@ionic/angular';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
@@ -22,6 +23,17 @@ export class ExerciciosPage implements OnInit {
 
   gridExercises: any[] = [];
 
+  /*exercicios: any = [
+    {
+      id: null,
+      video: '',
+      nome: '',
+      repeticoes: null,
+      tempo: null,
+      descricao: ''
+    }
+  ];*/
+
   exercicios: any = [
     {
       id: null,
@@ -36,15 +48,14 @@ export class ExerciciosPage implements OnInit {
   constructor(private domSanitizer: DomSanitizer, private exerciseService: ExerciseService) { }
 
   ngOnInit() {
-    /*this.exerciseService.getExercises().then(data => {
+    this.exerciseService.getAllExercises().then(data => {
       let result = JSON.stringify(data);
       result = JSON.parse(result);
-      console.log(result);
-      console.log(data);
-      
-    });*/
-    this.exercicios = this.exerciseService.getAllExercises();
-    this.getTrustUrl();
+      this.exercicios = Object.values(result);
+      this.getTrustUrl();
+    });
+    //this.exercicios = this.exerciseService.getAllExercises();
+    //this.getTrustUrl();
   }
 
   getTrustUrl() {
