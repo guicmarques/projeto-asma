@@ -73,6 +73,10 @@ def createUser(userData):
                 if "token" in userData.keys():
                     profileInfo.token = userData["token"]
 
+                if "nascimento" in userData.keys():
+                    profileInfo.nascimento = datetime.strptime(
+                        userData["nascimento"], '%Y-%m-%d').date()
+
                 profileInfo.save()
 
                 # FOR TESTING PURPOSES ONLY
@@ -140,6 +144,7 @@ def getUserData(user):
         else:
             userData["imagem"] = ""
         userData["token"] = profileInfo.token
+        userData["nascimento"] = profileInfo.nascimento.strftime("%Y-%m-%d")
 
         return userData
     except Exception as e:
@@ -175,11 +180,15 @@ def updateUserData(user, userData):
             profileInfo.imagem = "userImage/{}".format(filename)
         if "token" in userData.keys():
             profileInfo.token = userData["token"]
+        if "nascimento" in userData.keys():
+            profileInfo.nascimento = datetime.strptime(
+                userData["nascimento"], '%Y-%m-%d').date()
 
         profileInfo.save()
 
         return True
-    except:
+    except Exception as e:
+        logging.warn(e)
         return False
 
 

@@ -17,6 +17,7 @@ class UserProfileInfo(models.Model):
     peso = models.CharField(max_length=4, blank=True)
     imagem = models.FileField(upload_to=userImage_path, blank=True)
     token = models.CharField(max_length=10, blank=True)
+    nascimento = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.user.username

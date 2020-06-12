@@ -50,7 +50,7 @@ $ python manage.py runsslserver 0.0.0.0:8000
     - Response: ```{"access": access_token}```
 
 - /rest/register/ - Cria um novo usuário
-    - Body: ```{"username": cpf, "password": senha, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "imagem": .jpg em base64, "token": token do HC}```
+    - Body: ```{"username": cpf, "password": senha, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "imagem": .jpg em base64, "token": RGHC, "nascimento": "yyyy-mm-dd"}```
     - campos obrigatórios do Body: ```["username", "email", "password"]```
     - Response: ```{"missingData": bool, "created": bool}``` (onde missingData = True indica se falta algum dado obrigatório e created = False indica que o usuário já existe, se houver algum erro ao salvar, missingData será o erro)
 
@@ -96,7 +96,7 @@ $ python manage.py runsslserver 0.0.0.0:8000
 
 - /rest/user_data/ - Retorna as informações do usuário
     - Authentication: Bearer ```access_token```
-    - Response: ```{"username": cpf, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "imagem": .jpg em base64, "token": token do HC, "tokenValidado": bool}``` ou ```{"username": cpf, "email": email, "tokenValidado": bool}``` se as outras informações não estiverem presentes
+    - Response: ```{"username": cpf, "email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "imagem": .jpg em base64, "token": RGHC, "tokenValidado": bool, "nascimento": yyyy-mm-dd}``` ou ```{"username": cpf, "email": email, "tokenValidado": bool}``` se as outras informações não estiverem presentes
 
 - /rest/questionnaire
     - Authentication: Bearer ```access_token```
@@ -125,7 +125,7 @@ $ python manage.py runsslserver 0.0.0.0:8000
     - Body: ```{"find": True}``` - serão retornados as conquistas do usuário
     - Response ```{nome da conquista 1: {"level": nivel da conquista, "quantity": quantidade para obter a conquista}, nome da conquista 2: ...}```
 
--/rest/barriers/ - são retornadas as datas em que o questionário de bareiras foi respondido
+- /rest/barriers/ - são retornadas as datas em que o questionário de bareiras foi respondido
     - Authentication: Bearer ```access_token```
     - Response: ```{"dates": ["yyyy-mm-dd", ...]}```
 
