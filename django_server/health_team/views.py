@@ -240,7 +240,7 @@ def pacienteGraficos2(request,username):
     fig.update_layout(
         sliders=sliders
     )
-    fig10 = plot(data = fig,output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+    fig10 = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
 
