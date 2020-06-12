@@ -188,7 +188,7 @@ def pacienteGraficos2(request,username):
     user_data = UserProfileInfo.objects.get(user_id=username)
     print(user_data.user, user_data.user_id, UserProfileInfo.objects.get(user_id=username).user_id)
     try:
-        dailycontrol = server_dailycontrol.objects.filter(user_id=username)
+        dailycontrol = DailyControl.objects.all().filter(user_id=username)
         print(dailycontrol)
 
     except:
