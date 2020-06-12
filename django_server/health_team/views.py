@@ -193,12 +193,13 @@ def pacienteGraficos2(request,username):
         print(len(dailycontrol))
         print(dailycontrol[0])
         print(dir(dailycontrol[0]))
-        print(dailycontrol[0].all())
-
+        print(dailycontrol[0].faltaDeAr)
+        print(dailycontrol[0].get_deferred_fields)
+        print(dailycontrol[0].full_clean())
     except:
         dailycontrol = False
     
-    print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
+    #print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
     
     #Grafico Demo
     x_data = [0,1,2,3]
