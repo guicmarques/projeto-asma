@@ -1,9 +1,48 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>chatBot</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="chatHeader">
+    <ion-buttons class="btnContainer">
+      <ion-button routerLink=".." class="backBtn">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="chatTitle">ChatBot</ion-title>
+    <div class="bot-img">
+      <img src="../../../assets/images/chatbot_avatar.png">
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="chats">
+    <div class="chatbox">
+      <div class="bot-hello">
+        <div class="bot-hello-img">
+          <img style="width: 25vw; height: 25vw;" src="../../../assets/images/chatbot.png">
+        </div>
+      </div>
 
+      <div *ngFor="let chat of chats">
+        <div>
+          <div class="message sent" *ngIf="chat.type!=='bot' && chat.isMe">
+            {{chat.message}}
+            <span class="metadata">
+              <span class="time">{{chat.createdAt | date: 'HH:mm aaa'}}</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="bot-msg" *ngIf="chat.type =='bot' && !chat.isMe">
+          <div class="bot-avatar">
+            <img src="../../../assets/images/chatbot_avatar.png">
+          </div>
+          <div class="message received">
+            {{chat.message}}
+            <span class="metadata">
+              <span class="time">{{chat.createdAt | date: 'HH:mm aaa'}}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>
