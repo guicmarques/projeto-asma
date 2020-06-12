@@ -217,7 +217,7 @@ def createACQ(user, answers):
         return str(e)
 
 
-def getACQ(user):
+def getACQDates(user):
     dates = []
 
     questionnaires = AsthmaControlQuestionnaire.objects.filter(user=user)
@@ -471,7 +471,7 @@ def getConsecStepsDays(user):
 
 def getMilestonesInfo(user):
     # questionario semanal
-    weeklyDates = getACQ(user)
+    weeklyDates = getACQDates(user)
     consecWeekly = consecutiveWeeks(weeklyDates)
     # questionario diario
     dailyDates = list(getDaily(user).keys())
@@ -529,3 +529,13 @@ def createBarrier(user, barriers):
             return str(e)
     except Exception as e:
         return str(e)
+
+
+def getBarriersDates(user):
+    dates = []
+
+    barriers = PracticeBarriers.objects.filter(user=user)
+    for barrier in barriers:
+        dates.append(barrier.date.strftime("%Y-%m-%d"))
+
+    return sorted(dates)

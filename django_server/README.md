@@ -125,12 +125,14 @@ $ python manage.py runsslserver 0.0.0.0:8000
     - Body: ```{"find": True}``` - serão retornados as conquistas do usuário
     - Response ```{nome da conquista 1: {"level": nivel da conquista, "quantity": quantidade para obter a conquista}, nome da conquista 2: ...}```
 
+-/rest/barriers/ - são retornadas as datas em que o questionário de bareiras foi respondido
+    - Authentication: Bearer ```access_token```
+    - Response: ```{"dates": ["yyyy-mm-dd", ...]}```
 
 ### PUT requests:
 - /rest/user_data/ - Atualiza (ou cria, se não existir) as informações do usuário
     - Authentication: Bearer ```access_token```
-    - Body: ```{"email": email, "nome": nome, "sobrenome": sobrenome, "rg": RG, "telefone": telefone, "altura": altura, "peso": peso, "imagem": .jpg em base64, "token": token do HC}```
-    - Response: ```{"updated": bool}``` (booleano indicando se a operação de atualização teve sucesso)
+    - Response: ```{"dates": bool}``` (booleano indicando se a operação de atualização teve sucesso)
 
 ## Formato do payload Fitbit Activity (dados padrão)
 ```

@@ -103,7 +103,7 @@ class Questionnaire(APIView):
         return Response({"created": created}, status=request_status)
 
     def get(self, request):
-        dates = handleUserData.getACQ(request.user)
+        dates = handleUserData.getACQDates(request.user)
 
         return Response({"dates": dates}, status=status.HTTP_200_OK)
 
@@ -290,6 +290,11 @@ class Barriers(APIView):
             request_status = status.HTTP_400_BAD_REQUEST
 
         return Response({"created": created}, status=request_status)
+
+    def get(self, request):
+        dates = handleUserData.getBarriersDates(request.user)
+
+        return Response({"dates": dates}, status=status.HTTP_200_OK)
 
 
 class Milestones(APIView):
