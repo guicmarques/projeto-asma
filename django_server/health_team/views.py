@@ -195,7 +195,7 @@ def pacienteGraficos2(request,username):
         print(dir(dailycontrol[0]))
         print(dailycontrol[0].faltaDeAr)
         print(dailycontrol[0].get_deferred_fields)
-        print(dailycontrol[0].full_clean())
+        print(dailycontrol[0].full_clean)
     except:
         dailycontrol = False
     
