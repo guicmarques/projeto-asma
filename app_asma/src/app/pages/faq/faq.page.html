@@ -5,5 +5,22 @@
 </ion-header>
 
 <ion-content>
+  <ion-list >
+    <ion-item (click)="expand(0)">
+      <ion-button expand="full" fill="clear"  class="expand-button"  >
+        <ion-text class="question" >
+          <ion-icon name="remove-outline" class="expand-icon" *ngIf="( expandQuestions[0])"> </ion-icon>
+          <ion-icon  name="add-outline" class="expand-icon" *ngIf=" ( !expandQuestions[0])"> </ion-icon>
+            Pergunta 1
+        </ion-text>
+        <p *ngIf=" ( expandQuestions[0])" class="answer">
+        <ion-text>
+          
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla hendrerit bibendum elit nec rhoncus. Donec accumsan nec elit ultricies euismod. Nulla at elit finibus, rhoncus arcu nec, tincidunt ipsum. Nam imperdiet nec dui a molestie. Suspendisse potenti. Donec feugiat eu nisi vel efficitur. Donec dapibus sem dolor, sed rutrum justo tempor eu.
+        </ion-text>
+      </p>
+      </ion-button>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

@@ -1,33 +1,12 @@
-.building {
-    position: relative;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+.expand-icon{
+    color:#2dd2c2;
 }
+.question{
+    font-size: large;    
+    color: black;
 
-.building-img {
-    height: 16em;
-    width: 16em;
 }
-
-.oops-text {
-    font-size: xx-large;
-    font-weight: 500;
-    margin-bottom: 0;
-}
-
-.page-text {
-    font-size: large;
-    font-weight: 100;
-    margin-top: 0;
-}
-
-.dot {
-    height: 2px;
-    width: 2px;
-    background-color: gray;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 2px;
+.expand-button{
+    --ripple-color: transparent;
+    
 }
