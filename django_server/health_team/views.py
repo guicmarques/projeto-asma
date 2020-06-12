@@ -248,8 +248,7 @@ def pacienteGraficos2(request,username):
             type="date"
         )
     )
-    fig10 = plot([fig],
-               output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+    fig10 = plot([fig],output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
 
@@ -275,7 +274,7 @@ def pacienteGraficos2(request,username):
 
     ##################
     fig3 = go.Bar(y=[240, 659, 881], x=["activityCalories","caloriesBMR","caloriesOut"])
-    fig3 = plot(
+    fig3 = plot([fig3],
                output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
     
     return render(
