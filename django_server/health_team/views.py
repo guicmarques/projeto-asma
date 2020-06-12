@@ -11,7 +11,7 @@ import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
 
-from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile
+from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, server_dailycontrol
 
 def index(request):
     return render(request, 'health_team/index.html')
@@ -188,12 +188,12 @@ def pacienteGraficos2(request,username):
     user_data = UserProfileInfo.objects.get(user_id=username)
     print(user_data.user, user_data.user_id, UserProfileInfo.objects.get(user_id=username).user_id)
     try:
-        asthmaQuestionaire = AsthmaControlQuestionnaire.objects.all().filter(user_id=username)
-        print(asthmaQuestionaire)
+        dailycontrol = server_dailycontrol.objects.all().filter(user_id=username)
+        print(dailycontrol)
 
     except:
-        asthmaQuestionaire = False
-    print(asthmaQuestionaire)
+        dailycontrol = False
+    print(dailycontrol)
     
     #Grafico Demo
     x_data = [0,1,2,3]
