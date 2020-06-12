@@ -189,6 +189,7 @@ def pacienteGraficos2(request,username):
     print(user_data.user, user_data.user_id, UserProfileInfo.objects.get(user_id=username).user_id)
     try:
         asthmaQuestionaire = AsthmaControlQuestionnaire.objects.all().filter(id=username)
+        print(asthmaQuestionaire)
 
     except:
         asthmaQuestionaire = False
