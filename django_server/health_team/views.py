@@ -190,9 +190,13 @@ def pacienteGraficos2(request,username):
     try:
         dailycontrol = DailyControl.objects.all().filter(user_id=username)
         print(dailycontrol)
+        print(len(dailycontrol))
+        print(dailycontrol[0])
+        print(dailycontrol[0].all())
 
     except:
         dailycontrol = False
+    
     print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
     
     #Grafico Demo
