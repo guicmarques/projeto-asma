@@ -187,7 +187,12 @@ def pacienteGraficos2(request,username):
     #asthmaQuestionaire = AsthmaControlQuestionnaire.objects.get_or_create(id=username)
     user_data = UserProfileInfo.objects.get(user_id=username)
     print(user_data.user, user_data.user_id, UserProfileInfo.objects.get(user_id=username).user_id)
+    try:
+        asthmaQuestionaire = AsthmaControlQuestionnaire.objects.all().filter(id=username)
 
+    except:
+        asthmaQuestionaire = False
+    print(asthmaQuestionaire)
     
     #Grafico Demo
     x_data = [0,1,2,3]
