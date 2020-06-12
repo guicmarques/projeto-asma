@@ -238,7 +238,7 @@ def getACQDates(user):
 
 def getFitbitData(user, dates):
     activities = {}
-    # TESTE COM AUTENTICA√á√ÉO DO MICHELET
+    # TESTE COM AUTENTICA«√O DO MICHELET
     # user = User.objects.get(username='Michelet')
     if len(dates) == 0:
         dt, activity = getActivities(user, date=None)
