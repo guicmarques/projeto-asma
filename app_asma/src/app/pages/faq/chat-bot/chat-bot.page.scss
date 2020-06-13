@@ -23,10 +23,14 @@
     height: 100%;
     position: relative;
     z-index: 0;
+    background-color: white;
+    //border-bottom-left-radius: 40px;
+    //border-bottom-right-radius: 40px;
 }
 .chats .chatbox {
-    height: calc(100% - 80px);
+    height: 100%; //calc(100% - 80px);
     overflow-x: hidden;
+    overflow-y: scroll;
     padding: 0 16px;
     padding-bottom: 30px;
 }
@@ -61,7 +65,25 @@
 }
 
 .bot-msg {
-    display: inline-flex;
+  display: inline-flex;
+  padding-bottom: 5px;
+}
+
+.my-msg {
+  display: inline-flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding-bottom: 5px;
+}
+
+.metadata {
+  display: inline-flex;
+  align-self: flex-end;
+}
+
+.time {
+  font-size: 10px;
+  color: rgb(128, 128, 128);
 }
 
 /* Messages */
@@ -85,9 +107,9 @@
     height: 0;
     border-style: solid;
   }*/
-  /*.message:first-child {
+  .message:first-child {
     margin: 16px 0 8px;
-  }*/
+  }
 
   .message.received {
     background: #faedb4;
@@ -113,3 +135,47 @@
   .scroll-content{
     padding: 0 !important;
   }
+
+  /* Footer */
+/*ion-content {
+  --background: #faedb4;
+}*/
+
+.flex-items{
+    display: flex;
+    //background-color: #faedb4;
+    justify-content: center;
+    width: 100%;
+}
+
+.msg-btn{
+  --padding-start: 0.7em;
+  --padding-end: 0.7em;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+}
+
+.msg-btn-container {
+  background-color: #ffc549;
+  border-radius: 50px;
+  align-self: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+}
+
+.message-input{
+  border: 1px solid #ffeb91;
+  border-radius: 25px;
+  resize: none;
+  padding-left: 10px;
+  padding-right: 20px;
+  margin-bottom: 2%;
+  max-width: 75%;
+  --background: white;
+  font-size: 15px;
+}
