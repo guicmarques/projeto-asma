@@ -201,51 +201,53 @@ def pacienteGraficos2(request,username):
     #print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
 
     #GRafico
-    df = pd.read_csv(
-        "https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv")
-    df.columns = [col.replace("AAPL.", "") for col in df.columns]
+    dates = ["2020-06-01","2020-06-02","2020-06-03","2020-06-04","2020-06-05"]
+    a = [1,2,1,2,1]
+    b = [5,4,3,2,1]
+    c = [1,2,3,4,5]
 
     # Create figure
     fig = go.Figure()
 
-    fig.add_trace(
-        go.Scatter(x=list(df.Date), y=list(df.High)))
+    # Add traces, one for each slider step
+    for step in range(0, 5):
+        fig.add_trace(
+            go.Bar(
+                visible=False,
+                name=dates[step],
+                x= ["Comida","Comida2","Comida3"],
+                y= [a[step],b[step],c[step]]))
 
-    # Set title
-    fig.update_layout(
-        title_text="Time series with range slider and selectors"
-    )
+    # Make 10th trace visible
+    fig.data[0].visible = True
 
-    # Add range slider
-    fig.update_layout(
-        xaxis=dict(
-            rangeselector=dict(
-                buttons=list([
-                    dict(count=1,
-                        label="1m",
-                        step="month",
-                        stepmode="backward"),
-                    dict(count=6,
-                        label="6m",
-                        step="month",
-                        stepmode="backward"),
-                    dict(count=1,
-                        label="YTD",
-                        step="year",
-                        stepmode="todate"),
-                    dict(count=1,
-                        label="1y",
-                        step="year",
-                        stepmode="backward"),
-                    dict(step="all")
-                ])
-            ),
-            rangeslider=dict(
-                visible=True
-            ),
-            type="date"
+    # Create and add slider
+    steps = []
+    for i in range(len(fig.data)):
+        step = dict(
+            method="update",
+            args=[{"visible": [False] * len(fig.data)},
+                {"title": "Day: " + dates[i]}],  # layout attribute
         )
+        step["args"][0]["visible"][i] = True  # Toggle i'th trace to "visible"
+        steps.append(step)
+
+    sliders = [dict(
+        active=10,
+        currentvalue={"prefix": "Frequency: "},
+        pad={"t": 50},
+        steps=steps
+    )]
+
+    fig.update_layout(
+        sliders=sliders
     )
+
+    # Edit slider labels
+    fig['layout']['sliders'][0]['currentvalue']['prefix']='Date: '
+    for i, date in enumerate(dates, start = 0):
+        fig['layout']['sliders'][0]['steps'][i]['label']=dates[i]
+
     fig10 = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
