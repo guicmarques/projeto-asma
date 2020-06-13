@@ -19,7 +19,7 @@
 </ion-header>
 
 <ion-content>
-  <div>
+  <div *ngIf="showACQ">
     <ion-card class="QACard questionnaire" routerLink="./questionario">
       <ion-card-header class="QAHeader">
         <ion-grid>
@@ -38,7 +38,7 @@
     </ion-card>
   </div>
 
-  <div>
+  <div *ngIf="showBarriers">
     <ion-card class="QACard barrier" routerLink="./barreiras">
       <ion-card-header class="QAHeader barrierCard">
         <ion-grid>

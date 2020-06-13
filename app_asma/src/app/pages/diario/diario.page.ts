@@ -1,9 +1,12 @@
+import { EventService } from './../../services/event.service';
+import { Subscription } from 'rxjs';
+import { BarrierService } from './../../services/barrier.service';
+import { QuestionnaireService } from './../../services/questionnaire.service';
 import { AnimationsService } from './../../services/animations.service';
 import { AlertService } from './../../services/alert.service';
 import { DiaryService } from './../../services/diary.service';
 import { Diary } from './../../models/diary.model';
 import { DateService } from './../../services/date.service';
-import { ModalController } from '@ionic/angular';
 import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 
 @Component({
@@ -29,6 +32,7 @@ export class DiarioPage implements OnInit {
     acordar: '',
     bombinha: ''
   }
+
   description = {
     note: 'É importante detalhar o máximo possível os seus sintomas para que seu médico possa lhe dar um tratamento mais personalizado.',
     pico: 'Serve para medir a facilidade do ar passar nos brônquios (vias aéreas). É importante seguir as orientações dos profissionais da saúde e anotar o valor do pico de fluxo (ou peakflow) diariamente. Essas informações ajudarão o médico a escolher o melhor tratamento da sua asma.',
@@ -38,24 +42,43 @@ export class DiarioPage implements OnInit {
     acordar: 'Os sintomas da asma podem mudar a qualidade do seu sono. Uma noite mal dormida pode afetar as atividades do seu dia-a-dia e piorar os sintomas de asma. Por isso, é importante seguir o tratamento, buscando controlar os sintomas e melhorar as noites de sono.',
     bombinha: 'A “bombinha” (ou broncodilatador) é usado para aliviar os sintomas da asma. Para o medicamento fazer efeito, é importante seguir as orientações dos profissionais de saúde e usá-lo corretamente. O efeito da “bombinha” (ou broncodilatador) é relaxar os músculos dos brônquios (vias aéreas) e facilitar a passagem de ar e aliviar os sintomas.'
   }
+
+  showACQ: boolean = false;
+  showBarriers: boolean = false;
+
   @ViewChild('saveIcon', {static: false}) saveIcon: ElementRef;
   @ViewChild('loadingBack', {static: false}) loadingBack: ElementRef;
   @ViewChild('checkIcon', {static: false}) checkIcon: ElementRef;
+  @ViewChild('ACQContainer', {static: false}) ACQContainer: ElementRef;
+  @ViewChild('barriersContainer', {static: false}) barriersContainer: ElementRef;
 
 
-  constructor(private modalController: ModalController,
-              private dateService: DateService,
+  constructor(private dateService: DateService,
               private diaryService: DiaryService,
               private alertService: AlertService,
-              private animationService: AnimationsService) { }
+              private questionnaireService: QuestionnaireService,
+              private barriersService: BarrierService,
+              private eventService: EventService,
+              private animationService: AnimationsService) {
+
+    this.eventService.subscribe('ACQAnswered', bool => {
+      this.showACQ = bool;
+    })
+
+    this.eventService.subscribe('barriersAnswered', bool => {
+      this.showBarriers = bool;
+    });
+  }
 
   ngOnInit() {
     [this.dayName, this.day, this.month, this.year] = this.dateService.getDate()
     this.week = this.dateService.getWeek();
     this.getDiaryPage([this.day, this.dateService.getMonthNumber(this.month), this.year, 'selected'])
 
-    console.log('Teste: ' + this.dateService.getLastDays(3));
+    this.displayACQ();
+    this.displayBarriers();
 
+    //console.log('Teste: ' + this.dateService.getLastDays(3));
     //console.log(this.week)
   }
 
@@ -112,6 +135,49 @@ export class DiarioPage implements OnInit {
 
   presentPopUp(cardTitle:string, cardSelected: string) {
     this.alertService.presentNoButtonPopUp(cardTitle, this.description[cardSelected]);
+  }
+
+  displayACQ() {
+    this.questionnaireService.getLastQuestionnaireDate().then(date => {
+      if (date === undefined) {
+        this.showACQ = true;
+        return;
+      }
+
+      let today = this.year + '-' + this.dateService.getMonthNumber(this.month) + '-' + this.day;
+      console.log('Hoje:', today);
+      let diffDays = this.dateService.compareDates(today, date)
+
+      if (diffDays >= 2) {
+        this.showACQ = true;
+        return;
+      }
+
+      this.showACQ = false;
+      return;
+    });
+  }
+
+  displayBarriers() {
+    this.barriersService.getLastBarriersDate().then(date => {
+      if (date === undefined) {
+        this.showBarriers = true;
+        return;
+      }
+
+      let today = this.year + '-' + this.dateService.getMonthNumber(this.month) + '-' + this.day;
+      console.log('Hoje:', today);
+      let diffDays = this.dateService.compareDates(today, date)
+
+      if (diffDays >= 2) {
+        this.showBarriers = true;
+        return;
+      }
+
+      this.showBarriers = false;
+      return;
+    });
+
   }
 
 }

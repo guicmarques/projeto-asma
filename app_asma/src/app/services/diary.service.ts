@@ -48,7 +48,9 @@ export class DiaryService {
           this.diary = data;
           resolve(this.diary);
         }, (error) => {
+          console.log('Erro:', error);
           this.alertService.presentPopUp('Oops!', 'Houve um problema para obter seu diário de sintomas. Por favor, tente novamente.');
+          reject(error);
         });
       })
     })

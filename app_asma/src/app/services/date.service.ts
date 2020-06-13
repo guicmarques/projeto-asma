@@ -153,4 +153,23 @@ export class DateService {
 
     return index.toString().padStart(2, '0')
   }
+
+  compareDates(date1, date2) {
+    let fullDate1 = date1.split('-');
+    let year1 = +fullDate1[0];
+    let month1 = +fullDate1[1];
+    let day1 = +fullDate1[2];
+    let fullDate2 = date2.split('-');
+    let year2 = +fullDate2[0];
+    let month2 = +fullDate2[1];
+    let day2 = +fullDate2[2];
+
+    let data1 = new Date(year1, month1 - 1, day1);
+    let data2 = new Date(year2, month2 - 1, day2);
+    let diffTime = Math.abs(data1.getTime() - data2.getTime());
+    let diffDays = diffTime / (1000 * 60 * 60 * 24); 
+
+    console.log(date1 + ' - ' + date2 + ' =', diffDays, 'days')
+    return diffDays;
+  }
 }

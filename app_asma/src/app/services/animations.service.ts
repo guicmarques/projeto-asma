@@ -73,4 +73,5 @@ export class AnimationsService {
     this.background.play();
     this.check.play();
   }
+
 }
