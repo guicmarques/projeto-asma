@@ -25,7 +25,7 @@ export class DiarioPage implements OnInit {
   pageView: string[];
   diaryPage: Diary = {
     note: '',
-    pico: [null, null, null],
+    pico: [null, 0, 0],
     tosse: '',
     chiado: '',
     faltaAr: '',
@@ -84,6 +84,7 @@ export class DiarioPage implements OnInit {
 
   getDiaryPage(date: string[]) {
     console.log('Clicado')
+    this.alertService.presentLoading(3000);
     this.pageView = date;
 
     this.diaryService.getDiary().then(data => {
@@ -92,7 +93,7 @@ export class DiarioPage implements OnInit {
       if (data[fullDate] === undefined) {
         this.diaryPage = {
           note: '',
-          pico: [null, null, null],
+          pico: [null, 0, 0],
           tosse: '',
           chiado: '',
           faltaAr: '',
@@ -100,9 +101,18 @@ export class DiarioPage implements OnInit {
           bombinha: ''
         };
       } else {
+
+        if (data[fullDate].pico[0] === "-1") {
+          data[fullDate].pico[0] = null;
+        } else {
+          data[fullDate].pico[0] = +data[fullDate].pico[0];
+        }
+        data[fullDate].pico[1] = 0;
+        data[fullDate].pico[2] = 0;
+
         this.diaryPage = {
           note: data[fullDate].notes,
-          pico: data[fullDate].pico.map(x => +x),
+          pico: data[fullDate].pico,
           tosse: data[fullDate].tosse.toString(),
           chiado: data[fullDate].chiado.toString(),
           faltaAr: data[fullDate].faltaDeAr.toString(),
@@ -127,6 +137,9 @@ export class DiarioPage implements OnInit {
 
   setDiaryPage() {
     console.log(this.diaryPage);
+    if (this.diaryPage.pico[0] === null) {
+      this.diaryPage.pico[0] = -1;
+    }
     this.diaryService.setDiaryPage(this.diaryPage).then(data => {
       console.log(data)
       this.animationService.clickAnimation(this.saveIcon, this.loadingBack, this.checkIcon);
@@ -159,7 +172,7 @@ export class DiarioPage implements OnInit {
   }
 
   displayBarriers() {
-    this.barriersService.getLastBarriersDate().then(date => {
+    this.barriersService.getLastBarriersDate().then(date => {  
       if (date === undefined) {
         this.showBarriers = true;
         return;

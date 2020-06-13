@@ -1,3 +1,4 @@
+import { AlertService } from './../../services/alert.service';
 import { Exercise } from './../../models/exercise.model';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Animation, AnimationController } from '@ionic/angular';
@@ -45,9 +46,12 @@ export class ExerciciosPage implements OnInit {
     }
   ];
 
-  constructor(private domSanitizer: DomSanitizer, private exerciseService: ExerciseService) { }
+  constructor(private domSanitizer: DomSanitizer, private exerciseService: ExerciseService,
+              private alertService: AlertService) { }
 
   ngOnInit() {
+    this.alertService.presentLoading(4000);
+
     this.exerciseService.getAllExercises().then(data => {
       let result = JSON.stringify(data);
       result = JSON.parse(result);

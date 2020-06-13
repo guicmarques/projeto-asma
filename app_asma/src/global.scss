@@ -214,3 +214,10 @@
         border-radius: 6vw;
     }
 }
+
+.loading-class {
+    .loading-wrapper {
+        border-radius: 25px;
+        flex-direction: column;
+    }
+}

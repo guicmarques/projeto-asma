@@ -27,8 +27,12 @@ export class RegisterPage implements OnInit {
     telefone: null,
     imagem: '',
     senha: '',
-    tokenHC: ''
+    tokenHC: '',
+    nascimento: ''
   }
+  monthShortNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+  monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 
+  'Outrubro', 'Novembro', 'Dezembro'];
 
   constructor(private authService: AuthService, 
               private userService: UserService,
@@ -89,6 +93,11 @@ export class RegisterPage implements OnInit {
         this.alertService.presentPopUp('Erro ao cadastrar', 'Usuário já cadastrado');
       }    
     })   
+  }
+
+  print() {
+    console.log(this.user.nascimento)
+    console.log(this.user.nascimento.substring(0,10))
   }
 
 }

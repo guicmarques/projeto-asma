@@ -35,6 +35,12 @@
     </div>
 
     <div class="register-input">
+      <ion-datetime class="register-field date-field" displayFormat="DD MMMM YYYY" pickerFormat="DD MMM YYYY" 
+      placeholder="Data de nascimento" [(ngModel)]="user.nascimento" [monthShortNames]="monthShortNames" 
+      [monthNames]="monthNames"></ion-datetime>
+    </div>
+
+    <div class="register-input">
       <ion-input class="register-field" placeholder="Peso (kg)" type="number" [(ngModel)]="user.peso"></ion-input>
     </div>
 
@@ -77,12 +83,12 @@
 
     <div>
       <ion-item lines="none">
-        <ion-label>Possuo um token de acesso</ion-label>
+        <ion-label>Possuo um RGHC</ion-label>
         <ion-checkbox slot="start" [(ngModel)]="hasTokenHC" mode="ios"></ion-checkbox>        
       </ion-item>
       
       <div *ngIf="hasTokenHC" class="register-input">
-        <ion-input class="token-field" placeholder="Token" type="text" [(ngModel)]="user.tokenHC"></ion-input>
+        <ion-input class="token-field" placeholder="RGHC" type="text" [(ngModel)]="user.tokenHC"></ion-input>
       </div> 
     </div>   
   </div> 

@@ -87,6 +87,10 @@ img {
     border-radius: 23px;
 }
 
+.date-field {
+    padding-right: 0;
+}
+
 .invPsw {
     list-style-type: none;
     color: red;
@@ -109,7 +113,6 @@ ion-checkbox {
     --padding-start: 40px;
     --padding-top: 14px;
     --padding-end: 40px;
-    text-align: start;
     border-bottom: 1px solid;
     border-image-source: linear-gradient(315deg, rgba(0,252,198,1) 0%, rgba(0,252,233,1) 35%, rgba(0,166,235,1) 100%);
     border-image-slice: 1;

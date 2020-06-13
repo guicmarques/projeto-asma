@@ -10,4 +10,5 @@ export interface Register {
     imagem: string,
     senha: string,
     tokenHC: string
+    nascimento: string
 }

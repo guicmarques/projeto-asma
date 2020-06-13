@@ -273,23 +273,9 @@
       <ion-card-content>
         <ion-list>
           <ion-item lines="none">
-            <ion-label class="peakLabel">1ª Medição: </ion-label>
+            <ion-label class="peakLabel">Medição: </ion-label>
             <ion-textarea inputmode="text" maxlength="6" cols="4" rows="1" class="peakValue" 
             [(ngModel)]="diaryPage.pico[0]" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-textarea>
-            <div class="peakUnit">L/min</div>
-          </ion-item>
-
-          <ion-item lines="none">
-            <ion-label class="peakLabel">2ª Medição: </ion-label>
-            <ion-textarea inputmode="text" maxlength="6" cols="4" rows="1" class="peakValue" 
-            [(ngModel)]="diaryPage.pico[1]" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-textarea>
-            <div class="peakUnit">L/min</div>
-          </ion-item>
-
-          <ion-item lines="none">
-            <ion-label class="peakLabel">3ª Medição: </ion-label>
-            <ion-textarea inputmode="text" maxlength="6" cols="4" rows="1" class="peakValue" 
-            [(ngModel)]="diaryPage.pico[2]" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-textarea>
             <div class="peakUnit">L/min</div>
           </ion-item>
         </ion-list>

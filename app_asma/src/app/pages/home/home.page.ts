@@ -48,6 +48,8 @@ export class HomePage implements OnInit {
               private dateService: DateService, private eventService: EventService) { }
 
   ngOnInit() {
+    this.alertService.presentLoading(4000);
+
     this.getUser();
     this.getDate()
     this.getGoals();
