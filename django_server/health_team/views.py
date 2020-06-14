@@ -200,11 +200,11 @@ def pacienteGraficos2(request,username):
                 print("Certo")
                 listaData.append(day.date.strftime("%Y-%m-%d"))
                 print("Certo2")
-                listaTosse.append(day.tosse)
-                listaChiado.append(day.chiado)
-                listaFaltaDeAr.append(day.faltaDeAr)
-                listaAcordar.append(day.acordar)
-                listaBombinha.append(day.bombinha)
+                listaTosse.append(int(day.tosse))
+                listaChiado.append(int(day.chiado))
+                listaFaltaDeAr.append(int(day.faltaDeAr))
+                listaAcordar.append(int(day.acordar))
+                listaBombinha.append(int(day.bombinha))
         else:
             print("Errado")
             listaData = ["0000-00-00"]
@@ -241,11 +241,10 @@ def pacienteGraficos2(request,username):
                 y= [a[step],b[step],c[step]])
         fig.add_trace(fig_inside)
         fig.update_layout(
-            autosize=False,
             yaxis= dict(
-                range=[False, True],
+                range=[0, 1],
                 ticktext=["Não", "Sim"],
-                tickvals=[False, True]
+                tickvals=[0, 1]
             )
         )
 
