@@ -9,3 +9,14 @@ screen
 sudo fuser -k 443/tcp
 sudo python3 manage.py runsslserver 0.0.0.0:443
 
+
+Verify database
+
+import sqlite3
+c = sqlite3.connect("db.sqlite3")
+cur = c.cursor()
+cur.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;")
+cur.fetchall()
+
+cur.execute("select * from auth_user")
+cur.fetchall()

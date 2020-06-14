@@ -188,34 +188,58 @@ def pacienteGraficos2(request,username):
     user_data = UserProfileInfo.objects.get(user_id=username)
     print(user_data.user, user_data.user_id, UserProfileInfo.objects.get(user_id=username).user_id)
     try:
+        listaData = []
+        listaTosse = []
+        listaChiado = []
+        listaFaltaDeAr = []
+        listaAcordar = []
+        listaBombinha = []
         dailycontrol = DailyControl.objects.all().filter(user_id=username)
-        print(dailycontrol)
-        print(len(dailycontrol))
-        print(dailycontrol[0])
-        print(dir(dailycontrol[0]))
-        print(dailycontrol[0].faltaDeAr)
+        if len(dailycontrol)!=0:
+            print(dailycontrol)
+            print(len(dailycontrol))
+            print(dailycontrol[0])
+            print(dir(dailycontrol[0]))
+            print(dailycontrol[0].faltaDeAr)
+            for day in dailycontrol:
+                listaData.append(day.date)
+                listaTosse.append(day.tosse)
+                listaChiado.append(day.chiado)
+                listaFaltaDeAr.append(day.faltaDeAr)
+                listaAcordar.append(day.acordar)
+                listaBombinha.append(day.bombinha)
+        else:
+            listaData = ["0000-00-00"]
+            listaTosse = [False]
+            listaChiado = [False]
+            listaFaltaDeAr = [False]
+            listaAcordar = [False]
+            listaBombinha = [False] 
+
 
     except:
-        dailycontrol = False
+        listaData = ["0000-00-00"]
+        listaTosse = [False]
+        listaChiado = [False]
+        listaFaltaDeAr = [False]
+        listaAcordar = [False]
+        listaBombinha = [False]
     
     #print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
 
     #GRafico
-    dates = ["2020-06-01","2020-06-02","2020-06-03","2020-06-04","2020-06-05"]
-    a = [1,2,1,2,1]
-    b = [5,4,3,2,1]
-    c = [1,2,3,4,5]
-
-    # Create figure
+    dates = listaData
+    a = listaTosse
+    b = listaChiado
+    c = listaFaltaDeAr
     fig = go.Figure()
-
     # Add traces, one for each slider step
     for step in range(0, 5):
         fig.add_trace(
             go.Bar(
                 visible=False,
                 name=dates[step],
-                x= ["Comida","Comida2","Comida3"],
+                x= ["Tosse","Chiado","FaltaDeAr"],
                 y= [a[step],b[step],c[step]]))
 
     # Make 10th trace visible
