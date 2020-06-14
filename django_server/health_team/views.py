@@ -240,7 +240,7 @@ def pacienteGraficos2(request,username):
                 x= ["Tosse","Chiado","FaltaDeAr"],
                 y= [a[step],b[step],c[step]])
         fig.add_trace(fig_inside)
-        fig.update_layout(range=[False, True])
+        fig.update_layout(yaxis= dict(range=[False, True]))
 
     # Make 10th trace visible
     fig.data[0].visible = True
