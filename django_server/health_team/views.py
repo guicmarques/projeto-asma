@@ -305,13 +305,13 @@ def pacienteGraficos2(request,username):
     fig = go.Figure()
 
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico1)
+        go.Scatter(x=listaData, y=listaPico1, name='Pico 1')
     )    
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico2)
+        go.Scatter(x=listaData, y=listaPico2, name='Pico 2')
     )
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico3)
+        go.Scatter(x=listaData, y=listaPico3, name='Pico 3')
     )
     
 
@@ -325,17 +325,17 @@ def pacienteGraficos2(request,username):
         xaxis=dict(
             rangeselector=dict(
                 buttons=list([
-                    dict(count=1,
-                        label="1m",
-                        step="month",
+                    dict(count=7,
+                        label="week",
+                        step="day",
                         stepmode="backward"),
-                    dict(count=6,
-                        label="6m",
-                        step="month",
+                    dict(count=14,
+                        label="2 weeks",
+                        step="day",
                         stepmode="backward"),
                     dict(count=1,
-                        label="YTD",
-                        step="year",
+                        label="This month",
+                        step="month",
                         stepmode="todate"),
                     dict(count=1,
                         label="1y",
