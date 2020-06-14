@@ -194,17 +194,24 @@ def pacienteGraficos2(request,username):
         listaFaltaDeAr = []
         listaAcordar = []
         listaBombinha = []
+        listaPico1 = []
+        listaPico2 = []
+        listaPico3 = []
+        listaNotes = []
         dailycontrol = DailyControl.objects.all().filter(user_id=username)
         if len(dailycontrol)!=0:
             for day in dailycontrol:
                 print("Certo")
                 listaData.append(day.date.strftime("%Y-%m-%d"))
-                print("Certo2")
                 listaTosse.append(int(day.tosse))
                 listaChiado.append(int(day.chiado))
                 listaFaltaDeAr.append(int(day.faltaDeAr))
                 listaAcordar.append(int(day.acordar))
                 listaBombinha.append(int(day.bombinha))
+                listaPico1.append(day.pico1)
+                listaPico2.append(day.pico2)
+                listaPico3.append(day.pico3)
+                listaNotes.append(day.notes)
         else:
             print("Errado")
             listaData = ["0000-00-00"]
@@ -213,6 +220,10 @@ def pacienteGraficos2(request,username):
             listaFaltaDeAr = [False]
             listaAcordar = [False]
             listaBombinha = [False] 
+            listaPico1 = [0]
+            listaPico2 = [0]
+            listaPico3 = [0]
+            listaNotes = ["No data"]
 
 
     except:
@@ -223,6 +234,11 @@ def pacienteGraficos2(request,username):
         listaFaltaDeAr = [False]
         listaAcordar = [False]
         listaBombinha = [False]
+        listaPico1 = [0]
+        listaPico2 = [0]
+        listaPico3 = [0]
+        listaNotes = ["Fail to load Data"]
+
     
     #print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
 
@@ -231,14 +247,16 @@ def pacienteGraficos2(request,username):
     a = listaTosse
     b = listaChiado
     c = listaFaltaDeAr
+    d = listaAcordar
+    e = listaBombinha
     fig = go.Figure()
     # Add traces, one for each slider step
     for step in range(len(dates)):
         fig_inside = go.Bar(
                 visible=False,
                 name=dates[step],
-                x= ["Tosse","Chiado","FaltaDeAr"],
-                y= [a[step],b[step],c[step]])
+                x= ["Apresentou tosse?","Apresentou chiado?","Teve falta de ar?","Teve problemas ao dormir?","Usou a bombinha?"],
+                y= [a[step],b[step],c[step],d[step],e[step]])
         fig.add_trace(fig_inside)
         fig.update_layout(
             yaxis= dict(
