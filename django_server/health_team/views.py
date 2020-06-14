@@ -234,6 +234,11 @@ def pacienteGraficos2(request,username):
     fig = go.Figure()
     # Add traces, one for each slider step
     for step in range(len(dates)):
+        fig_inside = go.Bar(
+                visible=False,
+                name=dates[step],
+                x= ["Tosse","Chiado","FaltaDeAr"],
+                y= [a[step],b[step],c[step]])
         fig.add_trace(fig_inside)
         fig.update_layout(range=[False, True])
 
