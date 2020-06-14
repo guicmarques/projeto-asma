@@ -234,7 +234,7 @@ def pacienteGraficos2(request,username):
     c = listaFaltaDeAr
     fig = go.Figure()
     # Add traces, one for each slider step
-    for step in range(0, 5):
+    for step in range(len(dates)):
         fig.add_trace(
             go.Bar(
                 visible=False,
