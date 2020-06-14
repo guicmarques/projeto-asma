@@ -305,14 +305,15 @@ def pacienteGraficos2(request,username):
     fig = go.Figure()
 
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico1))
+        go.Scatter(x=listaData, y=listaPico1)
+    )    
+    fig.add_trace(
+        go.Scatter(x=listaData, y=listaPico2)
     )
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico2))
+        go.Scatter(x=listaData, y=listaPico3)
     )
-    fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico3))
-    )
+    
 
     # Set title
     fig.update_layout(
