@@ -300,15 +300,19 @@ def pacienteGraficos2(request,username):
 
 
     #Grafico de fluxo de ar
-    df = pd.read_csv(
-        "https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv")
-    df.columns = [col.replace("AAPL.", "") for col in df.columns]
 
     # Create figure
     fig = go.Figure()
 
     fig.add_trace(
-        go.Scatter(x=list(df.Date), y=list(df.High)))
+        go.Scatter(x=listaData, y=listaPico1))
+    )
+    fig.add_trace(
+        go.Scatter(x=listaData, y=listaPico2))
+    )
+    fig.add_trace(
+        go.Scatter(x=listaData, y=listaPico3))
+    )
 
     # Set title
     fig.update_layout(
