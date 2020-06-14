@@ -196,12 +196,8 @@ def pacienteGraficos2(request,username):
         listaBombinha = []
         dailycontrol = DailyControl.objects.all().filter(user_id=username)
         if len(dailycontrol)!=0:
-            print(dailycontrol)
-            print(len(dailycontrol))
-            print(dailycontrol[0])
-            print(dir(dailycontrol[0]))
-            print(dailycontrol[0].faltaDeAr)
             for day in dailycontrol:
+                print("Certo")
                 listaData.append(day.date.date.strftime("%Y-%m-%d"))
                 listaTosse.append(day.tosse)
                 listaChiado.append(day.chiado)
