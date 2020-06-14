@@ -1,1 +1,1 @@
-from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile
+from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, DailyControl
