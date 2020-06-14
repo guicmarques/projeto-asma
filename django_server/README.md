@@ -92,6 +92,11 @@ $ python manage.py runsslserver 0.0.0.0:8000
     - Body: ```{"interesse": valor, "tempo": valor, "energia": valor, "faltaAr": valor, "companhia": valor, "dinheiro": valor, "coisas": valor, "seguranca": valor, "clima": valor, "equipamentos": valor}```
     - Response ```{"created": True ou mensagem de erro}```
 
+- /rest/watson/ - Envia pergunta ao chatbot Watson Assistant
+    - Authentication: Bearer ```access_token```
+    - Body: ```{"text": texto com a pergunta da pessoa}```
+    - Response ```{"intent": intent da pergunta, "responses": lista de mensagens retornadas pelo chatbot}```
+
 ### GET requests:
 
 - /rest/user_data/ - Retorna as informações do usuário

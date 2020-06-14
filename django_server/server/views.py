@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 
 # Create your views here.
@@ -11,8 +12,8 @@ from rest_framework.views import APIView
 
 import server.fitbitHandler as fitbitHandler
 import server.handleUserData as handleUserData
+import server.watsonHandler as watson
 from server.serializers import GroupSerializer, UserSerializer
-import logging
 
 
 class HelloView(APIView):
@@ -336,4 +337,19 @@ class Milestones(APIView):
 
         return Response({"created": created}, status=request_status)
 
-    # def post(self, request):
+class Watson(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        if "text" in request.data:
+            intent, responses = watson.askWatson(request.data["text"])
+            request_status = status.HTTP_200_OK
+
+        else:
+            intent = ""
+            responses = "There are missing keys in request"
+            request_status = status.HTTP_400_BAD_REQUEST
+
+        resp = {"intent": intent, "responses": responses}
+        
+        return Response(resp, status=request_status)

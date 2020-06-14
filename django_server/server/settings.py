@@ -10,3 +10,8 @@ fitbitTokens = {
     "refresh_token": "00ad76b33a992dec6bcdb84aadc557ffe5661f5974bc9a3eac3ab1afadbf3f6d",
     "userId": "8GJTXT"
 }
+
+watsonCredentials = {
+    "assistant_id": "1f092732-a949-4831-ba38-a830f30ae4a9",
+    "API_key": "EyPW_ndsTNL2JXVnzk-Ipy67Y4larys7Up_wnuOpRliw"
+}

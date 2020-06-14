@@ -26,4 +26,5 @@ urlpatterns = [
     path('exercises/', views.Exercises.as_view(), name="exercises"),
     path('milestones/', views.Milestones.as_view(), name="milestones"),
     path('barriers/', views.Barriers.as_view(), name="barriers"),
+    path('watson/', views.Watson.as_view(), name="watson"),
 ]
