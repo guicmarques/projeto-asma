@@ -299,6 +299,54 @@ def pacienteGraficos2(request,username):
     fig10 = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
+    #Grafico de fluxo de ar
+    df = pd.read_csv(
+        "https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv")
+    df.columns = [col.replace("AAPL.", "") for col in df.columns]
+
+    # Create figure
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(x=list(df.Date), y=list(df.High)))
+
+    # Set title
+    fig.update_layout(
+        title_text="Time series with range slider and selectors"
+    )
+
+    # Add range slider
+    fig.update_layout(
+        xaxis=dict(
+            rangeselector=dict(
+                buttons=list([
+                    dict(count=1,
+                        label="1m",
+                        step="month",
+                        stepmode="backward"),
+                    dict(count=6,
+                        label="6m",
+                        step="month",
+                        stepmode="backward"),
+                    dict(count=1,
+                        label="YTD",
+                        step="year",
+                        stepmode="todate"),
+                    dict(count=1,
+                        label="1y",
+                        step="year",
+                        stepmode="backward"),
+                    dict(step="all")
+                ])
+            ),
+            rangeslider=dict(
+                visible=True
+            ),
+            type="date"
+        )
+    )
+    figFluxoAr = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
 
     
     #Grafico Demo
@@ -333,7 +381,8 @@ def pacienteGraficos2(request,username):
             'plot_div': plot_div,
             'fig':fig2,
             'fig3':fig3,
-            'fig10':fig10
+            'fig10':fig10,
+            'figFluxoAr':figFluxoAr
             }
         )
 
