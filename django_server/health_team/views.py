@@ -199,6 +199,7 @@ def pacienteGraficos2(request,username):
             for day in dailycontrol:
                 print("Certo")
                 listaData.append(day.date.date.strftime("%Y-%m-%d"))
+                print("Certo2")
                 listaTosse.append(day.tosse)
                 listaChiado.append(day.chiado)
                 listaFaltaDeAr.append(day.faltaDeAr)
