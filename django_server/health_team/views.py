@@ -209,6 +209,7 @@ def pacienteGraficos2(request,username):
                 listaAcordar.append(day.acordar)
                 listaBombinha.append(day.bombinha)
         else:
+            print("Errado")
             listaData = ["0000-00-00"]
             listaTosse = [False]
             listaChiado = [False]
@@ -218,6 +219,7 @@ def pacienteGraficos2(request,username):
 
 
     except:
+        print("Errado2")
         listaData = ["0000-00-00"]
         listaTosse = [False]
         listaChiado = [False]
