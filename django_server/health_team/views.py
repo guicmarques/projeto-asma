@@ -202,7 +202,7 @@ def pacienteGraficos2(request,username):
             print(dir(dailycontrol[0]))
             print(dailycontrol[0].faltaDeAr)
             for day in dailycontrol:
-                listaData.append(day.date)
+                listaData.append(day.date.date.strftime("%Y-%m-%d"))
                 listaTosse.append(day.tosse)
                 listaChiado.append(day.chiado)
                 listaFaltaDeAr.append(day.faltaDeAr)
