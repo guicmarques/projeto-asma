@@ -442,7 +442,7 @@ def pacienteGraficos2(request,username):
     )
 
     # Add range slider
-    fig.update_yaxes(title_text="yaxis 4 title", row=4, col=1,
+    fig.update_xaxes( row=4, col=1,
         rangeselector=dict(
                 buttons=list([
                     dict(count=7,
