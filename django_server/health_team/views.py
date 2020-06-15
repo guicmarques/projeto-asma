@@ -442,7 +442,7 @@ def pacienteGraficos2(request,username):
     )
 
     # Add range slider
-    fig['layout'].update(
+    fig['layout'][7].update(
         height=800,
         xaxis=dict(
             rangeselector=dict(
