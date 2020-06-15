@@ -446,8 +446,7 @@ def pacienteGraficos2(request,username):
         rangeselector=dict(
             rangeslider=dict(
                 visible=True
-            ),
-            type="date"
+            )
         )
     )
     fig.update_xaxes( row=1, col=1,
