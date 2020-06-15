@@ -82,11 +82,17 @@ def register_account(request):
     registered = False
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
+        print(dir(user_form))
         if user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
             registered = True
+            new_user = authenticate(username=user_form.cleaned_data['username'],
+                                    password=user_form.cleaned_data['password'],
+                                    )
+            login(request, new_user)
+            return HttpResponseRedirect(reverse('table'))
         else:
             print(user_form.errors)
     else:
