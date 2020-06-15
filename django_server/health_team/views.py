@@ -265,25 +265,25 @@ def pacienteGraficos2(request,username):
 
         else:
             print("Errado")
-            listaquestion1 = []
-            listaquestion2 = []
-            listaquestion3 = []
-            listaquestion4 = []
-            listaquestion5 = []
-            listaquestion6 = []
-            listaquestion7 = []
-            listaData = []
+            listaquestion1 = [0]
+            listaquestion2 = [0]
+            listaquestion3 = [0]
+            listaquestion4 = [0]
+            listaquestion5 = [0]
+            listaquestion6 = [0]
+            listaquestion7 = [0]
+            listaData = ["0000-00-00"]
 
 
     except:
-        listaquestion1 = []
-        listaquestion2 = []
-        listaquestion3 = []
-        listaquestion4 = []
-        listaquestion5 = []
-        listaquestion6 = []
-        listaquestion7 = []
-        listaData = []
+        listaquestion1 = [0]
+        listaquestion2 = [0]
+        listaquestion3 = [0]
+        listaquestion4 = [0]
+        listaquestion5 = [0]
+        listaquestion6 = [0]
+        listaquestion7 = [0]
+        listaData = ["0000-00-00"]
 
     
     #print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
