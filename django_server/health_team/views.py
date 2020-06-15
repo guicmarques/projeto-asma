@@ -443,8 +443,26 @@ def pacienteGraficos2(request,username):
 
     # Add range slider
     fig.update_xaxes( row=4, col=1,
-            rangeslider=dict(
-                autorange=True
+        rangeslider=dict(
+                buttons=list([
+                    dict(count=7,
+                        label="week",
+                        step="day",
+                        stepmode="backward"),
+                    dict(count=14,
+                        label="2 weeks",
+                        step="day",
+                        stepmode="backward"),
+                    dict(count=1,
+                        label="This month",
+                        step="month",
+                        stepmode="todate"),
+                    dict(count=1,
+                        label="1y",
+                        step="year",
+                        stepmode="backward"),
+                    dict(step="all")
+                ])
             ),
             rangeslider=dict(
                 visible=True
