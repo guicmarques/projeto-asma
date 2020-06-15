@@ -438,7 +438,7 @@ def pacienteGraficos2(request,username):
     fig.update_yaxes(
 
                 range=[0,6],
-                ticktext=["Sem sintomas", " Sintomas muito leves","Sintomas leves","Sintomas moderados","Sintomas um tanto graves","Sintomas graves","Sintomas muito graves"],
+                ticktext=["Sem sintomas", " Muito leves","Leves","Moderados","Tanto graves","Graves","Muito graves"],
                 tickvals=[0, 1,2,3,4,5,6],
 
         row=1, col=2
@@ -450,7 +450,7 @@ def pacienteGraficos2(request,username):
     fig.update_yaxes(
 
                 range=[0,6],
-                ticktext=["Nada limitado", "Muito pouco limitado","Pouco limitado","Moderadamente limitado","Muito limitado","Extremamente limitado","Totalmente limitado"],
+                ticktext=["Nada limitado", "Muito pouco","Pouco","Moderadamente","Muito","Extremamente","Totalmente"],
                 tickvals=[0, 1,2,3,4,5,6],
 
         row=2, col=1
@@ -486,7 +486,7 @@ def pacienteGraficos2(request,username):
     fig.update_yaxes(
 
                 range=[0,6],
-                ticktext=["Nenhum", "1-2 jatos na maior parte dos dias","3-4 jatos na maior parte dos dias","5-8 jatos na maior parte dos dias","9-12 jatos na maior parte dos dias","13-16 jatos na maior parte dos dias","Mais de 16 jatos por dia"],
+                ticktext=["Nenhum", "1-2 jatos","3-4 jatos","5-8 jatos","9-12 jatos","13-16 jatos","+ 16 jatos"],
                 tickvals=[0, 1,2,3,4,5,6],
 
         row=3, col=2
