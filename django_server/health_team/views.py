@@ -444,6 +444,14 @@ def pacienteGraficos2(request,username):
     # Add range slider
     fig.update_xaxes( row=4, col=1,
         rangeselector=dict(
+            rangeslider=dict(
+                visible=True
+            ),
+            type="date"
+        )
+    )
+    fig.update_xaxes( row=1, col=1,
+        rangeselector=dict(
                 buttons=list([
                     dict(count=7,
                         label="week",
@@ -465,7 +473,7 @@ def pacienteGraficos2(request,username):
                 ])
             ),
             rangeslider=dict(
-                visible=True
+                visible=False
             ),
             type="date"
     )
