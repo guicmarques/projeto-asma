@@ -249,6 +249,7 @@ def pacienteGraficos2(request,username):
     c = listaFaltaDeAr
     d = listaAcordar
     e = listaBombinha
+    f = listaNotes
     fig = go.Figure()
     # Add traces, one for each slider step
     for step in range(len(dates)):
@@ -256,7 +257,9 @@ def pacienteGraficos2(request,username):
                 visible=False,
                 name=dates[step],
                 x= ["Apresentou tosse?","Apresentou chiado?","Teve falta de ar?","Teve problemas ao dormir?","Usou a bombinha?"],
-                y= [a[step],b[step],c[step],d[step],e[step]])
+                y= [a[step],b[step],c[step],d[step],e[step]],
+                text = f[step]
+        )
         fig.add_trace(fig_inside)
         fig.update_layout(
             yaxis= dict(
@@ -305,13 +308,13 @@ def pacienteGraficos2(request,username):
     fig = go.Figure()
 
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico1, name='Pico 1')
+        go.Scatter(x=listaData, y=listaPico1, name='Pico 1', text = f[step])
     )    
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico2, name='Pico 2')
+        go.Scatter(x=listaData, y=listaPico2, name='Pico 2', text = f[step])
     )
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico3, name='Pico 3')
+        go.Scatter(x=listaData, y=listaPico3, name='Pico 3', text = f[step])
     )
     
 
