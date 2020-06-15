@@ -248,13 +248,13 @@ def pacienteGraficos2(request,username):
         listaquestion5 = []
         listaquestion6 = []
         listaquestion7 = []
-        listaData = []
+        listaData2 = []
 
         questionario = AsthmaControlQuestionnaire.objects.all().filter(user_id=username)
         if len(questionario)!=0:
             for day in questionario:
                 print("Certo - Questionario")
-                listaData.append(day.date.strftime("%Y-%m-%d"))
+                listaData2.append(day.date.strftime("%Y-%m-%d"))
                 listaquestion1.append(day.question1)
                 listaquestion2.append(day.question2)
                 listaquestion3.append(day.question3)
@@ -272,7 +272,7 @@ def pacienteGraficos2(request,username):
             listaquestion5 = [0]
             listaquestion6 = [0]
             listaquestion7 = [0]
-            listaData = ["0000-00-00"]
+            listaData2 = ["0000-00-00"]
 
 
     except:
@@ -283,7 +283,7 @@ def pacienteGraficos2(request,username):
         listaquestion5 = [0]
         listaquestion6 = [0]
         listaquestion7 = [0]
-        listaData = ["0000-00-00"]
+        listaData2 = ["0000-00-00"]
 
     
     #print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
@@ -296,7 +296,7 @@ def pacienteGraficos2(request,username):
     d = listaAcordar
     e = listaBombinha
     f = listaNotes
-    fig_dia = go.Figure()
+    fig = go.Figure()
     # Add traces, one for each slider step
     for step in range(len(dates)):
         fig_inside = go.Bar(
@@ -306,8 +306,8 @@ def pacienteGraficos2(request,username):
                 y= [a[step],b[step],c[step],d[step],e[step]],
                 text = f[step]
         )
-        fig_dia.add_trace(fig_inside)
-        fig_dia.update_layout(
+        fig.add_trace(fig_inside)
+        fig.update_layout(
             yaxis= dict(
                 range=[0, 1],
                 ticktext=["Não", "Sim"],
@@ -316,14 +316,14 @@ def pacienteGraficos2(request,username):
         )
 
     # Make 10th trace visible
-    fig_dia.data[0].visible = True
+    fig.data[0].visible = True
 
     # Create and add slider
     steps = []
-    for i in range(len(fig_dia.data)):
+    for i in range(len(fig.data)):
         step = dict(
             method="update",
-            args=[{"visible": [False] * len(fig_dia.data)},
+            args=[{"visible": [False] * len(fig.data)},
                 {"title": "Day: " + dates[i]}],  # layout attribute
         )
         step["args"][0]["visible"][i] = True  # Toggle i'th trace to "visible"
@@ -336,16 +336,16 @@ def pacienteGraficos2(request,username):
         steps=steps
     )]
 
-    fig_dia.update_layout(
+    fig.update_layout(
         sliders=sliders
     )
 
     # Edit slider labels
-    fig_dia['layout']['sliders'][0]['currentvalue']['prefix']='Date: '
+    fig['layout']['sliders'][0]['currentvalue']['prefix']='Date: '
     for i, date in enumerate(dates, start = 0):
-        fig_dia['layout']['sliders'][0]['steps'][i]['label']=dates[i]
+        fig['layout']['sliders'][0]['steps'][i]['label']=dates[i]
 
-    fig10 = plot({"data":fig_dia},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+    fig10 = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
     #Grafico de fluxo de ar
@@ -401,7 +401,85 @@ def pacienteGraficos2(request,username):
     )
     figFluxoAr = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
-    
+    #Grafico de questionario semanal
+
+    # Create figure
+    fig = make_subplots(
+        rows=4, cols=2,
+        specs=
+            [[{}, {}],
+            [{}, {}],
+            [{}, {}],
+            [{"colspan": 2}, None]],
+        shared_xaxes=True
+    )
+
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion1, name='Pico 1'),row=1, col=1
+    )    
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion2, name='Pico 2'),row=1, col=2
+    )
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion3, name='Pico 3'),row=2, col=1
+    )
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion4, name='Pico 3'),row=2, col=2
+    )
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion5, name='Pico 3'),row=3, col=1
+    )
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion6, name='Pico 3'),row=3, col=2
+    )
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion7, name='Pico 3'),row=4, col=1
+    )
+
+    # Set title
+    fig.update_layout(
+        title_text="Time series with range slider and selectors"
+    )
+
+    # Add range slider
+    fig.update_xaxes( row=4, col=1,
+        rangeslider=dict(
+            visible=True
+        ),
+        type="date"
+    )
+    fig.update_xaxes( row=1, col=1,
+        rangeselector=dict(
+                buttons=list([
+                    dict(count=7,
+                        label="week",
+                        step="day",
+                        stepmode="backward"),
+                    dict(count=14,
+                        label="2 weeks",
+                        step="day",
+                        stepmode="backward"),
+                    dict(count=1,
+                        label="This month",
+                        step="month",
+                        stepmode="todate"),
+                    dict(count=1,
+                        label="1y",
+                        step="year",
+                        stepmode="backward"),
+                    dict(step="all")
+                ])
+            ),
+            rangeslider=dict(
+                visible=False
+            ),
+            type="date"
+    )
+    fig['layout'].update(
+        height=800
+    )
+    fig.update_xaxes(matches='x')
+    figQuestSemanal = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
     
@@ -438,7 +516,8 @@ def pacienteGraficos2(request,username):
             'fig':fig2,
             'fig3':fig3,
             'fig10':fig10,
-            'figFluxoAr':figFluxoAr
+            'figFluxoAr':figFluxoAr,
+            'figQuestSemanal':figQuestSemanal
             }
         )
 
