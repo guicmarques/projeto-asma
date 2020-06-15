@@ -401,85 +401,7 @@ def pacienteGraficos2(request,username):
     )
     figFluxoAr = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
-    #Grafico de questionario semanal
-
-    # Create figure
-    fig = make_subplots(
-        rows=4, cols=2,
-        specs=
-            [[{}, {}],
-            [{}, {}],
-            [{}, {}],
-            [{"colspan": 2}, None]],
-        shared_xaxes=True
-    )
-
-    fig.add_trace(
-        go.Scatter(x=listaData, y=listaquestion1, name='Pico 1'),row=1, col=1
-    )    
-    fig.add_trace(
-        go.Scatter(x=listaData, y=listaquestion2, name='Pico 2'),row=1, col=2
-    )
-    fig.add_trace(
-        go.Scatter(x=listaData, y=listaquestion3, name='Pico 3'),row=2, col=1
-    )
-    fig.add_trace(
-        go.Scatter(x=listaData, y=listaquestion4, name='Pico 3'),row=2, col=2
-    )
-    fig.add_trace(
-        go.Scatter(x=listaData, y=listaquestion5, name='Pico 3'),row=3, col=1
-    )
-    fig.add_trace(
-        go.Scatter(x=listaData, y=listaquestion6, name='Pico 3'),row=3, col=2
-    )
-    fig.add_trace(
-        go.Scatter(x=listaData, y=listaquestion7, name='Pico 3'),row=4, col=1
-    )
-
-    # Set title
-    fig.update_layout(
-        title_text="Time series with range slider and selectors"
-    )
-
-    # Add range slider
-    fig.update_xaxes( row=4, col=1,
-        rangeslider=dict(
-            visible=True
-        ),
-        type="date"
-    )
-    fig.update_xaxes( row=1, col=1,
-        rangeselector=dict(
-                buttons=list([
-                    dict(count=7,
-                        label="week",
-                        step="day",
-                        stepmode="backward"),
-                    dict(count=14,
-                        label="2 weeks",
-                        step="day",
-                        stepmode="backward"),
-                    dict(count=1,
-                        label="This month",
-                        step="month",
-                        stepmode="todate"),
-                    dict(count=1,
-                        label="1y",
-                        step="year",
-                        stepmode="backward"),
-                    dict(step="all")
-                ])
-            ),
-            rangeslider=dict(
-                visible=False
-            ),
-            type="date"
-    )
-    fig['layout'].update(
-        height=800
-    )
-    fig.update_xaxes(matches='x')
-    figQuestSemanal = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+    
 
 
     
@@ -516,8 +438,7 @@ def pacienteGraficos2(request,username):
             'fig':fig2,
             'fig3':fig3,
             'fig10':fig10,
-            'figFluxoAr':figFluxoAr,
-            'figQuestSemanal':figQuestSemanal
+            'figFluxoAr':figFluxoAr
             }
         )
 
