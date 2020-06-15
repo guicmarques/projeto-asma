@@ -296,7 +296,7 @@ def pacienteGraficos2(request,username):
     d = listaAcordar
     e = listaBombinha
     f = listaNotes
-    fig = go.Figure()
+    fig_dia = go.Figure()
     # Add traces, one for each slider step
     for step in range(len(dates)):
         fig_inside = go.Bar(
@@ -306,8 +306,8 @@ def pacienteGraficos2(request,username):
                 y= [a[step],b[step],c[step],d[step],e[step]],
                 text = f[step]
         )
-        fig.add_trace(fig_inside)
-        fig.update_layout(
+        fig_dia.add_trace(fig_inside)
+        fig_dia.update_layout(
             yaxis= dict(
                 range=[0, 1],
                 ticktext=["Não", "Sim"],
@@ -316,14 +316,14 @@ def pacienteGraficos2(request,username):
         )
 
     # Make 10th trace visible
-    fig.data[0].visible = True
+    fig_dia.data[0].visible = True
 
     # Create and add slider
     steps = []
-    for i in range(len(fig.data)):
+    for i in range(len(fig_dia.data)):
         step = dict(
             method="update",
-            args=[{"visible": [False] * len(fig.data)},
+            args=[{"visible": [False] * len(fig_dia.data)},
                 {"title": "Day: " + dates[i]}],  # layout attribute
         )
         step["args"][0]["visible"][i] = True  # Toggle i'th trace to "visible"
@@ -336,16 +336,16 @@ def pacienteGraficos2(request,username):
         steps=steps
     )]
 
-    fig.update_layout(
+    fig_dia.update_layout(
         sliders=sliders
     )
 
     # Edit slider labels
-    fig['layout']['sliders'][0]['currentvalue']['prefix']='Date: '
+    fig_dia['layout']['sliders'][0]['currentvalue']['prefix']='Date: '
     for i, date in enumerate(dates, start = 0):
-        fig['layout']['sliders'][0]['steps'][i]['label']=dates[i]
+        fig_dia['layout']['sliders'][0]['steps'][i]['label']=dates[i]
 
-    fig10 = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+    fig10 = plot({"data":fig_dia},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
     #Grafico de fluxo de ar
