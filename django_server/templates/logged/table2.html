@@ -115,6 +115,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
+                                        <th>RGHC</th>
                                         <th>RG</th>
                                         <th>Telefone</th>
                                         <th>Peso</th>
@@ -125,6 +126,7 @@
                                     {% for linha in lista %}
                                         <tr>
                                             <td><a href="/health_team/graphs/{{linha.user_id}}" >{{linha.nome}} {{linha.sobrenome}}</a></td>
+                                            <td>{{linha.token}}<br></td>
                                             <td>{{linha.rg}}<br></td>
                                             <td>{{linha.telefone}}<br></td>
                                             <td>{{linha.peso}}</td>
