@@ -442,10 +442,8 @@ def pacienteGraficos2(request,username):
     )
 
     # Add range slider
-    fig['layout'][7].update(
-        height=800,
-        xaxis=dict(
-            rangeselector=dict(
+    fig.update_yaxes(title_text="yaxis 4 title", row=4, col=1,
+        rangeselector=dict(
                 buttons=list([
                     dict(count=7,
                         label="week",
@@ -470,7 +468,9 @@ def pacienteGraficos2(request,username):
                 visible=True
             ),
             type="date"
-        )
+    )
+    fig['layout'].update(
+        height=800
     )
     figQuestSemanal = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
