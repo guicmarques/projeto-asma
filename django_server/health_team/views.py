@@ -443,6 +443,7 @@ def pacienteGraficos2(request,username):
 
     # Add range slider
     fig.update_layout(
+        height=800,
         xaxis=dict(
             rangeselector=dict(
                 buttons=list([
