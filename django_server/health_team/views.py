@@ -410,7 +410,8 @@ def pacienteGraficos2(request,username):
             [[{}, {}],
             [{}, {}],
             [{}, {}],
-            [{"colspan": 2}, None]]
+            [{"colspan": 2}, None]],
+        shared_xaxes=True
     )
 
     fig.add_trace(
