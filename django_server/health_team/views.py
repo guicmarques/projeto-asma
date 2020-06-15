@@ -370,10 +370,7 @@ def pacienteGraficos2(request,username):
     )
     
 
-    # Set title
-    fig.update_layout(
-        title_text="Time series with range slider and selectors"
-    )
+
 
     # Add range slider
     fig.update_layout(
@@ -513,14 +510,6 @@ def pacienteGraficos2(request,username):
         row=4, col=1
     )
 
-    # Set title
-    fig.update_layout(
-        title=dict(
-            text = "Questionário de Controle da Asma (ACQ)",
-            xanchor = 'center',
-            yanchor = 'top'
-        )
-    )
     
 
     # Add range slider
