@@ -315,7 +315,7 @@ def pacienteGraficos2(request,username):
         fig.add_trace(fig_inside)
         fig.update_layout(
             yaxis= dict(
-                range=[0, 1],
+                range=[-0.1, 1.1],
                 ticktext=["Não", "Sim"],
                 tickvals=[0, 1]
             )
@@ -435,7 +435,7 @@ def pacienteGraficos2(request,username):
     fig.update_yaxes(
 
                 range=[0,6],
-                ticktext=["Nunca", "Quase nunca","Poucas vezes","Várias vezes","Muitas vezes","Muitíssimas vezes","Incapaz de dormir devido a asma"],
+                ticktext=["Nunca", "Quase nunca","Poucas vezes","Várias vezes","Muitas vezes","Muitíssimas vezes","Incapaz de dormir"],
                 tickvals=[0, 1,2,3,4,5,6],
 
         row=1, col=1
