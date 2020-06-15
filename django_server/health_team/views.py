@@ -419,8 +419,8 @@ def pacienteGraficos2(request,username):
             [{"colspan": 2}, None]],
         shared_xaxes=True,
         subplot_titles=(
-            "Quão frequentemente você se acordou por causa de sua asma?",
-            "Quão ruins foram os seus sintomas quando você acordou pela manhã?",
+            "Quão frequentemente você acordou por causa de sua asma?",
+            "Quão ruins foram os seus sintomas ao acordar?",
             "Quão limitado você tem estado em suas atividades?",
             "O quanto de falta de ar você teve?",
             "Quanto tempo você teve chiado?",
@@ -515,7 +515,11 @@ def pacienteGraficos2(request,username):
 
     # Set title
     fig.update_layout(
-        title_text="Time series with range slider and selectors"
+        title=dict(
+            text = "Questionário de Controle da Asma (ACQ)",
+            xanchor = 'center',
+            yanchor = 'top'
+        )
     )
     
 
