@@ -309,15 +309,15 @@ def pacienteGraficos2(request,username):
                 visible=False,
                 name=dates[step],
                 x= ["Apresentou tosse?","Apresentou chiado?","Teve falta de ar?","Teve problemas ao dormir?","Usou a bombinha?"],
-                y= [a[step],b[step],c[step],d[step],e[step]],
+                y= [[num+0.1 for num in a[step]],[num+0.1 for num in b[step]],[num+0.1 for num in c[step]],[num+0.1 for num in d[step]],[num+0.1 for num in e[step]]], 
                 text = f[step]
         )
         fig.add_trace(fig_inside)
         fig.update_layout(
             yaxis= dict(
-                range=[-0.1, 1.1],
+                range=[0, 1.1],
                 ticktext=["Não", "Sim"],
-                tickvals=[0, 1]
+                tickvals=[0.1, 1.1]
             )
         )
 
