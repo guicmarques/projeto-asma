@@ -309,7 +309,7 @@ def pacienteGraficos2(request,username):
                 visible=False,
                 name=dates[step],
                 x= ["Apresentou tosse?","Apresentou chiado?","Teve falta de ar?","Teve problemas ao dormir?","Usou a bombinha?"],
-                y= [a[step]+0.1,b[step]+0.1,c[step]+0.1,d[step]+0.1,e[step]+0.1], [num+0.1 for num in a[step]]
+                y= [a[step]+0.1,b[step]+0.1,c[step]+0.1,d[step]+0.1,e[step]+0.1], 
                 text = f[step]
         )
         fig.add_trace(fig_inside)
