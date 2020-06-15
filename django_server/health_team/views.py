@@ -443,11 +443,13 @@ def pacienteGraficos2(request,username):
 
     # Add range slider
     fig.update_xaxes( row=4, col=1,
-        rangeselector=dict(
+        rangeslider=dict(
+                autorange=True
+            ),
             rangeslider=dict(
                 visible=True
-            )
-        )
+            ),
+            type="date"
     )
     fig.update_xaxes( row=1, col=1,
         rangeselector=dict(
