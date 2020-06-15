@@ -417,7 +417,16 @@ def pacienteGraficos2(request,username):
             [{}, {}],
             [{}, {}],
             [{"colspan": 2}, None]],
-        shared_xaxes=True
+        shared_xaxes=True,
+        subplot_titles=(
+            "Quão frequentemente você se acordou por causa de sua asma?",
+            "Quão ruins foram os seus sintomas quando você acordou pela manhã?",
+            "Quão limitado você tem estado em suas atividades?",
+            "O quanto de falta de ar você teve?",
+            "Quanto tempo você teve chiado?",
+            "Quantos jatos de broncodilatador foram usado por dia?",
+            "VEF1 % previsto?"
+        )
     )
 
     fig.add_trace(
