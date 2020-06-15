@@ -8,6 +8,7 @@ from plotly.offline import plot
 from plotly.graph_objs import Scatter
 from plotly.graph_objs import Line
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import numpy as np
 import pandas as pd
 
@@ -239,6 +240,51 @@ def pacienteGraficos2(request,username):
         listaPico3 = [0]
         listaNotes = ["Fail to load Data"]
 
+    try:
+        listaquestion1 = []
+        listaquestion2 = []
+        listaquestion3 = []
+        listaquestion4 = []
+        listaquestion5 = []
+        listaquestion6 = []
+        listaquestion7 = []
+        listaData = []
+
+        questionario = AsthmaControlQuestionnaire.objects.all().filter(user_id=username)
+        if len(questionario)!=0:
+            for day in questionario:
+                print("Certo - Questionario")
+                listaData.append(day.date.strftime("%Y-%m-%d"))
+                listaquestion1.append(day.question1)
+                listaquestion2.append(day.question2)
+                listaquestion3.append(day.question3)
+                listaquestion4.append(day.question4)
+                listaquestion5.append(day.question5)
+                listaquestion6.append(day.question6)
+                listaquestion7.append(day.question7)
+
+        else:
+            print("Errado")
+            listaquestion1 = []
+            listaquestion2 = []
+            listaquestion3 = []
+            listaquestion4 = []
+            listaquestion5 = []
+            listaquestion6 = []
+            listaquestion7 = []
+            listaData = []
+
+
+    except:
+        listaquestion1 = []
+        listaquestion2 = []
+        listaquestion3 = []
+        listaquestion4 = []
+        listaquestion5 = []
+        listaquestion6 = []
+        listaquestion7 = []
+        listaData = []
+
     
     #print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
 
@@ -355,6 +401,77 @@ def pacienteGraficos2(request,username):
     )
     figFluxoAr = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
+    #Grafico de questionario semanal
+
+    # Create figure
+    fig = make_subplots(
+        rows=4, cols=2,
+        specs=
+            [[{}, {}],
+            [[{}, {}],
+            [[{}, {}],
+            [{"colspan": 2}, None]],
+    )
+
+    fig.add_trace(
+        go.Scatter(x=listaData, y=listaquestion1, name='Pico 1'),row=1, col=1
+    )    
+    fig.add_trace(
+        go.Scatter(x=listaData, y=listaquestion2, name='Pico 2'),row=1, col=2
+    )
+    fig.add_trace(
+        go.Scatter(x=listaData, y=listaquestion3, name='Pico 3'),row=2, col=1
+    )
+    fig.add_trace(
+        go.Scatter(x=listaData, y=listaquestion4, name='Pico 3'),row=2, col=2
+    )
+    fig.add_trace(
+        go.Scatter(x=listaData, y=listaquestion5, name='Pico 3'),row=3, col=1
+    )
+    fig.add_trace(
+        go.Scatter(x=listaData, y=listaquestion6, name='Pico 3'),row=3, col=2
+    )
+    fig.add_trace(
+        go.Scatter(x=listaData, y=listaquestion7, name='Pico 3'),row=4, col=1
+    )
+
+    # Set title
+    fig.update_layout(
+        title_text="Time series with range slider and selectors"
+    )
+
+    # Add range slider
+    fig.update_layout(
+        xaxis=dict(
+            rangeselector=dict(
+                buttons=list([
+                    dict(count=7,
+                        label="week",
+                        step="day",
+                        stepmode="backward"),
+                    dict(count=14,
+                        label="2 weeks",
+                        step="day",
+                        stepmode="backward"),
+                    dict(count=1,
+                        label="This month",
+                        step="month",
+                        stepmode="todate"),
+                    dict(count=1,
+                        label="1y",
+                        step="year",
+                        stepmode="backward"),
+                    dict(step="all")
+                ])
+            ),
+            rangeslider=dict(
+                visible=True
+            ),
+            type="date"
+        )
+    )
+    figQuestSemanal = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
 
     
     #Grafico Demo
@@ -390,7 +507,8 @@ def pacienteGraficos2(request,username):
             'fig':fig2,
             'fig3':fig3,
             'fig10':fig10,
-            'figFluxoAr':figFluxoAr
+            'figFluxoAr':figFluxoAr,
+            'figQuestSemanal':figQuestSemanal
             }
         )
 
