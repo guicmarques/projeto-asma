@@ -425,7 +425,7 @@ def pacienteGraficos2(request,username):
     )
     fig.update_yaxes(
 
-                range=[0, 1,2,3,4,5,6],
+                range=[0,6],
                 ticktext=["Nunca", "Quase nunca","Poucas vezes","Várias vezes","Muitas vezes","Muitíssimas vezes","Incapaz de dormir devido a asma"],
                 tickvals=[0, 1,2,3,4,5,6],
 
