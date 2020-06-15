@@ -26,7 +26,8 @@
           <div class="metadata">
             <div class="time">{{chat.createdAt | date: 'HH:mm'}}</div>
           </div>
-          <div class="message sent">
+          <div class="message" [ngClass]="{'sent'   : chat.sent === true,
+                                           'unsent' : chat.sent === false}">
             {{chat.message}}
           </div>
           

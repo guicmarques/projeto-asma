@@ -126,11 +126,16 @@
     border-radius: 15px 0px 15px 15px;
     float: right;
   }
-  .message.sent:after {
+  /*.message.sent:after {
     border-width: 0px 0 10px 10px;
     border-color: transparent transparent transparent rgb(182, 239, 253);
     top: 0;
     right: -10px;
+  }*/
+  .message.unsent {
+    background: rgb(186, 211, 218);
+    border-radius: 15px 0px 15px 15px;
+    float: right;
   }
   .scroll-content{
     padding: 0 !important;

@@ -1,3 +1,4 @@
+import { ChatbotService } from './../../../services/chatbot.service';
 import { Chat } from './../../../models/chat.model';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AlertController } from '@ionic/angular';
@@ -16,7 +17,8 @@ export class ChatBotPage implements OnInit {
 
   chats: any =[]
 
-  constructor(private alertCtrl: AlertController, private userService: UserService) { }
+  constructor(private alertCtrl: AlertController, private userService: UserService,
+              private chatService: ChatbotService) { }
 
   ngOnInit() {
     this.userService.getUser().then(data => {
@@ -24,7 +26,6 @@ export class ChatBotPage implements OnInit {
       user = data;
       let nome = user.nome;
       this.chats.push({
-        id: '1',
         message: `Olá, ${nome}! Tudo bem com você? Me chamo AsmaBot! Sou um robô, mas posso tirar todas (ou quase) as 
                   suas dúvidas, então é só me perguntar!`,
         isMe: false,
@@ -35,23 +36,45 @@ export class ChatBotPage implements OnInit {
   }
 
   sendMessage() {
-    let question = this.setQuestion(this.newMsg);
-    this.div.nativeElement.scrollTo(0, this.div.nativeElement.scrollHeight);
-    this.newMsg = '';
-    console.log(question);
+    this.setQuestion(this.newMsg).then(async message => {
+      this.chatService.sendMessage(this.chats[this.chats.length - 1].message).then(data => {
+        setTimeout(() => {this.div.nativeElement.scrollTo(0, this.div.nativeElement.scrollHeight)}, 10);
+        this.chats[this.chats.length - 1].sent = true;
+        let payload: any = {
+          intent: '',
+          responses: [],
+        }
+        payload = data;
+        for (let i = 0; i < payload.responses.length; i++) {
+          let answer: Chat = {
+            message: payload.responses[i],
+            isMe: false,
+            createdAt: new Date().toString(),
+            type: 'bot'
+          }
+          this.chats.push(answer);
+          setTimeout(() => {this.div.nativeElement.scrollTo(0, this.div.nativeElement.scrollHeight)}, 10);
+        }
+      })
+    })
   }
 
   setQuestion(message) {
-    let question: Chat = {
-      id: '1',
-      message: message,
-      isMe: true,
-      createdAt: new Date().toString(),
-      type: 'human'
-    };
+    return new Promise ((resolve) => {
+      let question = {
+        message: message,
+        isMe: true,
+        createdAt: new Date().toString(),
+        type: 'human',
+        sent: false
+      };
 
-    this.chats.push(question);
-    return question;
+      this.newMsg = '';
+  
+      this.chats.push(question);
+      setTimeout(() => {this.div.nativeElement.scrollTo(0, this.div.nativeElement.scrollHeight)}, 10);
+      resolve(question.message);
+    });
   }
 
   presentBot() {
