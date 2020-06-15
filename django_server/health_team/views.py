@@ -408,9 +408,9 @@ def pacienteGraficos2(request,username):
         rows=4, cols=2,
         specs=
             [[{}, {}],
-            [[{}, {}],
-            [[{}, {}],
-            [{"colspan": 2}, None]],
+            [{}, {}],
+            [{}, {}],
+            [{"colspan": 2}, None]]
     )
 
     fig.add_trace(
