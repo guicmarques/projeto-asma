@@ -421,25 +421,33 @@ def pacienteGraficos2(request,username):
     )
 
     fig.add_trace(
-        go.Scatter(x=listaData2, y=listaquestion1, name='Pico 1'),row=1, col=1
-    )    
+        go.Scatter(x=listaData2, y=listaquestion1, name='Pergunta 1'),row=1, col=1
+    )
+    fig.update_layout(
+        yaxis= dict(
+                range=[0, 1,2,3,4,5,6],
+                ticktext=["Nunca", "Quase nunca","Poucas vezes","Várias vezes","Muitas vezes","Muitíssimas vezes","Incapaz de dormir devido a asma"],
+                tickvals=[0, 1,2,3,4,5,6]
+            ),
+        row=1, col=1
+        )    
     fig.add_trace(
-        go.Scatter(x=listaData2, y=listaquestion2, name='Pico 2'),row=1, col=2
+        go.Scatter(x=listaData2, y=listaquestion2, name='Pergunta 2'),row=1, col=2
     )
     fig.add_trace(
-        go.Scatter(x=listaData2, y=listaquestion3, name='Pico 3'),row=2, col=1
+        go.Scatter(x=listaData2, y=listaquestion3, name='Pergunta 3'),row=2, col=1
     )
     fig.add_trace(
-        go.Scatter(x=listaData2, y=listaquestion4, name='Pico 3'),row=2, col=2
+        go.Scatter(x=listaData2, y=listaquestion4, name='Pergunta 4'),row=2, col=2
     )
     fig.add_trace(
-        go.Scatter(x=listaData2, y=listaquestion5, name='Pico 3'),row=3, col=1
+        go.Scatter(x=listaData2, y=listaquestion5, name='Pergunta 5'),row=3, col=1
     )
     fig.add_trace(
-        go.Scatter(x=listaData2, y=listaquestion6, name='Pico 3'),row=3, col=2
+        go.Scatter(x=listaData2, y=listaquestion6, name='Pergunta 6'),row=3, col=2
     )
     fig.add_trace(
-        go.Scatter(x=listaData2, y=listaquestion7, name='Pico 3'),row=4, col=1
+        go.Scatter(x=listaData2, y=listaquestion7, name='Pergunta 7'),row=4, col=1
     )
 
     # Set title
