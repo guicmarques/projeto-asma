@@ -430,30 +430,85 @@ def pacienteGraficos2(request,username):
                 tickvals=[0, 1,2,3,4,5,6],
 
         row=1, col=1
-        )    
+    )   
+
     fig.add_trace(
         go.Scatter(x=listaData2, y=listaquestion2, name='Pergunta 2'),row=1, col=2
     )
+    fig.update_yaxes(
+
+                range=[0,6],
+                ticktext=["Sem sintomas", " Sintomas muito leves","Sintomas leves","Sintomas moderados","Sintomas um tanto graves","Sintomas graves","Sintomas muito graves"],
+                tickvals=[0, 1,2,3,4,5,6],
+
+        row=1, col=2
+    )
+
     fig.add_trace(
         go.Scatter(x=listaData2, y=listaquestion3, name='Pergunta 3'),row=2, col=1
     )
+    fig.update_yaxes(
+
+                range=[0,6],
+                ticktext=["Nada limitado", "Muito pouco limitado","Pouco limitado","Moderadamente limitado","Muito limitado","Extremamente limitado","Totalmente limitado"],
+                tickvals=[0, 1,2,3,4,5,6],
+
+        row=2, col=1
+    )
+
     fig.add_trace(
         go.Scatter(x=listaData2, y=listaquestion4, name='Pergunta 4'),row=2, col=2
     )
+    fig.update_yaxes(
+
+                range=[0,6],
+                ticktext=["Nenhuma", "Muito pouca","Alguma","Moderada","Bastante","Muita","Muitíssima"],
+                tickvals=[0, 1,2,3,4,5,6],
+
+        row=2, col=2
+    )
+
     fig.add_trace(
         go.Scatter(x=listaData2, y=listaquestion5, name='Pergunta 5'),row=3, col=1
     )
+    fig.update_yaxes(
+
+                range=[0,6],
+                ticktext=["Nunca", "Quase nunca","Pouco tempo","Algum tempo","Bastante tempo","Quase sempre","Sempre"],
+                tickvals=[0, 1,2,3,4,5,6],
+
+        row=3, col=1
+    )
+
     fig.add_trace(
         go.Scatter(x=listaData2, y=listaquestion6, name='Pergunta 6'),row=3, col=2
     )
+    fig.update_yaxes(
+
+                range=[0,6],
+                ticktext=["Nenhum", "1-2 jatos na maior parte dos dias","3-4 jatos na maior parte dos dias","5-8 jatos na maior parte dos dias","9-12 jatos na maior parte dos dias","13-16 jatos na maior parte dos dias","Mais de 16 jatos por dia"],
+                tickvals=[0, 1,2,3,4,5,6],
+
+        row=3, col=2
+    )
+
     fig.add_trace(
         go.Scatter(x=listaData2, y=listaquestion7, name='Pergunta 7'),row=4, col=1
+    )
+    fig.update_yaxes(
+
+                range=[0,6],
+                ticktext=["> 95% do previsto", "95-90% do previsto","89-80% do previsto","79-70% do previsto","69-60% do previsto","59-50% do previsto","< 50% do previsto"],
+                tickvals=[0, 1,2,3,4,5,6],
+
+        row=4, col=1
     )
 
     # Set title
     fig.update_layout(
         title_text="Time series with range slider and selectors"
     )
+    
 
     # Add range slider
     fig.update_xaxes( row=4, col=1,
