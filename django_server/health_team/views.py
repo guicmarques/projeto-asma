@@ -308,13 +308,13 @@ def pacienteGraficos2(request,username):
     fig = go.Figure()
 
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico1, name='Pico 1', text = f[step])
+        go.Scatter(x=listaData, y=listaPico1, name='Pico 1')
     )    
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico2, name='Pico 2', text = f[step])
+        go.Scatter(x=listaData, y=listaPico2, name='Pico 2')
     )
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico3, name='Pico 3', text = f[step])
+        go.Scatter(x=listaData, y=listaPico3, name='Pico 3')
     )
     
 
