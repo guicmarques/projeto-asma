@@ -318,6 +318,7 @@ def pacienteGraficos2(request,username):
             listaEquipamentos.append(barreiras.equipamentos)
             listaDate3.append(barreiras.date)
         else:
+            print("Não tem - Barreiras")
             listaInteresse = [1]
             listaTempo = [1]
             listaEnergia = [1]
@@ -331,6 +332,7 @@ def pacienteGraficos2(request,username):
             listaDate3 = ["0000-00-00"]
 
     except:
+        print("Falha - Barreiras")
         listaInteresse = [1]
         listaTempo = [1]
         listaEnergia = [1]
