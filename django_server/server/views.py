@@ -182,7 +182,7 @@ class FitbitLogin(APIView):
     def get(self, request):
         args = {
             'message': "Insira aqui o CPF utilizado no cadastro do app"}
-        return render(request, "health_team/fitbit_login.html", args)
+        return render(request, "health_team/fitbit_login_layout.html", args)
 
     def post(self, request):
         cpf = request.POST.get('cpf_number')
@@ -195,7 +195,7 @@ class FitbitLogin(APIView):
             return redirect(url)
         else:
             args = {'message': f"O CPF {cpf} nao esta cadastrado, insira outro"}
-            return render(request, "health_team/fitbit_login.html", args)
+            return render(request, "health_team/fitbit_login_layout.html", args)
 
 
 class FitbitAuth(APIView):
