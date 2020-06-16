@@ -317,7 +317,7 @@ def pacienteGraficos2(request,username):
             listaSeguranca.append(barreiras.seguranca)
             listaClima.append(barreiras.clima)
             listaEquipamentos.append(barreiras.equipamentos)
-            listaDate3.append(barreiras.date)
+            listaDate3.append(barreiras.date.strftime("%Y-%m-%d"))
         else:
             print("Não tem - Barreiras")
             listaInteresse = [1]
