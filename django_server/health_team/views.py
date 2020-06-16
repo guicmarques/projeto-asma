@@ -636,8 +636,8 @@ def pacienteGraficos2(request,username):
         fig_inside = go.Bar(
                 visible=False,
                 name=dates[step],
-                x= ["Apresentou tosse?","Apresentou chiado?","Teve falta de ar?","Teve problemas ao dormir?","Usou a bombinha?"],
-                y= [a[step]-0.9,b[step]-0.9,c[step]-0.9,d[step]-0.9,e[step]-0.9,f[step]-0.9,g[step]-0.9,h[step]-0.9,i[step]-0.9,j[step]-0.9], 
+                x= ["Não tenho interesse","Falta de tempo","Não tenho energia ou disposição","Tenho medo de sentir falta de ar","Não tenho companhia ou incentivo","Não tenho dinheiro","Tenho muitas coisas para fazer","Não tenho um local seguro","Por causa do clima","Não tenho equipamentos"],
+                y= [int(a[step])-0.9,int(b[step])-0.9,int(c[step])-0.9,int(d[step])-0.9,int(e[step])-0.9,int(f[step])-0.9,int(g[step])-0.9,int(h[step])-0.9,int(i[step])-0.9,int(j[step])-0.9], 
                 text = f[step]
         )
         fig.add_trace(fig_inside)
