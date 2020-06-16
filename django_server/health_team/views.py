@@ -607,17 +607,6 @@ def pacienteGraficos2(request,username):
 
 
     #GRafico - Barreiras
-    listaInteresse = [1]
-    listaTempo = [1]
-    listaEnergia = [1]
-    listaFaltaAr = [1]
-    listaCompanhia = [1]
-    listaDinheiro = [1]
-    listaCoisa = [1]
-    listaSeguranca = [1]
-    listaClima = [1]
-    listaEquipamentos = [1]
-    listaDate3 = ["0000-00-00"]
 
     dates = listaDate3
     a = listaInteresse
