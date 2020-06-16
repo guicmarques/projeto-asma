@@ -304,26 +304,20 @@ def pacienteGraficos2(request,username):
         listaEquipamentos = []
         listaDate3 = []
 
-        barreiras = PracticeBarriers.objects.all().filter(user_id=username)
-        print("A")
-        if len(barreiras)!=0:
-            print("B")
-            print(dir(barreiras))
-            listaInteresse.append(barreiras.interesse)
-            listaTempo.append(barreiras.tempo)
-            print("E")
-            listaEnergia.append(barreiras.energia)
-            listaFaltaAr.append(barreiras.faltaAr)
-            listaCompanhia.append(barreiras.companhia)
-            print("C")
-            listaDinheiro.append(barreiras.dinheiro)
-            listaCoisa.append(barreiras.coisas)
-            listaSeguranca.append(barreiras.seguranca)
-            print("D")
-            listaClima.append(barreiras.clima)
-            listaEquipamentos.append(barreiras.equipamentos)
-            print("F")
-            listaDate3.append(barreiras.date.strftime("%Y-%m-%d"))
+        barreiras_list = PracticeBarriers.objects.all().filter(user_id=username)
+        if len(barreiras_list)!=0:
+            for barreiras in barreiras_list:
+                listaInteresse.append(barreiras.interesse)
+                listaTempo.append(barreiras.tempo)
+                listaEnergia.append(barreiras.energia)
+                listaFaltaAr.append(barreiras.faltaAr)
+                listaCompanhia.append(barreiras.companhia)
+                listaDinheiro.append(barreiras.dinheiro)
+                listaCoisa.append(barreiras.coisas)
+                listaSeguranca.append(barreiras.seguranca)
+                listaClima.append(barreiras.clima)
+                listaEquipamentos.append(barreiras.equipamentos)
+                listaDate3.append(barreiras.date.strftime("%Y-%m-%d"))
         else:
             print("Não tem - Barreiras")
             listaInteresse = [1]
