@@ -20,20 +20,15 @@
                         <div class="row">
                             <div class="col-lg-6 col-lg-12">
                                 <div class="p-5">
-                                    <div class="text-center">
-                                        <h4 class="text-dark mb-2">Esqueceu sua senha?</h4>
-                                        <p class="mb-4">Sem problemas. Iremos enviar um email para você reiniciar sua senha!</p>
-                                    </div>
                                     <form form method="POST" role="form">
                                         {% csrf_token %}
                                         {% block includes %}
-                                        <h4>{{ message }}</h4>
+                                        <div class="text-center">
+                                            <h4 class="text-dark mb-2">{{ message }}</h4>
+                                        </div>
                                         {% endblock includes %}
                                         <div class="form-group"><input class="form-control form-control-user" type="text" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Qual o seu email cadastrado?" name="cpf_number"></div><button class="btn btn-primary btn-block text-white btn-user"
-                                            type="submit" value="submit">Redefinir Senha</button></form>
-                                    <div class="text-center">
-                                        <hr><a class="small" href="register.html">Cria uma conta!</a></div>
-                                    <div class="text-center"><a class="small" href="/health_team/user_login/">Já tem uma conta? Logue nela!</a></div>
+                                            type="submit" value="submit">Confirmar</button></form>
                                 </div>
                             </div>
                         </div>
