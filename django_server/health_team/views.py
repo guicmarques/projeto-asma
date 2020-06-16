@@ -305,6 +305,7 @@ def pacienteGraficos2(request,username):
         listaDate3 = []
 
         barreiras = PracticeBarriers.objects.all().filter(user_id=username)
+        print("A")
         if len(barreiras)!=0:
             listaInteresse.append(barreiras.interesse)
             listaTempo.append(barreiras.tempo)
