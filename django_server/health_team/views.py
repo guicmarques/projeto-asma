@@ -679,7 +679,7 @@ def pacienteGraficos2(request,username):
     for i, date in enumerate(dates, start = 0):
         fig['layout']['sliders'][0]['steps'][i]['label']=dates[i]
 
-    fig10 = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+    barreiras = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
 
@@ -718,7 +718,8 @@ def pacienteGraficos2(request,username):
             'fig3':fig3,
             'fig10':fig10,
             'figFluxoAr':figFluxoAr,
-            'figQuestSemanal':figQuestSemanal
+            'figQuestSemanal':figQuestSemanal,
+            'barreiras':barreiras
             }
         )
 
