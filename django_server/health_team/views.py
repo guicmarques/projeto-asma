@@ -308,6 +308,7 @@ def pacienteGraficos2(request,username):
         print("A")
         if len(barreiras)!=0:
             print("B")
+            print(dir(barreiras))
             listaInteresse.append(barreiras.interesse)
             listaTempo.append(barreiras.tempo)
             print("E")
