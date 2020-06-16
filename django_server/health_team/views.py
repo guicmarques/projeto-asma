@@ -12,7 +12,7 @@ from plotly.subplots import make_subplots
 import numpy as np
 import pandas as pd
 
-from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, DailyControl
+from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, DailyControl, PracticeBarriers
 
 def index(request):
     return render(request, 'health_team/index.html')
@@ -291,6 +291,58 @@ def pacienteGraficos2(request,username):
         listaquestion7 = [0]
         listaData2 = ["0000-00-00"]
 
+    try:
+        listaInteresse = []
+        listaTempo = []
+        listaEnergia = []
+        listaFaltaAr = []
+        listaCompanhia = []
+        listaDinheiro = []
+        listaCoisa = []
+        listaSeguranca = []
+        listaClima = []
+        listaEquipamentos = []
+        listaDate3 = []
+
+        barreiras = PracticeBarriers.objects.all().filter(user_id=username)
+        if len(barreiras)!=0:
+            listaInteresse.append(barreiras.interesse)
+            listaTempo.append(barreiras.tempo)
+            listaEnergia.append(barreiras.energia)
+            listaFaltaAr.append(barreiras.faltaAr)
+            listaCompanhia.append(barreiras.companhia)
+            listaDinheiro.append(barreiras.dinheiro)
+            listaCoisa.append(barreiras.coisas)
+            listaSeguranca.append(barreiras.seguranca)
+            listaClima.append(barreiras.clima)
+            listaEquipamentos.append(barreiras.equipamentos)
+            listaDate3.append(barreiras.date)
+        else:
+            listaInteresse = [1]
+            listaTempo = [1]
+            listaEnergia = [1]
+            listaFaltaAr = [1]
+            listaCompanhia = [1]
+            listaDinheiro = [1]
+            listaCoisa = [1]
+            listaSeguranca = [1]
+            listaClima = [1]
+            listaEquipamentos = [1]
+            listaDate3 = ["0000-00-00"]
+
+    except:
+        listaInteresse = [1]
+        listaTempo = [1]
+        listaEnergia = [1]
+        listaFaltaAr = [1]
+        listaCompanhia = [1]
+        listaDinheiro = [1]
+        listaCoisa = [1]
+        listaSeguranca = [1]
+        listaClima = [1]
+        listaEquipamentos = [1]
+        listaDate3 = ["0000-00-00"]
+
     
     #print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
 
@@ -551,6 +603,84 @@ def pacienteGraficos2(request,username):
     )
     fig.update_xaxes(matches='x')
     figQuestSemanal = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
+
+
+    #GRafico - Barreiras
+    listaInteresse = [1]
+    listaTempo = [1]
+    listaEnergia = [1]
+    listaFaltaAr = [1]
+    listaCompanhia = [1]
+    listaDinheiro = [1]
+    listaCoisa = [1]
+    listaSeguranca = [1]
+    listaClima = [1]
+    listaEquipamentos = [1]
+    listaDate3 = ["0000-00-00"]
+
+    dates = listaDate3
+    a = listaInteresse
+    b = listaTempo
+    c = listaEnergia
+    d = listaFaltaAr
+    e = listaCompanhia
+    f = listaDinheiro
+    g = listaCoisa
+    h = listaSeguranca
+    i = listaClima
+    j = listaEquipamentos
+    fig = go.Figure()
+    # Add traces, one for each slider step
+    for step in range(len(dates)):
+        fig_inside = go.Bar(
+                visible=False,
+                name=dates[step],
+                x= ["Apresentou tosse?","Apresentou chiado?","Teve falta de ar?","Teve problemas ao dormir?","Usou a bombinha?"],
+                y= [a[step]-0.9,b[step]-0.9,c[step]-0.9,d[step]-0.9,e[step]-0.9,f[step]-0.9,g[step]-0.9,h[step]-0.9,i[step]-0.9,j[step]-0.9], 
+                text = f[step]
+        )
+        fig.add_trace(fig_inside)
+        fig.update_layout(
+            yaxis= dict(
+                range=[0, 4.1],
+                ticktext=["Nunca", "Raramente", "Às vezes", "Quase sempre", "Sempre"],
+                tickvals=[0.1, 1.1, 2.1, 3.1, 4.1]
+            )
+        )
+
+    # Make 10th trace visible
+    fig.data[0].visible = True
+
+    # Create and add slider
+    steps = []
+    for i in range(len(fig.data)):
+        step = dict(
+            method="update",
+            args=[{"visible": [False] * len(fig.data)},
+                {"title": "Day: " + dates[i]}],  # layout attribute
+        )
+        step["args"][0]["visible"][i] = True  # Toggle i'th trace to "visible"
+        steps.append(step)
+
+    sliders = [dict(
+        active=10,
+        currentvalue={"prefix": "Frequency: "},
+        pad={"t": 50},
+        steps=steps
+    )]
+
+    fig.update_layout(
+        sliders=sliders
+    )
+
+    # Edit slider labels
+    fig['layout']['sliders'][0]['currentvalue']['prefix']='Date: '
+    for i, date in enumerate(dates, start = 0):
+        fig['layout']['sliders'][0]['steps'][i]['label']=dates[i]
+
+    fig10 = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
 
 
     
