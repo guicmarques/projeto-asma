@@ -361,8 +361,20 @@ def pacienteGraficos2(request,username):
             day30List.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
 
 
-        dados = getFitbitData(user=username,dates=day7List)
-        print(dados)
+        dados7dias = getFitbitData(user=username,dates=day7List)
+        print(dados7dias)
+
+        dados7diasSteps = 0
+        dados7diasSedentaryMinutes = 0
+        dados7diasLightlyActiveMinutes = 0
+        dados7diasVeryActiveMinutes = 0
+        for day in sorted(dados7dias.keys()):
+            dados7diasSteps += dados7dias[day]["summary"]["steps"]
+            dados7diasSedentaryMinutes += dados7dias[day]["summary"]["sedentaryMinutes"]
+            dados7diasLightlyActiveMinutes += dados7dias[day]["summary"]["lightlyActiveMinutes"]
+            dados7diasVeryActiveMinutes += dados7dias[day]["summary"]["veryActiveMinutes"]
+        print(dados7diasSteps,dados7diasSedentaryMinutes,dados7diasLightlyActiveMinutes,dados7diasVeryActiveMinutes)
+
     except:
         pass
     
