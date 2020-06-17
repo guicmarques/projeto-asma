@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+
 from plotly.offline import plot
 from plotly.graph_objs import Scatter
 from plotly.graph_objs import Line
@@ -11,6 +12,10 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
 import pandas as pd
+import datetime
+import time
+
+from server.handleUserData import getFitbitData
 
 from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, DailyControl, PracticeBarriers
 
@@ -346,6 +351,20 @@ def pacienteGraficos2(request,username):
         listaEquipamentos = [1]
         listaDate3 = ["0000-00-00"]
 
+    # Obter dados da fitbit
+    try:
+        day7List = []
+        day30List = []
+        for i in range(1,8,1):
+            day7List.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
+        for i in range(1,31,1):
+            day30List.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
+
+
+        dados = getFitbitData(user=username,dates=day7List)
+        print(dados)
+    except:
+        pass
     
     #print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
 
