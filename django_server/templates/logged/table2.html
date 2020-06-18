@@ -12,7 +12,7 @@
 
     <script>
         function myFunction() {
-          var input, filter, table, tr, td, i, txtValue, txtValue2;
+          var input, filter, table, tr, td, td2, i, txtValue, txtValue2;
           input = document.getElementById("myInput");
           filter = input.value.toUpperCase();
           table = document.getElementById("dataTable");
@@ -65,6 +65,8 @@
                     <li class="nav-item" role="presentation"></li>
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="table.html"><i class="fas fa-table"></i><span>Pacientes</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="blank-1.html"><i class="fas fa-user-plus"></i><span>Cadastrar</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="blank-2.html"><i class="fas fa-laptop-medical"></i><span>Estatísticas</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/rest/fitbit/login/" target="_blank"><i class="fas fa-sync"></i><span>Integração Fitbit</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -115,6 +117,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
+                                        <th>RGHC</th>
                                         <th>RG</th>
                                         <th>Telefone</th>
                                         <th>Peso</th>
@@ -122,16 +125,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><a href="/health_team/pacienteGraficos.html" target="_blank">Airi Satou</a></td>
-                                        <td>a.a@a.com</td>
-                                        <td>00000000000</td>
-                                        <td>33</td>
-                                        <td>00000000000<br></td>
-                                    </tr>
                                     {% for linha in lista %}
                                         <tr>
-                                            <td><a href="/health_team/graphs/{{linha.user_id}}" target="_blank">{{linha.nome}} {{linha.sobrenome}}</a></td>
+                                            <td><a href="/health_team/graphs/{{linha.user_id}}" >{{linha.nome}} {{linha.sobrenome}}</a></td>
+                                            <td>{{linha.token}}<br></td>
                                             <td>{{linha.rg}}<br></td>
                                             <td>{{linha.telefone}}<br></td>
                                             <td>{{linha.peso}}</td>
@@ -143,22 +140,6 @@
                                     <tr></tr>
                                 </tfoot>
                             </table>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 align-self-center">
-                                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
-                            </div>
-                            <div class="col-md-6">
-                                <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                                    <ul class="pagination">
-                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                                    </ul>
-                                </nav>
-                            </div>
                         </div>
                     </div>
                 </div>

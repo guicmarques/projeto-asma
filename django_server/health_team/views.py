@@ -4,14 +4,20 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+
 from plotly.offline import plot
 from plotly.graph_objs import Scatter
 from plotly.graph_objs import Line
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import numpy as np
 import pandas as pd
+import datetime
+import time
 
-from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, DailyControl
+from server.handleUserData import getFitbitData
+
+from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, DailyControl, PracticeBarriers
 
 def index(request):
     return render(request, 'health_team/index.html')
@@ -81,11 +87,17 @@ def register_account(request):
     registered = False
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
+        print(dir(user_form))
         if user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
             registered = True
+            new_user = authenticate(username=user_form.cleaned_data['username'],
+                                    password=user_form.cleaned_data['password'],
+                                    )
+            login(request, new_user)
+            return HttpResponseRedirect(reverse('table'))
         else:
             print(user_form.errors)
     else:
@@ -239,6 +251,166 @@ def pacienteGraficos2(request,username):
         listaPico3 = [0]
         listaNotes = ["Fail to load Data"]
 
+    try:
+        listaquestion1 = []
+        listaquestion2 = []
+        listaquestion3 = []
+        listaquestion4 = []
+        listaquestion5 = []
+        listaquestion6 = []
+        listaquestion7 = []
+        listaData2 = []
+
+        questionario = AsthmaControlQuestionnaire.objects.all().filter(user_id=username)
+        if len(questionario)!=0:
+            for day in questionario:
+                print("Certo - Questionario")
+                listaData2.append(day.date.strftime("%Y-%m-%d"))
+                listaquestion1.append(day.question1)
+                listaquestion2.append(day.question2)
+                listaquestion3.append(day.question3)
+                listaquestion4.append(day.question4)
+                listaquestion5.append(day.question5)
+                listaquestion6.append(day.question6)
+                listaquestion7.append(day.question7)
+
+        else:
+            print("Errado")
+            listaquestion1 = [0]
+            listaquestion2 = [0]
+            listaquestion3 = [0]
+            listaquestion4 = [0]
+            listaquestion5 = [0]
+            listaquestion6 = [0]
+            listaquestion7 = [0]
+            listaData2 = ["0000-00-00"]
+
+
+    except:
+        listaquestion1 = [0]
+        listaquestion2 = [0]
+        listaquestion3 = [0]
+        listaquestion4 = [0]
+        listaquestion5 = [0]
+        listaquestion6 = [0]
+        listaquestion7 = [0]
+        listaData2 = ["0000-00-00"]
+
+    try:
+        listaInteresse = []
+        listaTempo = []
+        listaEnergia = []
+        listaFaltaAr = []
+        listaCompanhia = []
+        listaDinheiro = []
+        listaCoisa = []
+        listaSeguranca = []
+        listaClima = []
+        listaEquipamentos = []
+        listaDate3 = []
+
+        barreiras_list = PracticeBarriers.objects.all().filter(user_id=username)
+        if len(barreiras_list)!=0:
+            for barreiras in barreiras_list:
+                listaInteresse.append(barreiras.interesse)
+                listaTempo.append(barreiras.tempo)
+                listaEnergia.append(barreiras.energia)
+                listaFaltaAr.append(barreiras.faltaAr)
+                listaCompanhia.append(barreiras.companhia)
+                listaDinheiro.append(barreiras.dinheiro)
+                listaCoisa.append(barreiras.coisas)
+                listaSeguranca.append(barreiras.seguranca)
+                listaClima.append(barreiras.clima)
+                listaEquipamentos.append(barreiras.equipamentos)
+                listaDate3.append(barreiras.date.strftime("%Y-%m-%d"))
+        else:
+            print("Não tem - Barreiras")
+            listaInteresse = [1]
+            listaTempo = [1]
+            listaEnergia = [1]
+            listaFaltaAr = [1]
+            listaCompanhia = [1]
+            listaDinheiro = [1]
+            listaCoisa = [1]
+            listaSeguranca = [1]
+            listaClima = [1]
+            listaEquipamentos = [1]
+            listaDate3 = ["0000-00-00"]
+
+    except:
+        print("Falha - Barreiras")
+        listaInteresse = [1]
+        listaTempo = [1]
+        listaEnergia = [1]
+        listaFaltaAr = [1]
+        listaCompanhia = [1]
+        listaDinheiro = [1]
+        listaCoisa = [1]
+        listaSeguranca = [1]
+        listaClima = [1]
+        listaEquipamentos = [1]
+        listaDate3 = ["0000-00-00"]
+
+    # Obter dados da fitbit
+    try:
+
+        day60List = []
+        for i in range(1,61,1):
+            day60List.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
+
+
+        dados60dias = getFitbitData(user=username,dates=day60List)
+        #print(dados7dias)
+
+        dados7diasSteps = 0
+        dados7diasSedentaryMinutes = 0
+        dados7diasLightlyActiveMinutes = 0
+        dados7diasVeryActiveMinutes = 0
+        for day in sorted(dados60dias.keys(),reverse=True)[:7]:
+            dados7diasSteps += dados60dias[day]["summary"]["steps"]
+            dados7diasSedentaryMinutes += dados60dias[day]["summary"]["sedentaryMinutes"]
+            dados7diasLightlyActiveMinutes += dados60dias[day]["summary"]["lightlyActiveMinutes"]
+            dados7diasVeryActiveMinutes += dados60dias[day]["summary"]["veryActiveMinutes"]
+
+        dados7PasdiasSteps = 0
+        dados7PasdiasSedentaryMinutes = 0
+        dados7PasdiasLightlyActiveMinutes = 0
+        dados7PasdiasVeryActiveMinutes = 0
+        for day in sorted(dados60dias.keys(),reverse=True)[7:14]:
+            dados7PasdiasSteps += dados60dias[day]["summary"]["steps"]
+            dados7PasdiasSedentaryMinutes += dados60dias[day]["summary"]["sedentaryMinutes"]
+            dados7PasdiasLightlyActiveMinutes += dados60dias[day]["summary"]["lightlyActiveMinutes"]
+            dados7PasdiasVeryActiveMinutes += dados60dias[day]["summary"]["veryActiveMinutes"]
+
+        listaSteps = []
+        listaSedentaryMinutes = []
+        listaLightlyActiveMinutes = []
+        listaVeryActiveMinutes = []
+        listaDiaFitbit = []
+        for day in sorted(dados60dias.keys(),reverse=True):
+            listaSteps.append(dados60dias[day]["summary"]["steps"])
+            listaSedentaryMinutes.append(dados60dias[day]["summary"]["sedentaryMinutes"])
+            listaLightlyActiveMinutes.append(dados60dias[day]["summary"]["lightlyActiveMinutes"])
+            listaVeryActiveMinutes.append(dados60dias[day]["summary"]["veryActiveMinutes"])
+            listaDiaFitbit.append(day)
+    
+    except:
+        dados7diasSteps = 0
+        dados7diasSedentaryMinutes = 0
+        dados7diasLightlyActiveMinutes = 0
+        dados7diasVeryActiveMinutes = 0
+
+        dados7PasdiasSteps = 0
+        dados7PasdiasSedentaryMinutes = 0
+        dados7PasdiasLightlyActiveMinutes = 0
+        dados7PasdiasVeryActiveMinutes = 0
+
+        listaSteps = [0]
+        listaSedentaryMinutes = [0]
+        listaLightlyActiveMinutes = [0]
+        listaVeryActiveMinutes = [0]
+        listaDiaFitbit = ["0000-00-00"]
+
     
     #print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
 
@@ -249,6 +421,7 @@ def pacienteGraficos2(request,username):
     c = listaFaltaDeAr
     d = listaAcordar
     e = listaBombinha
+    f = listaNotes
     fig = go.Figure()
     # Add traces, one for each slider step
     for step in range(len(dates)):
@@ -256,13 +429,15 @@ def pacienteGraficos2(request,username):
                 visible=False,
                 name=dates[step],
                 x= ["Apresentou tosse?","Apresentou chiado?","Teve falta de ar?","Teve problemas ao dormir?","Usou a bombinha?"],
-                y= [a[step],b[step],c[step],d[step],e[step]])
+                y= [a[step]+0.1,b[step]+0.1,c[step]+0.1,d[step]+0.1,e[step]+0.1], 
+                text = dates[step]+" - "+f[step]
+        )
         fig.add_trace(fig_inside)
         fig.update_layout(
             yaxis= dict(
-                range=[0, 1],
+                range=[0, 1.1],
                 ticktext=["Não", "Sim"],
-                tickvals=[0, 1]
+                tickvals=[0.1, 1.1]
             )
         )
 
@@ -305,37 +480,34 @@ def pacienteGraficos2(request,username):
     fig = go.Figure()
 
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico1)
+        go.Scatter(x=listaData, y=listaPico1, name='Pico 1')
     )    
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico2)
+        go.Scatter(x=listaData, y=listaPico2, name='Pico 2')
     )
     fig.add_trace(
-        go.Scatter(x=listaData, y=listaPico3)
+        go.Scatter(x=listaData, y=listaPico3, name='Pico 3')
     )
     
 
-    # Set title
-    fig.update_layout(
-        title_text="Time series with range slider and selectors"
-    )
+
 
     # Add range slider
     fig.update_layout(
         xaxis=dict(
             rangeselector=dict(
                 buttons=list([
-                    dict(count=1,
-                        label="1m",
-                        step="month",
+                    dict(count=7,
+                        label="week",
+                        step="day",
                         stepmode="backward"),
-                    dict(count=6,
-                        label="6m",
-                        step="month",
+                    dict(count=14,
+                        label="2 weeks",
+                        step="day",
                         stepmode="backward"),
                     dict(count=1,
-                        label="YTD",
-                        step="year",
+                        label="This month",
+                        step="month",
                         stepmode="todate"),
                     dict(count=1,
                         label="1y",
@@ -352,6 +524,305 @@ def pacienteGraficos2(request,username):
     )
     figFluxoAr = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
+    #Grafico de questionario semanal
+
+    # Create figure
+    fig = make_subplots(
+        rows=4, cols=2,
+        specs=
+            [[{}, {}],
+            [{}, {}],
+            [{}, {}],
+            [{"colspan": 2}, None]],
+        shared_xaxes=True,
+        subplot_titles=(
+            "Quão frequentemente você acordou por causa de sua asma?",
+            "Quão ruins foram os seus sintomas ao acordar?",
+            "Quão limitado você tem estado em suas atividades?",
+            "O quanto de falta de ar você teve?",
+            "Quanto tempo você teve chiado?",
+            "Quantos jatos de broncodilatador foram usado por dia?",
+            "VEF1 % previsto?"
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion1, name='Pergunta 1'),row=1, col=1
+    )
+    fig.update_yaxes(
+
+                range=[0,6],
+                ticktext=["Nunca", "Quase nunca","Poucas vezes","Várias vezes","Muitas vezes","Muitíssimas vezes","Incapaz de dormir"],
+                tickvals=[0, 1,2,3,4,5,6],
+
+        row=1, col=1
+    )   
+
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion2, name='Pergunta 2'),row=1, col=2
+    )
+    fig.update_yaxes(
+
+                range=[0,6],
+                ticktext=["Sem sintomas", " Muito leves","Leves","Moderados","Tanto graves","Graves","Muito graves"],
+                tickvals=[0, 1,2,3,4,5,6],
+
+        row=1, col=2
+    )
+
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion3, name='Pergunta 3'),row=2, col=1
+    )
+    fig.update_yaxes(
+
+                range=[0,6],
+                ticktext=["Nada limitado", "Muito pouco","Pouco","Moderadamente","Muito","Extremamente","Totalmente"],
+                tickvals=[0, 1,2,3,4,5,6],
+
+        row=2, col=1
+    )
+
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion4, name='Pergunta 4'),row=2, col=2
+    )
+    fig.update_yaxes(
+
+                range=[0,6],
+                ticktext=["Nenhuma", "Muito pouca","Alguma","Moderada","Bastante","Muita","Muitíssima"],
+                tickvals=[0, 1,2,3,4,5,6],
+
+        row=2, col=2
+    )
+
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion5, name='Pergunta 5'),row=3, col=1
+    )
+    fig.update_yaxes(
+
+                range=[0,6],
+                ticktext=["Nunca", "Quase nunca","Pouco tempo","Algum tempo","Bastante tempo","Quase sempre","Sempre"],
+                tickvals=[0, 1,2,3,4,5,6],
+
+        row=3, col=1
+    )
+
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion6, name='Pergunta 6'),row=3, col=2
+    )
+    fig.update_yaxes(
+
+                range=[0,6],
+                ticktext=["Nenhum", "1-2 jatos","3-4 jatos","5-8 jatos","9-12 jatos","13-16 jatos","+ 16 jatos"],
+                tickvals=[0, 1,2,3,4,5,6],
+
+        row=3, col=2
+    )
+
+    fig.add_trace(
+        go.Scatter(x=listaData2, y=listaquestion7, name='Pergunta 7'),row=4, col=1
+    )
+    fig.update_yaxes(
+
+                range=[0,6],
+                ticktext=["> 95% do previsto", "95-90% do previsto","89-80% do previsto","79-70% do previsto","69-60% do previsto","59-50% do previsto","< 50% do previsto"],
+                tickvals=[0, 1,2,3,4,5,6],
+
+        row=4, col=1
+    )
+
+    
+
+    # Add range slider
+    fig.update_xaxes( row=4, col=1,
+        rangeslider=dict(
+            visible=True
+        ),
+        type="date"
+    )
+    fig.update_xaxes( row=1, col=1,
+        rangeselector=dict(
+                buttons=list([
+                    dict(count=7,
+                        label="week",
+                        step="day",
+                        stepmode="backward"),
+                    dict(count=14,
+                        label="2 weeks",
+                        step="day",
+                        stepmode="backward"),
+                    dict(count=1,
+                        label="This month",
+                        step="month",
+                        stepmode="todate"),
+                    dict(count=1,
+                        label="1y",
+                        step="year",
+                        stepmode="backward"),
+                    dict(step="all")
+                ])
+            ),
+            rangeslider=dict(
+                visible=False
+            ),
+            type="date"
+    )
+    fig['layout'].update(
+        height=1000
+    )
+    fig.update_xaxes(matches='x')
+    figQuestSemanal = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
+
+
+    #GRafico - Barreiras
+
+    dates = listaDate3
+    a = listaInteresse
+    b = listaTempo
+    c = listaEnergia
+    d = listaFaltaAr
+    e = listaCompanhia
+    f = listaDinheiro
+    g = listaCoisa
+    h = listaSeguranca
+    i = listaClima
+    j = listaEquipamentos
+    fig = go.Figure()
+    # Add traces, one for each slider step
+    for step in range(len(dates)):
+        fig_inside = go.Bar(
+                visible=False,
+                name=dates[step],
+                x= ["Não tenho interesse","Falta de tempo","Não tenho energia ou disposição","Tenho medo de sentir falta de ar","Não tenho companhia ou incentivo","Não tenho dinheiro","Tenho muitas coisas para fazer","Não tenho um local seguro","Por causa do clima","Não tenho equipamentos"],
+                y= [int(a[step])-0.9,int(b[step])-0.9,int(c[step])-0.9,int(d[step])-0.9,int(e[step])-0.9,int(f[step])-0.9,int(g[step])-0.9,int(h[step])-0.9,int(i[step])-0.9,int(j[step])-0.9], 
+                text = dates[step]
+        )
+        fig.add_trace(fig_inside)
+        fig.update_layout(
+            yaxis= dict(
+                range=[0, 4.1],
+                ticktext=["Nunca", "Raramente", "Às vezes", "Quase sempre", "Sempre"],
+                tickvals=[0.1, 1.1, 2.1, 3.1, 4.1]
+            )
+        )
+
+    # Make 10th trace visible
+    fig.data[0].visible = True
+
+    # Create and add slider
+    steps = []
+    for i in range(len(fig.data)):
+        step = dict(
+            method="update",
+            args=[{"visible": [False] * len(fig.data)},
+                {"title": "Day: " + dates[i]}],  # layout attribute
+        )
+        step["args"][0]["visible"][i] = True  # Toggle i'th trace to "visible"
+        steps.append(step)
+
+    sliders = [dict(
+        active=10,
+        currentvalue={"prefix": "Frequency: "},
+        pad={"t": 50},
+        steps=steps
+    )]
+
+    fig.update_layout(
+        sliders=sliders
+    )
+
+    # Edit slider labels
+    fig['layout']['sliders'][0]['currentvalue']['prefix']='Date: '
+    for i, date in enumerate(dates, start = 0):
+        fig['layout']['sliders'][0]['steps'][i]['label']=dates[i]
+
+    barreiras = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
+
+    # 7 days
+    fig = go.Figure()
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = dados7diasSedentaryMinutes,
+        title = {"text": "Média de minutos<br>sedentários<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        domain = {'x': [0, 0.25], 'y': [0, 1]},
+        delta = {'reference': dados7PasdiasSedentaryMinutes, 'relative': True}))
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = dados7diasVeryActiveMinutes,
+        title = {"text": "Média de minutos<br>em atividade<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': dados7PasdiasVeryActiveMinutes, 'relative': True},
+        domain = {'x': [0.26, 0.5], 'y': [0, 1]}))
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = dados7diasLightlyActiveMinutes,
+        title = {"text": "Média de minutos<br>em atividade leve<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': dados7PasdiasLightlyActiveMinutes, 'relative': True},
+        domain = {'x': [0.51, 0.75], 'y': [0, 1]}))
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = dados7diasSteps,
+        title = {"text": "Média de passos<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': dados7PasdiasSteps, 'relative': True},
+        domain = {'x': [0.76, 1], 'y': [0, 1]}))
+
+    fitbit7dias = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
+    ###################################
+
+    #Grafico de fitbit data
+
+    # Create figure
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(x=listaDiaFitbit, y=listaSteps, name='Passos')
+    )    
+    fig.add_trace(
+        go.Scatter(x=listaDiaFitbit, y=listaSedentaryMinutes, name='Minutos sedentários')
+    )
+    fig.add_trace(
+        go.Scatter(x=listaDiaFitbit, y=listaLightlyActiveMinutes, name='Minutos de\natividades leves')
+    )
+    fig.add_trace(
+        go.Scatter(x=listaDiaFitbit, y=listaVeryActiveMinutes, name='Minutos ativos')
+    )
+    
+    # Add range slider
+    fig.update_layout(
+        xaxis=dict(
+            rangeselector=dict(
+                buttons=list([
+                    dict(count=7,
+                        label="week",
+                        step="day",
+                        stepmode="backward"),
+                    dict(count=14,
+                        label="2 weeks",
+                        step="day",
+                        stepmode="backward"),
+                    dict(count=1,
+                        label="This month",
+                        step="month",
+                        stepmode="todate"),
+                    dict(count=1,
+                        label="1 month",
+                        step="month",
+                        stepmode="backward"),
+                    dict(step="all")
+                ])
+            ),
+            rangeslider=dict(
+                visible=True
+            ),
+            type="date"
+        )
+    )
+    figFitBitData = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
     
     #Grafico Demo
@@ -387,7 +858,11 @@ def pacienteGraficos2(request,username):
             'fig':fig2,
             'fig3':fig3,
             'fig10':fig10,
-            'figFluxoAr':figFluxoAr
+            'figFluxoAr':figFluxoAr,
+            'figQuestSemanal':figQuestSemanal,
+            'barreiras':barreiras,
+            'fitbit7dias':fitbit7dias,
+            'figFitBitData':figFitBitData
             }
         )
 

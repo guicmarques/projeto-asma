@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Blank Page - Brand</title>
+    <title>{{user_data.nome}}</title>
     <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="/static/assets/fonts/fontawesome-all.min.css">
@@ -22,8 +22,10 @@
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item" role="presentation"></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="table.html"><i class="fas fa-table"></i><span>Pacientes</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="blank-1.html"><i class="fas fa-user-plus"></i><span>Cadastrar</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/table.html"><i class="fas fa-table"></i><span>Pacientes</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/blank-1.html"><i class="fas fa-user-plus"></i><span>Cadastrar</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="blank-2.html"><i class="fas fa-laptop-medical"></i><span>Estatísticas</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link"  href="/rest/fitbit/login/" target="_blank"><i class="fas fa-sync"></i><span>Integração Fitbit</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -65,7 +67,9 @@
             </nav>
             <div class="container col-md-12" id="graph">
                 <div class="row">
-                    <h1>{{user_data.nome}} {{user_data.sobrenome}} - {{user_data.user}}</h1>
+                    <div class="col">
+                        <h1 class="text-center text-dark mb-1">{{user_data.nome}} {{user_data.sobrenome}} - {{user_data.token}}</h1>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -79,26 +83,26 @@
                     </div>
                 </div>
             </div>
+            
             <div class="container col-md-12" id="graph">
                 <div >
-                    <div class="row"></div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-sm">
                             {% autoescape off %}
-                            {{ plot_div }}
-                            {% endautoescape %}
-                        </div>
-                        <div class="col-md-6">
-                            {% autoescape off %}
-                            {{ fig }}
+                            {{ fitbit7dias }}
                             {% endautoescape %}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm">
                             {% autoescape off %}
-                            {{ fig3 }}
+                            {{ figFitBitData }}
                             {% endautoescape %}
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <h3 class="text-center text-dark mb-1">Questionário diário</h3>
                         </div>
                     </div>
                     <div class="row">
@@ -108,10 +112,39 @@
                             {% endautoescape %}
                         </div>
                     </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <h3 class="text-center text-dark mb-1">Pico de fluxo</h3>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm">
                             {% autoescape off %}
                             {{ figFluxoAr }}
+                            {% endautoescape %}
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <h3 class="text-center text-dark mb-1">Questionário de Controle da Asma (ACQ)</h3>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-sm" >
+                            {% autoescape off %}
+                            {{ figQuestSemanal }}
+                            {% endautoescape %}
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <h3 class="text-center text-dark mb-1">Motivos que dificultam realizar atividade física</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            {% autoescape off %}
+                            {{ barreiras }}
                             {% endautoescape %}
                         </div>
                     </div>

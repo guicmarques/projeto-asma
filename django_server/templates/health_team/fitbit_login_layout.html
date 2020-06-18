@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Forgot password</title>
+        <title>Fitbit Integração</title>
         <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
         <link rel="stylesheet" href="/static/assets/fonts/fontawesome-all.min.css">
@@ -20,16 +20,15 @@
                         <div class="row">
                             <div class="col-lg-6 col-lg-12">
                                 <div class="p-5">
-                                    <div class="text-center">
-                                        <h4 class="text-dark mb-2">Esqueceu sua senha?</h4>
-                                        <p class="mb-4">Sem problemas. Iremos enviar um email para você reiniciar sua senha!</p>
-                                    </div>
-                                    <form class="user">
-                                        <div class="form-group"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Qual o seu email cadastrado?" name="email"></div><button class="btn btn-primary btn-block text-white btn-user"
-                                            type="submit">Redefinir Senha</button></form>
-                                    <div class="text-center">
-                                        <hr><a class="small" href="register.html">Cria uma conta!</a></div>
-                                    <div class="text-center"><a class="small" href="/health_team/user_login/">Já tem uma conta? Logue nela!</a></div>
+                                    <form form method="POST" role="form">
+                                        {% csrf_token %}
+                                        {% block includes %}
+                                        <div class="text-center">
+                                            <h4 class="text-dark mb-2">{{ message }}</h4>
+                                        </div>
+                                        {% endblock includes %}
+                                        <div class="form-group"><input class="form-control form-control-user" type="text" aria-describedby="emailHelp" placeholder="CPF - 00000000000" name="cpf_number"></div><button class="btn btn-primary btn-block text-white btn-user"
+                                            type="submit" value="submit">Confirmar</button></form>
                                 </div>
                             </div>
                         </div>
