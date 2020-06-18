@@ -382,17 +382,11 @@ def pacienteGraficos2(request,username):
             dados7PasdiasLightlyActiveMinutes += dados60dias[day]["summary"]["lightlyActiveMinutes"]
             dados7PasdiasVeryActiveMinutes += dados60dias[day]["summary"]["veryActiveMinutes"]
 
-        listaSteps = []
-        listaSedentaryMinutes = []
-        listaLightlyActiveMinutes = []
-        listaVeryActiveMinutes = []
-        listaDiaFitbit = []
-        for day in sorted(dados60dias.keys(),reverse=True):
-            listaSteps.append(dados60dias[day]["summary"]["steps"])
-            listaSedentaryMinutes.append(dados60dias[day]["summary"]["sedentaryMinutes"])
-            listaLightlyActiveMinutes.append(dados60dias[day]["summary"]["lightlyActiveMinutes"])
-            listaVeryActiveMinutes.append(dados60dias[day]["summary"]["veryActiveMinutes"])
-            listaDiaFitbit.append(day)
+        listaSteps = [0]
+        listaSedentaryMinutes = [0]
+        listaLightlyActiveMinutes = [0]
+        listaVeryActiveMinutes = [0]
+        listaDiaFitbit = ["0000-00-00"]
     
     except:
         dados7diasSteps = 0
