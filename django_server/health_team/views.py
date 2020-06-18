@@ -381,6 +381,18 @@ def pacienteGraficos2(request,username):
             dados7PasdiasSedentaryMinutes += dados60dias[day]["summary"]["sedentaryMinutes"]
             dados7PasdiasLightlyActiveMinutes += dados60dias[day]["summary"]["lightlyActiveMinutes"]
             dados7PasdiasVeryActiveMinutes += dados60dias[day]["summary"]["veryActiveMinutes"]
+
+        listaSteps = []
+        listaSedentaryMinutes = []
+        listaLightlyActiveMinutes = []
+        listaVeryActiveMinutes = []
+        listaDiaFitbit = []
+        for day in sorted(dados60dias.keys(),reverse=True):
+            listaSteps.append(dados60dias[day]["summary"]["steps"])
+            listaSedentaryMinutes.append(dados60dias[day]["summary"]["sedentaryMinutes"])
+            listaLightlyActiveMinutes.append(dados60dias[day]["summary"]["lightlyActiveMinutes"])
+            listaVeryActiveMinutes.append(dados60dias[day]["summary"]["veryActiveMinutes"])
+            listaDiaFitbit.append(day)
     
     except:
         dados7diasSteps = 0
@@ -392,6 +404,12 @@ def pacienteGraficos2(request,username):
         dados7PasdiasSedentaryMinutes = 0
         dados7PasdiasLightlyActiveMinutes = 0
         dados7PasdiasVeryActiveMinutes = 0
+
+        listaSteps = [0]
+        listaSedentaryMinutes = [0]
+        listaLightlyActiveMinutes = [0]
+        listaVeryActiveMinutes = [0]
+        listaDiaFitbit = ["0000-00-00"]
 
     
     #print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
@@ -753,6 +771,58 @@ def pacienteGraficos2(request,username):
         domain = {'x': [0.76, 1], 'y': [0, 1]}))
 
     fitbit7dias = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
+    ###################################
+
+    #Grafico de fitbit data
+
+    # Create figure
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(x=listaDiaFitbit, y=listaSteps, name='Passos')
+    )    
+    fig.add_trace(
+        go.Scatter(x=listaDiaFitbit, y=listaSedentaryMinutes, name='Minutos sedentários')
+    )
+    fig.add_trace(
+        go.Scatter(x=listaDiaFitbit, y=listaLightlyActiveMinutes, name='Minutos de\natividades leves')
+    )
+    fig.add_trace(
+        go.Scatter(x=listaDiaFitbit, y=listaVeryActiveMinutes, name='Minutos ativos')
+    )
+    
+    # Add range slider
+    fig.update_layout(
+        xaxis=dict(
+            rangeselector=dict(
+                buttons=list([
+                    dict(count=7,
+                        label="week",
+                        step="day",
+                        stepmode="backward"),
+                    dict(count=14,
+                        label="2 weeks",
+                        step="day",
+                        stepmode="backward"),
+                    dict(count=1,
+                        label="This month",
+                        step="month",
+                        stepmode="todate"),
+                    dict(count=1,
+                        label="1 month",
+                        step="month",
+                        stepmode="backward"),
+                    dict(step="all")
+                ])
+            ),
+            rangeslider=dict(
+                visible=True
+            ),
+            type="date"
+        )
+    )
+    figFitBitData = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
     
     #Grafico Demo
