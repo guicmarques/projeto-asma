@@ -353,30 +353,46 @@ def pacienteGraficos2(request,username):
 
     # Obter dados da fitbit
     try:
-        day7List = []
-        day30List = []
-        for i in range(1,8,1):
-            day7List.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
-        for i in range(1,31,1):
-            day30List.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
+
+        day60List = []
+        for i in range(1,61,1):
+            day60List.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
 
 
-        dados7dias = getFitbitData(user=username,dates=day7List)
-        print(dados7dias)
+        dados60dias = getFitbitData(user=username,dates=day7List)
+        #print(dados7dias)
 
         dados7diasSteps = 0
         dados7diasSedentaryMinutes = 0
         dados7diasLightlyActiveMinutes = 0
         dados7diasVeryActiveMinutes = 0
-        for day in sorted(dados7dias.keys()):
-            dados7diasSteps += dados7dias[day]["summary"]["steps"]
-            dados7diasSedentaryMinutes += dados7dias[day]["summary"]["sedentaryMinutes"]
-            dados7diasLightlyActiveMinutes += dados7dias[day]["summary"]["lightlyActiveMinutes"]
-            dados7diasVeryActiveMinutes += dados7dias[day]["summary"]["veryActiveMinutes"]
-        print(dados7diasSteps,dados7diasSedentaryMinutes,dados7diasLightlyActiveMinutes,dados7diasVeryActiveMinutes)
+        for day in sorted(dados60dias.keys(),reverse=True)[:7]:
+            dados7diasSteps += dados60dias[day]["summary"]["steps"]
+            dados7diasSedentaryMinutes += dados60dias[day]["summary"]["sedentaryMinutes"]
+            dados7diasLightlyActiveMinutes += dados60dias[day]["summary"]["lightlyActiveMinutes"]
+            dados7diasVeryActiveMinutes += dados60dias[day]["summary"]["veryActiveMinutes"]
 
+        dados7PasdiasSteps = 0
+        dados7PasdiasSedentaryMinutes = 0
+        dados7PasdiasLightlyActiveMinutes = 0
+        dados7PasdiasVeryActiveMinutes = 0
+        for day in sorted(dados60dias.keys(),reverse=True)[7:14]:
+            dados7PasdiasSteps += dados60dias[day]["summary"]["steps"]
+            dados7PasdiasSedentaryMinutes += dados60dias[day]["summary"]["sedentaryMinutes"]
+            dados7PasdiasLightlyActiveMinutes += dados60dias[day]["summary"]["lightlyActiveMinutes"]
+            dados7PasdiasVeryActiveMinutes += dados60dias[day]["summary"]["veryActiveMinutes"]
+    
     except:
-        pass
+        dados7diasSteps = 0
+        dados7diasSedentaryMinutes = 0
+        dados7diasLightlyActiveMinutes = 0
+        dados7diasVeryActiveMinutes = 0
+
+        dados7PasdiasSteps = 0
+        dados7PasdiasSedentaryMinutes = 0
+        dados7PasdiasLightlyActiveMinutes = 0
+        dados7PasdiasVeryActiveMinutes = 0
+
     
     #print(len(dailycontrol),dailycontrol[0],dailycontrol[0].all())
 
@@ -705,6 +721,38 @@ def pacienteGraficos2(request,username):
     barreiras = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
+    # Minutos
+    fig = go.Figure()
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = 200,
+        title = {"text": "Média de minutos<br>sedentários<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        domain = {'x': [0, 0.25], 'y': [0, 1]},
+        delta = {'reference': 400, 'relative': True}))
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = 350,
+        title = {"text": "Média de minutos<br>em atividade<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': 400, 'relative': True},
+        domain = {'x': [0.26, 0.5], 'y': [0, 1]}))
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = 450,
+        title = {"text": "Média de minutos<br>em atividade leve<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': 400, 'relative': True},
+        domain = {'x': [0.51, 0.75], 'y': [0, 1]}))
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = 450,
+        title = {"text": "Média de passos<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': 400, 'relative': True},
+        domain = {'x': [0.76, 1], 'y': [0, 1]}))
+
+    fitbit7dias = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
     
     #Grafico Demo
@@ -742,7 +790,8 @@ def pacienteGraficos2(request,username):
             'fig10':fig10,
             'figFluxoAr':figFluxoAr,
             'figQuestSemanal':figQuestSemanal,
-            'barreiras':barreiras
+            'barreiras':barreiras,
+            'fitbit7dias':fitbit7dias
             }
         )
 
