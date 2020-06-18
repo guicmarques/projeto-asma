@@ -117,17 +117,17 @@ $ python manage.py runsslserver 0.0.0.0:8000
 
 - /rest/exercises - Obtém exercícios à partir de um arquivo JSON
     - Authentication: Bearer ```access_token```
-    - Body: ```{"id": id do exercício}``` - caso nada seja passado, será entregue o dicionário completo
+    - Query: ```id=id do exercício``` - caso nada seja passado, será entregue o dicionário completo
     - Response: será retornado o dicionário presente em ```media/exercicios.json``` ou o corpo do id correspondente
 
 - /rest/milestones/ - Obtém dados de conquista de acordo com o valor passado no body
     - Authentication: Bearer ```access_token```
-    - Body: ```{"info": True}``` - será retornados dados sobre a performance da pessoa
+    - Query: ```info``` - será retornados dados sobre a performance da pessoa
     - Response ```{"weekly": máximo de semanas consecutivas respondendo questionário semanal, "daily": máximo de dias consecutivos respondendo questionário diário, "steps": máximo de dias consecutivos batendo meta de passos}```
     
     **ou**
     
-    - Body: ```{"find": True}``` - serão retornados as conquistas do usuário
+    - Query: ```find``` - serão retornados as conquistas do usuário
     - Response ```{nome da conquista 1: {"level": nivel da conquista, "quantity": quantidade para obter a conquista}, nome da conquista 2: ...}```
 
 - /rest/barriers/ - são retornadas as datas em que o questionário de bareiras foi respondido

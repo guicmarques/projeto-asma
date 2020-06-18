@@ -260,8 +260,9 @@ class Exercises(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        if "id" in request.data:
-            exercise_id = request.data["id"]
+        print(request.GET)
+        if "id" in request.GET.keys():
+            exercise_id = request.GET["id"]
         else:
             exercise_id = None
         exercicios = handleUserData.getExercises(exercise_id)
@@ -302,14 +303,14 @@ class Milestones(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        if "info" in request.data:
+        if "info" in request.GET.keys():
             weekly, daily, steps = handleUserData.getMilestonesInfo(
                 request.user)
             data = {"weekly": weekly, "daily": daily, "steps": steps}
 
             return Response(data=data)
 
-        elif "find" in request.data:
+        elif "find" in request.GET.keys():
             data = handleUserData.getMilestones(request.user)
             return Response(data=data)
         else:
