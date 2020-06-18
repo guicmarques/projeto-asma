@@ -861,7 +861,8 @@ def pacienteGraficos2(request,username):
             'figFluxoAr':figFluxoAr,
             'figQuestSemanal':figQuestSemanal,
             'barreiras':barreiras,
-            'fitbit7dias':fitbit7dias
+            'fitbit7dias':fitbit7dias,
+            'figFitBitData':figFitBitData
             }
         )
 
