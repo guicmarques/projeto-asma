@@ -260,7 +260,6 @@ class Exercises(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        print(request.GET)
         if "id" in request.GET.keys():
             exercise_id = request.GET["id"]
         else:
