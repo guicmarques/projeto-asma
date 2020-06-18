@@ -352,7 +352,7 @@ def pacienteGraficos2(request,username):
         listaDate3 = ["0000-00-00"]
 
     # Obter dados da fitbit
-    if True:
+    try:
 
         day60List = []
         for i in range(1,61,1):
@@ -394,7 +394,7 @@ def pacienteGraficos2(request,username):
             listaVeryActiveMinutes.append(dados60dias[day]["summary"]["veryActiveMinutes"])
             listaDiaFitbit.append(day)
     
-    else:
+    except:
         dados7diasSteps = 0
         dados7diasSedentaryMinutes = 0
         dados7diasLightlyActiveMinutes = 0
