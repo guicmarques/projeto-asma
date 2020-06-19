@@ -60,6 +60,7 @@
       <ion-icon name="alert-circle-outline"></ion-icon> Para editar essa informação contate o suporte
     </ion-text>
   </div>
+
   <div class="edit-input-with-warning">
     <ion-text class="field-title" >CPF</ion-text>
     <br>
@@ -74,7 +75,35 @@
       <ion-icon name="alert-circle-outline"></ion-icon> Para editar essa informação contate o suporte
     </ion-text>
   </div>
- 
+
+  <div class="edit-input-with-warning">
+    <ion-text class="field-title" > RGHC </ion-text>
+    <br>
+    <ion-input class="edit-field-empty" type="text" readonly
+    autocapitalize="on" *ngIf="userDefined"  [(ngModel)]="user.token"
+    (ionFocus)="warning(true,2)" (ionBlur)="warning(false,2)"></ion-input>
+    <br>
+    <ion-text class="warning" color="danger"
+     [ngStyle]="{
+      'visibility': showhelp[2] ? 'visible' : 'hidden'
+    }">
+      <ion-icon name="alert-circle-outline"></ion-icon> Para editar essa informação contate o suporte
+    </ion-text>
+  </div>
+
+  
+  <div class="edit-input">
+    <ion-text class="field-title" >DATA DE NASCIMENTO</ion-text>
+    <br>
+    <ion-datetime class="edit-field date-field" displayFormat="DD MM YYYY" pickerFormat="DD MMM YYYY" *ngIf="userDefined"
+    placeholder={{nascimento}} [(ngModel)]="newData.nascimento" [monthShortNames]="monthShortNames" 
+    [monthNames]="monthNames" 
+    (ionBlur)="focus(false, 5)" (ionFocus)="focus(true, 5)"
+    [ngClass]="{
+      'edit-field': classChange[5],
+      'edit-field-empty' : !(classChange[5])}"></ion-datetime>
+    
+  </div>
   <div class="edit-input">
     <ion-text class="field-title" >PESO</ion-text>
     <br>
@@ -100,11 +129,11 @@
     <ion-text class="field-title" >EMAIL</ion-text>
     <br>
     <ion-input class="edit-field-empty" [(ngModel)]="user.email" type="text" *ngIf="userDefined" readonly 
-    (ionFocus)="warning(true,2)" (ionBlur)="warning(false,2)"></ion-input>
+    (ionFocus)="warning(true,3)" (ionBlur)="warning(false,3)"></ion-input>
     <br>
     <ion-text class="warning" color="danger"
      [ngStyle]="{
-      'visibility': showhelp[2] ? 'visible' : 'hidden'
+      'visibility': showhelp[3] ? 'visible' : 'hidden'
     }">
       <ion-icon name="alert-circle-outline"></ion-icon> Para editar essa informação contate o suporte
     </ion-text>

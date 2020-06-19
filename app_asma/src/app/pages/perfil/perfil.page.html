@@ -35,43 +35,14 @@
     </div>
      
       <ion-slides [options]="slideOpts" >
-
-          <ion-slide>
-            <div data-swiper-parallax-y="70%">
-              <ion-img src="../../../assets/images/achievements/achievement_metas.svg" class= "achievement-img" size="large"></ion-img>
-              
-              <ion-text class="achievement-name">
-                Metas
-              </ion-text>           
-              <br>
-              <ion-button fill="clear" class="get-info-button" (onclick)="openPopup()">
-              <ion-text class="achievement-subtitle">
-                Detalhes <ion-icon name="chevron-forward" class="get-info-arrow"></ion-icon>
-              </ion-text>    
-              </ion-button>
-              </div>
-          </ion-slide>
-          <ion-slide>
-            <div data-swiper-parallax-y="70%">
-              <ion-img src="../../../assets/images/achievements/achievement_passos.svg" class= "achievement-img" size="large"></ion-img>
-              
-              <ion-text class="achievement-name">
-                Passos
-              </ion-text>           
-              <br>
-              <ion-button fill="clear" class="get-info-button" (onclick)="openPopup()">
-              <ion-text class="achievement-subtitle">
-                Detalhes <ion-icon name="chevron-forward" class="get-info-arrow"></ion-icon>
-              </ion-text>    
-            </ion-button>
-
-              </div>
-          </ion-slide>
-          <ion-slide>
-            <div data-swiper-parallax-y="70%">
-            <ion-img src="../../../assets/images/achievements/achievement_diario.svg" class= "achievement-img" size="large"></ion-img>
+          
+        <ion-slide  *ngFor="let milestone of milestones">
+          <div data-swiper-parallax-y="70%">
+            <ion-img src="../../../assets/images/achievements/star_achievement_bronze.png" class= "achievement-img" size="large" *ngIf="milestone.level==1" ></ion-img>
+            <ion-img src="../../../assets/images/achievements/star_achievement_silver.png" class= "achievement-img" size="large" *ngIf="milestone.level==2" ></ion-img>
+            <ion-img src="../../../assets/images/achievements/star_achievement.svg" class= "achievement-img" size="large" *ngIf="milestone.level==3" ></ion-img>
             <ion-text class="achievement-name">
-              Diario
+              {{milestone.nome}}
             </ion-text>           
             <br>
             <ion-button fill="clear" class="get-info-button" (onclick)="openPopup()">
@@ -80,35 +51,9 @@
             </ion-text>    
             </ion-button>
             </div>
-          </ion-slide>
-          <ion-slide>
-            <div data-swiper-parallax-y="70%">
-              <ion-img src="../../../assets/images/achievements/achievement_treino.svg" class= "achievement-img" size="large"></ion-img>
-              <ion-text class="achievement-name">
-                Treino
-              </ion-text>           
-              <br>
-              <ion-button fill="clear" class="get-info-button" (onclick)="openPopup()">
-              <ion-text class="achievement-subtitle">
-                Detalhes <ion-icon name="chevron-forward" class="get-info-arrow"></ion-icon>
-              </ion-text>    
-              </ion-button>
-              </div>
-          </ion-slide>
-          <ion-slide>
-            <div data-swiper-parallax-y="70%">
-              <ion-img src="../../../assets/images/achievements/achievement_questionario.svg" class= "achievement-img" size="large"></ion-img>
-              <ion-text class="achievement-name">
-               Questionário
-              </ion-text>           
-              <br>
-              <ion-button fill="clear" class="get-info-button" (onclick)="openPopup()">
-              <ion-text class="achievement-subtitle">
-                Detalhes <ion-icon name="chevron-forward" class="get-info-arrow"></ion-icon>
-              </ion-text>    
-              </ion-button>
-              </div>
-          </ion-slide>
+        </ion-slide>
+          
+         
       </ion-slides>
     </ion-card>
   

@@ -10,4 +10,5 @@ export interface User {
     imagem: string,
     token: string,
     tokenValidado: boolean,
+    nascimento: string
 }

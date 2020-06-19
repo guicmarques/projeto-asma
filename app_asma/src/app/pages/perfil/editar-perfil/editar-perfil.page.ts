@@ -16,10 +16,13 @@ import { EventService } from '../../../services/event.service';
 
 export class EditarPerfilPage implements OnInit {
   user: any;
-  
-  classChange = [false,false,false,false,false];
+  nascimento: string;
+  monthShortNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+  monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 
+  'Outrubro', 'Novembro', 'Dezembro'];
+  classChange = [false,false,false,false,false,false];
   dataSent: User;
-  showhelp=[false,false,false];
+  showhelp=[false,false,false,false];
   userDefined: boolean = false;
   newData: User = {
     nome: '',
@@ -33,6 +36,7 @@ export class EditarPerfilPage implements OnInit {
     imagem: '',
     token: '',
     tokenValidado: true,
+    nascimento:'',
   }
   emptyData: User = {
     nome: '',
@@ -46,6 +50,7 @@ export class EditarPerfilPage implements OnInit {
     imagem: '',
     token: '',
     tokenValidado: true,
+    nascimento:'',
   }
 
 
@@ -64,6 +69,8 @@ export class EditarPerfilPage implements OnInit {
       this.userDefined = true;
       console.log(user);
       this.dataSent = this.user;
+      this.nascimento=  user.nascimento.substring(8,10) + ' ' + user.nascimento.substring(5,7) + ' ' + user.nascimento.substring(0,4);
+
     });
   }
   selectImg(){
@@ -78,10 +85,6 @@ export class EditarPerfilPage implements OnInit {
     if (this.newData.sobrenome !==''){
       this.dataSent.sobrenome = this.newData.sobrenome;
     }
-    /* por enquanto nao editaremos o email
-    if (this.newData.email !==''){
-      this.dataSent.email = this.newData.email;
-    }*/
     if (this.newData.peso !==null){
       this.dataSent.peso = this.newData.peso;
     }
@@ -90,6 +93,9 @@ export class EditarPerfilPage implements OnInit {
     }
     if (this.newData.telefone !==null){
       this.dataSent.telefone = this.newData.telefone;
+    }
+    if (this.newData.nascimento !==''){
+      this.dataSent.nascimento = this.newData.nascimento.substring(0,10);
     }
   }
 
@@ -114,6 +120,7 @@ export class EditarPerfilPage implements OnInit {
       alertEl.present();
     });
   }
+  
   focus(focus, i){
     // Definido como i=0-> Nome, i=1 ->sobrenome, i=2-> peso, i=3->altura, i=4->telefone
     console.log(focus);
@@ -153,6 +160,7 @@ export class EditarPerfilPage implements OnInit {
       this.user = user;
       this.user = user;
       this.newData= this.emptyData;
+      this.nascimento=   user.nascimento.substring(8,10) + ' ' + user.nascimento.substring(5,7) + ' ' + user.nascimento.substring(0,4);
       this.eventService.publish('userUpdated', {
         user: user,
       });

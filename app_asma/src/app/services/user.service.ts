@@ -33,7 +33,7 @@ export class UserService {
         return this.http.put(this.env.API_URL + 'user_data/', {
           'email': user.email, 'nome': user.nome, 'sobrenome': user.sobrenome,        
           'rg': user.rg, 'telefone': user.telefone, 'altura': user.altura,
-          'peso': user.peso, 'imagem': user.imagem, 'token': user.token,
+          'peso': user.peso, 'imagem': user.imagem, 'token': user.token, 'nascimento': user.nascimento,
             }, { headers: header })
           .subscribe((data) => {
             this.alertService.presentPopUp('Alterações salvas!', 'Alterações salvas com sucesso.');
@@ -59,6 +59,25 @@ export class UserService {
       })
     })      
   }
+  /*
+  getMilestones(milestones: User) {
+    return new Promise ((resolve, reject) =>{
+      this.authService.validateToken().then(data => {
+        const header = new HttpHeaders({
+          'Authorization': 'Bearer' + " " + this.authService.token["access"]
+        });
+        return this.http.get(this.env.API_URL + 'milestones/',{ find:true }, { headers: header})
+          .subscribe((data) => {
+            this.alertService.presentPopUp('Alterações salvas!', 'Alterações salvas com sucesso.');
+            resolve(data);
+          }, (error) =>{
+            this.alertService.presentPopUp('Erro!', 'Não foi possivel fazer as alterações.');
+            reject(error);
+          });
+        });
+      });
+    
+  }*/
 }
     
 
