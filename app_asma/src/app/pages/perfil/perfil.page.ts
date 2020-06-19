@@ -24,8 +24,9 @@ export class PerfilPage implements OnInit {
 
   milestones: Milestones[]= [];
   milestone: Milestones;
+  imagemConquista: string;
+  mensagem:string;
   
-
   userDefined: boolean = false;
   slideOpts = {
     initialSlide: 0,
@@ -191,6 +192,7 @@ checkMilestones(){
         })}
 
 }
+
 getMilestones(){
   this.milestones = this.getConquistas;
 }
@@ -201,12 +203,27 @@ updateUser(){
     console.log(user);
   });
   }
+
   openPopup(milestone){
     var aviso : string;
-    if(milestone.level != 3 ){
-      aviso="  Faltam "+ milestone.quantity+ " " + milestone.type+" para a próxima medalha! " }
-    else{ aviso = "  Parabéns você conseguiu todas as medalhas dessa categoria!" }
-    this.alertService.presentNoButtonPopUp(milestone.nome, milestone.description+ aviso);
+    
+    if(milestone.level == 2 ){
+      this.imagemConquista='../../../assets/images/achievements/star_achievement_silver.png'
+
+      aviso=` <br> Faltam `+ milestone.quantity+ " "  + milestone.type+ ` para a próxima medalha! <br>` }
+    else if(milestone.level == 1){
+      this.imagemConquista='../../../assets/images/achievements/star_achievement_bronze.png'
+
+      aviso=` <br> Faltam `+ milestone.quantity+ " "  + milestone.type+ ` para a próxima medalha! <br>` }
+    else if( milestone.level == 0){
+      this.imagemConquista='../../../assets/images/achievements/star_achievement_notyet.png'
+
+      aviso=` <br> Faltam `+ milestone.quantity+ " "  + milestone.type+ ` para a próxima medalha! <br>` }
+    else{ aviso = ` <br> Parabéns você conseguiu todas as medalhas dessa categoria! <br>`
+    this.imagemConquista='../../../assets/images/achievements/star_achievement_gold.png' }
+    this.mensagem=` <img src="${this.imagemConquista}" width="50" height="50"> <br>`
+
+    this.alertService.presentNoButtonPopUp(milestone.nome,this.mensagem+ milestone.description+ aviso);
   }
   logout() {
     this.authService.logout();
@@ -215,3 +232,4 @@ updateUser(){
   }
  
 }
+
