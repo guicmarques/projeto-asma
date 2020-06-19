@@ -69,9 +69,19 @@ export class UserService {
         return this.http.get<Records>(this.env.API_URL + 'milestones/?info', { headers: header }).subscribe(data =>{
           this.record = data;
           resolve(this.record);
+        }, (error) =>{
+          this.alertService.presentPopUp('Erro!', 'Não foi computar as conquistas.');
+          resolve({
+            steps:0,
+            weekly:0,
+            daily:0,
+          });
         });
       })
     })     
+
+  }
+ 
 
   }
   /*
@@ -93,6 +103,5 @@ export class UserService {
       });
     
   }*/
-}
-    
+
 

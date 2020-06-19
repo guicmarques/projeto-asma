@@ -9,7 +9,7 @@ import { Questions } from './../../models/questions.model';
 })
 
 export class FaqPage implements OnInit {
-  query:string;
+  query:string = '';
   searching:boolean;
   // fonte das perguntas: https://ginasthma.org/about-us/faqs/ 
   //https://sbpt.org.br/portal/publico-geral/doencas/asma-perguntas-e-respostas/
