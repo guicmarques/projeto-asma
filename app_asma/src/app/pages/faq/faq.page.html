@@ -5,7 +5,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar (ionInput)="search($event)" ></ion-searchbar>
+  <ion-searchbar (ionInput)="search($event)" (ionFocus)="searchBarColoring(true)" (ionBlur)="searchBarColoring(false)"
+  [ngClass]="{
+    'searching': searching,
+    '' : !(searching)}"></ion-searchbar>
   <ion-list class="FAQ-list" >
     <div *ngFor="let question of questions">
     <ion-item *ngIf="question.show">
