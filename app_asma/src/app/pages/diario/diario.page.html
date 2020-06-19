@@ -26,6 +26,7 @@
           <ion-row class="QAContainer">
               <ion-col>
                 <ion-card-title class="QATitle">Questionário de Controle da Asma (ACQ)</ion-card-title>
+                <img src="../../../assets/images/bell_ACQ.gif" class="gif">
               </ion-col>
 
               <ion-col class="questionnaireImg">
@@ -45,6 +46,7 @@
           <ion-row class="QAContainer">
               <ion-col>
                 <ion-card-title class="QATitle">Questionário de Barreiras</ion-card-title>
+                <img src="../../../assets/images/bell_barriers.gif" class="gif">
               </ion-col>
 
               <ion-col>
@@ -273,11 +275,23 @@
       <ion-card-content>
         <ion-list>
           <ion-item lines="none">
-            <ion-label class="peakLabel">Medição: </ion-label>
+            <ion-input type="number" min="150" max="600" [(ngModel)]="diaryPage.pico[0]"
+            class="peakValue"></ion-input>
+            <ion-label class="peakUnit">L/min</ion-label>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-range min="150" max="600" color="secondary" pin="true" class="peakSlide" 
+            [(ngModel)]="diaryPage.pico[0]">
+              <ion-label slot="start" class="peakRange">150</ion-label>
+              <ion-label slot="end" class="peakRange">600</ion-label>
+            </ion-range>
+            <!--<ion-label class="peakLabel">Medição: </ion-label>
             <ion-textarea inputmode="text" maxlength="6" cols="4" rows="1" class="peakValue" 
             [(ngModel)]="diaryPage.pico[0]" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-textarea>
-            <div class="peakUnit">L/min</div>
+            <div class="peakUnit">L/min</div>-->
           </ion-item>
+          
         </ion-list>
       </ion-card-content>
     </ion-card>

@@ -25,7 +25,7 @@ export class DiarioPage implements OnInit {
   pageView: string[];
   diaryPage: Diary = {
     note: '',
-    pico: [null, 0, 0],
+    pico: [375, 0, 0],
     tosse: '',
     chiado: '',
     faltaAr: '',
