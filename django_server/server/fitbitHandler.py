@@ -20,7 +20,7 @@ logFile = 'server.log'
 datefmt = '%d/%m/%Y %H:%M:%S'
 fmt = '[%(asctime)s] %(levelname)s: %(message)s'
 logging.basicConfig(filename=logFile, filemode='a',
-                    level=logging.DEBUG, datefmt=datefmt, format=fmt)
+                    level=logging.WARN, datefmt=datefmt, format=fmt)
 
 
 def getAddress():
