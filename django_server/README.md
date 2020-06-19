@@ -115,7 +115,7 @@ $ python manage.py runsslserver 0.0.0.0:8000
     - Authentication: Bearer ```access_token```
     - Response ```{yyyy-mm-dd: {"note": nota escrita do dia, "pico": [pico1, pico2, pico3], "tosse": bool, "chiado": bool, "faltaAr": bool, "acordar": bool, "bombinha": bool}, ...}```
 
-- /rest/exercises - Obtém exercícios à partir de um arquivo JSON
+- /rest/exercises/ - Obtém exercícios à partir de um arquivo JSON
     - Authentication: Bearer ```access_token```
     - Query: ```id=id do exercício``` - caso nada seja passado, será entregue o dicionário completo
     - Response: será retornado o dicionário presente em ```media/exercicios.json``` ou o corpo do id correspondente
@@ -133,6 +133,11 @@ $ python manage.py runsslserver 0.0.0.0:8000
 - /rest/barriers/ - são retornadas as datas em que o questionário de bareiras foi respondido
     - Authentication: Bearer ```access_token```
     - Response: ```{"dates": ["yyyy-mm-dd", ...]}```
+
+- /rest/faq/ - Obtém exercícios à partir de um arquivo JSON
+    - Authentication: Bearer ```access_token```
+    - Query: ```id=id do exercício``` - caso nada seja passado, será entregue o dicionário completo
+    - Response: será retornado o dicionário presente em ```media/faq.json``` ou o corpo do id correspondente
 
 ### PUT requests:
 - /rest/user_data/ - Atualiza (ou cria, se não existir) as informações do usuário

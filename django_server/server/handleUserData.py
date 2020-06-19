@@ -401,6 +401,8 @@ def getExercises(exercise_id=None):
         exercise_id = str(exercise_id)
         if exercise_id in data:
             data = data[exercise_id]
+        elif exercise_id == '':
+            pass
         else:
             data = f"There are no exercises with id {exercise_id}"
 
@@ -548,3 +550,19 @@ def getBarriersDates(user):
         dates.append(barrier.date.strftime("%Y-%m-%d"))
 
     return sorted(dates)
+
+
+def getFaq(faq_id=None):
+    with open('media/faq.json', encoding="ISO-8859-1") as json_file:
+        data = json.load(json_file)
+
+    if faq_id is not None:
+        faq_id = str(faq_id)
+        if faq_id in data:
+            data = data[faq_id]
+        elif faq_id == '':
+            pass
+        else:
+            data = f"There are no FAQ with id {faq_id}"
+
+    return data

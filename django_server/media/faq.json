@@ -1,0 +1,27 @@
+{
+    "0": {
+        "id": 0,
+        "pergunta": "O que é asma?",
+        "resposta": "Asma é uma doença comum das vias aéreas ou brônquios (tubos que levam o ar para dentro dos pulmões) causada por inflamação das vias aéreas.  A asma causa os seguintes sintomas:\n– falta de ar ou dificuldade para respirar\n– sensação de aperto no peito ou peito pesado\n– chio ou chiado no peito\n– tosse\nEsses sintomas variam durante o dia, podendo piorar à noite ou de madrugada e com as atividades físicas. Os sintomas também variam bastante ao longo do tempo. Às vezes desaparecendo sozinhos, mas a asma continua lá, uma vez que não tem cura."
+    },
+    "1": {
+        "id": 1,
+        "pergunta": "A asma de todas as pessoas é igual?",
+        "resposta": "A asma varia muito de pessoa para pessoa e num mesmo indivíduo. Tem épocas que pode ser muito leve e os sintomas desaparecerem e tem momentos em que pode piorar muito, necessitando atendimentos de emergência e até mesmo internação.  As crises de asma também podem variar, umas sendo mais fortes do que as outras."
+    },
+    "2": {
+        "id": 3,
+        "pergunta": "Qual a causa da asma?",
+        "resposta": "A causa exata da asma ainda não é conhecida, mas acredita-se que é causada por um conjunto de fatores: genéticos (história familiar de alergias respiratórias – asma ou rinite) e ambientais."
+    },
+    "3": {
+        "id": 3,
+        "pergunta": "Asma pega? É contagiosa? ",
+        "resposta": "Não. Os asmáticos possuem uma condição genética (herança dos pais) que determina uma reação exagerada a determinados estímulos (poeira, mudança de temperatura, fumaça, mofo, cheiro forte), causando os sintomas de chiado, falta de ar, tosse e cansaço. Não há como pegar asma, a pessoa nasce com a genética para ter ou não a doença. "
+    },
+    "4": {
+        "id": 4,
+        "pergunta": "“Bombinha” vicia? Faz mal ao coração? Pode matar?",
+        "resposta": "Não. A asma é uma doença das vias respiratórias e, portanto, o tratamento inalatório é o ideal, pois atua diretamente sobre as partes afetadas (vias aéreas dentro dos pulmões). Seu efeito é mais rápido, as doses necessárias para o controle dos sintomas menores e os efeitos colaterais mais discretos se comparados aos medicamentos usados por via oral. Importante também frisar que existems “bombinhas” (de spray) e inaladores de pó seco que servem só para tratar a crise de asma enquanto outros também são indicados para diminuir a inflamação nas vias aéreas dentro dos pulmoes, evitando as crises, quando usadas regularmente. É o modo mais eficaz e seguro de administração dos medicamentos para a asma. E devem ser sempre utilizadas sob orientação médica, de forma correta, evitando os abusos."
+    }
+}

@@ -353,3 +353,17 @@ class Watson(APIView):
         resp = {"intent": intent, "responses": responses}
         
         return Response(resp, status=request_status)
+
+class Faq(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+
+        if "id" in request.GET.keys():
+            faq_id = request.GET["id"]
+            print(faq_id == '')
+        else:
+            faq_id = None
+        faq = handleUserData.getFaq(faq_id)
+
+        return Response(faq)

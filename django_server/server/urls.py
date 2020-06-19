@@ -27,4 +27,5 @@ urlpatterns = [
     path('milestones/', views.Milestones.as_view(), name="milestones"),
     path('barriers/', views.Barriers.as_view(), name="barriers"),
     path('watson/', views.Watson.as_view(), name="watson"),
+    path('faq/', views.Faq.as_view(), name="FAQ"),
 ]
