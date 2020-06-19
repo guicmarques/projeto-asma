@@ -16,11 +16,7 @@ import { EventService } from './../../services/event.service';
 export class PerfilPage implements OnInit {
   user:any;
   getConquistas: Milestones [];
-  records:  Records={
-    steps:10,
-    weekly:8,
-    daily:20,
-  }
+  records:  any;
 
   milestones: Milestones[]= [];
   milestone: Milestones;
@@ -53,18 +49,26 @@ export class PerfilPage implements OnInit {
 
 
 ngOnInit() { 
-  console.log(this.userDefined);
+  this.alertService.presentLoading(4000);
   this.userService.getUser().then(user => {
     this.user = user;
     this.userDefined = true;
     console.log(user);
-    this.checkMilestones();
-    console.log(this.milestones);
-  });
+    
+    
+    
+  })
+  this.userService.getRecords().then(records =>{
+      this.records = records;
+      console.log(this.records);
+      this.checkMilestones();
+      console.log(this.milestones);
+  }
+    );
   
 }
 checkMilestones(){
-    console.log(this.milestones);
+    
     if(this.records.weekly>=2){
       if (this.records.weekly >=4){
         if (this.records.weekly >=8){
@@ -72,12 +76,16 @@ checkMilestones(){
             { level: 3,
               quantity: null,
               nome: "Semanal",
+              description:" Conquista atribuida por responder o Questionário de Controle de Asma (ACQ) por várias semanas seguidas. \n",
+              type:"semanas",
             })
         } else{
           this.milestones.push(
             { level: 2,
               quantity: 8-this.records.weekly,
               nome: "Semanal",
+              description:" Conquista atribuida por responder o Questionário de Controle de Asma (ACQ) por várias semanas seguidas. \n",
+              type:"semanas",
             })
         }
       }
@@ -86,8 +94,19 @@ checkMilestones(){
           { level: 1,
             quantity: 2-this.records.weekly,
             nome: "Semanal",
+            description:" Conquista atribuida por responder o Questionário de Controle de Asma (ACQ) por várias semanas seguidas. \n",
+            type:"semanas",
           })
       }
+    }
+    else{
+      this.milestones.push(
+        { level: 0,
+          quantity: 2-this.records.weekly,
+          nome: "Semanal",
+          description:" Conquista atribuida por responder o Questionário de Controle de Asma(ACQ) por várias semanas seguidas. \n",
+          type:"semanas",  
+        })
     }
     console.log(this.milestones);
     if(this.records.daily>=7){
@@ -97,23 +116,37 @@ checkMilestones(){
             { level: 3,
               quantity: null,
               nome: "Diário",
+              description:" Conquista atribuída por conseguir responder o questionário diário por múltiplos dias seguidos. \n",
+              type:"dias",
             })
         } else{
           this.milestones.push(
             { level: 2,
               quantity: 31-this.records.daily,
               nome: "Diário",
+              description:" Conquista atribuída por conseguir responder o questionário diário por múltiplos dias seguidos. \n",
+              type:"dias",
             })
         }
       }
       else{
         this.milestones.push(
           { level: 1,
-            quantity: 7-this.records.daily,
+            quantity: 15-this.records.daily,
             nome: "Diário",
+            description:" Conquista atribuída por conseguir responder o questionário diário por múltiplos dias seguidos. \n",
+            type:"dias",
           })
       }
     }
+    else{
+      this.milestones.push(
+        { level: 0,
+          quantity: 7-this.records.daily,
+          nome: "Diário",
+          description:"  Conquista atribuída por conseguir responder o questionário diário por múltiplos dias seguidos. \n",
+          type:"dias",
+        })}
     if(this.records.steps>=7){
       if (this.records.steps >=15){
         if (this.records.steps >=31){
@@ -121,12 +154,16 @@ checkMilestones(){
             { level: 3,
               quantity: null,
               nome: "Meta Diária",
+              description:" Conquista atribuída pelos dias consecutivos que voce conseguiu cumprir sua meta. \n",
+              type:"dias",
             })
         } else{
           this.milestones.push(
             { level: 2,
               quantity: 31-this.records.steps,
               nome: "Meta Diária",
+              description:" Conquista atribuída pelos dias consecutivos que voce conseguiu cumprir sua meta. \n",
+              type:"dias",
             })
         }
       }
@@ -135,9 +172,19 @@ checkMilestones(){
           { level: 1,
             quantity: 7-this.records.steps,
             nome: "Meta Diária",
+            description:" Conquista atribuída pelos dias consecutivos que voce conseguiu cumprir sua meta.\n",
+            type:"dias",
           })
       }
     }
+    else{
+      this.milestones.push(
+        { level: 0,
+          quantity: 7-this.records.steps,
+          nome: "Meta Diária",
+          description:"  Conquista atribuída pelos dias consecutivos que voce conseguiu cumprir sua meta. \n",
+          type:"dias",
+        })}
 
 }
 getMilestones(){
@@ -150,8 +197,12 @@ updateUser(){
     console.log(user);
   });
   }
-  openPopup(){
-    this.alertService.presentPopUp('Oops!', 'Função ainda não impementada.');
+  openPopup(milestone){
+    var aviso : string;
+    if(milestone.level != 3 ){
+      aviso=" \n Faltam "+ milestone.quantity+ " " + milestone.type+" para a próxima medalha! " }
+    else{ aviso = " \n Parabéns você conseguiu todas as medalhas dessa categoria!"}
+    this.alertService.presentNoButtonPopUp(milestone.nome, milestone.description + aviso);
   }
   logout() {
     this.authService.logout();

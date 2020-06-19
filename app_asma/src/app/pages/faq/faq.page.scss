@@ -15,3 +15,20 @@
     --background: rgb(64, 196, 248);
     --color: white;
 }
+.search-field {
+    text-align: center;
+    height: 46px;
+    width: 80%;
+    display: inline-block;
+    box-sizing: border-box;
+    outline: none;
+    --padding-start: 50px;
+    --padding-end: 50px;
+    --padding-top: 14px;
+    text-align: start;
+    background: 
+     linear-gradient(rgb(255, 255, 255),rgb(255, 255, 255)) padding-box,
+     linear-gradient(315deg, rgba(0,252,198,1) 0%, rgba(0,252,233,1) 35%, rgba(0,166,235,1) 100%) border-box;
+    border: 2px solid transparent;
+    border-radius: 23px;
+}

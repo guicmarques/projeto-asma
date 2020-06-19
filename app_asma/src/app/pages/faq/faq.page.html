@@ -1,73 +1,32 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title class="iitle">Perguntas Frequentes</ion-title>
+    <ion-title class="title">Perguntas Frequentes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-searchbar></ion-searchbar>
+  <ion-searchbar (ionInput)="search($event)" class="search-field"></ion-searchbar>
   <ion-list class="FAQ-list" >
-    <ion-item >
+    <div *ngFor="let question of questions">
+    <ion-item *ngIf="question.show">
       <ion-list lines="none">
-        <ion-item (click)="expand(0)">
+        <ion-item (click)="expand(question)">
           <ion-text class="question" >
-            <ion-icon name="remove-outline" class="expand-icon" *ngIf="( expandQuestions[0])"> </ion-icon>
-            <ion-icon  name="add-outline" class="expand-icon" *ngIf=" ( !expandQuestions[0])"> </ion-icon>
-              Pergunta 1
+            <ion-icon name="remove-outline" class="expand-icon" *ngIf="( question.showAnswer)"> </ion-icon>
+            <ion-icon  name="add-outline" class="expand-icon" *ngIf=" (!(question.showAnswer))"> </ion-icon>
+              {{question.question}}
           </ion-text>
         </ion-item>
-        <ion-item *ngIf=" ( expandQuestions[0])">
+        <ion-item *ngIf=" (question.showAnswer)">
           <ion-item-divider  class="answer">
-          
           <ion-text>
-            
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla hendrerit bibendum elit nec rhoncus. Donec accumsan nec elit ultricies euismod. Nulla at elit finibus, rhoncus arcu nec, tincidunt ipsum. Nam imperdiet nec dui a molestie. Suspendisse potenti. Donec feugiat eu nisi vel efficitur. Donec dapibus sem dolor, sed rutrum justo tempor eu.
+            {{question.answer}}
           </ion-text>
           </ion-item-divider>
         </ion-item>
       </ion-list>
-      
     </ion-item>
-    <ion-item >
-      <ion-list lines="none">
-        <ion-item (click)="expand(1)">
-          <ion-text class="question" >
-            <ion-icon name="remove-outline" class="expand-icon" *ngIf="( expandQuestions[1])"> </ion-icon>
-            <ion-icon  name="add-outline" class="expand-icon" *ngIf=" ( !expandQuestions[1])"> </ion-icon>
-              Pergunta 2
-          </ion-text>
-        </ion-item>
-        <ion-item *ngIf=" ( expandQuestions[1])">
-          <ion-item-divider  class="answer">
-          
-          <ion-text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla hendrerit bibendum elit nec rhoncus. Donec accumsan nec elit ultricies euismod. Nulla at elit finibus, rhoncus arcu nec, tincidunt ipsum. Nam imperdiet nec dui a molestie. Suspendisse potenti. Donec feugiat eu nisi vel efficitur. Donec dapibus sem dolor, sed rutrum justo tempor eu.
-          </ion-text>
-          </ion-item-divider>
-        </ion-item>
-      </ion-list>
-      
-    </ion-item>
-    <ion-item >
-      <ion-list lines="none">
-        <ion-item (click)="expand(2)">
-          <ion-text class="question" >
-            <ion-icon name="remove-outline" class="expand-icon" *ngIf="( expandQuestions[2])"> </ion-icon>
-            <ion-icon  name="add-outline" class="expand-icon" *ngIf=" ( !expandQuestions[2])"> </ion-icon>
-              Pergunta 3
-          </ion-text>
-        </ion-item>
-        <ion-item *ngIf=" ( expandQuestions[2])">
-          <ion-item-divider  class="answer">
-          
-          <ion-text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla hendrerit bibendum elit nec rhoncus. Donec accumsan nec elit ultricies euismod. Nulla at elit finibus, rhoncus arcu nec, tincidunt ipsum. Nam imperdiet nec dui a molestie. Suspendisse potenti. Donec feugiat eu nisi vel efficitur. Donec dapibus sem dolor, sed rutrum justo tempor eu.
-          </ion-text>
-          </ion-item-divider>
-        </ion-item>
-      </ion-list>
-      
-    </ion-item>
+     </div>
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

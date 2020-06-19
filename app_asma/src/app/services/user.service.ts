@@ -1,4 +1,5 @@
 import { User } from './../models/user.model';
+import { Records } from './../models/records.model';
 import { Register } from './../models/register.model';
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
@@ -12,7 +13,7 @@ import { NavController } from '@ionic/angular';
 })
 export class UserService {
   user: any;
-
+  record:any;
   constructor(private http: HttpClient,
               private env: EnvService,
               private alertService: AlertService,
@@ -46,7 +47,7 @@ export class UserService {
       });
     
   }
-  getUser() {
+  getUser( ) {
     return new Promise ((resolve, reject) =>{
       this.authService.validateToken().then(data => {
         const header = new HttpHeaders({
@@ -58,6 +59,20 @@ export class UserService {
         });
       })
     })      
+  }
+  getRecords(){
+    return new Promise ((resolve, reject) =>{
+      this.authService.validateToken().then(data => {
+        const header = new HttpHeaders({
+          'Authorization': 'Bearer' + " " + this.authService.token["access"]
+        });
+        return this.http.get<Records>(this.env.API_URL + 'milestones/?info', { headers: header }).subscribe(data =>{
+          this.record = data;
+          resolve(this.record);
+        });
+      })
+    })     
+
   }
   /*
   getMilestones(milestones: User) {

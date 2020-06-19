@@ -38,6 +38,7 @@
           
         <ion-slide  *ngFor="let milestone of milestones">
           <div data-swiper-parallax-y="70%">
+            <ion-img src="../../../assets/images/achievements/star_achievement_notyet.png" class= "achievement-img" size="large" *ngIf="milestone.level==0" ></ion-img>
             <ion-img src="../../../assets/images/achievements/star_achievement_bronze.png" class= "achievement-img" size="large" *ngIf="milestone.level==1" ></ion-img>
             <ion-img src="../../../assets/images/achievements/star_achievement_silver.png" class= "achievement-img" size="large" *ngIf="milestone.level==2" ></ion-img>
             <ion-img src="../../../assets/images/achievements/star_achievement.svg" class= "achievement-img" size="large" *ngIf="milestone.level==3" ></ion-img>
@@ -45,7 +46,7 @@
               {{milestone.nome}}
             </ion-text>           
             <br>
-            <ion-button fill="clear" class="get-info-button" (onclick)="openPopup()">
+            <ion-button fill="clear" class="get-info-button" (click)="openPopup(milestone)">
             <ion-text class="achievement-subtitle">
               Detalhes <ion-icon name="chevron-forward" class="get-info-arrow"></ion-icon>
             </ion-text>    
