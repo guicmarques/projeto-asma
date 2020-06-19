@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar (ionInput)="search($event)" class="search-field"></ion-searchbar>
+  <ion-searchbar (ionInput)="search($event)" ></ion-searchbar>
   <ion-list class="FAQ-list" >
     <div *ngFor="let question of questions">
     <ion-item *ngIf="question.show">
