@@ -240,6 +240,10 @@ def getFitbitData(user, dates):
     activities = {}
     # TESTE COM AUTENTICAÇÃO DO MICHELET
     # user = User.objects.get(username='Michelet')
+    # dados do Henrique para user ana banana APENAS TESTE
+    if str(user.username) == "12345678912":
+        user = User.objects.get(username='47277091809')
+    
     if len(dates) == 0:
         dt, activity = getActivities(user, date=None)
         activities[dt] = activity
