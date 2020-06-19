@@ -69,7 +69,7 @@ export class EditarPerfilPage implements OnInit {
       this.userDefined = true;
       console.log(user);
       this.dataSent = this.user;
-      this.nascimento=  user.nascimento.substring(8,10) + ' ' + user.nascimento.substring(5,7) + ' ' + user.nascimento.substring(0,4);
+      this.nascimento=  this.user.nascimento.substring(8,10) + ' ' + this.user.nascimento.substring(5,7) + ' ' + this.user.nascimento.substring(0,4);
 
     });
   }
@@ -160,7 +160,7 @@ export class EditarPerfilPage implements OnInit {
       this.user = user;
       this.user = user;
       this.newData= this.emptyData;
-      this.nascimento=   user.nascimento.substring(8,10) + ' ' + user.nascimento.substring(5,7) + ' ' + user.nascimento.substring(0,4);
+      this.nascimento = this.user.nascimento.substring(8,10) + ' ' + this.user.nascimento.substring(5,7) + ' ' + this.user.nascimento.substring(0,4);
       this.eventService.publish('userUpdated', {
         user: user,
       });

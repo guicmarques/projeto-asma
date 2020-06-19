@@ -8,6 +8,7 @@ ion-content {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    display: inline-flex;
 }
 
 .imagem {
@@ -20,4 +21,13 @@ ion-content {
     position: absolute;
     left: 50%;
     bottom: 30%;
+}
+
+.loading {
+    width: 20%;
+    line-height: 20%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: 20%;
 }
