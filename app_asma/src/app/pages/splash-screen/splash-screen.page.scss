@@ -12,8 +12,8 @@ ion-content {
 }
 
 .imagem {
-    height: 16em;
-    width: 16em;
+    height: 8em;
+    width: 8em;
 }
 
 .spinner {
@@ -29,5 +29,13 @@ ion-content {
     position: absolute;
     left: 50%;
     transform: translate(-50%);
-    bottom: 20%;
+    bottom: 30%;
+}
+
+.name {
+    position: absolute;
+    text-align: center;
+    color: rgb(165, 165, 165);
+    bottom: 7vh;
+    width: 100%;
 }
