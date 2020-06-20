@@ -1022,7 +1022,8 @@ def estats(request):
         fig.add_trace(go.Scatter(
             x=x, y=dadosDailyControlDict[k]['lista_sim'],
             mode='lines',
-            line=dict(width=0.5, color='rgb(247, 247, 212)'),
+            name="Sim",
+            line=dict(width=0.5, color='rgb(241, 111, 108)'),
             stackgroup=dadosDailyControlDict[k]['texto'],
             groupnorm='percent' # sets the normalization for the sum of the stackgroup
         ))
@@ -1030,7 +1031,8 @@ def estats(request):
         fig.add_trace(go.Scatter(
             x=x, y=dadosDailyControlDict[k]['lista_nao'],
             mode='lines',
-            line=dict(width=0.5, color='rgb(184, 247, 212)'),
+            name="Não",
+            line=dict(width=0.5, color='rgb(148, 212, 131)'),
             stackgroup=dadosDailyControlDict[k]['texto'],
             groupnorm='percent' # sets the normalization for the sum of the stackgroup
         ))
