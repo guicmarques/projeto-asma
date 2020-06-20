@@ -740,7 +740,7 @@ def pacienteGraficos2(request,username):
         fig['layout']['sliders'][0]['steps'][i]['label']=dates[i]
 
     fig['layout'].update(
-        height=400
+        height=600
     )
     barreiras = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
