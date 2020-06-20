@@ -24,7 +24,7 @@
                     <li class="nav-item" role="presentation"></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/table.html"><i class="fas fa-table"></i><span>Pacientes</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/blank-1.html"><i class="fas fa-user-plus"></i><span>Cadastrar</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="/estatisticas.html"><i class="fas fa-laptop-medical"></i><span>Estatísticas</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="blank-2.html"><i class="fas fa-laptop-medical"></i><span>Estatísticas</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link"  href="/rest/fitbit/login/" target="_blank"><i class="fas fa-sync"></i><span>Integração Fitbit</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
@@ -64,90 +64,10 @@
                     </li>
                     </ul>
             </div>
-            </nav>
-            <div class="container col-md-12" id="graph">
-                <div class="row">
-                    <div class="col">
-                        <h1 class="text-center text-dark mb-1">{{user_data.nome}} {{user_data.sobrenome}} - {{user_data.token}}</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <p class="text-center">Telefone:  {{user_data.telefone}}</p>
-                    </div>
-                    <div class="col">
-                        <p class="text-center">Altura: {{user_data.altura}}</p>
-                    </div>
-                    <div class="col">
-                        <p class="text-center">Peso: {{user_data.peso}}</p>
-                    </div>
-                </div>
-            </div>
-            
+            </nav>            
             <div class="container col-md-12" id="graph">
                 <div >
-                    <div class="row">
-                        <div class="col-sm">
-                            {% autoescape off %}
-                            {{ fitbit7dias }}
-                            {% endautoescape %}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm">
-                            {% autoescape off %}
-                            {{ figFitBitData }}
-                            {% endautoescape %}
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col">
-                            <h3 class="text-center text-dark mb-1">Questionário diário</h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm">
-                            {% autoescape off %}
-                            {{ fig10 }}
-                            {% endautoescape %}
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col">
-                            <h3 class="text-center text-dark mb-1">Pico de fluxo</h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm">
-                            {% autoescape off %}
-                            {{ figFluxoAr }}
-                            {% endautoescape %}
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col">
-                            <h3 class="text-center text-dark mb-1">Questionário de Controle da Asma (ACQ)</h3>
-                        </div>
-                    </div>
-                    <div class="row" >
-                        <div class="col-sm" >
-                            {% autoescape off %}
-                            {{ figQuestSemanal }}
-                            {% endautoescape %}
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col">
-                            <h3 class="text-center text-dark mb-1">Motivos que dificultam realizar atividade física</h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm">
-                            {% autoescape off %}
-                            {{ barreiras }}
-                            {% endautoescape %}
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

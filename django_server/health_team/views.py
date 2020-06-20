@@ -872,6 +872,10 @@ def pacienteGraficos2(request,username):
             }
         )
 
+def estats(request):
+    return render(request, 'logged/estats.html', {})
+
+
 def tableTest(request):
     return render(request, 'logged/table_test.html', {})
 
