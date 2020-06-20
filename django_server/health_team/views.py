@@ -524,6 +524,7 @@ def pacienteGraficos2(request,username):
             type="date"
         )
     )
+    fig.update_yaxes( range=[150,600] )
     figFluxoAr = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
     #Grafico de questionario semanal
@@ -747,28 +748,28 @@ def pacienteGraficos2(request,username):
     fig.add_trace(go.Indicator(
         mode = "number+delta",
         value = dados7diasSedentaryMinutes,
-        title = {"text": "Média de minutos<br>sedentários<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        title = {"text": "Total de minutos<br>sedentários<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
         domain = {'x': [0, 0.25], 'y': [0, 1]},
         delta = {'reference': dados7PasdiasSedentaryMinutes, 'relative': True}))
 
     fig.add_trace(go.Indicator(
         mode = "number+delta",
         value = dados7diasVeryActiveMinutes,
-        title = {"text": "Média de minutos<br>em atividade<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        title = {"text": "Total de minutos<br>em atividade<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
         delta = {'reference': dados7PasdiasVeryActiveMinutes, 'relative': True},
         domain = {'x': [0.26, 0.5], 'y': [0, 1]}))
 
     fig.add_trace(go.Indicator(
         mode = "number+delta",
         value = dados7diasLightlyActiveMinutes,
-        title = {"text": "Média de minutos<br>em atividade leve<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        title = {"text": "Total de minutos<br>em atividade leve<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
         delta = {'reference': dados7PasdiasLightlyActiveMinutes, 'relative': True},
         domain = {'x': [0.51, 0.75], 'y': [0, 1]}))
 
     fig.add_trace(go.Indicator(
         mode = "number+delta",
         value = dados7diasSteps,
-        title = {"text": "Média de passos<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        title = {"text": "Total de passos<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
         delta = {'reference': dados7PasdiasSteps, 'relative': True},
         domain = {'x': [0.76, 1], 'y': [0, 1]}))
 
