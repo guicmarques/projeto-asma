@@ -1022,7 +1022,7 @@ def estats(request):
             x=x, y=dadosDailyControlDict[k]['lista_sim'],
             mode='lines',
             line=dict(width=0.5, color='rgb(184, 247, 212)'),
-            stackgroup=dadosDailyControlDict[k]['Texto'],
+            stackgroup=dadosDailyControlDict[k]['texto'],
             groupnorm='percent' # sets the normalization for the sum of the stackgroup
         ))
 
@@ -1030,7 +1030,7 @@ def estats(request):
             x=x, y=dadosDailyControlDict[k]['lista_nao'],
             mode='lines',
             line=dict(width=0.5, color='rgb(184, 247, 212)'),
-            stackgroup=dadosDailyControlDict[k]['Texto'],
+            stackgroup=dadosDailyControlDict[k]['texto'],
             groupnorm='percent' # sets the normalization for the sum of the stackgroup
         ))
 
