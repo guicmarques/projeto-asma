@@ -67,7 +67,13 @@
             </nav>            
             <div class="container col-md-12" id="graph">
                 <div >
-                    
+                    <div class="row">
+                        <div class="col-sm">
+                            {% autoescape off %}
+                            {{ fitbit7dias }}
+                            {% endautoescape %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

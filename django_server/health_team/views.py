@@ -872,8 +872,62 @@ def pacienteGraficos2(request,username):
             }
         )
 
+
+#####################################################################################################################
 def estats(request):
-    return render(request, 'logged/estats.html', {})
+    #Numero de respostas
+    try:
+        #Ultimos 7
+        date7dayback = (datetime.datetime.today() - datetime.timedelta(days=7))#.strftime("%Y-%m-%d")
+        dailycontrol = DailyControl.objects.all().filter(date__gte=date7dayback)
+        numQuestDiarioUltimos7dias=len(dailycontrol)
+        #Ultimos 7
+        date8dayback = (datetime.datetime.today() - datetime.timedelta(days=8))#.strftime("%Y-%m-%d")
+        date14dayback = (datetime.datetime.today() - datetime.timedelta(days=14))#.strftime("%Y-%m-%d")
+        dailycontrol = DailyControl.objects.all().filter(date__lte=date8dayback).filter(date__gte=date14dayback)
+        numQuestDiarioPenultimos7dias=len(dailycontrol)
+    except:
+        numQuestDiarioUltimos7dias=0
+        numQuestDiarioPenultimos7dias=0
+
+
+    # 7 days
+    fig = go.Figure()
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = numQuestDiarioUltimos7dias,
+        title = {"text": "Total de minutos<br>sedentários<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        domain = {'x': [0, 0.25], 'y': [0, 1]},
+        delta = {'reference': numQuestDiarioPenultimos7dias, 'relative': True}))
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = 0,
+        title = {"text": "Total de minutos<br>em atividade<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': 0, 'relative': True},
+        domain = {'x': [0.26, 0.5], 'y': [0, 1]}))
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = 0,
+        title = {"text": "Total de minutos<br>em atividade leve<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': 0, 'relative': True},
+        domain = {'x': [0.51, 0.75], 'y': [0, 1]}))
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = 0,
+        title = {"text": "Total de passos<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': 0, 'relative': True},
+        domain = {'x': [0.76, 1], 'y': [0, 1]}))
+
+    fitbit7dias = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
+
+    return render(request, 'logged/estats.html', context={
+        'fitbit7dias':fitbit7dias
+    })
 
 
 def tableTest(request):
