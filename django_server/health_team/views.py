@@ -928,6 +928,55 @@ def estats(request):
         numBarreirasUltimos7dias=0
         numBarreirasPenultimos7dias=0
 
+    # Questionario Diario
+    try:
+        date30dayback = (datetime.datetime.today() - datetime.timedelta(days=30))
+        dailycontrolLista = DailyControl.objects.all().filter(date__gte=date30dayback)
+
+        dadosDailyControlDict = {
+            'data'=[]
+            'tosse'= dict(texto= "Apresentou tosse?", lista_sim=[], lista_nao =[])
+            'chiado'= dict(texto= "Apresentou chiado?", lista_sim=[], lista_nao =[])
+            'ar'= dict(texto= "Teve falta de ar?", lista_sim=[], lista_nao =[])
+            'dormir'= dict(texto= "Teve problemas ao dormir?", lista_sim=[], lista_nao =[])
+            'bombinha'= dict(texto= "Usou a bombinha?", lista_sim=[], lista_nao =[])
+        }
+        for i in range(0,31,1):
+            dadosDailyControlDict['data'].append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
+            dailycontrol = dailycontrolLista.objects.all().filter(date=(datetime.datetime.today() - datetime.timedelta(days=i)))
+
+            lista_tosse = dailycontrol.values_list('tosse', flat=True)
+            dadosDailyControlDict['tosse']['lista_sim'].append(sum(lista_tosse))
+            dadosDailyControlDict['tosse']['lista_nao'].append(len(lista_tosse) - sum(lista_tosse))
+
+            lista_chiado = dailycontrol.values_list('chiado', flat=True)
+            dadosDailyControlDict['chiado']['lista_sim'].append(sum(lista_chiado))
+            dadosDailyControlDict['chiado']['lista_nao'].append(len(lista_chiado) - sum(lista_chiado))
+
+            lista_faltaDeAr = dailycontrol.values_list('faltaDeAr', flat=True)
+            dadosDailyControlDict['ar']['lista_sim'].append(sum(lista_faltaDeAr))
+            dadosDailyControlDict['ar']['lista_nao'].append(len(lista_faltaDeAr) - sum(lista_faltaDeAr))
+
+            lista_acordar = dailycontrol.values_list('acordar', flat=True)
+            dadosDailyControlDict['dormir']['lista_sim'].append(sum(lista_acordar))
+            dadosDailyControlDict['dormir']['lista_nao'].append(len(lista_acordar) - sum(lista_acordar))
+
+            lista_bombinha = dailycontrol.values_list('bombinha', flat=True)
+            dadosDailyControlDict['bombinha']['lista_sim'].append(sum(lista_bombinha))
+            dadosDailyControlDict['bombinha']['lista_nao'].append(len(lista_bombinha) - sum(lista_bombinha))
+
+
+
+    except:
+        dadosDailyControlDict = {
+            'data'=["0000-00-00"]
+            'tosse'= dict(texto= "Apresentou tosse?", lista_sim=[0], lista_nao =[0])
+            'chiado'= dict(texto= "Apresentou chiado?", lista_sim=[0], lista_nao =[0])
+            'ar'= dict(texto= "Teve falta de ar?", lista_sim=[0], lista_nao =[0])
+            'dormir'= dict(texto= "Teve problemas ao dormir?", lista_sim=[0], lista_nao =[0])
+            'bombinha'= dict(texto= "Usou a bombinha?", lista_sim=[0], lista_nao =[0])
+        }
+
     # 7 days
     fig = go.Figure()
 
@@ -965,34 +1014,27 @@ def estats(request):
 
 
     # Graph Stacked
-    x=['Winter', 'Spring', 'Summer', 'Fall']
+    x=dadosDailyControlDict['data']
     fig = go.Figure()
 
-    fig.add_trace(go.Scatter(
-        x=x, y=[40, 20, 30, 40],
-        mode='lines',
-        line=dict(width=0.5, color='rgb(184, 247, 212)'),
-        stackgroup='one',
-        groupnorm='percent' # sets the normalization for the sum of the stackgroup
-    ))
-    fig.add_trace(go.Scatter(
-        x=x, y=[50, 70, 40, 60],
-        mode='lines',
-        line=dict(width=0.5, color='rgb(111, 231, 219)'),
-        stackgroup='one'
-    ))
-    fig.add_trace(go.Scatter(
-        x=x, y=[70, 80, 60, 70],
-        mode='lines',
-        line=dict(width=0.5, color='rgb(127, 166, 238)'),
-        stackgroup='two'
-    ))
-    fig.add_trace(go.Scatter(
-        x=x, y=[100, 100, 100, 100],
-        mode='lines',
-        line=dict(width=0.5, color='rgb(131, 90, 241)'),
-        stackgroup='two'
-    ))
+    for k in dadosDailyControlDict.keys()[1:]:
+        fig.add_trace(go.Scatter(
+            x=x, y=dadosDailyControlDict[k]['lista_sim'],
+            mode='lines',
+            line=dict(width=0.5, color='rgb(184, 247, 212)'),
+            stackgroup=dadosDailyControlDict[k]['Texto'],
+            groupnorm='percent' # sets the normalization for the sum of the stackgroup
+        ))
+
+        fig.add_trace(go.Scatter(
+            x=x, y=dadosDailyControlDict[k]['lista_nao'],
+            mode='lines',
+            line=dict(width=0.5, color='rgb(184, 247, 212)'),
+            stackgroup=dadosDailyControlDict[k]['Texto'],
+            groupnorm='percent' # sets the normalization for the sum of the stackgroup
+        ))
+
+    
 
     fig.update_layout(
         showlegend=True,
@@ -1002,30 +1044,7 @@ def estats(request):
             range=[1, 100],
             ticksuffix='%'))
 
-    fig.update_layout(
-    updatemenus=[
-        dict(
-            type="buttons",
-            direction="right",
-            active=0,
-            x=0.57,
-            y=1.2,
-            buttons=list([
-                dict(label="None",
-                     method="update",
-                     args=[{"visible": [True, False, True, False]}]),
-                dict(label="High",
-                     method="update",
-                     args=[{"visible": [True, True, False, False]}]),
-                dict(label="Low",
-                     method="update",
-                     args=[{"visible": [False, False, True, True]}]),
-                dict(label="Both",
-                     method="update",
-                     args=[{"visible": [True, True, True, True]}]),
-            ]),
-        )
-    ])
+    
     stacked = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
