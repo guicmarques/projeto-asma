@@ -881,6 +881,7 @@ def estats(request):
         date7dayback = (datetime.datetime.today() - datetime.timedelta(days=7))#.strftime("%Y-%m-%d")
         dailycontrol = DailyControl.objects.all().filter(date__gte=date7dayback)
         numQuestDiarioUltimos7dias=len(dailycontrol)
+        print(dailycontrol.values_list('user_id', flat=True).distinct())
         #Ultimos 7
         date8dayback = (datetime.datetime.today() - datetime.timedelta(days=8))#.strftime("%Y-%m-%d")
         date14dayback = (datetime.datetime.today() - datetime.timedelta(days=14))#.strftime("%Y-%m-%d")
@@ -904,7 +905,21 @@ def estats(request):
     except:
         numAsthmaControlUltimos7dias=0
         numAsthmaControlPenultimos7dias=0
-
+    
+    #Numero de respostas - Questionario diário
+    try:
+        #Ultimos 7
+        date7dayback = (datetime.datetime.today() - datetime.timedelta(days=7))#.strftime("%Y-%m-%d")
+        barreirasData = PracticeBarriers.objects.all().filter(date__gte=date7dayback)
+        numBarreirasUltimos7dias=len(barreirasData)
+        #Ultimos 7
+        date8dayback = (datetime.datetime.today() - datetime.timedelta(days=8))#.strftime("%Y-%m-%d")
+        date14dayback = (datetime.datetime.today() - datetime.timedelta(days=14))#.strftime("%Y-%m-%d")
+        barreirasData = PracticeBarriers.objects.all().filter(date__lte=date8dayback).filter(date__gte=date14dayback)
+        numBarreirasPenultimos7dias=len(barreirasData)
+    except:
+        numBarreirasUltimos7dias=0
+        numBarreirasPenultimos7dias=0
 
     # 7 days
     fig = go.Figure()
@@ -925,9 +940,9 @@ def estats(request):
 
     fig.add_trace(go.Indicator(
         mode = "number+delta",
-        value = 0,
-        title = {"text": "Total de minutos<br>em atividade leve<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
-        delta = {'reference': 0, 'relative': True},
+        value = numBarreirasUltimos7dias,
+        title = {"text": "Respostas<br>Questionário de barreiras<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': numBarreirasPenultimos7dias, 'relative': True},
         domain = {'x': [0.51, 0.75], 'y': [0, 1]}))
 
     fig.add_trace(go.Indicator(
