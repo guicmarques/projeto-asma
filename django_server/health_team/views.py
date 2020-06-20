@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 import datetime
 import time
+import traceback
 
 from server.handleUserData import getFitbitData
 
@@ -394,7 +395,8 @@ def pacienteGraficos2(request,username):
             listaVeryActiveMinutes.append(dados60dias[day]["summary"]["veryActiveMinutes"])
             listaDiaFitbit.append(day)
     
-    except:
+    except Exception:
+        traceback.print_exc()
         dados7diasSteps = 0
         dados7diasSedentaryMinutes = 0
         dados7diasLightlyActiveMinutes = 0
