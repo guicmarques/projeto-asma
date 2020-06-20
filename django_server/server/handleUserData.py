@@ -517,10 +517,10 @@ def getConsecStepsDays(user):
         dateRange = [date.strftime("%Y-%m-%d") for date in dateRange]
 
         fitbitData = getFitbitData(user, dateRange)
-        steps = {date: fitbitData[date]["summary"]["steps"]
+        steps = {date: int(fitbitData[date]["summary"]["steps"])
                  for date in fitbitData}
 
-        completeDays = [date for date in steps if steps[date] > noSteps]
+        completeDays = [date for date in steps if steps[date] > int(noSteps)]
         consecDays = consecutiveDates(completeDays)
 
         if consecDays > maxDays:
