@@ -960,6 +960,8 @@ def estats(request):
         domain = {'x': [0.76, 1], 'y': [0, 1]}))
 
     fitbit7dias = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+    print(list(set(usuariosAtivosUltimos7Dias)))
+    print(list(set(usuariosAtivosPenultimos7Dias)))
 
 
     return render(request, 'logged/estats.html', context={
