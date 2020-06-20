@@ -1017,7 +1017,7 @@ def estats(request):
     x=listaDatasDailyControl
     fig = go.Figure()
 
-    for k in dadosDailyControlDict.keys()[1:]:
+    for k in list(dadosDailyControlDict.keys()):
         fig.add_trace(go.Scatter(
             x=x, y=dadosDailyControlDict[k]['lista_sim'],
             mode='lines',
