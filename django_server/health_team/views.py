@@ -955,7 +955,7 @@ def estats(request):
     fig.add_trace(go.Indicator(
         mode = "number+delta",
         value = len(list(set(usuariosAtivosUltimos7Dias))),
-        title = {"text": "Usuários<br>que responderam<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        title = {"text": "Usuários ativos<br>Questionários<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
         delta = {'reference': len(list(set(usuariosAtivosPenultimos7Dias))), 'relative': True},
         domain = {'x': [0.76, 1], 'y': [0, 1]}))
 
@@ -964,8 +964,49 @@ def estats(request):
     print(list(set(usuariosAtivosPenultimos7Dias)))
 
 
+    # Graph Stacked
+    x=['Winter', 'Spring', 'Summer', 'Fall']
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(
+        x=x, y=[40, 20, 30, 40],
+        mode='lines',
+        line=dict(width=0.5, color='rgb(184, 247, 212)'),
+        stackgroup='one',
+        groupnorm='percent' # sets the normalization for the sum of the stackgroup
+    ))
+    fig.add_trace(go.Scatter(
+        x=x, y=[50, 70, 40, 60],
+        mode='lines',
+        line=dict(width=0.5, color='rgb(111, 231, 219)'),
+        stackgroup='one'
+    ))
+    fig.add_trace(go.Scatter(
+        x=x, y=[70, 80, 60, 70],
+        mode='lines',
+        line=dict(width=0.5, color='rgb(127, 166, 238)'),
+        stackgroup='one'
+    ))
+    fig.add_trace(go.Scatter(
+        x=x, y=[100, 100, 100, 100],
+        mode='lines',
+        line=dict(width=0.5, color='rgb(131, 90, 241)'),
+        stackgroup='one'
+    ))
+
+    fig.update_layout(
+        showlegend=True,
+        xaxis_type='category',
+        yaxis=dict(
+            type='linear',
+            range=[1, 100],
+            ticksuffix='%'))
+    stacked = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
+
     return render(request, 'logged/estats.html', context={
-        'fitbit7dias':fitbit7dias
+        'fitbit7dias':fitbit7dias,
+        'stacked' : stacked
     })
 
 
