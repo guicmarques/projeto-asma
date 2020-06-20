@@ -1074,6 +1074,12 @@ def estats(request):
                 buttons=lista_valores,
             )
         ])
+
+    # Set title
+    fig.update_layout(
+        title_text="Apresentou tosse?",
+        xaxis_domain=[0.05, 1.0]
+    )
     
     stacked = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
