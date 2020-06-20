@@ -20,8 +20,7 @@
     width: 61px;
     border-radius: 0 100% 0 0;
     background-color: #2dd2c2;
-    position: absolute;
-    bottom: 0;
+    margin-top: 20px;
 }
 
 .back-btn-container {
@@ -168,9 +167,8 @@ ion-checkbox {
 .submit-text {
     font-size: 20px;
     font-weight: 500;
-    position: absolute;
-    bottom: 25px;
-    right: 75px;
+    margin-right: 70px;
+    align-self: center;
 }
 
 .submit-btn {
@@ -181,4 +179,7 @@ ion-checkbox {
 
 .register-footer {
     min-height: 80px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
 }
