@@ -25,13 +25,15 @@ export class DiarioPage implements OnInit {
   pageView: string[];
   diaryPage: Diary = {
     note: '',
-    pico: [375, 0, 0],
+    pico: [null, 0, 0],
     tosse: '',
     chiado: '',
     faltaAr: '',
     acordar: '',
     bombinha: ''
   }
+  peakEnable: boolean = false;
+  peakVal: number = 375;
 
   description = {
     note: 'É importante detalhar o máximo possível os seus sintomas para que seu médico possa lhe dar um tratamento mais personalizado.',
@@ -73,13 +75,20 @@ export class DiarioPage implements OnInit {
   ngOnInit() {
     [this.dayName, this.day, this.month, this.year] = this.dateService.getDate()
     this.week = this.dateService.getWeek();
-    this.getDiaryPage([this.day, this.dateService.getMonthNumber(this.month), this.year, 'selected'])
+    this.getDiaryPage([this.day, this.dateService.getMonthNumber(this.month), this.year, 'selected']);
 
     this.displayACQ();
     this.displayBarriers();
 
+    setTimeout(() => { this.sendReminder(); }, 2000);
+
     //console.log('Teste: ' + this.dateService.getLastDays(3));
     //console.log(this.week)
+  }
+
+  ionViewDidEnter(){
+    this.getDiaryPage([this.day, this.dateService.getMonthNumber(this.month), this.year, 'selected']);
+    this.sendReminder();
   }
 
   getDiaryPage(date: string[]) {
@@ -100,6 +109,14 @@ export class DiarioPage implements OnInit {
           acordar: '',
           bombinha: ''
         };
+
+        if (date[0] === this.day) {
+          this.peakVal = 375;
+        } else {
+          this.peakVal = null;
+        }
+        this.peakEnable = false;
+
       } else {
 
         if (data[fullDate].pico[0] === "-1") {
@@ -119,6 +136,14 @@ export class DiarioPage implements OnInit {
           acordar: data[fullDate].acordar.toString(),
           bombinha: data[fullDate].bombinha.toString()
         };
+
+        if (data[fullDate].pico[0] == null) {
+          this.peakVal = 375;
+          this.peakEnable = false;
+        } else {
+          this.peakVal = data[fullDate].pico[0];
+          this.peakEnable = true;
+        }
       }
 
       this.week.forEach(element => { 
@@ -137,9 +162,15 @@ export class DiarioPage implements OnInit {
 
   setDiaryPage() {
     console.log(this.diaryPage);
-    if (this.diaryPage.pico[0] === null) {
+
+    if ((+this.peakEnable && this.peakVal) == 0) {
       this.diaryPage.pico[0] = -1;
+    } else {
+      this.diaryPage.pico[0] = this.peakVal;
     }
+
+    console.log("Pico:", this.diaryPage.pico);
+
     this.diaryService.setDiaryPage(this.diaryPage).then(data => {
       console.log(data)
       this.animationService.clickAnimation(this.saveIcon, this.loadingBack, this.checkIcon);
@@ -191,6 +222,15 @@ export class DiarioPage implements OnInit {
       return;
     });
 
+  }
+
+  sendReminder() {
+    console.log('lembrete', this.showACQ, this.showBarriers)
+    if(this.showACQ || this.showBarriers) {
+      this.alertService.presentPopUp('', `<img src="../../../assets/images/bell_notification.gif">
+      <h2>Atenção!</h2>
+      <div>Você possui questionários pendentes!</div>`);
+    }
   }
 
 }

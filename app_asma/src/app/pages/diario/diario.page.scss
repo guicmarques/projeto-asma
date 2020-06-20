@@ -130,7 +130,8 @@ button {
 
 .gif {
     width: 10vw;
-    align-self: flex-end;
+    position: absolute;
+    bottom: 3vw;
 }
 
 .sympCard {
@@ -166,9 +167,10 @@ button {
 }
 
 .peakSlide {
-    //--bar-height: 1vh;
     --knob-size: 4vh;
-    //--knob-background: white;
+    --bar-background-active: rgb(102, 201, 255);
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .peakRange {
@@ -183,11 +185,17 @@ button {
 .peakValue {
     font-size: 26px;
     --padding-start: 23vw;
+    --padding-top: 0;
+    --padding-bottom: 0;
 }
 
 .peakUnit {
-    margin-right: 23vw;
-    margin-left: 3vw;
+    margin: 0 23vw 0 3vw;
+}
+
+.peakCheck {
+    --background-checked: rgb(102, 201, 255);
+    --border-color-checked: rgb(102, 201, 255);
 }
 
 /*
@@ -214,8 +222,21 @@ ion-fab-button {
     height: 50px;
 }
 
-ion-range .range-slider .range-knob-handle .range-pin {
-    top: 40px;    // <--- Change this to manually position the pin
-    font-size: 14px;    // You can also change other properties
-    color: orange;
+.saveIcon {
+    z-index: 10; 
+    width: 24px;
+}
+
+.rect {
+    width: 50px; 
+    height: 50px; 
+    background-color: #FFB000; 
+    position: absolute; 
+    left: -50px;
+}
+
+.checkIcon {
+    position: absolute; 
+    top: 50px; 
+    width: 24px;
 }

@@ -19,14 +19,14 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="showACQ">
+  <div *ngIf="showACQ && pageView[0].padStart(2, '0') == this.day">
     <ion-card class="QACard questionnaire" routerLink="./questionario">
       <ion-card-header class="QAHeader">
+        <img src="../../../assets/images/bell_ACQ.gif" class="gif">
         <ion-grid>
           <ion-row class="QAContainer">
               <ion-col>
                 <ion-card-title class="QATitle">Questionário de Controle da Asma (ACQ)</ion-card-title>
-                <img src="../../../assets/images/bell_ACQ.gif" class="gif">
               </ion-col>
 
               <ion-col class="questionnaireImg">
@@ -39,14 +39,14 @@
     </ion-card>
   </div>
 
-  <div *ngIf="showBarriers">
+  <div *ngIf="showBarriers && pageView[0].padStart(2, '0') == this.day">
     <ion-card class="QACard barrier" routerLink="./barreiras">
       <ion-card-header class="QAHeader barrierCard">
+        <img src="../../../assets/images/bell_barriers.gif" class="gif">
         <ion-grid>
           <ion-row class="QAContainer">
               <ion-col>
                 <ion-card-title class="QATitle">Questionário de Barreiras</ion-card-title>
-                <img src="../../../assets/images/bell_barriers.gif" class="gif">
               </ion-col>
 
               <ion-col>
@@ -275,14 +275,15 @@
       <ion-card-content>
         <ion-list>
           <ion-item lines="none">
-            <ion-input type="number" min="150" max="600" [(ngModel)]="diaryPage.pico[0]"
+            <ion-input type="number" min="150" max="600" [(ngModel)]="peakVal"
+            [disabled]="!peakEnable || pageView[0].padStart(2, '0') !== this.day ? true : false"
             class="peakValue"></ion-input>
             <ion-label class="peakUnit">L/min</ion-label>
           </ion-item>
 
           <ion-item lines="none">
-            <ion-range min="150" max="600" color="secondary" pin="true" class="peakSlide" 
-            [(ngModel)]="diaryPage.pico[0]">
+            <ion-range min="150" max="600" class="peakSlide" [(ngModel)]="peakVal" 
+            [disabled]="!peakEnable || pageView[0].padStart(2, '0') !== this.day ? true : false">
               <ion-label slot="start" class="peakRange">150</ion-label>
               <ion-label slot="end" class="peakRange">600</ion-label>
             </ion-range>
@@ -290,6 +291,11 @@
             <ion-textarea inputmode="text" maxlength="6" cols="4" rows="1" class="peakValue" 
             [(ngModel)]="diaryPage.pico[0]" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-textarea>
             <div class="peakUnit">L/min</div>-->
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>Realizei a medição hoje</ion-label>    
+            <ion-checkbox slot="start" mode="ios" [(ngModel)]="peakEnable" class="peakCheck"
+            [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-checkbox>
           </ion-item>
           
         </ion-list>
@@ -326,12 +332,9 @@
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="setDiaryPage()" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false">
-      <img src="../../../../assets/images/save_icon.png" #saveIcon style="z-index: 10; width: 24px;">
-      <div class="rect" style="width: 50px; height: 50px; background-color: #FFB000; position: absolute; left: -50px;" #loadingBack></div>
-      <img src="../../../../assets/images/tick_icon.png" #checkIcon style="position: absolute; top: 50px; width: 24px;"> 
-      <!-- <ion-icon name="save-outline"></ion-icon> -->
+      <img src="../../../../assets/images/save_icon.png" #saveIcon class="saveIcon">
+      <div class="rect" #loadingBack></div>
+      <img src="../../../../assets/images/tick_icon.png" #checkIcon class="checkIcon"> 
     </ion-fab-button>
   </ion-fab>
-
-  <!-- <app-save-button style="position: fixed; bottom: 0px; left: 100px; z-index: 5;" ></app-save-button> -->
 </ion-content>
