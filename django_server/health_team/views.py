@@ -875,7 +875,7 @@ def pacienteGraficos2(request,username):
 
 #####################################################################################################################
 def estats(request):
-    #Numero de respostas
+    #Numero de respostas - Questionario diário
     try:
         #Ultimos 7
         date7dayback = (datetime.datetime.today() - datetime.timedelta(days=7))#.strftime("%Y-%m-%d")
@@ -889,6 +889,21 @@ def estats(request):
     except:
         numQuestDiarioUltimos7dias=0
         numQuestDiarioPenultimos7dias=0
+    
+    #Numero de respostas - Questionario diário
+    try:
+        #Ultimos 7
+        date7dayback = (datetime.datetime.today() - datetime.timedelta(days=7))#.strftime("%Y-%m-%d")
+        asthmaControlData = AsthmaControlQuestionnaire.objects.all().filter(date__gte=date7dayback)
+        numAsthmaControlUltimos7dias=len(asthmaControlData)
+        #Ultimos 7
+        date8dayback = (datetime.datetime.today() - datetime.timedelta(days=8))#.strftime("%Y-%m-%d")
+        date14dayback = (datetime.datetime.today() - datetime.timedelta(days=14))#.strftime("%Y-%m-%d")
+        asthmaControlData = AsthmaControlQuestionnaire.objects.all().filter(date__lte=date8dayback).filter(date__gte=date14dayback)
+        numAsthmaControlPenultimos7dias=len(asthmaControlData)
+    except:
+        numAsthmaControlUltimos7dias=0
+        numAsthmaControlPenultimos7dias=0
 
 
     # 7 days
@@ -897,15 +912,15 @@ def estats(request):
     fig.add_trace(go.Indicator(
         mode = "number+delta",
         value = numQuestDiarioUltimos7dias,
-        title = {"text": "Total de minutos<br>sedentários<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        title = {"text": "Respostas<br>Questionário diário<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
         domain = {'x': [0, 0.25], 'y': [0, 1]},
         delta = {'reference': numQuestDiarioPenultimos7dias, 'relative': True}))
 
     fig.add_trace(go.Indicator(
         mode = "number+delta",
-        value = 0,
-        title = {"text": "Total de minutos<br>em atividade<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
-        delta = {'reference': 0, 'relative': True},
+        value = numAsthmaControlUltimos7dias,
+        title = {"text": "Respostas<br>Controle de Asma<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': numAsthmaControlPenultimos7dias, 'relative': True},
         domain = {'x': [0.26, 0.5], 'y': [0, 1]}))
 
     fig.add_trace(go.Indicator(
