@@ -876,17 +876,20 @@ def pacienteGraficos2(request,username):
 #####################################################################################################################
 def estats(request):
     #Numero de respostas - Questionario diário
+    usuariosAtivosUltimos7Dias = []
+    usuariosAtivosPenultimos7Dias = []
     try:
         #Ultimos 7
         date7dayback = (datetime.datetime.today() - datetime.timedelta(days=7))#.strftime("%Y-%m-%d")
         dailycontrol = DailyControl.objects.all().filter(date__gte=date7dayback)
         numQuestDiarioUltimos7dias=len(dailycontrol)
-        print(dailycontrol.values_list('user_id', flat=True).distinct())
+        usuariosAtivosUltimos7Dias.extend(dailycontrol.values_list('user_id', flat=True))
         #Ultimos 7
         date8dayback = (datetime.datetime.today() - datetime.timedelta(days=8))#.strftime("%Y-%m-%d")
         date14dayback = (datetime.datetime.today() - datetime.timedelta(days=14))#.strftime("%Y-%m-%d")
         dailycontrol = DailyControl.objects.all().filter(date__lte=date8dayback).filter(date__gte=date14dayback)
         numQuestDiarioPenultimos7dias=len(dailycontrol)
+        usuariosAtivosPenultimos7Dias.extend(dailycontrol.values_list('user_id', flat=True))
     except:
         numQuestDiarioUltimos7dias=0
         numQuestDiarioPenultimos7dias=0
@@ -897,11 +900,13 @@ def estats(request):
         date7dayback = (datetime.datetime.today() - datetime.timedelta(days=7))#.strftime("%Y-%m-%d")
         asthmaControlData = AsthmaControlQuestionnaire.objects.all().filter(date__gte=date7dayback)
         numAsthmaControlUltimos7dias=len(asthmaControlData)
+        usuariosAtivosUltimos7Dias.extend(dailycontrol.values_list('user_id', flat=True))
         #Ultimos 7
         date8dayback = (datetime.datetime.today() - datetime.timedelta(days=8))#.strftime("%Y-%m-%d")
         date14dayback = (datetime.datetime.today() - datetime.timedelta(days=14))#.strftime("%Y-%m-%d")
         asthmaControlData = AsthmaControlQuestionnaire.objects.all().filter(date__lte=date8dayback).filter(date__gte=date14dayback)
         numAsthmaControlPenultimos7dias=len(asthmaControlData)
+        usuariosAtivosPenultimos7Dias.extend(dailycontrol.values_list('user_id', flat=True))
     except:
         numAsthmaControlUltimos7dias=0
         numAsthmaControlPenultimos7dias=0
@@ -912,11 +917,13 @@ def estats(request):
         date7dayback = (datetime.datetime.today() - datetime.timedelta(days=7))#.strftime("%Y-%m-%d")
         barreirasData = PracticeBarriers.objects.all().filter(date__gte=date7dayback)
         numBarreirasUltimos7dias=len(barreirasData)
+        usuariosAtivosUltimos7Dias.extend(dailycontrol.values_list('user_id', flat=True))
         #Ultimos 7
         date8dayback = (datetime.datetime.today() - datetime.timedelta(days=8))#.strftime("%Y-%m-%d")
         date14dayback = (datetime.datetime.today() - datetime.timedelta(days=14))#.strftime("%Y-%m-%d")
         barreirasData = PracticeBarriers.objects.all().filter(date__lte=date8dayback).filter(date__gte=date14dayback)
         numBarreirasPenultimos7dias=len(barreirasData)
+        usuariosAtivosPenultimos7Dias.extend(dailycontrol.values_list('user_id', flat=True))
     except:
         numBarreirasUltimos7dias=0
         numBarreirasPenultimos7dias=0
@@ -947,9 +954,9 @@ def estats(request):
 
     fig.add_trace(go.Indicator(
         mode = "number+delta",
-        value = 0,
-        title = {"text": "Total de passos<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
-        delta = {'reference': 0, 'relative': True},
+        value = len(usuariosAtivosUltimos7Dias.distinct()),
+        title = {"text": "Usuários<br>que responderam<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': len(usuariosAtivosPenultimos7Dias.distinct()), 'relative': True},
         domain = {'x': [0.76, 1], 'y': [0, 1]}))
 
     fitbit7dias = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
