@@ -242,7 +242,7 @@ def fitbitCache(user):
     if os.path.exists(directory):
         filePath = os.path.join(directory, user.username+".json")
         if os.path.isfile(filePath):
-            with open(filePath, encoding="ISO-8859-1") as json_file:
+            with open(filePath) as json_file:
                 cache = json.load(json_file)
         else:
             cache = {}
@@ -442,7 +442,7 @@ def getDaily(user):
 
 
 def getExercises(exercise_id=None):
-    with open('media/exercicios.json', encoding="ISO-8859-1") as json_file:
+    with open('media/exercicios.json') as json_file:
         data = json.load(json_file)
 
     if exercise_id is not None:
@@ -602,7 +602,7 @@ def getBarriersDates(user):
 
 
 def getFaq(faq_id=None):
-    with open('media/faq.json', encoding="ISO-8859-1") as json_file:
+    with open('media/faq.json') as json_file:
         data = json.load(json_file)
 
     if faq_id is not None:
