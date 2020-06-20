@@ -941,7 +941,7 @@ def estats(request):
             'bombinha': dict(texto= "Usou a bombinha?", lista_sim=[], lista_nao =[])
         }
         for i in range(0,31,1):
-            listaDatasDailyControl.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
+            listaDatasDailyControl.append((datetime.datetime.today() - 30 + datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
             dailycontrol = dailycontrolLista.filter(date=(datetime.datetime.today() - datetime.timedelta(days=i)))
 
             lista_tosse = dailycontrol.values_list('tosse', flat=True)
