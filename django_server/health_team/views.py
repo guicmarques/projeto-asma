@@ -1063,6 +1063,7 @@ def estats(request):
 
 
     except Exception:
+        print("Algo")
         traceback.print_exc()
         listaBarreiraNames = ["Não tenho interesse","Falta de tempo","Não tenho energia<br>ou disposição","Tenho medo de sentir<br>falta de ar","Não tenho companhia<br>ou incentivo","Não tenho dinheiro","Tenho muitas coisas<br>para fazer","Não tenho um<br>local seguro","Por causa do clima","Não tenho equipamentos"]
         lista_nunca=[0 for x in listaBarreiraNames]
