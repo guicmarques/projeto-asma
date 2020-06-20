@@ -1,4 +1,49 @@
 .register-header {  
+    min-height: 30vh;
+    text-align: center;
+    display: flex;
+    
+}
+
+.upper-elipse {
+    width: 60vw;
+    height: 30vh;
+    border-radius: 0px 0px 0px 100%;
+    background-color: #2dd2c2;
+    position: absolute;
+    top: 0;
+    right: 0vw;
+}
+
+.bottom-circle {
+    height: 10vh;
+    width: 17vw;
+    border-radius: 0 100% 0 0;
+    background-color: #2dd2c2;
+    position: absolute;
+    bottom: 0;
+}
+
+.back-btn-container {
+    align-self: flex-start;
+    position: absolute;
+}
+
+.back-btn {
+    --color: black;
+    --ripple-color: white;
+    margin-top: 2vh;
+    margin-left: 1vh;
+}
+
+h1 {
+    font-size: 32px;
+    position: relative;
+    margin-top: 10vh;
+}
+
+/*
+.register-header {  
     height: 25%;
     width: 100%;
     text-align: center;
@@ -37,15 +82,16 @@ h1 {
     top: 50%;
 }
 
+*/
+
 ion-content {
     --overflow: hidden;
 }
 
 .register-forms {
-    max-height: 75%;
+    height: 58vh;
     display: flex;
     flex-direction: column;
-    margin-top: 10%;
     color:black;
     overflow-y: auto;
 }
