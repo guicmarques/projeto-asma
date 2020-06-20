@@ -942,7 +942,7 @@ def estats(request):
         }
         for i in range(0,31,1):
             listaDatasDailyControl.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
-            dailycontrol = dailycontrolLista.objects.all().filter(date=(datetime.datetime.today() - datetime.timedelta(days=i)))
+            dailycontrol = dailycontrolLista.filter(date=(datetime.datetime.today() - datetime.timedelta(days=i)))
 
             lista_tosse = dailycontrol.values_list('tosse', flat=True)
             dadosDailyControlDict['tosse']['lista_sim'].append(sum(lista_tosse))
