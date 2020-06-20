@@ -1185,40 +1185,40 @@ def estats(request):
     fig.add_trace(go.Scatter(
         x=listaBarreiraNames, y=lista_nunca,
         mode='lines',
-        name="Sim",
-        line=dict(width=0.5, color='rgb(241, 111, 108)'),
+        name="Nunca",
+        line=dict(width=0.5, color='rgb(86, 217, 86)'),
         stackgroup="A",
         groupnorm='percent' # sets the normalization for the sum of the stackgroup
     ))
     fig.add_trace(go.Scatter(
         x=listaBarreiraNames, y=lista_raramente,
         mode='lines',
-        name="Sim",
-        line=dict(width=0.5, color='rgb(241, 111, 108)'),
+        name="Raramente",
+        line=dict(width=0.5, color='rgb(166, 217, 24)'),
         stackgroup="A",
         groupnorm='percent' # sets the normalization for the sum of the stackgroup
     ))
     fig.add_trace(go.Scatter(
         x=listaBarreiraNames, y=lista_vezes,
         mode='lines',
-        name="Sim",
-        line=dict(width=0.5, color='rgb(241, 111, 108)'),
+        name="Às vezes",
+        line=dict(width=0.5, color='rgb(217, 217, 24)'),
         stackgroup="A",
         groupnorm='percent' # sets the normalization for the sum of the stackgroup
     ))
     fig.add_trace(go.Scatter(
         x=listaBarreiraNames, y=lista_quase,
         mode='lines',
-        name="Sim",
-        line=dict(width=0.5, color='rgb(241, 111, 108)'),
+        name="Quase sempre",
+        line=dict(width=0.5, color='rgb(209, 80, 61)'),
         stackgroup="A",
         groupnorm='percent' # sets the normalization for the sum of the stackgroup
     ))
     fig.add_trace(go.Scatter(
         x=listaBarreiraNames, y=lista_sempre,
         mode='lines',
-        name="Sim",
-        line=dict(width=0.5, color='rgb(241, 111, 108)'),
+        name="Sempre",
+        line=dict(width=0.5, color='rgb(245, 67, 31)'),
         stackgroup="A",
         groupnorm='percent' # sets the normalization for the sum of the stackgroup
     ))
