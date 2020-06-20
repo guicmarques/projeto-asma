@@ -66,6 +66,16 @@ button {
     color: rgb(70, 228, 220);
 }
 
+.yesChecked {
+    --background: #cbf1ff;
+    border-radius: 15px;
+}
+
+.noChecked {
+    --background: #ffe59f;
+    border-radius: 15px;
+}
+
 .noIcon {
     color: orange;
 }

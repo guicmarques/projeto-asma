@@ -80,13 +80,13 @@
       <ion-card-content>
         <ion-list>
           <ion-radio-group [(ngModel)]="diaryPage.tosse">
-            <ion-item lines="none">
+            <ion-item [ngClass]="{'yesChecked' : diaryPage.tosse === 'true'}" lines="none">
               <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
               <ion-label>Sim</ion-label>
               <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
     
-            <ion-item lines="none">
+            <ion-item [ngClass]="{'noChecked' : diaryPage.tosse === 'false'}" lines="none">
               <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
               <ion-label>Não</ion-label>
               <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
@@ -119,13 +119,13 @@
       <ion-card-content>
         <ion-list>
           <ion-radio-group [(ngModel)]="diaryPage.chiado">
-            <ion-item lines="none">
+            <ion-item [ngClass]="{'yesChecked' : diaryPage.chiado === 'true'}" lines="none">
               <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
               <ion-label>Sim</ion-label>
               <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
 
-            <ion-item lines="none">
+            <ion-item [ngClass]="{'noChecked' : diaryPage.chiado === 'false'}" lines="none">
               <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
               <ion-label>Não</ion-label>
               <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
@@ -158,13 +158,13 @@
       <ion-card-content>
         <ion-list>
           <ion-radio-group [(ngModel)]="diaryPage.faltaAr">
-            <ion-item lines="none">
+            <ion-item [ngClass]="{'yesChecked' : diaryPage.faltaAr === 'true'}" lines="none">
               <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
               <ion-label>Sim</ion-label>
               <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
     
-            <ion-item lines="none">
+            <ion-item [ngClass]="{'noChecked' : diaryPage.faltaAr === 'false'}" lines="none">
               <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
               <ion-label>Não</ion-label>
               <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
@@ -197,13 +197,13 @@
       <ion-card-content>
         <ion-list>
           <ion-radio-group [(ngModel)]="diaryPage.acordar"> 
-            <ion-item lines="none">
+            <ion-item [ngClass]="{'yesChecked' : diaryPage.acordar === 'true'}" lines="none">
               <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
               <ion-label>Sim</ion-label>
               <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
 
-            <ion-item lines="none">
+            <ion-item [ngClass]="{'noChecked' : diaryPage.acordar === 'false'}" lines="none">
               <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
               <ion-label>Não</ion-label>
               <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
@@ -236,13 +236,13 @@
       <ion-card-content>
         <ion-list>
           <ion-radio-group [(ngModel)]="diaryPage.bombinha">
-            <ion-item lines="none">
+            <ion-item [ngClass]="{'yesChecked' : diaryPage.bombinha === 'true'}" lines="none">
               <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
               <ion-label>Sim</ion-label>
               <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
             </ion-item>
     
-            <ion-item lines="none">
+            <ion-item [ngClass]="{'noChecked' : diaryPage.bombinha === 'false'}" lines="none">
               <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
               <ion-label>Não</ion-label>
               <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
@@ -277,7 +277,7 @@
           <ion-item lines="none">
             <ion-input type="number" min="150" max="600" [(ngModel)]="peakVal"
             [disabled]="!peakEnable || pageView[0].padStart(2, '0') !== this.day ? true : false"
-            class="peakValue"></ion-input>
+            class="peakValue" (ionBlur)="checkPeakValue()"></ion-input>
             <ion-label class="peakUnit">L/min</ion-label>
           </ion-item>
 

@@ -233,4 +233,11 @@ export class DiarioPage implements OnInit {
     }
   }
 
+  checkPeakValue() {
+    if (this.peakVal < 150) {
+      this.peakVal = 150;
+    } else if (this.peakVal > 600) {
+      this.peakVal = 600;
+    }
+  }
 }
