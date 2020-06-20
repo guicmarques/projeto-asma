@@ -981,40 +981,95 @@ def estats(request):
     try:
         date30dayback = (datetime.datetime.today() - datetime.timedelta(days=30))
         barreiras_list = PracticeBarriers.objects.all().filter(date__gte=date30dayback)
-        listaDatasBarreira = []
-        dadosBarreira = {
-            'interesse': dict(texto= "Não tenho interesse", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
-            'tempo': dict(texto= "Falta de tempo", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
-            'energia': dict(texto= "Não tenho energia<br>ou disposição", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
-            'faltaAr': dict(texto= "Tenho medo de sentir<br>falta de ar", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
-            'companhia': dict(texto= "Não tenho companhia<br>ou incentivo", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
-            'dinheiro': dict(texto= "Não tenho dinheiro", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
-            'coisas': dict(texto= "Tenho muitas coisas<br>para fazer", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
-            'seguranca': dict(texto= "Não tenho um<br>local seguro", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
-            'clima': dict(texto= "Por causa do clima", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
-            'equipamentos': dict(texto= "Não tenho equipamentos", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[])
-        }
-        for i in range(0,31,1):
-            barreiralistaDatasBarreiras_list.append((datetime.datetime.today() - datetime.timedelta(days=30) + datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
-            dailybarreira = barreiras_list.filter(date=(datetime.datetime.today() - datetime.timedelta(days=30) + datetime.timedelta(days=i)))
+        listaBarreiraNames = ["Não tenho interesse","Falta de tempo","Não tenho energia<br>ou disposição","Tenho medo de sentir<br>falta de ar","Não tenho companhia<br>ou incentivo","Não tenho dinheiro","Tenho muitas coisas<br>para fazer","Não tenho um<br>local seguro","Por causa do clima","Não tenho equipamentos"]
+        lista_nunca=[]
+        lista_raramente =[]
+        lista_vezes =[]
+        lista_quase =[]
+        lista_sempre =[]
+        
+        barreiraValor = barreiras_list.order_by('user_id', 'date').distinct('user_id')
 
-            lista_tosse = dailybarreira.values_list('tosse', flat=True)
-            dadosBarreira['tosse']['lista_sim'].append(len([f(x) if condition else g(x) for x in sequence]))
-            dadosBarreira['tosse']['lista_nao'].append(len(lista_tosse) - sum(lista_tosse))
+        lista_simples = barreiraValor.values_list('interesse', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x==0]))
+        lista_raramente.append(len([1 for x in lista_simples if x==1]))
+        lista_vezes.append(len([1 for x in lista_simples if x==2]))
+        lista_quase.append(len([1 for x in lista_simples if x==3]))
+        lista_sempre.append(len([1 for x in lista_simples if x==4]))
 
+        lista_simples = barreiraValor.values_list('tempo', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x==0]))
+        lista_raramente.append(len([1 for x in lista_simples if x==1]))
+        lista_vezes.append(len([1 for x in lista_simples if x==2]))
+        lista_quase.append(len([1 for x in lista_simples if x==3]))
+        lista_sempre.append(len([1 for x in lista_simples if x==4]))
+
+        lista_simples = barreiraValor.values_list('energia', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x==0]))
+        lista_raramente.append(len([1 for x in lista_simples if x==1]))
+        lista_vezes.append(len([1 for x in lista_simples if x==2]))
+        lista_quase.append(len([1 for x in lista_simples if x==3]))
+        lista_sempre.append(len([1 for x in lista_simples if x==4]))
+
+        lista_simples = barreiraValor.values_list('faltaAr', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x==0]))
+        lista_raramente.append(len([1 for x in lista_simples if x==1]))
+        lista_vezes.append(len([1 for x in lista_simples if x==2]))
+        lista_quase.append(len([1 for x in lista_simples if x==3]))
+        lista_sempre.append(len([1 for x in lista_simples if x==4]))
+
+        lista_simples = barreiraValor.values_list('companhia', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x==0]))
+        lista_raramente.append(len([1 for x in lista_simples if x==1]))
+        lista_vezes.append(len([1 for x in lista_simples if x==2]))
+        lista_quase.append(len([1 for x in lista_simples if x==3]))
+        lista_sempre.append(len([1 for x in lista_simples if x==4]))
+
+        lista_simples = barreiraValor.values_list('dinheiro', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x==0]))
+        lista_raramente.append(len([1 for x in lista_simples if x==1]))
+        lista_vezes.append(len([1 for x in lista_simples if x==2]))
+        lista_quase.append(len([1 for x in lista_simples if x==3]))
+        lista_sempre.append(len([1 for x in lista_simples if x==4]))
+
+        lista_simples = barreiraValor.values_list('coisas', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x==0]))
+        lista_raramente.append(len([1 for x in lista_simples if x==1]))
+        lista_vezes.append(len([1 for x in lista_simples if x==2]))
+        lista_quase.append(len([1 for x in lista_simples if x==3]))
+        lista_sempre.append(len([1 for x in lista_simples if x==4]))
+
+        lista_simples = barreiraValor.values_list('seguranca', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x==0]))
+        lista_raramente.append(len([1 for x in lista_simples if x==1]))
+        lista_vezes.append(len([1 for x in lista_simples if x==2]))
+        lista_quase.append(len([1 for x in lista_simples if x==3]))
+        lista_sempre.append(len([1 for x in lista_simples if x==4]))
+
+        lista_simples = barreiraValor.values_list('clima', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x==0]))
+        lista_raramente.append(len([1 for x in lista_simples if x==1]))
+        lista_vezes.append(len([1 for x in lista_simples if x==2]))
+        lista_quase.append(len([1 for x in lista_simples if x==3]))
+        lista_sempre.append(len([1 for x in lista_simples if x==4]))
+
+        lista_simples = barreiraValor.values_list('equipamentos', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x==0]))
+        lista_raramente.append(len([1 for x in lista_simples if x==1]))
+        lista_vezes.append(len([1 for x in lista_simples if x==2]))
+        lista_quase.append(len([1 for x in lista_simples if x==3]))
+        lista_sempre.append(len([1 for x in lista_simples if x==4]))
 
 
 
     except Exception:
         traceback.print_exc()
-        listaDatasDailyControl = ["0000-00-00"]
-        dadosDailyControlDict = {
-            'tosse': dict(texto= "Apresentou tosse?", lista_sim=[0], lista_nao =[0]),
-            'chiado': dict(texto= "Apresentou chiado?", lista_sim=[0], lista_nao =[0]),
-            'ar': dict(texto= "Teve falta de ar?", lista_sim=[0], lista_nao =[0]),
-            'dormir': dict(texto= "Teve problemas ao dormir?", lista_sim=[0], lista_nao =[0]),
-            'bombinha': dict(texto= "Usou a bombinha?", lista_sim=[0], lista_nao =[0])
-        }
+        listaBarreiraNames = ["Não tenho interesse","Falta de tempo","Não tenho energia<br>ou disposição","Tenho medo de sentir<br>falta de ar","Não tenho companhia<br>ou incentivo","Não tenho dinheiro","Tenho muitas coisas<br>para fazer","Não tenho um<br>local seguro","Por causa do clima","Não tenho equipamentos"]
+        lista_nunca=[0 for x in listaBarreiraNames]
+        lista_raramente =[0 for x in listaBarreiraNames]
+        lista_vezes =[0 for x in listaBarreiraNames]
+        lista_quase =[0 for x in listaBarreiraNames]
+        lista_sempre =[0 for x in listaBarreiraNames]
 
     # 7 days
     fig = go.Figure()
@@ -1052,7 +1107,7 @@ def estats(request):
     print(list(set(usuariosAtivosPenultimos7Dias)))
 
 
-    # Graph Stacked
+    # Graph Stacked - Daily
     x=listaDatasDailyControl
     fig = go.Figure()
     cont = 0
@@ -1123,9 +1178,58 @@ def estats(request):
     stacked = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
+    #### Graph Barreiras
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(
+        x=listaBarreiraNames, y=lista_nunca,
+        mode='lines',
+        name="Sim",
+        line=dict(width=0.5, color='rgb(241, 111, 108)'),
+        stackgroup="A",
+        groupnorm='percent' # sets the normalization for the sum of the stackgroup
+    ))
+    fig.add_trace(go.Scatter(
+        x=listaBarreiraNames, y=lista_raramente,
+        mode='lines',
+        name="Sim",
+        line=dict(width=0.5, color='rgb(241, 111, 108)'),
+        stackgroup="A",
+        groupnorm='percent' # sets the normalization for the sum of the stackgroup
+    ))
+    fig.add_trace(go.Scatter(
+        x=listaBarreiraNames, y=lista_vezes,
+        mode='lines',
+        name="Sim",
+        line=dict(width=0.5, color='rgb(241, 111, 108)'),
+        stackgroup="A",
+        groupnorm='percent' # sets the normalization for the sum of the stackgroup
+    ))
+    fig.add_trace(go.Scatter(
+        x=listaBarreiraNames, y=lista_quase,
+        mode='lines',
+        name="Sim",
+        line=dict(width=0.5, color='rgb(241, 111, 108)'),
+        stackgroup="A",
+        groupnorm='percent' # sets the normalization for the sum of the stackgroup
+    ))
+    fig.add_trace(go.Scatter(
+        x=listaBarreiraNames, y=lista_sempre,
+        mode='lines',
+        name="Sim",
+        line=dict(width=0.5, color='rgb(241, 111, 108)'),
+        stackgroup="A",
+        groupnorm='percent' # sets the normalization for the sum of the stackgroup
+    ))
+
+    barreiras = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
+
+
     return render(request, 'logged/estats.html', context={
         'fitbit7dias':fitbit7dias,
-        'stacked' : stacked
+        'stacked' : stacked,
+        'barreiras':barreiras
     })
 
 
