@@ -512,15 +512,15 @@ def getConsecStepsDays(user):
     for goal in goals:
         start = goal.startDate
         end = goal.endDate
-        noSteps = goal.quantity
+        noSteps = float(goal.quantity)
         dateRange = pd.date_range(start=start, end=end).to_list()
         dateRange = [date.strftime("%Y-%m-%d") for date in dateRange]
 
         fitbitData = getFitbitData(user, dateRange)
-        steps = {date: int(fitbitData[date]["summary"]["steps"])
+        steps = {date: float(fitbitData[date]["summary"]["steps"])
                  for date in fitbitData}
 
-        completeDays = [date for date in steps if steps[date] > int(noSteps)]
+        completeDays = [date for date in steps if steps[date] > noSteps]
         consecDays = consecutiveDates(completeDays)
 
         if consecDays > maxDays:
