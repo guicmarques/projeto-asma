@@ -1016,13 +1016,14 @@ def estats(request):
     # Graph Stacked
     x=listaDatasDailyControl
     fig = go.Figure()
-
+    cont = 0
     for k in list(dadosDailyControlDict.keys()):
         print(dadosDailyControlDict[k]['lista_sim'],dadosDailyControlDict[k]['lista_nao'])
         fig.add_trace(go.Scatter(
             x=x, y=dadosDailyControlDict[k]['lista_sim'],
             mode='lines',
             name="Sim",
+            visible=cont==0,
             line=dict(width=0.5, color='rgb(241, 111, 108)'),
             stackgroup=dadosDailyControlDict[k]['texto'],
             groupnorm='percent' # sets the normalization for the sum of the stackgroup
@@ -1032,10 +1033,12 @@ def estats(request):
             x=x, y=dadosDailyControlDict[k]['lista_nao'],
             mode='lines',
             name="Não",
+            visible=cont==0,
             line=dict(width=0.5, color='rgb(148, 212, 131)'),
             stackgroup=dadosDailyControlDict[k]['texto'],
             groupnorm='percent' # sets the normalization for the sum of the stackgroup
         ))
+        cont +=1
 
     lista_valores = []
     cont = 0
@@ -1065,7 +1068,7 @@ def estats(request):
             dict(
                 type="buttons",
                 direction="right",
-                active=1,
+                active=0,
                 x=0.57,
                 y=1.2,
                 buttons=lista_valores,
