@@ -514,6 +514,7 @@ def getConsecStepsDays(user):
         end = goal.endDate
         noSteps = goal.quantity
         dateRange = pd.date_range(start=start, end=end).to_list()
+        dateRange = [date.strftime("%Y-%m-%d") for date in dateRange]
 
         fitbitData = getFitbitData(user, dateRange)
         steps = {date: fitbitData[date]["summary"]["steps"]
