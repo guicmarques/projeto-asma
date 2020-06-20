@@ -90,7 +90,7 @@ export class StepsCanvasComponent implements OnInit {
       <div>Parábens! Você conseguiu atingir sua meta diária!</div>`);
     } else {
       this.alertService.presentPopUp('', `<img src="${this.goalUnreachedImg}"> <h2>Falta pouco!</h2>
-      <div>Você ainda não alcançou sua meta diária, mas não desista! Dê o seu melhor!</div>`);
+      <div>Você ainda não alcançou sua meta diária, mas não desista!</div>`);
     }
   }
 
@@ -141,6 +141,7 @@ export class StepsCanvasComponent implements OnInit {
         this.createDounutChart(this.stepCanvas);
         this.goalPrevious = this.goal;
       }
+      this.sendMotivationalMessage();
     })
   }
 
