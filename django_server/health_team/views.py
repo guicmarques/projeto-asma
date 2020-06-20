@@ -1018,6 +1018,7 @@ def estats(request):
     fig = go.Figure()
 
     for k in list(dadosDailyControlDict.keys()):
+        print(dadosDailyControlDict[k]['lista_sim'],dadosDailyControlDict[k]['lista_nao'])
         fig.add_trace(go.Scatter(
             x=x, y=dadosDailyControlDict[k]['lista_sim'],
             mode='lines',
