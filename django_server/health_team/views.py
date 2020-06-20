@@ -1022,7 +1022,7 @@ def estats(request):
         fig.add_trace(go.Scatter(
             x=x, y=dadosDailyControlDict[k]['lista_sim'],
             mode='lines',
-            line=dict(width=0.5, color='rgb(184, 247, 212)'),
+            line=dict(width=0.5, color='rgb(247, 247, 212)'),
             stackgroup=dadosDailyControlDict[k]['texto'],
             groupnorm='percent' # sets the normalization for the sum of the stackgroup
         ))
@@ -1035,7 +1035,20 @@ def estats(request):
             groupnorm='percent' # sets the normalization for the sum of the stackgroup
         ))
 
-    
+    lista_valores = []
+    cont = 0
+    for k in list(dadosDailyControlDict.keys()):
+        lista_false = [False]*2*len(list(dadosDailyControlDict.keys()))
+        lista_false[cont] = True
+        lista_false[cont+1] = True
+        lista_valores.append(
+            dict(
+                label=k,
+                method="update",
+                args=[{"visible": lista_false[:]},
+                    {"title": dadosDailyControlDict[k]['texto']}])
+        )
+        cont+=2
 
     fig.update_layout(
         showlegend=True,
@@ -1045,6 +1058,17 @@ def estats(request):
             range=[1, 100],
             ticksuffix='%'))
 
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction="right",
+                active=0,
+                x=0.57,
+                y=1.2,
+                buttons=lista_valores,
+            )
+        ])
     
     stacked = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
