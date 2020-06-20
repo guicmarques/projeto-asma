@@ -1,13 +1,17 @@
 <div class="chart-header">
-  <div class="steps-goal">/{{ goal }} passos</div>
-  <div class="steps-given">{{ stepCanvas }}</div>
+  
   <div class="chart">
     <canvas #stepsChart></canvas>
+    <div class="infos">
+      <div class="walking-person">
+        <img [src]="walkingPersonImg">
+      </div>
+      <div class="steps-given">{{ stepCanvas }}</div>
+      <div class="steps-goal">/{{ goal }} passos</div>
+    </div>
   </div>
 
-  <div class="walking-person">
-    <img [src]="walkingPersonImg">
-  </div>
+  
 
   <div class="minutes">
     <div class="minutes-img">

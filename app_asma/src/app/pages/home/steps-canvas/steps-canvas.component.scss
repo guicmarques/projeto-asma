@@ -1,18 +1,23 @@
 
+.infos {
+    display: flex;
+}
+
 .steps-goal {
     position: absolute;
     z-index: 20;
-    top: 42%;
+    top: 54vw;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%);
     color: white;
+    padding-top: 1vh;
 }
 
 .steps-given {
     position: absolute;
-    top: 38%;
+    top: 48vw;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%);
     font-size: 150%;
     font-weight: 700;
     color: white;
@@ -23,7 +28,7 @@ canvas {
     width: 120% !important;
     height: 120% !important;
     margin-left: -10%;
-    padding-top: 15%;
+    padding-top: 8vh; //15%;
 }
 
 .chart {
@@ -33,9 +38,9 @@ canvas {
 .walking-person {
     position: absolute;
     z-index: 25;
-    top: 27%;
+    top: 15vh;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%);
 }
 
 .chart-header {
@@ -52,6 +57,8 @@ canvas {
     top: 43vh;
     left: 25vw;
     width: 12vw;
+    height: 24vw;
+    display: flex;
 }
 
 .minutes-img {
@@ -75,8 +82,10 @@ canvas {
     color: white;
     position: absolute;
     top: 6.8vh;
-    left: 3vw;
+    //left: 3vw;
     font-size: 11px;
+    text-align: center;
+    width: 12vw;
 }
 
 .distance {
@@ -86,6 +95,8 @@ canvas {
     top: 43vh;
     right: 26vw;
     width: 12vw;
+    height: 24vw;
+    display: flex;
 }
 
 .distance-img {
@@ -100,7 +111,7 @@ canvas {
     color: white;
     position: absolute;
     top: 6.8vh;
-    left: 3vw;
     text-align: center;
     font-size: 11px;
+    width: 12vw;
 }

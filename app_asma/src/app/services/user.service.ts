@@ -70,7 +70,7 @@ export class UserService {
           this.record = data;
           resolve(this.record);
         }, (error) =>{
-          this.alertService.presentPopUp('Erro!', 'Não foi computar as conquistas.');
+          this.alertService.presentPopUp('Erro!', 'Não foi possível computar as conquistas.');
           resolve({
             steps:0,
             weekly:0,

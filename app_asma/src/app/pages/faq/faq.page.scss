@@ -1,3 +1,10 @@
+.title {
+    padding-top: 50px;
+    margin-left: 10px;
+    font-size: 22px;
+    padding-bottom: 10px;
+}
+
 .expand-icon{
     color:#2dd2c2;
 }
@@ -14,11 +21,4 @@
 .chat-btn {
     --background: rgb(64, 196, 248);
     --color: white;
-}
-
-.searching{
-    --background: rgb(64, 196, 248);
-    color:white;
-    
-
 }

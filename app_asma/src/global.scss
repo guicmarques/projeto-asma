@@ -108,6 +108,17 @@
     font-size: 4vw;
     text-align: center;
     color: #a09a9a;
+
+    h2 {        
+        font-size: 5vw;
+        font-weight: 700;
+        color: black;
+    }
+
+    img {
+        width: 40vw;
+        height: 40vw;
+    }
 }
 
 .popUp .alert-button-group {
@@ -220,4 +231,35 @@
         border-radius: 25px;
         flex-direction: column;
     }
+}
+
+.searchbar {
+    .searchbar-input-container{
+        .searchbar-input{
+            border-radius: 50px !important;
+            --background: rgb(221, 221, 221);
+            font-size: 5vw;
+        }
+    }
+    --box-shadow: 0;
+    width: 90vw;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.searching {
+    .searchbar-input-container{
+        .searchbar-input{
+            border-radius: 50px !important;
+            --background: rgb(64, 196, 248);
+            color:white;
+            font-size: 5vw;
+        }
+        --cancel-button-color: white;
+    }
+    --icon-color: white;
+    --box-shadow: 0;
+    width: 90vw;
+    left: 50%;
+    transform: translate(-50%);
 }

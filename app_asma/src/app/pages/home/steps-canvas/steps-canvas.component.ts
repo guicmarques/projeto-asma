@@ -4,6 +4,7 @@ import { Chart } from 'chart.js';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { GoalsService } from 'src/app/services/goals.service';
 import { EventService } from 'src/app/services/event.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-steps-canvas',
@@ -36,9 +37,12 @@ export class StepsCanvasComponent implements OnInit {
   goalPrevious: number = 0;
 
   walkingPersonImg:  String = '../../../assets/images/walking_white_blue.png';
+  goalReachedImg: String = '../../../assets/images/goal_reached.gif';
+  goalUnreachedImg: String = '../../../assets/images/goal_unreached.gif';
 
   constructor(private sensorService: SensorService, private dateService: DateService,
-              private goalsService: GoalsService, private evntService: EventService) {
+              private goalsService: GoalsService, private evntService: EventService,
+              private alertService: AlertService) {
                 this.goalUpdated();
                }
 
@@ -73,8 +77,21 @@ export class StepsCanvasComponent implements OnInit {
         this.createDounutChart(this.stepCanvas);
         console.log(this.stepCanvas);
         setInterval(() => { this.reloadChart() }, 1800000);
+        this.sendMotivationalMessage();
       })
     })
+  }
+
+  sendMotivationalMessage() {
+    console.log(this.stepCanvas);
+    if(this.stepCanvas >= +this.goal) {
+      this.alertService.presentPopUp('', `<img src="${this.goalReachedImg}">
+      <h2>Meta diária alcançada!</h2>
+      <div>Parábens! Você conseguiu atingir sua meta diária!</div>`);
+    } else {
+      this.alertService.presentPopUp('', `<img src="${this.goalUnreachedImg}"> <h2>Falta pouco!</h2>
+      <div>Você ainda não alcançou sua meta diária, mas não desista! Dê o seu melhor!</div>`);
+    }
   }
 
   reloadChart() {
@@ -107,6 +124,7 @@ export class StepsCanvasComponent implements OnInit {
         this.stepCanvas = this.dailySteps[this.today].summary.steps;
         this.createDounutChart(this.stepCanvas);
         console.log(this.stepCanvas);
+        this.sendMotivationalMessage();
       });
     });
   }
