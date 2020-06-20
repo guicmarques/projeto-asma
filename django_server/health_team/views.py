@@ -359,8 +359,8 @@ def pacienteGraficos2(request,username):
         for i in range(1,61,1):
             day60List.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
 
-
-        dados60dias = getFitbitData(user=username,dates=day60List)
+        
+        dados60dias = getFitbitData(user=User.objects.get(user_id=username),dates=day60List)
         #print(dados7dias)
 
         dados7diasSteps = 0
