@@ -104,8 +104,9 @@ export class AuthService {
       this.isLoggedIn = false;
       this.credenciais = null;
       delete this.token;
-      this.router.navigateByUrl('/login');
+      this.router.navigate(['/login']);
       console.log(this.credenciais);
+      console.log(this.token);
     });
     
   }

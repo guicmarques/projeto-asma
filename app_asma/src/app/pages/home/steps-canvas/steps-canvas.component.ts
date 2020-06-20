@@ -141,7 +141,7 @@ export class StepsCanvasComponent implements OnInit {
         this.createDounutChart(this.stepCanvas);
         this.goalPrevious = this.goal;
       }
-      this.sendMotivationalMessage();
+      setTimeout(() => {this.sendMotivationalMessage();}, 5000);
     })
   }
 
