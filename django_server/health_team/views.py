@@ -1065,7 +1065,7 @@ def estats(request):
             dict(
                 type="buttons",
                 direction="right",
-                active=0,
+                active=1,
                 x=0.57,
                 y=1.2,
                 buttons=lista_valores,
