@@ -32,4 +32,23 @@ export class SplashScreenPage implements OnInit {
     }, 2000); 
   }
 
+  ionViewDidEnter(){
+    setTimeout(() => {
+      this.storage.get('credenciais').then(async (data) => {
+        if (data != null) {
+          this.authService.login(data.username, data.password)
+          .then(token => {
+            console.log('Usuário logado');
+            this.router.navigateByUrl('/tabs');
+          })
+          .catch((error) => {
+            this.router.navigateByUrl('/login');
+          })
+        } else {
+          this.router.navigateByUrl('/login');
+        }
+      })
+    }, 2000); 
+  }
+
 }

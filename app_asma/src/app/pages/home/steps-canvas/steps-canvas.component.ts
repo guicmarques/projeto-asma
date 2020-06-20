@@ -77,7 +77,7 @@ export class StepsCanvasComponent implements OnInit {
         this.createDounutChart(this.stepCanvas);
         console.log(this.stepCanvas);
         setInterval(() => { this.reloadChart() }, 1800000);
-        this.sendMotivationalMessage();
+        //this.sendMotivationalMessage();
       })
     })
   }
