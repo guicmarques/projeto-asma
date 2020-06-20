@@ -932,8 +932,8 @@ def estats(request):
     try:
         date30dayback = (datetime.datetime.today() - datetime.timedelta(days=30))
         dailycontrolLista = DailyControl.objects.all().filter(date__gte=date30dayback)
-
-        dadosDailyControlDict = {'data' : [],
+        listaDatasDailyControl = []
+        dadosDailyControlDict = {
             'tosse': dict(texto= "Apresentou tosse?", lista_sim=[], lista_nao =[]),
             'chiado': dict(texto= "Apresentou chiado?", lista_sim=[], lista_nao =[]),
             'ar': dict(texto= "Teve falta de ar?", lista_sim=[], lista_nao =[]),
@@ -941,7 +941,7 @@ def estats(request):
             'bombinha': dict(texto= "Usou a bombinha?", lista_sim=[], lista_nao =[])
         }
         for i in range(0,31,1):
-            dadosDailyControlDict['data'].append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
+            listaDatasDailyControl.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
             dailycontrol = dailycontrolLista.objects.all().filter(date=(datetime.datetime.today() - datetime.timedelta(days=i)))
 
             lista_tosse = dailycontrol.values_list('tosse', flat=True)
@@ -966,9 +966,10 @@ def estats(request):
 
 
 
-    except:
+    except Exception:
+        traceback.print_exc()
+        listaDatasDailyControl = ["0000-00-00"]
         dadosDailyControlDict = {
-            'data':["0000-00-00"],
             'tosse': dict(texto= "Apresentou tosse?", lista_sim=[0], lista_nao =[0]),
             'chiado': dict(texto= "Apresentou chiado?", lista_sim=[0], lista_nao =[0]),
             'ar': dict(texto= "Teve falta de ar?", lista_sim=[0], lista_nao =[0]),
@@ -1013,7 +1014,7 @@ def estats(request):
 
 
     # Graph Stacked
-    x=dadosDailyControlDict['data']
+    x=listaDatasDailyControl
     fig = go.Figure()
 
     for k in dadosDailyControlDict.keys()[1:]:
