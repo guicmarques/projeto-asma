@@ -985,13 +985,13 @@ def estats(request):
         x=x, y=[70, 80, 60, 70],
         mode='lines',
         line=dict(width=0.5, color='rgb(127, 166, 238)'),
-        stackgroup='one'
+        stackgroup='two'
     ))
     fig.add_trace(go.Scatter(
         x=x, y=[100, 100, 100, 100],
         mode='lines',
         line=dict(width=0.5, color='rgb(131, 90, 241)'),
-        stackgroup='one'
+        stackgroup='two'
     ))
 
     fig.update_layout(
