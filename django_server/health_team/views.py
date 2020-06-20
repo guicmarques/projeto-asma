@@ -988,7 +988,7 @@ def estats(request):
         lista_quase =[]
         lista_sempre =[]
         
-        barreiraValor = barreiras_list.order_by('user_id', 'date')#.distinct('user_id')
+        barreiraValor = barreiras_list#.order_by('user_id', 'date')#.distinct('user_id')
 
         lista_simples = barreiraValor.values_list('interesse', flat=True)
         lista_nunca.append(len([1  for x in lista_simples if x==0]))
