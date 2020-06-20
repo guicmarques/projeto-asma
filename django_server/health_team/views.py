@@ -954,9 +954,9 @@ def estats(request):
 
     fig.add_trace(go.Indicator(
         mode = "number+delta",
-        value = len(usuariosAtivosUltimos7Dias.distinct()),
+        value = len(list(set(usuariosAtivosUltimos7Dias))),
         title = {"text": "Usuários<br>que responderam<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
-        delta = {'reference': len(usuariosAtivosPenultimos7Dias.distinct()), 'relative': True},
+        delta = {'reference': len(list(set(usuariosAtivosPenultimos7Dias))), 'relative': True},
         domain = {'x': [0.76, 1], 'y': [0, 1]}))
 
     fitbit7dias = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
