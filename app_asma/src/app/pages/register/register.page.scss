@@ -16,7 +16,7 @@
 }
 
 .bottom-circle {
-    height: 64px;
+    height: 80px;
     width: 61px;
     border-radius: 0 100% 0 0;
     background-color: #2dd2c2;
@@ -167,8 +167,7 @@ ion-checkbox {
 .submit-text {
     font-size: 20px;
     font-weight: 500;
-    margin-right: 70px;
-    align-self: center;
+    margin-right: 10px;
 }
 
 .submit-btn {
@@ -182,4 +181,17 @@ ion-checkbox {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
+    align-items: center;
+}
+
+.btn-container {
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.fab-btn {
+    position: relative; 
+    margin-right: 10px;
 }
