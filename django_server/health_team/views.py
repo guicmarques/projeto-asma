@@ -977,6 +977,45 @@ def estats(request):
             'bombinha': dict(texto= "Usou a bombinha?", lista_sim=[0], lista_nao =[0])
         }
 
+    # Questionario Barreiras
+    try:
+        date30dayback = (datetime.datetime.today() - datetime.timedelta(days=30))
+        barreiras_list = PracticeBarriers.objects.all().filter(date__gte=date30dayback)
+        listaDatasBarreira = []
+        dadosBarreira = {
+            'interesse': dict(texto= "Não tenho interesse", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
+            'tempo': dict(texto= "Falta de tempo", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
+            'energia': dict(texto= "Não tenho energia<br>ou disposição", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
+            'faltaAr': dict(texto= "Tenho medo de sentir<br>falta de ar", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
+            'companhia': dict(texto= "Não tenho companhia<br>ou incentivo", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
+            'dinheiro': dict(texto= "Não tenho dinheiro", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
+            'coisas': dict(texto= "Tenho muitas coisas<br>para fazer", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
+            'seguranca': dict(texto= "Não tenho um<br>local seguro", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
+            'clima': dict(texto= "Por causa do clima", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[]),
+            'equipamentos': dict(texto= "Não tenho equipamentos", lista_nunca=[], lista_raramente =[], lista_vezes =[], lista_quase =[], lista_sempre =[])
+        }
+        for i in range(0,31,1):
+            barreiralistaDatasBarreiras_list.append((datetime.datetime.today() - datetime.timedelta(days=30) + datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
+            dailybarreira = barreiras_list.filter(date=(datetime.datetime.today() - datetime.timedelta(days=30) + datetime.timedelta(days=i)))
+
+            lista_tosse = dailybarreira.values_list('tosse', flat=True)
+            dadosBarreira['tosse']['lista_sim'].append(len([f(x) if condition else g(x) for x in sequence]))
+            dadosBarreira['tosse']['lista_nao'].append(len(lista_tosse) - sum(lista_tosse))
+
+
+
+
+    except Exception:
+        traceback.print_exc()
+        listaDatasDailyControl = ["0000-00-00"]
+        dadosDailyControlDict = {
+            'tosse': dict(texto= "Apresentou tosse?", lista_sim=[0], lista_nao =[0]),
+            'chiado': dict(texto= "Apresentou chiado?", lista_sim=[0], lista_nao =[0]),
+            'ar': dict(texto= "Teve falta de ar?", lista_sim=[0], lista_nao =[0]),
+            'dormir': dict(texto= "Teve problemas ao dormir?", lista_sim=[0], lista_nao =[0]),
+            'bombinha': dict(texto= "Usou a bombinha?", lista_sim=[0], lista_nao =[0])
+        }
+
     # 7 days
     fig = go.Figure()
 
