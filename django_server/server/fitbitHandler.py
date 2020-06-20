@@ -94,14 +94,7 @@ def r_cb(token):
 
 def getActivities(user, date=None):
     global actualUser
-    
-    # dados do Henrique para user ana banana APENAS TESTE
-    try:
-        if str(user.username) == "12345678912":
-            user = User.objects.get(username="47277091809")
-    except:
-        pass
-    
+        
     profile = FitbitProfile.objects.get(user=user)
     accessT = profile.accessToken
     refreshT = profile.refreshToken

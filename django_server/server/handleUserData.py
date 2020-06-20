@@ -5,6 +5,7 @@ import os
 from collections import Counter
 from datetime import date, datetime, timedelta
 from enum import Enum
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -13,8 +14,8 @@ from django.contrib.auth.models import Group, Permission, User
 import server.settings as settings
 from server.fitbitHandler import getActivities, updateFbProfile
 from server.models import (AsthmaControlQuestionnaire, DailyControl,
-                           FitbitFile, Goal, Milestone, UserProfileInfo,
-                           PracticeBarriers)
+                           FitbitFile, Goal, Milestone, PracticeBarriers,
+                           UserProfileInfo)
 
 
 def createUser(userData):
@@ -236,23 +237,69 @@ def getACQDates(user):
     return sorted(dates)
 
 
+def fitbitCache(user):
+    directory = f"media/cache/fitbit"
+    if os.path.exists(directory):
+        filePath = os.path.join(directory, user.username+".json")
+        if os.path.isfile(filePath):
+            with open(filePath, encoding="ISO-8859-1") as json_file:
+                cache = json.load(json_file)
+        else:
+            cache = {}
+    else:
+        os.makedirs(directory)
+        cache = {}
+    
+    return cache
+
+def saveFitbitCache(user, cache):
+    directory = f"media/cache/fitbit"
+    filePath = os.path.join(directory, user.username + ".json")
+    
+    with open(filePath, 'w') as fp:
+        json.dump(cache, fp, indent=4)
+
+
 def getFitbitData(user, dates):
     activities = {}
-    # TESTE COM AUTENTICAÇÃO DO MICHELET
+    # TESTE COM AUTENTICA??O DO MICHELET
     # user = User.objects.get(username='Michelet')
-    
+
+    # dados do Henrique para user ana banana APENAS TESTE
+    try:
+        if str(user.username) == "12345678912":
+            user = User.objects.get(username="47277091809")
+    except:
+        pass
+
+    # get saved cache
+    cache = fitbitCache(user)
+
     if len(dates) == 0:
         dt, activity = getActivities(user, date=None)
-        activities[dt] = activity
+        cache[dt] = activity
+        dates = [dt]
+    
+    else:
+        # get dates not in cache
+        notCached = list(set(dates) - set(cache.keys()))
+        
+        if type(dates) == list:
+            for date in notCached:
+                dt, activity = getActivities(user, date)
+                cache[dt] = activity
 
-    elif type(dates) == list:
-        for date in dates:
-            dt, activity = getActivities(user, date)
-            activities[dt] = activity
+        elif type(dates) == str:
+            if dates in notCached:
+                dt, activity = getActivities(user, dates)
+                cache[dt] = activity
+                dates = [dt]
 
-    elif type(dates) == str:
-        dt, activity = getActivities(user, dates)
-        activities[dt] = activity
+    # saves cache to file
+    saveFitbitCache(user, cache)
+
+    # process only the needed data
+    activities = {date: cache[date] for date in list(dates)}
 
     return activities
 
