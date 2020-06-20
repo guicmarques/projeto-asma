@@ -1001,6 +1001,31 @@ def estats(request):
             type='linear',
             range=[1, 100],
             ticksuffix='%'))
+
+    fig.update_layout(
+    updatemenus=[
+        dict(
+            type="buttons",
+            direction="right",
+            active=0,
+            x=0.57,
+            y=1.2,
+            buttons=list([
+                dict(label="None",
+                     method="update",
+                     args=[{"visible": [True, False, True, False]}]),
+                dict(label="High",
+                     method="update",
+                     args=[{"visible": [True, True, False, False]}]),
+                dict(label="Low",
+                     method="update",
+                     args=[{"visible": [False, False, True, True]}]),
+                dict(label="Both",
+                     method="update",
+                     args=[{"visible": [True, True, True, True]}]),
+            ]),
+        )
+    ])
     stacked = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
