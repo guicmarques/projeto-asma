@@ -40,14 +40,7 @@ export class RegisterPage implements OnInit {
               private alertCtrl: AlertController,
               private router: Router) { }
 
-  ngOnInit() {
-    setTimeout(function () {
-      let viewheight = window.innerHeight;
-      let viewwidth = window.innerWidth;
-      let viewport = document.querySelector("meta[name=viewport]");
-      viewport.setAttribute("content", "height=" + viewheight + "px, width=" + viewwidth + "px, initial-scale=1.0");
-    }, 300);
-  }
+  ngOnInit() { }
 
   selectImg() {
     console.log("Funcionouuu");

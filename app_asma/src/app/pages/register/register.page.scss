@@ -16,8 +16,8 @@
 }
 
 .bottom-circle {
-    height: 10vh;
-    width: 17vw;
+    height: 64px;
+    width: 61px;
     border-radius: 0 100% 0 0;
     background-color: #2dd2c2;
     position: absolute;
@@ -177,4 +177,8 @@ ion-checkbox {
     --background: #f9c022;
     width: 50px;
     height: 50px;
+}
+
+.register-footer {
+    min-height: 80px;
 }
