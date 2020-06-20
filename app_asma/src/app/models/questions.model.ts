@@ -1,6 +1,7 @@
 export interface Questions {
-    question: string,
-    answer: string,
+    question:any,
+    answer: any,
     show: boolean,
     showAnswer: boolean,
+    id:any,
 }

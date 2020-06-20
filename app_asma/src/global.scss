@@ -263,3 +263,36 @@
     left: 50%;
     transform: translate(-50%);
 }
+.popUpNoButtonWithImg .alert-wrapper {
+    border-radius: 5vw;
+}
+
+.popUpNoButtonWithImg .alert-head {
+    background-color: white;
+    text-align: center;
+
+    h2 {        
+        font-size: 5vw;
+        font-weight: 700;
+        color: black;
+    }
+}
+
+.popUpNoButtonWithImg .alert-message {
+    margin-top: 6px;
+    background-color: white;
+    font-size: 4vw;
+    text-align: center;
+    color: #a09a9a;
+
+    h2 {        
+        font-size: 5vw;
+        font-weight: 700;
+        color: black;
+    }
+
+    img {
+        width: 24vw;
+        height: 24vw;
+    }
+}

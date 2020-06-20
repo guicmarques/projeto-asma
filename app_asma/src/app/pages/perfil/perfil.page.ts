@@ -223,7 +223,7 @@ updateUser(){
     this.imagemConquista='../../../assets/images/achievements/star_achievement_gold.png' }
     this.mensagem=` <img src="${this.imagemConquista}" width="50" height="50"> <br>`
 
-    this.alertService.presentNoButtonPopUp(milestone.nome,this.mensagem+ milestone.description+ aviso);
+    this.alertService.presentPopUpNoButtonWithImg(milestone.nome,this.mensagem+ milestone.description+ aviso);
   }
   logout() {
     this.authService.logout();

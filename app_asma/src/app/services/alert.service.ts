@@ -35,6 +35,16 @@ export class AlertService {
       alertEl.present();
     });
   }
+  presentPopUpNoButtonWithImg(title: any, message: any) {
+    this.alertCtrl.create({
+      cssClass: 'popUpNoButtonWithImg',
+      header: title,
+      message: message,
+      
+    }).then(alertEl => {
+      alertEl.present();
+    });
+  }
 
   presentNoButtonPopUp(title: any, message: any) {
     this.alertCtrl.create({

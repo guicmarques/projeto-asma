@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Animation, AnimationController } from '@ionic/angular';
 import { AlertService } from './../../services/alert.service';
+import { FAQService } from './../../services/FAQ.service';
 import { Questions } from './../../models/questions.model';
 @Component({
   selector: 'app-faq',
@@ -13,7 +14,7 @@ export class FaqPage implements OnInit {
   searching:boolean;
   // fonte das perguntas: https://ginasthma.org/about-us/faqs/ 
   //https://sbpt.org.br/portal/publico-geral/doencas/asma-perguntas-e-respostas/
-  questions: Questions[] = [{
+  questions: Questions[]=[]; /*= [{
     question:"Eu sinto asma quando corro. Devo evitar essa atividade?",
     answer:"De jeito nenhum! Frequentente apenas se preparar para uma caminhada de forma diferente pode ajudar. Há duas coisas que você deve lembrar. Primeiramente, use sua bombinha 15 minutos antes de começar. Além disso, não se esqueça de se aquecer quando for uma atividade mais intensa.",
     show:true,
@@ -55,14 +56,36 @@ export class FaqPage implements OnInit {
       show:true,
       showAnswer:false,
       },
-  ]
+  ]*/
+  perguntas:any;
 
 
   constructor(private animationCtrl: AnimationController,
-              private alertService: AlertService,) { }
+              private alertService: AlertService,
+              private faqService:FAQService) { }
 
   ngOnInit() {
     this.alertService.presentLoading(4000);
+    
+    this.faqService.getAllQuestions().then(data => {
+      let result = JSON.stringify(data);
+      result = JSON.parse(result);
+      this.perguntas = Object.values(result);
+      console.log(this.perguntas);
+      this.perguntas.forEach(pergunta => {
+      
+        this.questions.push({
+          question: pergunta.pergunta,
+          answer: pergunta.resposta,
+          id: pergunta.id,
+          show:true,
+          showAnswer:false,
+
+
+        })
+     });
+     
+    });
   };
   expand(question){
       question.showAnswer = !(question.showAnswer);
