@@ -1054,6 +1054,7 @@ def estats(request):
         lista_sempre.append(len([1 for x in lista_simples if x==4]))
 
         lista_simples = barreiraValor.values_list('equipamentos', flat=True)
+        print(lista_simples)
         lista_nunca.append(len([1  for x in lista_simples if x==0]))
         lista_raramente.append(len([1 for x in lista_simples if x==1]))
         lista_vezes.append(len([1 for x in lista_simples if x==2]))
