@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from health_team.forms import UserForm, UserProfileInfoForm
+from health_team.forms import UserForm, UserProfileInfoForm, UserFormForProfile
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -137,7 +137,7 @@ def cadastroPaciente2(request):
 def cadastroPaciente(request):
     registered = False
     if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
+        user_form = UserFormForProfile(data=request.POST)
         profile_form = UserProfileInfoForm(data=request.POST)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()

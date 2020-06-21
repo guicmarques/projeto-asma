@@ -14,6 +14,21 @@ class UserForm(forms.ModelForm):
             
         }
 
+class UserFormForProfile(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control form-control-user'}))
+
+    class Meta():
+        model = User
+        labels = {
+        "username": "CPF"
+        }
+        fields = ('username', 'email', 'password')
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control form-control-user'}),
+            
+        }
+
 
 class UserProfileInfoForm(forms.ModelForm):
     class Meta():
