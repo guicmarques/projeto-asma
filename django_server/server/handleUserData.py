@@ -249,13 +249,16 @@ def fitbitCache(user):
     else:
         os.makedirs(directory)
         cache = {}
-    
+
     return cache
+
 
 def saveFitbitCache(user, cache):
     directory = f"media/cache/fitbit"
     filePath = os.path.join(directory, user.username + ".json")
-    
+
+    cache.pop(datetime.today().strftime("%Y-%m-%d"), None)
+
     with open(filePath, 'w') as fp:
         json.dump(cache, fp, indent=4)
 
@@ -279,11 +282,11 @@ def getFitbitData(user, dates):
         dt, activity = getActivities(user, date=None)
         cache[dt] = activity
         dates = [dt]
-    
+
     else:
         # get dates not in cache
         notCached = list(set(dates) - set(cache.keys()))
-        
+
         if type(dates) == list:
             for date in notCached:
                 dt, activity = getActivities(user, date)
@@ -295,11 +298,11 @@ def getFitbitData(user, dates):
                 cache[dt] = activity
                 dates = [dt]
 
-    # saves cache to file
-    saveFitbitCache(user, cache)
-
     # process only the needed data
     activities = {date: cache[date] for date in list(dates)}
+
+    # saves cache to file
+    saveFitbitCache(user, cache)
 
     return activities
 
