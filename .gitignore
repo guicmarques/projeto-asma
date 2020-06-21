@@ -129,3 +129,9 @@ dmypy.json
 .pyre/
 
 .vscode/
+django_server/media/fitbit/*
+!django_server/media/fitbit/*.csv
+django_server/media/userImage/*
+django_server/server/migrations/*
+!*/__init__.py
+django_server/media/cache/*

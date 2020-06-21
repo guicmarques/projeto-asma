@@ -1,0 +1,74 @@
+{
+    "0": {
+        "id": 0,
+        "video": "https://www.youtube.com/embed/74G6kn0vjPQ",
+        "nome": "Flexão",
+        "repeticoes": 30,
+        "tempo": 5,
+        "descricao": "Exercício que pode ser feito em qualquer lugar e que envolve diversos grupos musculares. Se não conseguir fazer como no vídeo, tente faça com os joelhos apoiados no chão."
+    },
+    "1": {
+        "id": 1,
+        "video": "https://www.youtube.com/embed/sdTru9Cbc9Q",
+        "nome": "Treino de Pernas",
+        "repeticoes": 1,
+        "tempo": 8,
+        "descricao": "O último capítulo da série '8 min de exercício para as pernas' é um tipo avançado de treinamento. Não se deixe enganar por sua duração de 'apenas' 8 minutos — a sequência de exercícios escolhidos e os curtíssimos períodos de recuperação tornam este treinamento um ótimo desafio, até para os usuários mais experientes que querem manter os músculos de suas pernas em forma em apenas 8 minutos. Teste a resistência de suas pernas! Recomendamos este exercício para usuários de nível avançado ou para aqueles que já completaram o programa de 4 semanas do nível anterior."
+    },
+    "2": {
+        "id": 2,
+        "video": "https://www.youtube.com/embed/dqDJCHC42Fw",
+        "nome": "Mountain Climber",
+        "repeticoes": 5,
+        "tempo": 1,
+        "descricao": "O 'Mountain Climber' é um dos exercícios cardíacos mais famosos. Trata-se de um exercício avançado de alta intensidade, que aumenta a frequência cardíaca, acelera o metabolismo, ajuda a construir uma maior resistência nas pernas e melhora a agilidade. Dada sua complexidade e eficácia, é frequentemente usado no treinamento dos soldados norte-americanos e pelos praticantes de artes marciais.\nCaso nunca tenha realizado este exercício, é aconselhável iniciar com repetições e movimentos lentos."
+    },
+    "3": {
+        "id": 3,
+        "video": "https://www.youtube.com/embed/sJB_v2snVds",
+        "nome": "HIT",
+        "repeticoes": 1,
+        "tempo": 7,
+        "descricao": "Este é um treino HIIT para iniciantes, pode ser feito em casa e sem aparelhos, em 7 minutos você vai queimar muitas calorias te ajudando no processo de emagrecimento!"
+    },
+    "4": {
+        "id": 4,
+        "video": "https://www.youtube.com/embed/DOe7Gz1JzEQ",
+        "nome": "Treino Iniciantes",
+        "repeticoes": 1,
+        "tempo": 6,
+        "descricao": "O treino de hoje é para quem está sedentário ou sem treinar há muito tempo e para iniciantes. Exercícios fáceis, exercícios de baixa intensidade, para que você começar a mudar seus hábitos e mudar de vida, isso mesmo, um treino para iniciantes."
+    },
+    "5": {
+        "id": 5,
+        "video": "https://www.youtube.com/embed/Qczz3f2-nGo",
+        "nome": "Treino Avançado",
+        "repeticoes": 1,
+        "tempo": 11,
+        "descricao": "Exercício de nível avançado."
+    },
+    "6": {
+        "id": 6,
+        "video": "https://www.youtube.com/embed/8UaguGuEQWg",
+        "nome": "Treino Iniciantes 2",
+        "repeticoes": 1,
+        "tempo": 11,
+        "descricao": "Iniciantes, chegou a vez de vocês! Um treino para quem está começando a treinar, ou que nunca tiveram o hábito de fazer exercícios, mas também ajuda a perder peso, ajuda a tonificar a musculatura, que tal? Treino simples, sem muito esforço, pra que esse começo seja possível de ser feito. Os idosos também podem fazer! Desde que sempre tenham um aval médico, ok? "
+    },
+    "7": {
+        "id": 7,
+        "video": "https://www.youtube.com/embed/j7XEKNV8k7U",
+        "nome": "Treino Intervalado",
+        "repeticoes": 1,
+        "tempo": 22,
+        "descricao": "Treinamento Intervalado de Alta Intensidade para Queimar muita Gordura! Até 500 cal."
+    },
+    "8": {
+        "id": 8,
+        "video": "https://www.youtube.com/embed/Vq7qvUj6CXs",
+        "nome": "Total HIIT",
+        "repeticoes": 1,
+        "tempo": 21,
+        "descricao": "Queime MUITA GORDURA em Apenas 20 MINUTOS! - Treino Total HIIT."
+    }
+}
