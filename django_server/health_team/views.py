@@ -1271,13 +1271,38 @@ def downloadAsthmaControlQuestionnaire(request):
     response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
     return response
 
+def downloadFitBitData(request):
+    response = HttpResponse(content_type = 'text/csv')
+
+    writer = csv.writer(response)
+    writer.writerow(['user_id','date','steps','sedentaryMinutes','lightlyActiveMinutes','veryActiveMinutes'])
+
+    usuariosFitBit = FitbitProfile.objects.all().values_list('user_id', flat=True)
+
+    day60List = []
+    for i in range(1,61,1):
+        day60List.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
+
+    for user_id_ind in usuariosFitBit:
+        try:
+            dados60dias = getFitbitData(user=User.objects.get(id=username),dates=day60List)
+            for day in sorted(dados60dias.keys(),reverse=True):
+                writer.writerow(user_id_ind, day, dados60dias[day]["summary"]["steps"], dados60dias[day]["summary"]["sedentaryMinutes"], dados60dias[day]["summary"]["lightlyActiveMinutes"], dados60dias[day]["summary"]["veryActiveMinutes"])
+        except Exception:
+            traceback.print_exc()
+
+
+    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    return response
+
+
 def downloadUserProfileInfo(request):
     response = HttpResponse(content_type = 'text/csv')
 
     writer = csv.writer(response)
-    writer.writerow(['user_id','user','nome','sobrenome','rg','altura','peso','imagem','token','nascimento'])
+    writer.writerow(['user_id','user','nome','sobrenome','rg','altura','peso','token','nascimento'])
 
-    for row in UserProfileInfo.objects.all().values_list('user_id','user','nome','sobrenome','rg','altura','peso','imagem','token','nascimento'):
+    for row in UserProfileInfo.objects.all().values_list('user_id','user','nome','sobrenome','rg','altura','peso','token','nascimento'):
         writer.writerow(row)
 
     response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'

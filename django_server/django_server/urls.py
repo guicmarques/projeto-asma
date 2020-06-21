@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^barreirasCSV$', views.downloadBarreiras, name='barreirasCSV'),
     url(r'^AsthmaControlQuestionnaireCSV$', views.downloadAsthmaControlQuestionnaire, name='AsthmaControlQuestionnaireCSV'),
     url(r'^UserProfileInfoCSV$', views.downloadUserProfileInfo, name='downloadUserProfileInfoCSV'),
+    url(r'^FitBitDataCSV$', views.downloadFitBitData, name='downloadFitBitDataCSV'),
     url(r'^404$', views.erro_404, name='erro_404'), 
     # Uso Interno 
     re_path(r'^favicon\.ico$', favicon_view),
