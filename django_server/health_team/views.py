@@ -1271,6 +1271,18 @@ def downloadAsthmaControlQuestionnaire(request):
     response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
     return response
 
+def downloadUserProfileInfo(request):
+    response = HttpResponse(content_type = 'text/csv')
+
+    writer = csv.writer(response)
+    writer.writerow(['user_id','date','user','nome','sobrenome','rg','altura','peso','imagem','token','nascimento'])
+
+    for row in UserProfileInfo.objects.all().values_list('user_id','date','user','nome','sobrenome','rg','altura','peso','imagem','token','nascimento'):
+        writer.writerow(row)
+
+    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    return response
+
 def tableTest(request):
     return render(request, 'logged/table_test.html', {})
 
