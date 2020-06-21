@@ -33,8 +33,9 @@ urlpatterns = [
     url(r'^estatisticas.html$', views.estats, name='estatisticas'),
     url(r'^dailycontrolCSV$', views.downloadDaily, name='dailycontrol'),
     url(r'^barreirasCSV$', views.downloadBarreiras, name='barreiras'),
+    url(r'^AsthmaControlQuestionnaireCSV$', views.downloadAsthmaControlQuestionnaire, name='AsthmaControlQuestionnaire'),
     url(r'^404$', views.erro_404, name='erro_404'),
-    # Uso Interno
+    # Uso Interno 
     re_path(r'^favicon\.ico$', favicon_view),
     url(r'^2$', views.index, name='index2'),
     url(r'^special/', views.special, name='special'),
