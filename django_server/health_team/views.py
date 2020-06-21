@@ -1238,9 +1238,9 @@ def downloadDaily(request):
     response = HttpResponse(content_type = 'text/csv')
 
     writer = csv.writer(response)
-    writer.writerow(['user_id','date','pico1','pico2','pico3','tosse','chiado','faltaDeAr','acordar','bombinha','notas'])
+    writer.writerow(['user_id','date','pico1','pico2','pico3','tosse','chiado','faltaDeAr','acordar','bombinha','notes'])
 
-    for row in DailyControl.objects.all().values_list('user_id','date','pico1','pico2','pico3','tosse','chiado','faltaDeAr','acordar','bombinha','notas'):
+    for row in DailyControl.objects.all().values_list('user_id','date','pico1','pico2','pico3','tosse','chiado','faltaDeAr','acordar','bombinha','notes'):
         writer.writerow(row)
 
     response['Content-Disposition'] = 'attachment; filename="dailycontrol.csv"'
