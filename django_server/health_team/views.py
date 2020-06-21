@@ -1256,7 +1256,7 @@ def downloadDaily(request):
     for row in DailyControl.objects.all().values_list('user_id','date','pico1','pico2','pico3','tosse','chiado','faltaDeAr','acordar','bombinha','notes'):
         writer.writerow(row)
 
-    response['Content-Disposition'] = 'attachment; filename="dailycontrol.csv"'
+    response['Content-Disposition'] = 'attachment; filename="daily_control.csv"'
     return response
 
 def downloadAsthmaControlQuestionnaire(request):
@@ -1268,7 +1268,7 @@ def downloadAsthmaControlQuestionnaire(request):
     for row in AsthmaControlQuestionnaire.objects.all().values_list('user_id','date','question1','question2','question3','question4','question5','question6','question7'):
         writer.writerow(row)
 
-    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    response['Content-Disposition'] = 'attachment; filename="asthma_control_questionnaire.csv"'
     return response
 
 def downloadFitBitData(request):
@@ -1295,7 +1295,7 @@ def downloadFitBitData(request):
             traceback.print_exc()
 
     print(usuariosFitBit)
-    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    response['Content-Disposition'] = 'attachment; filename="fitbit_dados.csv"'
     return response
 
 
@@ -1308,7 +1308,7 @@ def downloadUserProfileInfo(request):
     for row in UserProfileInfo.objects.all().values_list('user_id','user','nome','sobrenome','rg','altura','peso','token','nascimento'):
         writer.writerow(row)
 
-    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    response['Content-Disposition'] = 'attachment; filename="user_profile_info.csv"'
     return response
 
 def tableTest(request):
