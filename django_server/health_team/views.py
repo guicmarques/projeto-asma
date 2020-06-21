@@ -1289,6 +1289,7 @@ def downloadFitBitData(request):
         try:
             print(user_id_ind,User.objects.get(id=user_id_ind))
             dados60dias = getFitbitData(user=User.objects.get(id=user_id_ind),dates=day60List)
+            print(dados60dias)
             for day in sorted(dados60dias.keys(),reverse=True):
                 writer.writerow(user_id_ind, day, dados60dias[day]["summary"]["steps"], dados60dias[day]["summary"]["sedentaryMinutes"], dados60dias[day]["summary"]["lightlyActiveMinutes"], dados60dias[day]["summary"]["veryActiveMinutes"])
         except Exception:
