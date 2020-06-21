@@ -44,7 +44,10 @@ INSTALLED_APPS = [
     'sslserver',
     'health_team',
     'server',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

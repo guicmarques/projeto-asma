@@ -83,6 +83,11 @@ def forgot_password(request):
     return render(request, 'health_team/forgot-password.html', {})
 
 def register_account2(request):
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+    
+
     return render(request, 'health_team/register.html', {})
 
 def register_account(request):
@@ -875,6 +880,7 @@ def pacienteGraficos2(request,username):
 
 
 #####################################################################################################################
+@login_required
 def estats(request):
     #Numero de respostas - Questionario diário
     usuariosAtivosUltimos7Dias = []
@@ -1235,6 +1241,7 @@ def estats(request):
     })
 
 ####################### Downloads #######################
+@login_required
 def downloadBarreiras(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1247,6 +1254,7 @@ def downloadBarreiras(request):
     response['Content-Disposition'] = 'attachment; filename="barreiras.csv"'
     return response
 
+@login_required
 def downloadDaily(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1259,6 +1267,7 @@ def downloadDaily(request):
     response['Content-Disposition'] = 'attachment; filename="daily_control.csv"'
     return response
 
+@login_required
 def downloadAsthmaControlQuestionnaire(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1271,6 +1280,7 @@ def downloadAsthmaControlQuestionnaire(request):
     response['Content-Disposition'] = 'attachment; filename="asthma_control_questionnaire.csv"'
     return response
 
+@login_required
 def downloadFitBitData(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1298,7 +1308,7 @@ def downloadFitBitData(request):
     response['Content-Disposition'] = 'attachment; filename="fitbit_dados.csv"'
     return response
 
-
+@login_required
 def downloadUserProfileInfo(request):
     response = HttpResponse(content_type = 'text/csv')
 
