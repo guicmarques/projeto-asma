@@ -3,7 +3,7 @@ from health_team.models import User, UserProfileInfo, AsthmaControlQuestionnaire
 
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control form-control-user'}))
 
     class Meta():
         model = User
@@ -11,7 +11,7 @@ class UserForm(forms.ModelForm):
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
             'email': forms.EmailInput(attrs={'class': 'form-control form-control-user'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control form-control-user'})
+            
         }
 
 
