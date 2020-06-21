@@ -217,8 +217,9 @@ class FitbitAuth(APIView):
             created, user = fitbitHandler.updateFbProfile(
                 accessToken, refreshToken, userId, cpf)
             if created:
-                _, fitbitData = fitbitHandler.getActivities(user)
-                return Response(fitbitData)
+                # _, fitbitData = fitbitHandler.getActivities(user)
+                # return Response(fitbitData)
+                return render(request, 'health_team/index.html')
         else:
             logging.warn(f"error gathering fitbit tokens: {userId}")
         text = userId
