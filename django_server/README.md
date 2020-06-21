@@ -87,7 +87,7 @@ $ python manage.py runsslserver 0.0.0.0:8000
     - Body: ```{"name": nome da conquista, "level": nivel da conquista (máx. 10 digitos), "quantity": quantidade para obter a conquista (máx. 10 digitos)}```
     - Response ```{"created": True ou mensagem de erro}```
 
--/rest/barriers/ - Cria uma nova entrada de barreiras para a prática. São aceitos valores de 1 a 5, correspondentes a Nunca, Raramente, Às vezes, Quase Sempre e Sempre, respectivamente. Os motivos são representados por uma palavra chave, como pode ser visto a seguir.
+- /rest/barriers/ - Cria uma nova entrada de barreiras para a prática. São aceitos valores de 1 a 5, correspondentes a Nunca, Raramente, Às vezes, Quase Sempre e Sempre, respectivamente. Os motivos são representados por uma palavra chave, como pode ser visto a seguir.
     - Authentication: Bearer ```access_token```
     - Body: ```{"interesse": valor, "tempo": valor, "energia": valor, "faltaAr": valor, "companhia": valor, "dinheiro": valor, "coisas": valor, "seguranca": valor, "clima": valor, "equipamentos": valor}```
     - Response ```{"created": True ou mensagem de erro}```
