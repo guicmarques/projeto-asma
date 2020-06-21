@@ -1277,7 +1277,7 @@ def downloadFitBitData(request):
     writer = csv.writer(response)
     writer.writerow(['user_id','date','steps','sedentaryMinutes','lightlyActiveMinutes','veryActiveMinutes'])
 
-    usuariosFitBit = FitbitProfile.objects.all().exclude(accessToken__isnull=True).values_list('user', flat=True)
+    usuariosFitBit = FitbitProfile.objects.all().exclude(accessToken__isnull=True).exclude(accessToken='').values_list('user', flat=True)
 
     
 
