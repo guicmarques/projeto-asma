@@ -150,7 +150,7 @@ def cadastroPaciente(request):
         else:
             print(user_form.errors, profile_form.errors)
     else:
-        user_form = UserForm()
+        user_form = UserFormForProfile()
         profile_form = UserProfileInfoForm()
     return render(request, 'logged/blank-12.html',
                   {'user_form': user_form,
