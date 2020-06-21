@@ -1277,7 +1277,7 @@ def downloadFitBitData(request):
     writer = csv.writer(response)
     writer.writerow(['user_id','date','steps','sedentaryMinutes','lightlyActiveMinutes','veryActiveMinutes'])
 
-    usuariosFitBit = FitbitProfile.objects.all().values_list('user', flat=True)
+    usuariosFitBit = FitbitProfile.objects.all().filter(accessToken__gt='',accessToken__isnull=False).values_list('user', flat=True)
 
     
 
@@ -1290,7 +1290,6 @@ def downloadFitBitData(request):
             print(user_id_ind,User.objects.get(id=user_id_ind))
             dados60dias = getFitbitData(user=User.objects.get(id=user_id_ind),dates=day60List)
             for day in sorted(dados60dias.keys(),reverse=True):
-                #dados_day = user_id_ind +","+day +","+ dados60dias[day]["summary"]["steps"] +"," +dados60dias[day]["summary"]["sedentaryMinutes"] +","  +","  +","  +","  +","
                 writer.writerow([user_id_ind, day, dados60dias[day]["summary"]["steps"], dados60dias[day]["summary"]["sedentaryMinutes"], dados60dias[day]["summary"]["lightlyActiveMinutes"], dados60dias[day]["summary"]["veryActiveMinutes"]])
         except Exception:
             pass
