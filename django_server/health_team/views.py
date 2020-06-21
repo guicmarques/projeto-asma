@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from health_team.forms import UserForm, UserProfileInfoForm
+from health_team.forms import UserForm, UserProfileInfoForm, UserFormForProfile
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -83,6 +83,11 @@ def forgot_password(request):
     return render(request, 'health_team/forgot-password.html', {})
 
 def register_account2(request):
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+    
+
     return render(request, 'health_team/register.html', {})
 
 def register_account(request):
@@ -132,7 +137,7 @@ def cadastroPaciente2(request):
 def cadastroPaciente(request):
     registered = False
     if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
+        user_form = UserFormForProfile(data=request.POST)
         profile_form = UserProfileInfoForm(data=request.POST)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
@@ -142,10 +147,11 @@ def cadastroPaciente(request):
             profile.user = user
             profile.save()
             registered = True
+            return HttpResponseRedirect(reverse('table'))
         else:
             print(user_form.errors, profile_form.errors)
     else:
-        user_form = UserForm()
+        user_form = UserFormForProfile()
         profile_form = UserProfileInfoForm()
     return render(request, 'logged/blank-12.html',
                   {'user_form': user_form,
@@ -875,6 +881,7 @@ def pacienteGraficos2(request,username):
 
 
 #####################################################################################################################
+@login_required
 def estats(request):
     #Numero de respostas - Questionario diário
     usuariosAtivosUltimos7Dias = []
@@ -1235,6 +1242,7 @@ def estats(request):
     })
 
 ####################### Downloads #######################
+@login_required
 def downloadBarreiras(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1247,6 +1255,7 @@ def downloadBarreiras(request):
     response['Content-Disposition'] = 'attachment; filename="barreiras.csv"'
     return response
 
+@login_required
 def downloadDaily(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1256,9 +1265,10 @@ def downloadDaily(request):
     for row in DailyControl.objects.all().values_list('user_id','date','pico1','pico2','pico3','tosse','chiado','faltaDeAr','acordar','bombinha','notes'):
         writer.writerow(row)
 
-    response['Content-Disposition'] = 'attachment; filename="dailycontrol.csv"'
+    response['Content-Disposition'] = 'attachment; filename="daily_control.csv"'
     return response
 
+@login_required
 def downloadAsthmaControlQuestionnaire(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1268,9 +1278,10 @@ def downloadAsthmaControlQuestionnaire(request):
     for row in AsthmaControlQuestionnaire.objects.all().values_list('user_id','date','question1','question2','question3','question4','question5','question6','question7'):
         writer.writerow(row)
 
-    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    response['Content-Disposition'] = 'attachment; filename="asthma_control_questionnaire.csv"'
     return response
 
+@login_required
 def downloadFitBitData(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1295,10 +1306,10 @@ def downloadFitBitData(request):
             traceback.print_exc()
 
     print(usuariosFitBit)
-    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    response['Content-Disposition'] = 'attachment; filename="fitbit_dados.csv"'
     return response
 
-
+@login_required
 def downloadUserProfileInfo(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1308,7 +1319,7 @@ def downloadUserProfileInfo(request):
     for row in UserProfileInfo.objects.all().values_list('user_id','user','nome','sobrenome','rg','altura','peso','token','nascimento'):
         writer.writerow(row)
 
-    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    response['Content-Disposition'] = 'attachment; filename="user_profile_info.csv"'
     return response
 
 def tableTest(request):

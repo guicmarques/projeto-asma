@@ -44,7 +44,10 @@ INSTALLED_APPS = [
     'sslserver',
     'health_team',
     'server',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -145,4 +148,5 @@ CORS_ORIGIN_ALLOW_ALL = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-# SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = True
+SECURE_SSL_HOST =['felipesibuya.me','3.225.179.134']
