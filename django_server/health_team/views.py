@@ -1279,6 +1279,8 @@ def downloadFitBitData(request):
 
     usuariosFitBit = FitbitProfile.objects.all().values_list('user_id', flat=True)
 
+    
+
     day60List = []
     for i in range(1,61,1):
         day60List.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
@@ -1291,7 +1293,7 @@ def downloadFitBitData(request):
         except Exception:
             traceback.print_exc()
 
-
+    print(usuariosFitBit)
     response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
     return response
 
