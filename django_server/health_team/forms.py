@@ -8,6 +8,11 @@ class UserForm(forms.ModelForm):
     class Meta():
         model = User
         fields = ('username', 'email', 'password')
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
+            'email': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
+            'password': forms.TextInput(attrs={'class': 'form-control form-control-user'})
+        }
 
 
 class UserProfileInfoForm(forms.ModelForm):
@@ -15,3 +20,5 @@ class UserProfileInfoForm(forms.ModelForm):
         model = UserProfileInfo
         fields = ('nome', 'sobrenome', 'rg', 'altura', 'peso',
                   'telefone', 'token','nascimento')
+
+
