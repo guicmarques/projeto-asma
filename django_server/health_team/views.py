@@ -1292,6 +1292,7 @@ def downloadFitBitData(request):
             for day in sorted(dados60dias.keys(),reverse=True):
                 writer.writerow(user_id_ind, day, dados60dias[day]["summary"]["steps"], dados60dias[day]["summary"]["sedentaryMinutes"], dados60dias[day]["summary"]["lightlyActiveMinutes"], dados60dias[day]["summary"]["veryActiveMinutes"])
         except Exception:
+            pass
             traceback.print_exc()
 
     print(usuariosFitBit)
