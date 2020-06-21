@@ -147,6 +147,7 @@ def cadastroPaciente(request):
             profile.user = user
             profile.save()
             registered = True
+            return HttpResponseRedirect(reverse('table'))
         else:
             print(user_form.errors, profile_form.errors)
     else:
