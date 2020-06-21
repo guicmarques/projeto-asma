@@ -15,6 +15,7 @@ import pandas as pd
 import datetime
 import time
 import traceback
+import csv
 
 from server.handleUserData import getFitbitData
 
@@ -1233,6 +1234,18 @@ def estats(request):
         'barreiras':barreiras
     })
 
+def downloadDaily(request):
+    response = HttpResponse(content_type = 'text/csv')
+
+    writer = csv.writer(response)
+    writer.writerrow(['user_id','date','pico1','pico2','pico3','tosse','chiado','faltaDeAr','acordar','bombinha','notas'])
+
+    for row in DailyControl.objects.all().values_list('user_id','date','pico1','pico2','pico3','tosse','chiado','faltaDeAr','acordar','bombinha','notas'):
+        writer.writerow(row)
+
+    response['Content-Disposition'] = 'attachment; filename="dailycontrol.csv"'
+
+    return response
 
 def tableTest(request):
     return render(request, 'logged/table_test.html', {})
