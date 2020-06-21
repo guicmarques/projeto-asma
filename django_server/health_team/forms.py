@@ -32,9 +32,9 @@ class UserProfileInfoForm(forms.ModelForm):
             'rg': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
             'altura': forms.NumberInput(attrs={'class': 'form-control form-control-user'}),
             'peso': forms.NumberInput(attrs={'class': 'form-control form-control-user'}),
-            'telefone': forms.NumberInput(attrs={'class': 'form-control form-control-user'}),
+            'telefone': forms.NumberInput(attrs={'class': 'form-control form-control-user','type':'tel'}),
             'token': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
-            'nascimento': forms.DateInput(attrs={'class': 'form-control form-control-user'}),        
+            'nascimento': forms.DateInput(attrs={'class': 'form-control form-control-user','type':'date'}),        
         }
 
 
