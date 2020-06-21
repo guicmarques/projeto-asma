@@ -14,10 +14,12 @@ import numpy as np
 import pandas as pd
 import datetime
 import time
+import traceback
+import csv
 
 from server.handleUserData import getFitbitData
 
-from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, DailyControl, PracticeBarriers
+from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, DailyControl, PracticeBarriers,FitbitProfile
 
 def index(request):
     return render(request, 'health_team/index.html')
@@ -358,8 +360,8 @@ def pacienteGraficos2(request,username):
         for i in range(1,61,1):
             day60List.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
 
-
-        dados60dias = getFitbitData(user=username,dates=day60List)
+        
+        dados60dias = getFitbitData(user=User.objects.get(id=username),dates=day60List)
         #print(dados7dias)
 
         dados7diasSteps = 0
@@ -394,7 +396,8 @@ def pacienteGraficos2(request,username):
             listaVeryActiveMinutes.append(dados60dias[day]["summary"]["veryActiveMinutes"])
             listaDiaFitbit.append(day)
     
-    except:
+    except Exception:
+        traceback.print_exc()
         dados7diasSteps = 0
         dados7diasSedentaryMinutes = 0
         dados7diasLightlyActiveMinutes = 0
@@ -522,6 +525,7 @@ def pacienteGraficos2(request,username):
             type="date"
         )
     )
+    fig.update_yaxes( range=[150,600] )
     figFluxoAr = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
     #Grafico de questionario semanal
@@ -693,7 +697,7 @@ def pacienteGraficos2(request,username):
         fig_inside = go.Bar(
                 visible=False,
                 name=dates[step],
-                x= ["Não tenho interesse","Falta de tempo","Não tenho energia ou disposição","Tenho medo de sentir falta de ar","Não tenho companhia ou incentivo","Não tenho dinheiro","Tenho muitas coisas para fazer","Não tenho um local seguro","Por causa do clima","Não tenho equipamentos"],
+                x= ["Não tenho interesse","Falta de tempo","Não tenho energia<br>ou disposição","Tenho medo de sentir<br>falta de ar","Não tenho companhia<br>ou incentivo","Não tenho dinheiro","Tenho muitas coisas<br>para fazer","Não tenho um<br>local seguro","Por causa do clima","Não tenho equipamentos"],
                 y= [int(a[step])-0.9,int(b[step])-0.9,int(c[step])-0.9,int(d[step])-0.9,int(e[step])-0.9,int(f[step])-0.9,int(g[step])-0.9,int(h[step])-0.9,int(i[step])-0.9,int(j[step])-0.9], 
                 text = dates[step]
         )
@@ -736,6 +740,9 @@ def pacienteGraficos2(request,username):
     for i, date in enumerate(dates, start = 0):
         fig['layout']['sliders'][0]['steps'][i]['label']=dates[i]
 
+    fig['layout'].update(
+        height=600
+    )
     barreiras = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
@@ -745,28 +752,28 @@ def pacienteGraficos2(request,username):
     fig.add_trace(go.Indicator(
         mode = "number+delta",
         value = dados7diasSedentaryMinutes,
-        title = {"text": "Média de minutos<br>sedentários<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        title = {"text": "Total de minutos<br>sedentários<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
         domain = {'x': [0, 0.25], 'y': [0, 1]},
         delta = {'reference': dados7PasdiasSedentaryMinutes, 'relative': True}))
 
     fig.add_trace(go.Indicator(
         mode = "number+delta",
         value = dados7diasVeryActiveMinutes,
-        title = {"text": "Média de minutos<br>em atividade<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        title = {"text": "Total de minutos<br>em atividade<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
         delta = {'reference': dados7PasdiasVeryActiveMinutes, 'relative': True},
         domain = {'x': [0.26, 0.5], 'y': [0, 1]}))
 
     fig.add_trace(go.Indicator(
         mode = "number+delta",
         value = dados7diasLightlyActiveMinutes,
-        title = {"text": "Média de minutos<br>em atividade leve<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        title = {"text": "Total de minutos<br>em atividade leve<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
         delta = {'reference': dados7PasdiasLightlyActiveMinutes, 'relative': True},
         domain = {'x': [0.51, 0.75], 'y': [0, 1]}))
 
     fig.add_trace(go.Indicator(
         mode = "number+delta",
         value = dados7diasSteps,
-        title = {"text": "Média de passos<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        title = {"text": "Total de passos<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
         delta = {'reference': dados7PasdiasSteps, 'relative': True},
         domain = {'x': [0.76, 1], 'y': [0, 1]}))
 
@@ -865,6 +872,444 @@ def pacienteGraficos2(request,username):
             'figFitBitData':figFitBitData
             }
         )
+
+
+#####################################################################################################################
+def estats(request):
+    #Numero de respostas - Questionario diário
+    usuariosAtivosUltimos7Dias = []
+    usuariosAtivosPenultimos7Dias = []
+    try:
+        #Ultimos 7
+        date7dayback = (datetime.datetime.today() - datetime.timedelta(days=7))#.strftime("%Y-%m-%d")
+        dailycontrol = DailyControl.objects.all().filter(date__gte=date7dayback)
+        numQuestDiarioUltimos7dias=len(dailycontrol)
+        usuariosAtivosUltimos7Dias.extend(dailycontrol.values_list('user_id', flat=True))
+        #Ultimos 7
+        date8dayback = (datetime.datetime.today() - datetime.timedelta(days=8))#.strftime("%Y-%m-%d")
+        date14dayback = (datetime.datetime.today() - datetime.timedelta(days=14))#.strftime("%Y-%m-%d")
+        dailycontrol = DailyControl.objects.all().filter(date__lte=date8dayback).filter(date__gte=date14dayback)
+        numQuestDiarioPenultimos7dias=len(dailycontrol)
+        usuariosAtivosPenultimos7Dias.extend(dailycontrol.values_list('user_id', flat=True))
+    except:
+        numQuestDiarioUltimos7dias=0
+        numQuestDiarioPenultimos7dias=0
+    
+    #Numero de respostas - Questionario diário
+    try:
+        #Ultimos 7
+        date7dayback = (datetime.datetime.today() - datetime.timedelta(days=7))#.strftime("%Y-%m-%d")
+        asthmaControlData = AsthmaControlQuestionnaire.objects.all().filter(date__gte=date7dayback)
+        numAsthmaControlUltimos7dias=len(asthmaControlData)
+        usuariosAtivosUltimos7Dias.extend(dailycontrol.values_list('user_id', flat=True))
+        #Ultimos 7
+        date8dayback = (datetime.datetime.today() - datetime.timedelta(days=8))#.strftime("%Y-%m-%d")
+        date14dayback = (datetime.datetime.today() - datetime.timedelta(days=14))#.strftime("%Y-%m-%d")
+        asthmaControlData = AsthmaControlQuestionnaire.objects.all().filter(date__lte=date8dayback).filter(date__gte=date14dayback)
+        numAsthmaControlPenultimos7dias=len(asthmaControlData)
+        usuariosAtivosPenultimos7Dias.extend(dailycontrol.values_list('user_id', flat=True))
+    except:
+        numAsthmaControlUltimos7dias=0
+        numAsthmaControlPenultimos7dias=0
+    
+    #Numero de respostas - Questionario diário
+    try:
+        #Ultimos 7
+        date7dayback = (datetime.datetime.today() - datetime.timedelta(days=7))#.strftime("%Y-%m-%d")
+        barreirasData = PracticeBarriers.objects.all().filter(date__gte=date7dayback)
+        numBarreirasUltimos7dias=len(barreirasData)
+        usuariosAtivosUltimos7Dias.extend(dailycontrol.values_list('user_id', flat=True))
+        #Ultimos 7
+        date8dayback = (datetime.datetime.today() - datetime.timedelta(days=8))#.strftime("%Y-%m-%d")
+        date14dayback = (datetime.datetime.today() - datetime.timedelta(days=14))#.strftime("%Y-%m-%d")
+        barreirasData = PracticeBarriers.objects.all().filter(date__lte=date8dayback).filter(date__gte=date14dayback)
+        numBarreirasPenultimos7dias=len(barreirasData)
+        usuariosAtivosPenultimos7Dias.extend(dailycontrol.values_list('user_id', flat=True))
+    except:
+        numBarreirasUltimos7dias=0
+        numBarreirasPenultimos7dias=0
+
+    # Questionario Diario
+    try:
+        date30dayback = (datetime.datetime.today() - datetime.timedelta(days=30))
+        dailycontrolLista = DailyControl.objects.all().filter(date__gte=date30dayback)
+        listaDatasDailyControl = []
+        dadosDailyControlDict = {
+            'tosse': dict(texto= "Apresentou tosse?", lista_sim=[], lista_nao =[]),
+            'chiado': dict(texto= "Apresentou chiado?", lista_sim=[], lista_nao =[]),
+            'ar': dict(texto= "Teve falta de ar?", lista_sim=[], lista_nao =[]),
+            'dormir': dict(texto= "Teve problemas ao dormir?", lista_sim=[], lista_nao =[]),
+            'bombinha': dict(texto= "Usou a bombinha?", lista_sim=[], lista_nao =[])
+        }
+        for i in range(0,31,1):
+            listaDatasDailyControl.append((datetime.datetime.today() - datetime.timedelta(days=30) + datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
+            dailycontrol = dailycontrolLista.filter(date=(datetime.datetime.today() - datetime.timedelta(days=30) + datetime.timedelta(days=i)))
+
+            lista_tosse = dailycontrol.values_list('tosse', flat=True)
+            dadosDailyControlDict['tosse']['lista_sim'].append(sum(lista_tosse))
+            dadosDailyControlDict['tosse']['lista_nao'].append(len(lista_tosse) - sum(lista_tosse))
+
+            lista_chiado = dailycontrol.values_list('chiado', flat=True)
+            dadosDailyControlDict['chiado']['lista_sim'].append(sum(lista_chiado))
+            dadosDailyControlDict['chiado']['lista_nao'].append(len(lista_chiado) - sum(lista_chiado))
+
+            lista_faltaDeAr = dailycontrol.values_list('faltaDeAr', flat=True)
+            dadosDailyControlDict['ar']['lista_sim'].append(sum(lista_faltaDeAr))
+            dadosDailyControlDict['ar']['lista_nao'].append(len(lista_faltaDeAr) - sum(lista_faltaDeAr))
+
+            lista_acordar = dailycontrol.values_list('acordar', flat=True)
+            dadosDailyControlDict['dormir']['lista_sim'].append(sum(lista_acordar))
+            dadosDailyControlDict['dormir']['lista_nao'].append(len(lista_acordar) - sum(lista_acordar))
+
+            lista_bombinha = dailycontrol.values_list('bombinha', flat=True)
+            dadosDailyControlDict['bombinha']['lista_sim'].append(sum(lista_bombinha))
+            dadosDailyControlDict['bombinha']['lista_nao'].append(len(lista_bombinha) - sum(lista_bombinha))
+
+
+
+    except Exception:
+        traceback.print_exc()
+        listaDatasDailyControl = ["0000-00-00"]
+        dadosDailyControlDict = {
+            'tosse': dict(texto= "Apresentou tosse?", lista_sim=[0], lista_nao =[0]),
+            'chiado': dict(texto= "Apresentou chiado?", lista_sim=[0], lista_nao =[0]),
+            'ar': dict(texto= "Teve falta de ar?", lista_sim=[0], lista_nao =[0]),
+            'dormir': dict(texto= "Teve problemas ao dormir?", lista_sim=[0], lista_nao =[0]),
+            'bombinha': dict(texto= "Usou a bombinha?", lista_sim=[0], lista_nao =[0])
+        }
+
+    # Questionario Barreiras
+    try:
+        date30dayback = (datetime.datetime.today() - datetime.timedelta(days=30))
+        barreiras_list = PracticeBarriers.objects.all().filter(date__gte=date30dayback)
+        listaBarreiraNames = ["Não tenho interesse","Falta de tempo","Não tenho energia<br>ou disposição","Tenho medo de sentir<br>falta de ar","Não tenho companhia<br>ou incentivo","Não tenho dinheiro","Tenho muitas coisas<br>para fazer","Não tenho um<br>local seguro","Por causa do clima","Não tenho equipamentos"]
+        lista_nunca=[]
+        lista_raramente =[]
+        lista_vezes =[]
+        lista_quase =[]
+        lista_sempre =[]
+        
+        barreiraValor = barreiras_list#.order_by('user_id', 'date')#.distinct('user_id')
+
+        lista_simples = barreiraValor.values_list('interesse', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x=="0"]))
+        lista_raramente.append(len([1 for x in lista_simples if x=="1"]))
+        lista_vezes.append(len([1 for x in lista_simples if x=="2"]))
+        lista_quase.append(len([1 for x in lista_simples if x=="3"]))
+        lista_sempre.append(len([1 for x in lista_simples if x=="4"]))
+
+        lista_simples = barreiraValor.values_list('tempo', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x=="0"]))
+        lista_raramente.append(len([1 for x in lista_simples if x=="1"]))
+        lista_vezes.append(len([1 for x in lista_simples if x=="2"]))
+        lista_quase.append(len([1 for x in lista_simples if x=="3"]))
+        lista_sempre.append(len([1 for x in lista_simples if x=="4"]))
+
+        lista_simples = barreiraValor.values_list('energia', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x=="0"]))
+        lista_raramente.append(len([1 for x in lista_simples if x=="1"]))
+        lista_vezes.append(len([1 for x in lista_simples if x=="2"]))
+        lista_quase.append(len([1 for x in lista_simples if x=="3"]))
+        lista_sempre.append(len([1 for x in lista_simples if x=="4"]))
+
+        lista_simples = barreiraValor.values_list('faltaAr', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x=="0"]))
+        lista_raramente.append(len([1 for x in lista_simples if x=="1"]))
+        lista_vezes.append(len([1 for x in lista_simples if x=="2"]))
+        lista_quase.append(len([1 for x in lista_simples if x=="3"]))
+        lista_sempre.append(len([1 for x in lista_simples if x=="4"]))
+
+        lista_simples = barreiraValor.values_list('companhia', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x=="0"]))
+        lista_raramente.append(len([1 for x in lista_simples if x=="1"]))
+        lista_vezes.append(len([1 for x in lista_simples if x=="2"]))
+        lista_quase.append(len([1 for x in lista_simples if x=="3"]))
+        lista_sempre.append(len([1 for x in lista_simples if x=="4"]))
+
+        lista_simples = barreiraValor.values_list('dinheiro', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x=="0"]))
+        lista_raramente.append(len([1 for x in lista_simples if x=="1"]))
+        lista_vezes.append(len([1 for x in lista_simples if x=="2"]))
+        lista_quase.append(len([1 for x in lista_simples if x=="3"]))
+        lista_sempre.append(len([1 for x in lista_simples if x=="4"]))
+
+        lista_simples = barreiraValor.values_list('coisas', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x=="0"]))
+        lista_raramente.append(len([1 for x in lista_simples if x=="1"]))
+        lista_vezes.append(len([1 for x in lista_simples if x=="2"]))
+        lista_quase.append(len([1 for x in lista_simples if x=="3"]))
+        lista_sempre.append(len([1 for x in lista_simples if x=="4"]))
+
+        lista_simples = barreiraValor.values_list('seguranca', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x=="0"]))
+        lista_raramente.append(len([1 for x in lista_simples if x=="1"]))
+        lista_vezes.append(len([1 for x in lista_simples if x=="2"]))
+        lista_quase.append(len([1 for x in lista_simples if x=="3"]))
+        lista_sempre.append(len([1 for x in lista_simples if x=="4"]))
+
+        lista_simples = barreiraValor.values_list('clima', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x=="0"]))
+        lista_raramente.append(len([1 for x in lista_simples if x=="1"]))
+        lista_vezes.append(len([1 for x in lista_simples if x=="2"]))
+        lista_quase.append(len([1 for x in lista_simples if x=="3"]))
+        lista_sempre.append(len([1 for x in lista_simples if x=="4"]))
+
+        lista_simples = barreiraValor.values_list('equipamentos', flat=True)
+        lista_nunca.append(len([1  for x in lista_simples if x=="0"]))
+        lista_raramente.append(len([1 for x in lista_simples if x=="1"]))
+        lista_vezes.append(len([1 for x in lista_simples if x=="2"]))
+        lista_quase.append(len([1 for x in lista_simples if x=="3"]))
+        lista_sempre.append(len([1 for x in lista_simples if x=="4"]))
+
+
+
+    except Exception:
+        print("Algo")
+        traceback.print_exc()
+        listaBarreiraNames = ["Não tenho interesse","Falta de tempo","Não tenho energia<br>ou disposição","Tenho medo de sentir<br>falta de ar","Não tenho companhia<br>ou incentivo","Não tenho dinheiro","Tenho muitas coisas<br>para fazer","Não tenho um<br>local seguro","Por causa do clima","Não tenho equipamentos"]
+        lista_nunca=[0 for x in listaBarreiraNames]
+        lista_raramente =[0 for x in listaBarreiraNames]
+        lista_vezes =[0 for x in listaBarreiraNames]
+        lista_quase =[0 for x in listaBarreiraNames]
+        lista_sempre =[0 for x in listaBarreiraNames]
+
+    # 7 days
+    fig = go.Figure()
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = numQuestDiarioUltimos7dias,
+        title = {"text": "Respostas<br>Questionário diário<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        domain = {'x': [0, 0.25], 'y': [0, 1]},
+        delta = {'reference': numQuestDiarioPenultimos7dias, 'relative': True}))
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = numAsthmaControlUltimos7dias,
+        title = {"text": "Respostas<br>Controle de Asma<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': numAsthmaControlPenultimos7dias, 'relative': True},
+        domain = {'x': [0.26, 0.5], 'y': [0, 1]}))
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = numBarreirasUltimos7dias,
+        title = {"text": "Respostas<br>Questionário de barreiras<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': numBarreirasPenultimos7dias, 'relative': True},
+        domain = {'x': [0.51, 0.75], 'y': [0, 1]}))
+
+    fig.add_trace(go.Indicator(
+        mode = "number+delta",
+        value = len(list(set(usuariosAtivosUltimos7Dias))),
+        title = {"text": "Usuários ativos<br>Questionários<br><span style='font-size:0.8em;color:gray'>últimos 7 dias</span><br>"},
+        delta = {'reference': len(list(set(usuariosAtivosPenultimos7Dias))), 'relative': True},
+        domain = {'x': [0.76, 1], 'y': [0, 1]}))
+
+    fitbit7dias = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+    print(list(set(usuariosAtivosUltimos7Dias)))
+    print(list(set(usuariosAtivosPenultimos7Dias)))
+
+
+    # Graph Stacked - Daily
+    x=listaDatasDailyControl
+    fig = go.Figure()
+    cont = 0
+    for k in list(dadosDailyControlDict.keys()):
+        print(dadosDailyControlDict[k]['lista_sim'],dadosDailyControlDict[k]['lista_nao'])
+        fig.add_trace(go.Scatter(
+            x=x, y=dadosDailyControlDict[k]['lista_sim'],
+            mode='lines',
+            name="Sim",
+            visible=cont==0,
+            line=dict(width=0.5, color='rgb(241, 111, 108)'),
+            stackgroup=dadosDailyControlDict[k]['texto'],
+            groupnorm='percent' # sets the normalization for the sum of the stackgroup
+        ))
+
+        fig.add_trace(go.Scatter(
+            x=x, y=dadosDailyControlDict[k]['lista_nao'],
+            mode='lines',
+            name="Não",
+            visible=cont==0,
+            line=dict(width=0.5, color='rgb(148, 212, 131)'),
+            stackgroup=dadosDailyControlDict[k]['texto'],
+            groupnorm='percent' # sets the normalization for the sum of the stackgroup
+        ))
+        cont +=1
+
+    lista_valores = []
+    cont = 0
+    for k in list(dadosDailyControlDict.keys()):
+        lista_false = [False]*2*len(list(dadosDailyControlDict.keys()))
+        lista_false[cont] = True
+        lista_false[cont+1] = True
+        lista_valores.append(
+            dict(
+                label=k,
+                method="update",
+                args=[{"visible": lista_false[:]},
+                    {"title": dadosDailyControlDict[k]['texto']}])
+        )
+        cont+=2
+
+    fig.update_layout(
+        showlegend=True,
+        xaxis_type='category',
+        yaxis=dict(
+            type='linear',
+            range=[1, 100],
+            ticksuffix='%'))
+
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction="right",
+                active=0,
+                x=0.57,
+                y=1.2,
+                buttons=lista_valores,
+            )
+        ])
+
+    # Set title
+    fig.update_layout(
+        title_text="Apresentou tosse?",
+        xaxis_domain=[0.05, 1.0]
+    )
+    
+    stacked = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
+
+    #### Graph Barreiras
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(
+        x=listaBarreiraNames, y=lista_nunca,
+        mode='lines',
+        name="Nunca",
+        line=dict(width=0.5, color='rgb(86, 217, 86)'),
+        stackgroup="A",
+        groupnorm='percent' # sets the normalization for the sum of the stackgroup
+    ))
+    fig.add_trace(go.Scatter(
+        x=listaBarreiraNames, y=lista_raramente,
+        mode='lines',
+        name="Raramente",
+        line=dict(width=0.5, color='rgb(166, 217, 24)'),
+        stackgroup="A",
+        groupnorm='percent' # sets the normalization for the sum of the stackgroup
+    ))
+    fig.add_trace(go.Scatter(
+        x=listaBarreiraNames, y=lista_vezes,
+        mode='lines',
+        name="Às vezes",
+        line=dict(width=0.5, color='rgb(217, 217, 24)'),
+        stackgroup="A",
+        groupnorm='percent' # sets the normalization for the sum of the stackgroup
+    ))
+    fig.add_trace(go.Scatter(
+        x=listaBarreiraNames, y=lista_quase,
+        mode='lines',
+        name="Quase sempre",
+        line=dict(width=0.5, color='rgb(209, 80, 61)'),
+        stackgroup="A",
+        groupnorm='percent' # sets the normalization for the sum of the stackgroup
+    ))
+    fig.add_trace(go.Scatter(
+        x=listaBarreiraNames, y=lista_sempre,
+        mode='lines',
+        name="Sempre",
+        line=dict(width=0.5, color='rgb(245, 67, 31)'),
+        stackgroup="A",
+        groupnorm='percent' # sets the normalization for the sum of the stackgroup
+    ))
+
+    barreiras = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
+
+
+    return render(request, 'logged/estats.html', context={
+        'fitbit7dias':fitbit7dias,
+        'stacked' : stacked,
+        'barreiras':barreiras
+    })
+
+####################### Downloads #######################
+def downloadBarreiras(request):
+    response = HttpResponse(content_type = 'text/csv')
+
+    writer = csv.writer(response)
+    writer.writerow(['user_id','date','interesse','tempo','energia','faltaAr','companhia','dinheiro','coisas','seguranca','clima','equipamentos'])
+
+    for row in PracticeBarriers.objects.all().values_list('user_id','date','interesse','tempo','energia','faltaAr','companhia','dinheiro','coisas','seguranca','clima','equipamentos'):
+        writer.writerow(row)
+
+    response['Content-Disposition'] = 'attachment; filename="barreiras.csv"'
+    return response
+
+def downloadDaily(request):
+    response = HttpResponse(content_type = 'text/csv')
+
+    writer = csv.writer(response)
+    writer.writerow(['user_id','date','pico1','pico2','pico3','tosse','chiado','faltaDeAr','acordar','bombinha','notes'])
+
+    for row in DailyControl.objects.all().values_list('user_id','date','pico1','pico2','pico3','tosse','chiado','faltaDeAr','acordar','bombinha','notes'):
+        writer.writerow(row)
+
+    response['Content-Disposition'] = 'attachment; filename="dailycontrol.csv"'
+    return response
+
+def downloadAsthmaControlQuestionnaire(request):
+    response = HttpResponse(content_type = 'text/csv')
+
+    writer = csv.writer(response)
+    writer.writerow(['user_id','date','question1','question2','question3','question4','question5','question6','question7'])
+
+    for row in AsthmaControlQuestionnaire.objects.all().values_list('user_id','date','question1','question2','question3','question4','question5','question6','question7'):
+        writer.writerow(row)
+
+    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    return response
+
+def downloadFitBitData(request):
+    response = HttpResponse(content_type = 'text/csv')
+
+    writer = csv.writer(response)
+    writer.writerow(['user_id','date','steps','sedentaryMinutes','lightlyActiveMinutes','veryActiveMinutes'])
+
+    usuariosFitBit = FitbitProfile.objects.all().exclude(accessToken__isnull=True).exclude(accessToken='').values_list('user', flat=True)
+
+    
+
+    day60List = []
+    for i in range(1,61,1):
+        day60List.append((datetime.datetime.today() - datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
+
+    for user_id_ind in usuariosFitBit:
+        try:
+            print(user_id_ind,User.objects.get(id=user_id_ind))
+            dados60dias = getFitbitData(user=User.objects.get(id=user_id_ind),dates=day60List)
+            for day in sorted(dados60dias.keys(),reverse=True):
+                writer.writerow([user_id_ind, day, dados60dias[day]["summary"]["steps"], dados60dias[day]["summary"]["sedentaryMinutes"], dados60dias[day]["summary"]["lightlyActiveMinutes"], dados60dias[day]["summary"]["veryActiveMinutes"]])
+        except Exception:
+            traceback.print_exc()
+
+    print(usuariosFitBit)
+    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    return response
+
+
+def downloadUserProfileInfo(request):
+    response = HttpResponse(content_type = 'text/csv')
+
+    writer = csv.writer(response)
+    writer.writerow(['user_id','user','nome','sobrenome','rg','altura','peso','token','nascimento'])
+
+    for row in UserProfileInfo.objects.all().values_list('user_id','user','nome','sobrenome','rg','altura','peso','token','nascimento'):
+        writer.writerow(row)
+
+    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    return response
 
 def tableTest(request):
     return render(request, 'logged/table_test.html', {})
