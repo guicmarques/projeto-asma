@@ -22,3 +22,15 @@ class UserProfileInfoForm(forms.ModelForm):
                   'telefone', 'token','nascimento')
 
 
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
+            'sobrenome': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
+            'rg': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
+            'altura': forms.NumberInput(attrs={'class': 'form-control form-control-user'}),
+            'peso': forms.NumberInput(attrs={'class': 'form-control form-control-user'}),
+            'telefone': forms.NumberInput(attrs={'class': 'form-control form-control-user'}),
+            'RGHC': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
+            'nascimento': forms.DateInput(attrs={'class': 'form-control form-control-user'}),        
+        }
+
+
