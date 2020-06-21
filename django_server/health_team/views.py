@@ -1234,6 +1234,19 @@ def estats(request):
         'barreiras':barreiras
     })
 
+####################### Downloads #######################
+def downloadBarreiras(request):
+    response = HttpResponse(content_type = 'text/csv')
+
+    writer = csv.writer(response)
+    writer.writerow(['user_id','date','interesse','tempo','energia','faltaAr','companhia','dinheiro','coisas','seguranca','clima','equipamentos'])
+
+    for row in PracticeBarriers.objects.all().values_list('user_id','date','interesse','tempo','energia','faltaAr','companhia','dinheiro','coisas','seguranca','clima','equipamentos'):
+        writer.writerow(row)
+
+    response['Content-Disposition'] = 'attachment; filename="barreiras.csv"'
+    return response
+
 def downloadDaily(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1244,7 +1257,6 @@ def downloadDaily(request):
         writer.writerow(row)
 
     response['Content-Disposition'] = 'attachment; filename="dailycontrol.csv"'
-
     return response
 
 def tableTest(request):
