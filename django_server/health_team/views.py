@@ -1244,17 +1244,18 @@ def estats(request):
 
 
 def pageMetas(request,username):
-    print(dir(request))
-    print(request,request.path,request.get_full_path)
     testeExec = False
     if request.method == 'POST':
+        print("T")
         goalform = GoalForm(data=request.POST)
         if goalform.is_valid():
             goalformD = goalform.save(commit=False)
             goalformD.user = User.objects.get(id=username)
             goalformD.save()
+            print("T2")
             return HttpResponseRedirect(request.path)
         else:
+            print("T1")
             testeExec = True
     else:
         testeExec = True
@@ -1274,6 +1275,7 @@ def pageMetas(request,username):
             
         print(metasDadosLista)
         goalform = GoalForm()
+    print("T3")
     return render(request, 'logged/metas.html',{'metasDadosLista':metasDadosLista,'goalform':goalform})
 ####################### Downloads #######################
 @login_required
