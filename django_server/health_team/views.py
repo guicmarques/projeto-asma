@@ -1251,7 +1251,7 @@ def pageMetas(request,username):
             goalformD.user = User.objects.get(id=username)
             goalformD.save()
 
-    if True:
+    else:
         try:
             date60dayback = (datetime.datetime.today() - datetime.timedelta(days=60))
             metasDados = Goal.objects.all().filter(user_id=username).filter(startDate__gte=date60dayback)
