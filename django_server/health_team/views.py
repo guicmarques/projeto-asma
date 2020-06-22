@@ -1243,6 +1243,12 @@ def estats(request):
 
 
 def pageMetas(request,username):
+    try:
+        date60dayback = (datetime.datetime.today() - datetime.timedelta(days=60))
+        metasDados = Goal.objects.all().filter(user_id=username).filter(startDate__gte=date60dayback)
+    except:
+        pass
+
     return render(request, 'logged/metas.html',{})
 ####################### Downloads #######################
 @login_required
@@ -1251,6 +1257,8 @@ def downloadBarreiras(request):
 
     writer = csv.writer(response)
     writer.writerow(['user_id','date','interesse','tempo','energia','faltaAr','companhia','dinheiro','coisas','seguranca','clima','equipamentos'])
+
+    print(PracticeBarriers.objects.all().values_list('user_id','date','interesse','tempo','energia','faltaAr','companhia','dinheiro','coisas','seguranca','clima','equipamentos'))
 
     for row in PracticeBarriers.objects.all().values_list('user_id','date','interesse','tempo','energia','faltaAr','companhia','dinheiro','coisas','seguranca','clima','equipamentos'):
         writer.writerow(row)
