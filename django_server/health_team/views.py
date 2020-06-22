@@ -321,16 +321,57 @@ def pacienteGraficos2(request,username):
         barreiras_list = PracticeBarriers.objects.all().filter(user_id=username)
         if len(barreiras_list)!=0:
             for barreiras in barreiras_list:
-                listaInteresse.append(barreiras.interesse)
-                listaTempo.append(barreiras.tempo)
-                listaEnergia.append(barreiras.energia)
-                listaFaltaAr.append(barreiras.faltaAr)
-                listaCompanhia.append(barreiras.companhia)
-                listaDinheiro.append(barreiras.dinheiro)
-                listaCoisa.append(barreiras.coisas)
-                listaSeguranca.append(barreiras.seguranca)
-                listaClima.append(barreiras.clima)
-                listaEquipamentos.append(barreiras.equipamentos)
+
+                if barreiras.interesse != None:
+                    listaInteresse.append(barreiras.interesse)
+                else:
+                    listaInteresse.append('0')
+                
+                if barreiras.tempo != None:
+                    listaTempo.append(barreiras.tempo)
+                else:
+                    listaTempo.append('0')
+
+                if barreiras.energia != None:
+                    listaEnergia.append(barreiras.energia)
+                else:
+                    listaEnergia.append('0')
+
+                if barreiras.faltaAr != None:
+                    listaFaltaAr.append(barreiras.faltaAr)
+                else:
+                    listaFaltaAr.append('0')
+                
+                if barreiras.companhia != None:
+                    listaCompanhia.append(barreiras.companhia)
+                else:
+                    listaCompanhia.append('0')
+                
+                if barreiras.dinheiro != None:
+                    listaDinheiro.append(barreiras.dinheiro)
+                else:
+                    listaDinheiro.append('0')
+                
+                if barreiras.coisas != None:
+                    listaCoisa.append(barreiras.coisas)
+                else:
+                    listaCoisa.append('0')
+
+                if barreiras.seguranca != None:
+                    listaSeguranca.append(barreiras.seguranca)
+                else:
+                    listaSeguranca.append('0')
+
+                if barreiras.clima != None:
+                    listaClima.append(barreiras.clima)
+                else:
+                    listaClima.append('0')
+
+                if barreiras.equipamentos != None:
+                    listaEquipamentos.append(barreiras.equipamentos)
+                else:
+                    listaEquipamentos.append('0')
+
                 listaDate3.append(barreiras.date.strftime("%Y-%m-%d"))
         else:
             print("Não tem - Barreiras")
