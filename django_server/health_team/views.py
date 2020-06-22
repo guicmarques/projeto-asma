@@ -1245,6 +1245,7 @@ def estats(request):
 
 def pageMetas(request,username):
     print(dir(request))
+    print(request,request.path,request.get_full_path)
     testeExec = False
     if request.method == 'POST':
         goalform = GoalForm(data=request.POST)
