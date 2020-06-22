@@ -1249,7 +1249,7 @@ def pageMetas(request,username):
         print("T")
         goalform = GoalForm(data=request.POST)
         if goalform.is_valid():
-            goalformD = goalform.save(commit=False)
+            goalformD = goalform.save()
             goalformD.user = User.objects.get(id=username)
             goalformD.save()
             print("T2")
