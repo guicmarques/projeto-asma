@@ -1254,7 +1254,7 @@ def pageMetas(request,username):
     except:
         metasDadosLista =[('Falha',0,'Falha','0000-00-00','0000-00-00')]
         
-
+    print(metasDadosLista)
     return render(request, 'logged/metas.html',{'metasDadosLista':metasDadosLista})
 ####################### Downloads #######################
 @login_required
