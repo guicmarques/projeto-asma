@@ -1251,7 +1251,8 @@ def pageMetas(request,username):
         else:
             metasDadosLista =[('Vazio',0,'Vazio','0000-00-00','0000-00-00')]
         print(metasDadosLista)
-    except:
+    except Exception:
+        traceback.print_exc()
         metasDadosLista =[('Falha',0,'Falha','0000-00-00','0000-00-00')]
         
     print(metasDadosLista)
