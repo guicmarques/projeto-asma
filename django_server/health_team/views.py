@@ -1244,14 +1244,20 @@ def estats(request):
 
 
 def pageMetas(request,username):
+    print(dir(request))
+    testeExec = False
     if request.method == 'POST':
         goalform = GoalForm(data=request.POST)
         if goalform.is_valid():
             goalformD = goalform.save(commit=False)
             goalformD.user = User.objects.get(id=username)
             goalformD.save()
-
+        else:
+            testeExec = True
     else:
+        testeExec = True
+
+    if testeExec:
         try:
             date60dayback = (datetime.datetime.today() - datetime.timedelta(days=60))
             metasDados = Goal.objects.all().filter(user_id=username).filter(startDate__gte=date60dayback)
