@@ -1,3 +1,4 @@
+import { CalendarioComponent } from './calendario/calendario.component';
 import { SaveButtonComponent } from './save-button/save-button.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,7 +17,7 @@ import { DiarioPage } from './diario.page';
     IonicModule,
     DiarioPageRoutingModule
   ],
-  declarations: [DiarioPage, SaveButtonComponent]
+  declarations: [DiarioPage, SaveButtonComponent, CalendarioComponent]
   
 })
 export class DiarioPageModule {}

@@ -1,3 +1,4 @@
+import { GestureController, Gesture } from '@ionic/angular';
 import { EventService } from './../../services/event.service';
 import { Subscription } from 'rxjs';
 import { BarrierService } from './../../services/barrier.service';
@@ -7,7 +8,7 @@ import { AlertService } from './../../services/alert.service';
 import { DiaryService } from './../../services/diary.service';
 import { Diary } from './../../models/diary.model';
 import { DateService } from './../../services/date.service';
-import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-diario',
@@ -16,7 +17,7 @@ import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 })
 
 export class DiarioPage implements OnInit {
-  daysName: string[] = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+  daysName: string[] = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
   dayName: string;
   day: string;
   month: string;
@@ -61,7 +62,9 @@ export class DiarioPage implements OnInit {
               private questionnaireService: QuestionnaireService,
               private barriersService: BarrierService,
               private eventService: EventService,
-              private animationService: AnimationsService) {
+              private animationService: AnimationsService,
+              private gestureCtrl: GestureController,
+              private renderer: Renderer2) {
 
     this.eventService.subscribe('ACQAnswered', bool => {
       this.showACQ = bool;
@@ -70,11 +73,33 @@ export class DiarioPage implements OnInit {
     this.eventService.subscribe('barriersAnswered', bool => {
       this.showBarriers = bool;
     });
+
+    this.eventService.subscribe('calendarDayChanged', (data: any) => {
+      let selectedDay = data.newDate[0];
+      let selectedMonth = data.newDate[1];
+      let selectedYear = data.newDate[2];
+
+      let auxDay = selectedDay.toString();
+      let auxMonth = selectedMonth.toString().padStart(2, '0');
+      let auxYear = selectedYear.toString();
+      this.week = this.dateService.getWeek(selectedDay, selectedMonth - 1, selectedYear);
+
+      if (this.week.find(element => element[0] === this.day && element[1] === this.dateService.getMonthNumber(this.month) 
+      && element[2] === this.year)) {
+        this.week = this.dateService.getWeek(+this.day, +this.dateService.getMonthNumber(this.month) - 1, +this.year);
+      } else {
+        this.week.forEach(element => {
+          element[3] = 'before';
+        });
+      }
+
+      this.getDiaryPage([auxDay, auxMonth, auxYear, 'selected']);
+    });
   }
 
   ngOnInit() {
-    [this.dayName, this.day, this.month, this.year] = this.dateService.getDate()
-    this.week = this.dateService.getWeek();
+    [this.dayName, this.day, this.month, this.year] = this.dateService.getDate();
+    this.week = this.dateService.getWeek(+this.day, +this.dateService.getMonthNumber(this.month) - 1, +this.year);
     this.getDiaryPage([this.day, this.dateService.getMonthNumber(this.month), this.year, 'selected']);
 
     this.displayACQ();
@@ -93,10 +118,14 @@ export class DiarioPage implements OnInit {
 
   getDiaryPage(date: string[]) {
     console.log('Clicado')
+
     this.alertService.presentLoading(3000);
     this.pageView = date;
 
     this.diaryService.getDiary().then(data => {
+      this.eventService.publish('diaryDayChanged', {
+        newDate: date,
+      });
       console.log('Diário:', data);
       let fullDate = date[2] + '-' + date[1] + '-' + date[0].padStart(2, '0');
       if (data[fullDate] === undefined) {
@@ -240,4 +269,37 @@ export class DiarioPage implements OnInit {
       this.peakVal = 600;
     }
   }
+
+  /*
+  initSwipe() {
+    const calendarContainer: Gesture = this.gestureCtrl.create({
+      el: this.calendar.nativeElement,
+      gestureName: "calendar-swipe-down",
+      threshold: 15,
+      onStart: () => {
+        console.log('Starting');
+        this.renderer.setStyle(this.calendar.nativeElement, "transition", "none");
+      },
+      onMove: ev => {
+        console.log(ev);
+        this.renderer.setStyle(this.calendar.nativeElement, "transform", `translateX(${ev.deltaX}px)`);
+      },
+      onEnd: ev => {
+        console.log("ending");
+
+        /*
+        this.renderer.setStyle(this.Q0.nativeElement, 'transition', '0.4s ease-out')
+
+        if (ev.deltaX < -this.screenWidth/2.4) {
+          this.renderer.setStyle(this.Q0.nativeElement, 'transform', `translateX(-${this.screenWidth}px)`);
+          this.view++;
+          this.updateCardView();
+        } else {
+          this.renderer.setStyle(this.Q0.nativeElement, 'transform', 'translateX(0px)');
+        }     
+      }
+    });
+
+    calendarContainer.enable();
+  }*/
 }

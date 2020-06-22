@@ -35,8 +35,8 @@
 .selected {
     display: inline-block;
     font-size: 15px;
-    line-height: 32px;
-    width: 32px;
+    height: 35px;
+    width: 35px;
     text-align: center;
     background-color: #76F4ED;
     border-radius: 50%;
@@ -47,7 +47,7 @@
 .unavDay {
     display: inline-block;
     font-size: 15px;
-    line-height: 30px;
+    height: 35px;
     width: 35px;
     text-align: center;
     background-color: white;
@@ -249,4 +249,12 @@ ion-fab-button {
     position: absolute; 
     top: 50px; 
     width: 24px;
+}
+
+.calendar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 69%;
+    z-index: 5;
 }

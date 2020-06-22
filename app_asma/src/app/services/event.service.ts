@@ -7,7 +7,11 @@ import { Subject, Subscription } from 'rxjs';
 export class EventService {
 
   private channels: any = { goalUpdated: new Subject<any>(),
-                            userUpdated: new Subject<any>()};
+                            userUpdated: new Subject<any>(),
+                            ACQAnswered: new Subject<any>(),
+                            barriersAnswered: new Subject<any>(),
+                            diaryDayChanged: new Subject<any>(),
+                            calendarDayChanged: new Subject<any>()};
 
 
   /**

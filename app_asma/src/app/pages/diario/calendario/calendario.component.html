@@ -1,0 +1,93 @@
+<div #calendar>
+  <ion-card class="calendar-container">
+    <ion-card-content>
+      <div class="calendar-header">
+        <button class="nav-btn" (click)="previousMonth()">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+        <span class="month-display">{{viewMonthName.toUpperCase()}}</span>
+        <button class="nav-btn" (click)="nextMonth()">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </button>
+        <div class="year-display">{{viewYear}}</div>
+      </div>
+      
+  
+      <ion-grid class="viewDays">
+        <ion-row>
+          <ion-col *ngFor="let dayName of daysName" class="day-labels"> <span>{{dayName}}</span> </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngFor="let day of week1"> 
+            <button class="day" (click)="updateDate(day)" 
+            [ngClass]="{'selected'    : day[0] === selectedDay &&
+                                        day[1] === selectedMonth &&
+                                        day[2] === selectedYear,
+                        'unavailable' : (day[0] > todayDay && day[1] === todayMonth && day[2] === todayYear) ||
+                                        (day[1] > todayMonth && day[2] === todayYear) ||
+                                        (day[2] > todayYear)}">{{day[0]}}</button> 
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngFor="let day of week2"> 
+            <button class="day" (click)="updateDate(day)" 
+            [ngClass]="{'selected'    : day[0] === selectedDay &&
+                                        day[1] === selectedMonth &&
+                                        day[2] === selectedYear,
+                        'unavailable' : (day[0] > todayDay && day[1] === todayMonth && day[2] === todayYear) ||
+                                        (day[1] > todayMonth && day[2] === todayYear) ||
+                                        (day[2] > todayYear)}">{{day[0]}}</button> 
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngFor="let day of week3"> 
+            <button class="day" (click)="updateDate(day)" 
+            [ngClass]="{'selected'    : day[0] === selectedDay &&
+                                        day[1] === selectedMonth &&
+                                        day[2] === selectedYear,
+                        'unavailable' : (day[0] > todayDay && day[1] === todayMonth && day[2] === todayYear) ||
+                                        (day[1] > todayMonth && day[2] === todayYear) ||
+                                        (day[2] > todayYear)}">{{day[0]}}</button> 
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngFor="let day of week4"> 
+            <button class="day" (click)="updateDate(day)" 
+            [ngClass]="{'selected'    : day[0] === selectedDay &&
+                                        day[1] === selectedMonth &&
+                                        day[2] === selectedYear,
+                        'unavailable' : (day[0] > todayDay && day[1] === todayMonth && day[2] === todayYear) ||
+                                        (day[1] > todayMonth && day[2] === todayYear) ||
+                                        (day[2] > todayYear)}">{{day[0]}}</button> 
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngFor="let day of week5"> 
+            <button class="day" (click)="updateDate(day)" 
+            [ngClass]="{'selected'    : day[0] === selectedDay &&
+                                        day[1] === selectedMonth &&
+                                        day[2] === selectedYear,
+                        'unavailable' : (day[0] > todayDay && day[1] === todayMonth && day[2] === todayYear) ||
+                                        (day[1] > todayMonth && day[2] === todayYear) ||
+                                        (day[2] > todayYear)}">{{day[0]}}</button> 
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngFor="let day of week6"> 
+            <button class="day" (click)="updateDate(day)" 
+            [ngClass]="{'selected'    : day[0] === selectedDay &&
+                                        day[1] === selectedMonth &&
+                                        day[2] === selectedYear,
+                        'unavailable' : (day[0] > todayDay && day[1] === todayMonth && day[2] === todayYear) ||
+                                        (day[1] > todayMonth && day[2] === todayYear) ||
+                                        (day[2] > todayYear)}">{{day[0]}}</button> 
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <div class="tab">
+    <ion-icon name="caret-down-outline"></ion-icon>
+  </div>
+  
+</div>

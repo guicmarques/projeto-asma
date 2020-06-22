@@ -4,10 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DateService {
-  mesesNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outrubro', 'Novembro', 
+  mesesNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 
                 'Dezembro'];
   mesesLength = {'Janeiro': 31, 'Fevereiro': this.getFebLength(), 'Março': 31, 'Abril': 30, 'Maio': 31, 'Junho': 30, 'Julho': 31,
-                        'Agosto': 31, 'Setembro': 30, 'Outrubro': 31, 'Novembro': 30, 'Dezembro': 31};
+                        'Agosto': 31, 'Setembro': 30, 'Outubro': 31, 'Novembro': 30, 'Dezembro': 31};
   meses = {'Jan': 'Janeiro', 'Feb': 'Fevereiro', 'Mar': 'Março', 'Apr': 'Abril', 'May': 'Maio', 
           'Jun':'Junho', 'Jul': 'Julho', 'Aug': 'Agosto', 'Sep': 'Setembro', 'Oct': 'Outubro', 
           'Nov': 'Novembro', 'Dec': 'Dezembro'};
@@ -36,8 +36,8 @@ export class DateService {
     return [diaNome, dia, mes, date.getFullYear().toString(), mesNumberStr];
   }
 
-  getWeek() {
-    let date = new Date();
+  getWeek(d: number, m:number, y: number) {
+    let date = new Date(y, m, d);
     let dateString = date.toDateString();
     let fullDate = dateString.split(' ');
 
@@ -171,5 +171,28 @@ export class DateService {
 
     console.log(date1 + ' - ' + date2 + ' =', diffDays, 'days')
     return diffDays;
+  }
+
+  getFullMonth(month: number, year: number) {
+    let dd = 1;
+    let mm = month; // tem que ser mês - 1 ----> ex: Junho = 6 - 1 = 5
+    let yyyy = year;
+    let week: any;
+    let allWeeks = [[], [], [], [], [], []];
+    let lastDay = this.mesesLength[this.mesesNames[month]];
+    let i = 0;
+
+    while (dd <= lastDay && mm === month) {
+      week = this.getWeek(dd, mm, yyyy);
+      week = week.map((x) => { return  [+x[0], +x[1], +x[2]]; });
+      allWeeks[i] = week;
+
+      dd = week[week.length - 1][0] + 1;
+      mm = week[week.length - 1][1] - 1;
+      yyyy = week[week.length - 1][2];
+      i++;
+    }
+
+    return allWeeks;
   }
 }
