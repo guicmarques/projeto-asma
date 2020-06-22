@@ -48,6 +48,7 @@ export class DiarioPage implements OnInit {
 
   showACQ: boolean = false;
   showBarriers: boolean = false;
+  calendarView: boolean = false;
 
   @ViewChild('saveIcon', {static: false}) saveIcon: ElementRef;
   @ViewChild('loadingBack', {static: false}) loadingBack: ElementRef;
@@ -72,6 +73,10 @@ export class DiarioPage implements OnInit {
 
     this.eventService.subscribe('barriersAnswered', bool => {
       this.showBarriers = bool;
+    });
+
+    this.eventService.subscribe('calendarView', bool => {
+      this.calendarView = bool;
     });
 
     this.eventService.subscribe('calendarDayChanged', (data: any) => {
@@ -270,37 +275,4 @@ export class DiarioPage implements OnInit {
       this.peakVal = 600;
     }
   }
-
-  /*
-  initSwipe() {
-    const calendarContainer: Gesture = this.gestureCtrl.create({
-      el: this.calendar.nativeElement,
-      gestureName: "calendar-swipe-down",
-      threshold: 15,
-      onStart: () => {
-        console.log('Starting');
-        this.renderer.setStyle(this.calendar.nativeElement, "transition", "none");
-      },
-      onMove: ev => {
-        console.log(ev);
-        this.renderer.setStyle(this.calendar.nativeElement, "transform", `translateX(${ev.deltaX}px)`);
-      },
-      onEnd: ev => {
-        console.log("ending");
-
-        /*
-        this.renderer.setStyle(this.Q0.nativeElement, 'transition', '0.4s ease-out')
-
-        if (ev.deltaX < -this.screenWidth/2.4) {
-          this.renderer.setStyle(this.Q0.nativeElement, 'transform', `translateX(-${this.screenWidth}px)`);
-          this.view++;
-          this.updateCardView();
-        } else {
-          this.renderer.setStyle(this.Q0.nativeElement, 'transform', 'translateX(0px)');
-        }     
-      }
-    });
-
-    calendarContainer.enable();
-  }*/
 }

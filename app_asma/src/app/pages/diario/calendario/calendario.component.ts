@@ -9,7 +9,6 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/co
   styleUrls: ['./calendario.component.scss'],
 })
 export class CalendarioComponent implements OnInit {
-  screenHeight = window.innerHeight;
   @ViewChild('calendar', {static: false}) calendar: ElementRef;
 
   daysName: string[] = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
@@ -22,6 +21,8 @@ export class CalendarioComponent implements OnInit {
   month: number;  // Lembrar que sempre fica indice
   year: number;
 
+  opened: boolean = false;
+
   todayDay: number;
   todayMonth: number;
   todayYear: number;
@@ -31,8 +32,8 @@ export class CalendarioComponent implements OnInit {
   selectedYear: number;
 
   viewMonth: number;
-  viewMonthName: string = 'JUNHO';
-  viewYear: number = 2020;
+  viewMonthName: string;
+  viewYear: number;
 
   constructor(private dateService: DateService,
               private eventService: EventService,
@@ -66,6 +67,7 @@ export class CalendarioComponent implements OnInit {
   }
   
   ngAfterViewInit() {
+    /*
     const calendarContainer: Gesture = this.gestureCtrl.create({
       el: this.calendar.nativeElement,
       gestureName: "calendar-swipe-down",
@@ -106,6 +108,7 @@ export class CalendarioComponent implements OnInit {
     });
 
     calendarContainer.enable();
+    */
   }
 
   getFullMonth(month: number, year: number) {
@@ -152,5 +155,19 @@ export class CalendarioComponent implements OnInit {
     this.eventService.publish('calendarDayChanged', {
       newDate: date,
     });
+  }
+
+  moveCalendar() {
+    this.renderer.setStyle(this.calendar.nativeElement, 'transition', '0.6s ease-out');
+
+    if (this.opened) {
+      this.renderer.setStyle(this.calendar.nativeElement, "transform", 'translateY(0px)');
+      this.opened = false;
+    } else {
+      this.renderer.setStyle(this.calendar.nativeElement, "transform", `translateY(365px)`);
+      this.opened = true;
+    }
+
+    this.eventService.publish('calendarView', this.opened);
   }
 }

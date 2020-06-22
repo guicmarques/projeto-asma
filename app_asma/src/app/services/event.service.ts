@@ -11,7 +11,8 @@ export class EventService {
                             ACQAnswered: new Subject<any>(),
                             barriersAnswered: new Subject<any>(),
                             diaryDayChanged: new Subject<any>(),
-                            calendarDayChanged: new Subject<any>()};
+                            calendarDayChanged: new Subject<any>(),
+                            calendarView: new Subject<any>()};
 
 
   /**

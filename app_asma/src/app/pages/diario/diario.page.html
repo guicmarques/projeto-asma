@@ -20,7 +20,10 @@
 
 <app-calendario class="calendar"></app-calendario>
 
+<ion-backdrop tappable="false" *ngIf="calendarView"></ion-backdrop>
 <ion-content>
+  
+
   <div *ngIf="showACQ && pageView[0].padStart(2, '0') == this.day">
     <ion-card class="QACard questionnaire" routerLink="./questionario">
       <ion-card-header class="QAHeader">

@@ -255,6 +255,18 @@ ion-fab-button {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 69%;
+    top: -207px;
     z-index: 5;
 }
+
+ion-backdrop {
+    animation-name: backdrop;
+    animation-duration: 0.6s;
+    animation-timing-function: ease-out;
+    opacity: 0.4;
+}
+
+@keyframes backdrop {
+    from {opacity: 0;}
+    to {opacity: 0.4;}
+  }
