@@ -93,16 +93,6 @@
                         </tfoot>
                     </table>
                 </div>
-                <div class="container col-xs-12" id="cadastroPaciente">
-                    <h3 class="text-dark mb-1">Cadastro de Pacientes</h3>
-                    <form class="form-horizontal"enctype="multipart/form-data" method="POST">
-                        {% csrf_token %}
-                        {{ goalform.as_p }}
-
-                        <input hidden type="submit" name="" value="Cadastrar">
-                        <div class="text-right"><button class="btn btn-primary" type="submit" name="">Cadastrar Paciente</button></div>
-                    </form>
-                </div>
             </div>
         </div>
         <footer class="sticky-footer">

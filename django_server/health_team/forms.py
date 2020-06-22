@@ -1,12 +1,5 @@
 from django import forms
-from health_team.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, Goal
-
-
-class GoalForm(forms.ModelForm):
-    class Meta():
-        model = Goal
-        fields = ('activity', 'quantity', 'unit', 'startDate', 'endDate')
-        
+from health_team.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile
 
 
 class UserForm(forms.ModelForm):
