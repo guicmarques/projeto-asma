@@ -19,7 +19,7 @@ import csv
 
 from server.handleUserData import getFitbitData
 
-from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, DailyControl, PracticeBarriers,FitbitProfile
+from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, DailyControl, PracticeBarriers,FitbitProfile,Goal
 
 def index(request):
     return render(request, 'health_team/index.html')
