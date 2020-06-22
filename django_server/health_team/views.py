@@ -1259,6 +1259,7 @@ def pageMetas(request,username):
             testeExec = True
     else:
         testeExec = True
+    print(testeExec)
 
     if testeExec:
         try:
