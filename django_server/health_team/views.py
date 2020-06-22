@@ -1241,6 +1241,9 @@ def estats(request):
         'barreiras':barreiras
     })
 
+
+def pagemetas(request,username):
+    return render(request, 'logged/metas.html',{})
 ####################### Downloads #######################
 @login_required
 def downloadBarreiras(request):

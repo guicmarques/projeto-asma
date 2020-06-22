@@ -18,5 +18,6 @@ urlpatterns = [
     url(r'^pacienteGraficos.html$', views.pacienteGraficos, name='pacienteGraficos'),
     url(r'^table_test.html$', views.tableTest, name='table_test'),
     path('graphs/<slug:username>', views.pacienteGraficos2, name='table_test2'),
+    path('metas/<slug:username>', views.pacienteGraficos2, name='metas'),
 
 ]
