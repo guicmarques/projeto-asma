@@ -1247,8 +1247,9 @@ def pageMetas(request,username):
     if request.method == 'POST':
         goalform = GoalForm(data=request.POST)
         if goalform.is_valid():
-            goalform.user = username
-            goalform.save()
+            goalformD = goalform.save(commit=False)
+            goalformD.user = username
+            goalformD.save()
             return HttpResponseRedirect(reverse('metas'))
     else:
         try:
