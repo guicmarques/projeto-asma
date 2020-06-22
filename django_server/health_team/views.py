@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from health_team.forms import UserForm, UserProfileInfoForm, UserFormForProfile
+from health_team.forms import UserForm, UserProfileInfoForm, UserFormForProfile, GoalForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -1243,20 +1243,24 @@ def estats(request):
 
 
 def pageMetas(request,username):
-    try:
-        date60dayback = (datetime.datetime.today() - datetime.timedelta(days=60))
-        metasDados = Goal.objects.all().filter(user_id=username).filter(startDate__gte=date60dayback)
-        if len(metasDados)!=0:
-            metasDadosLista = metasDados.values_list('activity','quantity','unit','startDate','endDate')
-        else:
-            metasDadosLista =[('Vazio',0,'Vazio','0000-00-00','0000-00-00')]
+    if request.method == 'POST':
+        pass
+    else:
+        try:
+            date60dayback = (datetime.datetime.today() - datetime.timedelta(days=60))
+            metasDados = Goal.objects.all().filter(user_id=username).filter(startDate__gte=date60dayback)
+            if len(metasDados)!=0:
+                metasDadosLista = metasDados.values_list('activity','quantity','unit','startDate','endDate')
+            else:
+                metasDadosLista =[('Vazio',0,'Vazio','0000-00-00','0000-00-00')]
+            print(metasDadosLista)
+        except Exception:
+            traceback.print_exc()
+            metasDadosLista =[('Falha',0,'Falha','0000-00-00','0000-00-00')]
+            
         print(metasDadosLista)
-    except Exception:
-        traceback.print_exc()
-        metasDadosLista =[('Falha',0,'Falha','0000-00-00','0000-00-00')]
-        
-    print(metasDadosLista)
-    return render(request, 'logged/metas.html',{'metasDadosLista':metasDadosLista})
+        goalform = GoalForm()
+    return render(request, 'logged/metas.html',{'metasDadosLista':metasDadosLista,'goalform':goalform})
 ####################### Downloads #######################
 @login_required
 def downloadBarreiras(request):
