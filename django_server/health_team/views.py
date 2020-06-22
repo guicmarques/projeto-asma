@@ -1250,8 +1250,8 @@ def pageMetas(request,username):
             goalformD = goalform.save(commit=False)
             goalformD.user = User.objects.get(id=username)
             goalformD.save()
-            return HttpResponseRedirect(reverse('metas'))
-    else:
+
+    if True:
         try:
             date60dayback = (datetime.datetime.today() - datetime.timedelta(days=60))
             metasDados = Goal.objects.all().filter(user_id=username).filter(startDate__gte=date60dayback)
