@@ -1242,7 +1242,7 @@ def estats(request):
     })
 
 
-def pagemetas(request,username):
+def pageMetas(request,username):
     return render(request, 'logged/metas.html',{})
 ####################### Downloads #######################
 @login_required
