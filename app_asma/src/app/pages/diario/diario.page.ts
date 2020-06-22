@@ -112,6 +112,7 @@ export class DiarioPage implements OnInit {
   }
 
   ionViewDidEnter(){
+    this.week = this.dateService.getWeek(+this.day, +this.dateService.getMonthNumber(this.month) - 1, +this.year);
     this.getDiaryPage([this.day, this.dateService.getMonthNumber(this.month), this.year, 'selected']);
     this.sendReminder();
   }

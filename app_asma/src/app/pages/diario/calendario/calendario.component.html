@@ -25,7 +25,8 @@
                                         day[2] === selectedYear,
                         'unavailable' : (day[0] > todayDay && day[1] === todayMonth && day[2] === todayYear) ||
                                         (day[1] > todayMonth && day[2] === todayYear) ||
-                                        (day[2] > todayYear)}">{{day[0]}}</button> 
+                                        (day[2] > todayYear),
+                        'outside'     :  day[1] !== viewMonth}">{{day[0]}}</button> 
           </ion-col>
         </ion-row>
         <ion-row>
@@ -69,7 +70,8 @@
                                         day[2] === selectedYear,
                         'unavailable' : (day[0] > todayDay && day[1] === todayMonth && day[2] === todayYear) ||
                                         (day[1] > todayMonth && day[2] === todayYear) ||
-                                        (day[2] > todayYear)}">{{day[0]}}</button> 
+                                        (day[2] > todayYear),
+                        'outside'     :  day[1] !== viewMonth}">{{day[0]}}</button> 
           </ion-col>
         </ion-row>
         <ion-row>
@@ -80,14 +82,15 @@
                                         day[2] === selectedYear,
                         'unavailable' : (day[0] > todayDay && day[1] === todayMonth && day[2] === todayYear) ||
                                         (day[1] > todayMonth && day[2] === todayYear) ||
-                                        (day[2] > todayYear)}">{{day[0]}}</button> 
+                                        (day[2] > todayYear),
+                        'outside'     :  day[1] !== viewMonth}">{{day[0]}}</button> 
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
   <div class="tab">
-    <ion-icon name="caret-down-outline"></ion-icon>
+    <ion-icon name="caret-down-outline"></ion-icon> 
   </div>
   
 </div>

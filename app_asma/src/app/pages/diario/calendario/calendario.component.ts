@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { GestureController, Gesture } from '@ionic/angular';
 import { EventService } from './../../../services/event.service';
 import { DateService } from './../../../services/date.service';
@@ -10,6 +9,7 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/co
   styleUrls: ['./calendario.component.scss'],
 })
 export class CalendarioComponent implements OnInit {
+  screenHeight = window.innerHeight;
   @ViewChild('calendar', {static: false}) calendar: ElementRef;
 
   daysName: string[] = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
@@ -37,8 +37,7 @@ export class CalendarioComponent implements OnInit {
   constructor(private dateService: DateService,
               private eventService: EventService,
               private gestureCtrl: GestureController,
-              private renderer: Renderer2,
-              private element: ElementRef) {
+              private renderer: Renderer2) {
 
     this.eventService.subscribe('diaryDateChanged', (data: any) => {
       this.selectedDay = +data.newDate[0];
@@ -70,28 +69,39 @@ export class CalendarioComponent implements OnInit {
     const calendarContainer: Gesture = this.gestureCtrl.create({
       el: this.calendar.nativeElement,
       gestureName: "calendar-swipe-down",
-      threshold: 15,
       onStart: () => {
         console.log('Starting');
         this.renderer.setStyle(this.calendar.nativeElement, "transition", "none");
       },
       onMove: ev => {
         console.log(ev);
-        this.renderer.setStyle(this.calendar.nativeElement, "transform", `translateY(${ev.deltaY}px)`);
+
+        if (ev.deltaY < 0) {
+          this.renderer.setStyle(this.calendar.nativeElement, "transform", 'translateY(0px)');
+        } else if (ev.deltaY >= 0.56*this.screenHeight) {
+          this.renderer.setStyle(this.calendar.nativeElement, "transform", `translateY(${0.56*this.screenHeight}px)`);
+        } else {
+          this.renderer.setStyle(this.calendar.nativeElement, "transform", `translateY(${ev.deltaY}px)`);
+        }
       },
       onEnd: ev => {
         console.log("ending");
 
-        /*
-        this.renderer.setStyle(this.Q0.nativeElement, 'transition', '0.4s ease-out')
+        this.renderer.setStyle(this.calendar.nativeElement, 'transition', '0.4s ease-out');
 
-        if (ev.deltaX < -this.screenWidth/2.4) {
-          this.renderer.setStyle(this.Q0.nativeElement, 'transform', `translateX(-${this.screenWidth}px)`);
-          this.view++;
-          this.updateCardView();
+        if (ev.velocityY > 0) {
+          if (ev.deltaY > 0.09*this.screenHeight) {
+            this.renderer.setStyle(this.calendar.nativeElement, "transform", `translateY(${0.56*this.screenHeight}px)`);
+          } else {
+            this.renderer.setStyle(this.calendar.nativeElement, "transform", 'translateY(0px)');
+          } 
         } else {
-          this.renderer.setStyle(this.Q0.nativeElement, 'transform', 'translateX(0px)');
-        }*/       
+          if (ev.deltaY < 0.48*this.screenHeight) {
+            this.renderer.setStyle(this.calendar.nativeElement, "transform", 'translateY(0px)');
+          } else {
+            this.renderer.setStyle(this.calendar.nativeElement, "transform", `translateY(${0.56*this.screenHeight}px)`);
+          }
+        }
       }
     });
 

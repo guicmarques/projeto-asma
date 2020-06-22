@@ -86,6 +86,11 @@ ion-col {
     pointer-events: none;
 }
 
+.outside {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
 button {
     outline: none;
 }
