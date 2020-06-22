@@ -6,6 +6,14 @@ class GoalForm(forms.ModelForm):
     class Meta():
         model = Goal
         fields = ('activity', 'quantity', 'unit', 'startDate', 'endDate')
+        widgets = {
+            'activity': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
+            'quantity': forms.NumberInput(attrs={'class': 'form-control form-control-user'}),
+            'unit': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
+            'startDate': forms.DateInput(attrs={'class': 'form-control form-control-user'}),
+            'endDate': forms.DateInput(attrs={'class': 'form-control form-control-user'}),
+            
+        }
         
 
 
