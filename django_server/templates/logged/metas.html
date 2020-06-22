@@ -66,7 +66,33 @@
             </div>
             </nav>            
             <div class="container col-md-12" id="graph">
-                
+                <div class="tableFixHead table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info" style="tbody{overflow-y: scroll;height: 200px; width: 100%;position: absolute;}">
+                    <table class="table dataTable my-0" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>Atividade</th>
+                                <th>Quantidade</th>
+                                <th>Unidade</th>
+                                <th>Dado Inicio</th>
+                                <th>Dado Fim</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for linha in metasDadosLista %}
+                                <tr>
+                                    <td>{{linha[0]}}<br></td>
+                                    <td>{{linha[1]}}<br></td>
+                                    <td>{{linha[2]}}<br></td>
+                                    <td>{{linha[3]}}</td>
+                                    <td>{{linha[4]}}<br></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
         <footer class="sticky-footer">

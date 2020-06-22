@@ -1246,10 +1246,16 @@ def pageMetas(request,username):
     try:
         date60dayback = (datetime.datetime.today() - datetime.timedelta(days=60))
         metasDados = Goal.objects.all().filter(user_id=username).filter(startDate__gte=date60dayback)
+        if len(metasDados)!=0:
+            metasDadosLista = metasDados.values_list('activity','quantity','unit','startDate','endDate')
+        else:
+            metasDadosLista =[('Vazio',0,'Vazio','0000-00-00','0000-00-00')]
+        print(metasDadosLista)
     except:
-        pass
+        metasDadosLista =[('Falha',0,'Falha','0000-00-00','0000-00-00')]
+        
 
-    return render(request, 'logged/metas.html',{})
+    return render(request, 'logged/metas.html',{'metasDadosLista':metasDadosLista})
 ####################### Downloads #######################
 @login_required
 def downloadBarreiras(request):
@@ -1257,8 +1263,6 @@ def downloadBarreiras(request):
 
     writer = csv.writer(response)
     writer.writerow(['user_id','date','interesse','tempo','energia','faltaAr','companhia','dinheiro','coisas','seguranca','clima','equipamentos'])
-
-    print(PracticeBarriers.objects.all().values_list('user_id','date','interesse','tempo','energia','faltaAr','companhia','dinheiro','coisas','seguranca','clima','equipamentos'))
 
     for row in PracticeBarriers.objects.all().values_list('user_id','date','interesse','tempo','energia','faltaAr','companhia','dinheiro','coisas','seguranca','clima','equipamentos'):
         writer.writerow(row)
