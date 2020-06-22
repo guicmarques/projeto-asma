@@ -1244,7 +1244,11 @@ def estats(request):
 
 def pageMetas(request,username):
     if request.method == 'POST':
-        pass
+        goalform = GoalForm(data=request.POST)
+        if goalform.is_valid():
+            goalform.user = User.objects.get(id=user_id_ind)
+            goalform.save()
+            return HttpResponseRedirect(reverse('metas'))
     else:
         try:
             date60dayback = (datetime.datetime.today() - datetime.timedelta(days=60))
