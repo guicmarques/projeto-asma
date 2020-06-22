@@ -9,7 +9,7 @@ class GoalForm(forms.ModelForm):
         widgets = {
             'activity': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
             'quantity': forms.NumberInput(attrs={'class': 'form-control form-control-user'}),
-            'unit': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
+            'unit': forms.TextInput(attrs={'class': 'form-control form-control-user','value':'passos'}),
             'startDate': forms.DateInput(attrs={'class': 'form-control form-control-user','type':'date'}),
             'endDate': forms.DateInput(attrs={'class': 'form-control form-control-user','type':'date'}),
             
