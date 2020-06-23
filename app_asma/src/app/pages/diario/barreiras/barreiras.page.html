@@ -1,0 +1,503 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="barrierHeader">
+    <ion-buttons class="btnContainer">
+      <ion-button routerLink=".." class="backBtn">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="barrierTitle">Barreiras</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="barrierContent">
+  <div class="cardsContainer">
+
+    <div class="card" #Q0>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="infoTitle">Motivos que dificultaram a realização da atividade física</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="infoContent">
+          Dentre os fatores a seguir, selecione os mais comuns para você não praticar atividades físicas
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="startBtn" (click)="nextCard(0)">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+
+    <div class="card" #Q1>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle class="cardSubtitle">Fatores pessoais</ion-card-subtitle>
+          <ion-card-title class="cardTitle">Não tenho interesse.</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="answersContainer">
+            <ion-radio-group [(ngModel)]="answers.interesse">        
+              <ion-item class="answer" lines="none">
+                <ion-label>Sempre</ion-label>
+                <ion-radio slot="start" [value]=5></ion-radio>
+              </ion-item>
+          
+              <ion-item class="answer" lines="none">
+                <ion-label>Quase sempre</ion-label>
+                <ion-radio slot="start" [value]=4></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Às vezes</ion-label>
+                <ion-radio slot="start" [value]=3></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Raramente</ion-label>
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Nunca</ion-label>
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="previousBtn" (click)="prevCard(1)">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button class="nextBtn" (click)="nextCard(1)">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+    
+    <div class="card" #Q2>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle class="cardSubtitle">Fatores pessoais</ion-card-subtitle>
+          <ion-card-title class="cardTitle">Falta de tempo.</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="answersContainer">
+            <ion-radio-group [(ngModel)]="answers.tempo">        
+              <ion-item class="answer" lines="none">
+                <ion-label>Sempre</ion-label>
+                <ion-radio slot="start" [value]=5></ion-radio>
+              </ion-item>
+          
+              <ion-item class="answer" lines="none">
+                <ion-label>Quase sempre</ion-label>
+                <ion-radio slot="start" [value]=4></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Às vezes</ion-label>
+                <ion-radio slot="start" [value]=3></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Raramente</ion-label>
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Nunca</ion-label>
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="previousBtn" (click)="prevCard(2)">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button class="nextBtn" (click)="nextCard(2)">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+
+    <div class="card" #Q3>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle class="cardSubtitle">Fatores pessoais</ion-card-subtitle>
+          <ion-card-title class="cardTitle">Sinto que não tenho energia ou disposição.</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="answersContainer">
+            <ion-radio-group [(ngModel)]="answers.energia">        
+              <ion-item class="answer" lines="none">
+                <ion-label>Sempre</ion-label>
+                <ion-radio slot="start" [value]=5></ion-radio>
+              </ion-item>
+          
+              <ion-item class="answer" lines="none">
+                <ion-label>Quase sempre</ion-label>
+                <ion-radio slot="start" [value]=4></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Às vezes</ion-label>
+                <ion-radio slot="start" [value]=3></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Raramente</ion-label>
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Nunca</ion-label>
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="previousBtn" (click)="prevCard(3)">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button class="nextBtn" (click)="nextCard(3)">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+
+    <div class="card" #Q4>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle class="cardSubtitle">Fatores pessoais</ion-card-subtitle>
+          <ion-card-title class="cardTitle">Tenho medo de sentir falta de ar.</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="answersContainer">
+            <ion-radio-group [(ngModel)]="answers.faltaAr">        
+              <ion-item class="answer" lines="none">
+                <ion-label>Sempre</ion-label>
+                <ion-radio slot="start" [value]=5></ion-radio>
+              </ion-item>
+          
+              <ion-item class="answer" lines="none">
+                <ion-label>Quase sempre</ion-label>
+                <ion-radio slot="start" [value]=4></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Às vezes</ion-label>
+                <ion-radio slot="start" [value]=3></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Raramente</ion-label>
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Nunca</ion-label>
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="previousBtn" (click)="prevCard(4)">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button class="nextBtn" (click)="nextCard(4)">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+
+    <div class="card" #Q5>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle class="cardSubtitle">Fatores sociais</ion-card-subtitle>
+          <ion-card-title class="cardTitle">Não tenho companhia ou incentivo de amigos/família.</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="answersContainer">
+            <ion-radio-group [(ngModel)]="answers.companhia">        
+              <ion-item class="answer" lines="none">
+                <ion-label>Sempre</ion-label>
+                <ion-radio slot="start" [value]=5></ion-radio>
+              </ion-item>
+          
+              <ion-item class="answer" lines="none">
+                <ion-label>Quase sempre</ion-label>
+                <ion-radio slot="start" [value]=4></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Às vezes</ion-label>
+                <ion-radio slot="start" [value]=3></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Raramente</ion-label>
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Nunca</ion-label>
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="previousBtn" (click)="prevCard(5)">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button class="nextBtn" (click)="nextCard(5)">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+
+    <div class="card" #Q6>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle class="cardSubtitle">Fatores sociais</ion-card-subtitle>
+          <ion-card-title class="cardTitle">Não tenho dinheiro.</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="answersContainer">
+            <ion-radio-group [(ngModel)]="answers.dinheiro">        
+              <ion-item class="answer" lines="none">
+                <ion-label>Sempre</ion-label>
+                <ion-radio slot="start" [value]=5></ion-radio>
+              </ion-item>
+          
+              <ion-item class="answer" lines="none">
+                <ion-label>Quase sempre</ion-label>
+                <ion-radio slot="start" [value]=4></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Às vezes</ion-label>
+                <ion-radio slot="start" [value]=3></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Raramente</ion-label>
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Nunca</ion-label>
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="previousBtn" (click)="prevCard(6)">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button class="nextBtn" (click)="nextCard(6)">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+
+    <div class="card" #Q7>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle class="cardSubtitle">Fatores sociais</ion-card-subtitle>
+          <ion-card-title class="cardTitle">Tenho muitas coisas para fazer.</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="answersContainer">
+            <ion-radio-group [(ngModel)]="answers.coisas">        
+              <ion-item class="answer" lines="none">
+                <ion-label>Sempre</ion-label>
+                <ion-radio slot="start" [value]=5></ion-radio>
+              </ion-item>
+          
+              <ion-item class="answer" lines="none">
+                <ion-label>Quase sempre</ion-label>
+                <ion-radio slot="start" [value]=4></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Às vezes</ion-label>
+                <ion-radio slot="start" [value]=3></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Raramente</ion-label>
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Nunca</ion-label>
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="previousBtn" (click)="prevCard(7)">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button class="nextBtn" (click)="nextCard(7)">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+
+   <div class="card" #Q8>
+      <ion-card ard>
+        <ion-card-header>
+          <ion-card-subtitle class="cardSubtitle">Fatores ambientais</ion-card-subtitle>
+          <ion-card-title class="cardTitle">Não tenho um local seguro disponível.</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="answersContainer">
+            <ion-radio-group [(ngModel)]="answers.seguranca">        
+              <ion-item class="answer" lines="none">
+                <ion-label>Sempre</ion-label>
+                <ion-radio slot="start" [value]=5></ion-radio>
+              </ion-item>
+          
+              <ion-item class="answer" lines="none">
+                <ion-label>Quase sempre</ion-label>
+                <ion-radio slot="start" [value]=4></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Às vezes</ion-label>
+                <ion-radio slot="start" [value]=3></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Raramente</ion-label>
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Nunca</ion-label>
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="previousBtn" (click)="prevCard(8)">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button class="nextBtn" (click)="nextCard(8)">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+
+    <div class="card" #Q9>
+      <ion-card ard>
+        <ion-card-header>
+          <ion-card-subtitle class="cardSubtitle">Fatores ambientais</ion-card-subtitle>
+          <ion-card-title class="cardTitle">Por causa do clima (por exemplo: frio, calor, chuva).</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="answersContainer">
+            <ion-radio-group [(ngModel)]="answers.clima">        
+              <ion-item class="answer" lines="none">
+                <ion-label>Sempre</ion-label>
+                <ion-radio slot="start" [value]=5></ion-radio>
+              </ion-item>
+          
+              <ion-item class="answer" lines="none">
+                <ion-label>Quase sempre</ion-label>
+                <ion-radio slot="start" [value]=4></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Às vezes</ion-label>
+                <ion-radio slot="start" [value]=3></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Raramente</ion-label>
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Nunca</ion-label>
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="previousBtn" (click)="prevCard(9)">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button class="nextBtn" (click)="nextCard(9)">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+
+    <div class="card" #Q10>
+      <ion-card ard>
+        <ion-card-header>
+          <ion-card-subtitle class="cardSubtitle">Fatores ambientais</ion-card-subtitle>
+          <ion-card-title class="cardTitle">Não tenho equipamentos para praticar.</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="answersContainer">
+            <ion-radio-group [(ngModel)]="answers.equipamentos">        
+              <ion-item class="answer" lines="none">
+                <ion-label>Sempre</ion-label>
+                <ion-radio slot="start" [value]=5></ion-radio>
+              </ion-item>
+          
+              <ion-item class="answer" lines="none">
+                <ion-label>Quase sempre</ion-label>
+                <ion-radio slot="start" [value]=4></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Às vezes</ion-label>
+                <ion-radio slot="start" [value]=3></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Raramente</ion-label>
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+  
+              <ion-item class="answer" lines="none">
+                <ion-label>Nunca</ion-label>
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+        <div class="btnGroup">
+          <ion-button class="previousBtn" (click)="prevCard(10)">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button class="sendBtn" (click)="confirmAnswers()">
+            Enviar
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+
+  </div>
+
+</ion-content>

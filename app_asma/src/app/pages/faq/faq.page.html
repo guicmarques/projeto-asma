@@ -1,0 +1,39 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="title">Perguntas Frequentes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar class="searchbar" [ngClass]="{ 'searching': this.searching ,'searchbar' : !this.searching}" 
+  placeholder="Procurar pergunta ..." (ionInput)="search($event)" (ionFocus)="searchBarColoring(true)" 
+  (ionBlur)="searchBarColoring(false)"></ion-searchbar>
+  <ion-list class="FAQ-list" >
+    <div *ngFor="let question of questions">
+    <ion-item *ngIf="question.show">
+      <ion-list lines="none">
+        <ion-item (click)="expand(question)">
+          <ion-text class="question" >
+            <ion-icon name="remove-outline" class="expand-icon" *ngIf="( question.showAnswer)"> </ion-icon>
+            <ion-icon  name="add-outline" class="expand-icon" *ngIf=" (!(question.showAnswer))"> </ion-icon>
+              {{question.question}}
+          </ion-text>
+        </ion-item>
+        <ion-item *ngIf=" (question.showAnswer)">
+          <ion-item-divider  class="answer">
+          <ion-text>
+            {{question.answer}}
+          </ion-text>
+          </ion-item-divider>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+     </div>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="./chat-bot" class="chat-btn">
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

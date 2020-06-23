@@ -1,0 +1,106 @@
+.input-login {
+    position: relative;
+    padding-bottom: 5%;
+}
+
+.icon-input {
+    border-radius: 50%;
+    border: 2px solid gray;
+    background-color: gray;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 15%;
+    width: 40px;
+    height: 40px;
+    z-index: 9;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input {
+    border: 1px solid;
+    height: 40px;
+    width: 70%;
+    display: block;
+    margin:0 auto;
+    border-radius: 23px;
+    box-sizing: border-box;
+    outline: none;
+    --padding-start: 50px;
+    --padding-end: 20px;
+    --padding-top: 9px
+}
+
+.btn-login {
+    border-radius: 25px;
+    --background: orange;
+}
+
+.login-content {
+    position: relative;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login-header {
+    position: fixed;
+    height: 30%;
+    width: 100%;
+}
+
+.rectangle {
+    position: relative;
+    height: 80%;
+    background-color: #2DD2C2;
+}
+
+.elipse {
+    position: absolute;
+    top: 40%;
+    z-index: 20;
+    height: 75%;
+    width: 115%;
+    background-color: #2DD2C2;
+    border-radius: 50%;
+}
+
+.login-welcome {
+    position: relative;
+    z-index: 25;
+    top: -50%;
+    color: white;
+    text-align: center;    
+}
+
+.login-welcome-text {
+    font-size: 40px;
+}
+
+.acesse-conta {
+    font-weight: bold;
+}
+
+.btn-register-content {
+    position: absolute;
+    width: 100%;
+    bottom: 4%;
+}
+
+.btn-register {
+    --border-radius: 25px;
+    --border-color: #2DD2C2;
+    color: #2DD2C2;
+    width: 75%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.forgot-pswd {
+    position: relative;
+    text-align: center;
+}

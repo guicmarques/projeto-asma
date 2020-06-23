@@ -1,0 +1,35 @@
+<ion-content scroll="false">
+  <div class="login-header">
+    <div class="rectangle"></div>
+    <div class="elipse"></div>
+    <div class="login-welcome">
+      <h1 class="login-welcome-text">Seja bem <br>vindo(a)!</h1>
+    </div>
+  </div>
+  <div class="login-content">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center acesse-conta">Acesse sua conta</ion-card-title>
+      </ion-card-header>
+
+      <div class="input-login">
+        <ion-label class="icon-input"><ion-icon name="person-outline" slot="start"></ion-icon></ion-label>
+        <ion-input class="input" [(ngModel)]="username" type="number" placeholder="Insira seu CPF"></ion-input>
+      </div>  
+      
+      <div class="input-login">
+        <ion-label class="icon-input"><ion-icon name="key-outline" slot="start"></ion-icon></ion-label>
+        <ion-input class="input" [(ngModel)]="password" type="password" placeholder="Insira sua senha"></ion-input>
+      </div>
+  
+      <ion-button class="btn-login ion-no-margin" expand="full" (click)="login()">Iniciar sessão</ion-button>
+    </ion-card>
+
+    <div class="forgot-pswd">
+      <p>Esqueceu sua senha? Clique <a>aqui</a>.</p>
+    </div>
+  </div>
+  <div class="btn-register-content">
+    <ion-button class="btn-register" fill="outline" routerLink="../register">Cadastre-se</ion-button>   
+  </div> 
+</ion-content>

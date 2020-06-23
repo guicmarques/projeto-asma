@@ -1,0 +1,162 @@
+<ion-header class="ion-no-border">
+  <ion-grid><ion-row>
+  <ion-button routerLink="/tabs/perfil" fill="clear" class="backbtn"><ion-icon name="arrow-back-outline" class="back-arrow"></ion-icon></ion-button>
+    <ion-title>
+      <div class="title-text">Editar perfil</div>
+    </ion-title>
+    </ion-row></ion-grid>
+  
+</ion-header>
+<ion-content>
+
+<div class="image-padding">
+  <ion-avatar class="edit-image" (click)="selectImg()">
+    <ion-img [src]="user.imagem"  *ngIf="(userDefined)&&(user.imagem!== '');else semImagem" ></ion-img>
+         <ng-template #semImagem>
+         <ion-img src="../../../assets/images/robot_icon.png" class="imageborder"></ion-img>
+        </ng-template>
+        <!--
+        <ion-button class="camera-btn" fill="clear">
+        <ion-icon name="camera-outline" ></ion-icon></ion-button>-->
+  </ion-avatar>
+ 
+</div>
+<div class="edit">
+<div class="edit-input">
+    <ion-text class="field-title" >NOME</ion-text>
+    <br>
+    <ion-input class="edit-field" placeholder={{user.nome}} type="text" 
+    autocapitalize *ngIf="userDefined" [(ngModel)]="newData.nome" 
+    (ionBlur)="focus(false, 0)" (ionFocus)="focus(true, 0)"
+    [ngClass]="{
+      'edit-field': classChange[0],
+      'edit-field-empty' : !(classChange[0])}"> </ion-input>
+  </div>
+
+  <div class="edit-input">
+    <ion-text class="field-title" clear-input="true" >SOBRENOME</ion-text>
+    <br>
+    <ion-input class="edit-field" placeholder={{user.sobrenome}} type="text" 
+        autocapitalize="on" *ngIf="userDefined" [(ngModel)]="newData.sobrenome"
+        (ionBlur)="focus(false, 1)" (ionFocus)="focus(true, 1)"
+        [ngClass]="{
+          'edit-field': classChange[1],
+          'edit-field-empty' : !(classChange[1])}"
+      ></ion-input>
+      <!--</ion-input> onchange="changeClass()"  
+    [ngClass]="classChange ? 'edit-field' : 'edit-field-empty'">-->
+  </div>
+  <div class="edit-input-with-warning">
+    <ion-text class="field-title" >RG</ion-text>
+    <br>
+    <ion-input class="edit-field-empty" [(ngModel)]="user.rg" 
+    autocapitalize="on" *ngIf="userDefined" readonly 
+    (ionFocus)="warning(true,0)" (ionBlur)="warning(false,0)"></ion-input>
+    <br>
+    <ion-text class="warning" color="danger"
+     [ngStyle]="{
+      'visibility': showhelp[0] ? 'visible' : 'hidden'
+    }">
+      <ion-icon name="alert-circle-outline"></ion-icon> Para editar essa informação contate o suporte
+    </ion-text>
+  </div>
+
+  <div class="edit-input-with-warning">
+    <ion-text class="field-title" >CPF</ion-text>
+    <br>
+    <ion-input class="edit-field-empty" type="text" readonly
+    autocapitalize="on" *ngIf="userDefined"  [(ngModel)]="user.username"
+    (ionFocus)="warning(true,1)" (ionBlur)="warning(false,1)"></ion-input>
+    <br>
+    <ion-text class="warning" color="danger"
+     [ngStyle]="{
+      'visibility': showhelp[1] ? 'visible' : 'hidden'
+    }">
+      <ion-icon name="alert-circle-outline"></ion-icon> Para editar essa informação contate o suporte
+    </ion-text>
+  </div>
+
+  <div class="edit-input-with-warning">
+    <ion-text class="field-title" > RGHC </ion-text>
+    <br>
+    <ion-input class="edit-field-empty" type="text" readonly
+    autocapitalize="on" *ngIf="userDefined"  [(ngModel)]="user.token"
+    (ionFocus)="warning(true,2)" (ionBlur)="warning(false,2)"></ion-input>
+    <br>
+    <ion-text class="warning" color="danger"
+     [ngStyle]="{
+      'visibility': showhelp[2] ? 'visible' : 'hidden'
+    }">
+      <ion-icon name="alert-circle-outline"></ion-icon> Para editar essa informação contate o suporte
+    </ion-text>
+  </div>
+
+  
+  <div class="edit-input">
+    <ion-text class="field-title" >DATA DE NASCIMENTO</ion-text>
+    <br>
+    <ion-datetime class="edit-field date-field" displayFormat="DD MM YYYY" pickerFormat="DD MMM YYYY" *ngIf="userDefined"
+    placeholder={{nascimento}} [(ngModel)]="newData.nascimento" [monthShortNames]="monthShortNames" 
+    [monthNames]="monthNames" 
+    (ionBlur)="focus(false, 5)" (ionFocus)="focus(true, 5)"
+    [ngClass]="{
+      'edit-field': classChange[5],
+      'edit-field-empty' : !(classChange[5])}"></ion-datetime>
+    
+  </div>
+  <div class="edit-input">
+    <ion-text class="field-title" >PESO</ion-text>
+    <br>
+    <ion-input class="edit-field" placeholder={{user.peso}} type="number" 
+    *ngIf="userDefined" [(ngModel)]="newData.peso"
+    (ionBlur)="focus(false, 2)" (ionFocus)="focus(true, 2)"
+    [ngClass]="{
+      'edit-field': classChange[2],
+      'edit-field-empty' : !(classChange[2])}"></ion-input>
+  </div>
+
+  <div class="edit-input">
+    <ion-text class="field-title" >ALTURA</ion-text>
+    <br>
+    <ion-input class="edit-field" placeholder={{user.altura}} type="number" *ngIf="userDefined" [(ngModel)]="newData.altura"
+    (ionBlur)="focus(false, 3)" (ionFocus)="focus(true, 3)"
+    [ngClass]="{
+      'edit-field': classChange[3],
+      'edit-field-empty' : !(classChange[3])}"></ion-input>
+  </div>
+
+  <div class="edit-input-with-warning">
+    <ion-text class="field-title" >EMAIL</ion-text>
+    <br>
+    <ion-input class="edit-field-empty" [(ngModel)]="user.email" type="text" *ngIf="userDefined" readonly 
+    (ionFocus)="warning(true,3)" (ionBlur)="warning(false,3)"></ion-input>
+    <br>
+    <ion-text class="warning" color="danger"
+     [ngStyle]="{
+      'visibility': showhelp[3] ? 'visible' : 'hidden'
+    }">
+      <ion-icon name="alert-circle-outline"></ion-icon> Para editar essa informação contate o suporte
+    </ion-text>
+  </div>
+    
+  
+
+
+  <div class="edit-input">
+    <ion-text class="field-title" >TELEFONE</ion-text>
+    <ion-input class="edit-field" placeholder={{user.telefone}} type="number" *ngIf="userDefined" [(ngModel)]="newData.telefone"
+    (ionBlur)="focus(false, 4)" (ionFocus)="focus(true, 4)"
+    [ngClass]="{
+      'edit-field': classChange[4],
+      'edit-field-empty' : !(classChange[4])}"></ion-input>
+  </div>
+</div>
+
+  
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="confirmChanges()"  class="save-button" >
+      <ion-icon name="save-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

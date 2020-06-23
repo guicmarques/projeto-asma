@@ -1,0 +1,132 @@
+.btnContainer {
+    position: absolute; 
+    top: 9%; 
+    left: -1.4%;
+}
+
+.backBtn {
+    --background: rgba(0, 0, 0, 0);
+    --box-shadow: 0;
+}
+
+.barrierHeader {
+    --background: #ff7868;
+    --color: white;
+    text-align: center;
+}
+
+.barrierTitle {
+    font-size: 14px;
+}
+
+.barrierContent {
+    --background: linear-gradient(180deg, rgba(255,120,104,1) 0%, rgba(249,189,128,1) 70%, rgba(255,235,223,1) 100%);
+}
+
+.cardsContainer {
+    position: relative;
+    margin-top: 7%;
+}
+
+.card {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+}
+
+ion-card {
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 25px;
+    min-height: 67vh;
+    position: relative;
+}
+
+.infoTitle {
+    font-size: 18px;
+    margin: 5% 5% 5% 5%;
+}
+
+.infoContent {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 15%;
+}
+
+.startBtn {
+    --color: #ff7868;
+    --background: rgba(255, 255, 255, 0);
+    --box-shadow: 0;
+    margin-left: 70%;
+}
+
+.cardTitle {
+    font-size: 16px;
+    text-align: justify;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    font-weight: 700;
+}
+
+.cardSubtitle {
+    font-size: 12px;
+    color: #c2c1c1;
+    padding-left: 5%;
+}
+
+.answersContainer {
+    padding: 0;
+    border-radius: 25px;
+}
+
+.answer {
+    font-size: 14px;
+    --min-height: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+
+ion-radio {
+    --color: lightgray;
+    --color-checked: #ff7868;
+
+    .radio-checked {
+        --color: #ff7868;
+    }
+}
+
+.item-radio-checked {
+    --background: #fff3db;
+    color: black;
+}
+
+.btnGroup {
+    position: absolute;
+    bottom: 1%;
+    width: 100%;
+    text-align: center;
+}
+
+.previousBtn {
+    --color: #ff7868;
+    --background: rgba(255, 255, 255, 0);
+    --box-shadow: 0;
+    margin-right: 20%;
+}
+
+.nextBtn {
+    --color: #ff7868;
+    --background: rgba(255, 255, 255, 0);
+    --box-shadow: 0;
+    margin-left: 20%;
+}
+
+.sendBtn {
+    --background: #ff7868;
+    font-size: 12px;
+    margin-left: 12%;
+}

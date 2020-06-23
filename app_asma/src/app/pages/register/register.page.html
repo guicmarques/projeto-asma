@@ -1,0 +1,137 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="register-header">
+    <div class="upper-elipse"></div>
+    <ion-buttons slot="start" class="back-btn-container">
+      <ion-button class="back-btn" slot="icon-only" fill="clear" size="large" routerLink="/login">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <h1>Crie sua <span style="color: white">conta</span></h1>
+  </ion-toolbar>
+</ion-header>
+
+<!--
+<div class="register-header">
+  <div class="upper-elipse"></div>
+  <ion-button class="back-btn" slot="icon-only" fill="clear" size="large" routerLink="/login">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </ion-button>
+  <h1>Crie sua <span style="color: white">conta</span></h1>
+</div>
+-->
+
+<ion-content>
+  <div class="register-forms">
+    <div class="register-input">
+      <ion-avatar class="register-img" (click)="selectImg()">
+        <img *ngIf="profileImg === ''" src="../../../assets/images/defaultProfileImg.jpg">
+      </ion-avatar>
+      <ion-label>Escolha uma imagem</ion-label>
+    </div>
+
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Nome" type="text" [(ngModel)]="user.nome"
+      autocapitalize="on"></ion-input>
+    </div>
+
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Sobrenome" type="text" [(ngModel)]="user.sobrenome"
+      autocapitalize="on"></ion-input>
+    </div>
+
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="RG" type="text" [(ngModel)]="user.rg"></ion-input>
+    </div>
+
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="CPF" type="number" [(ngModel)]="user.cpf"></ion-input>
+    </div>
+
+    <div class="register-input">
+      <ion-datetime class="register-field date-field" displayFormat="DD MMMM YYYY" pickerFormat="DD MMM YYYY" 
+      placeholder="Data de nascimento" [(ngModel)]="user.nascimento" [monthShortNames]="monthShortNames" 
+      [monthNames]="monthNames"></ion-datetime>
+    </div>
+
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Peso (kg)" type="number" [(ngModel)]="user.peso"></ion-input>
+    </div>
+
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Altura (m)" type="number" [(ngModel)]="user.altura"></ion-input>
+    </div>
+
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="E-mail" type="text" [(ngModel)]="user.email"></ion-input>
+    </div>
+
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Telefone" type="number" [(ngModel)]="user.telefone"></ion-input>
+    </div>
+
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Senha" type="password" [(ngModel)]="user.senha"
+      (ionFocus)="initPwd()" (ionBlur)="validatePwd()"></ion-input>
+
+      <div *ngIf="senhaValida === false">
+        <ul class="invPsw"> <ion-icon name="alert-circle-outline"></ion-icon> A senha:
+          <li> Deve possuir no mínimo 8 caracteres.
+          </li> 
+          <li> Não deve conter espaços.</li>
+        </ul>
+      </div>
+    </div>
+
+    
+
+    <div class="register-input">
+      <ion-input class="register-field" placeholder="Confirme sua senha" type="password" [(ngModel)]="senhaConf"></ion-input>
+
+      <div *ngIf="user.senha != '' && user.senha !== senhaConf">
+        <ul class="invPsw"> <ion-icon name="alert-circle-outline"></ion-icon> As senhas devem ser idênticas.</ul>
+      </div>
+    </div>
+
+    
+
+    <div>
+      <ion-item lines="none">
+        <ion-label>Possuo um RGHC</ion-label>
+        <ion-checkbox slot="start" [(ngModel)]="hasTokenHC" mode="ios"></ion-checkbox>        
+      </ion-item>
+      
+      <div *ngIf="hasTokenHC" class="register-input">
+        <ion-input class="token-field" placeholder="RGHC" type="text" [(ngModel)]="user.tokenHC"></ion-input>
+      </div> 
+    </div>   
+  </div>
+  
+  <div class="register-footer">
+    <div class="btn-container">
+      <div class="submit-text">Enviar</div>
+      <ion-fab class="fab-btn">
+        <ion-fab-button class="submit-btn" (click)="confirmSignUp()" 
+        [attr.disabled]="user.cpf !== null && user.email !== '' && 
+        senhaValida && user.senha === senhaConf ? false : true">
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </div>
+    <div class="bottom-circle"></div>
+  </div>
+</ion-content>
+ 
+
+<!--
+<div class="regiser-footer">
+  <div class="submit-text">Enviar</div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="submit-btn" (click)="confirmSignUp()" 
+    [attr.disabled]="user.cpf !== null && user.email !== '' && 
+    senhaValida && user.senha === senhaConf ? false : true">
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div class="bottom-circle"></div>
+</div>
+-->

@@ -1,0 +1,62 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="chatHeader">
+    <ion-buttons class="btnContainer">
+      <ion-back-button defaultHref="./" class="backBtn">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title class="chatTitle">ChatBot</ion-title>
+    <div button (click)="presentBot()" class="bot-img">
+      <img src="../../../assets/images/chatbot_avatar.png">
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="chats">
+    <div class="chatbox" #chat>
+      <div class="bot-hello">
+        <div class="bot-hello-img">
+          <img style="width: 25vw; height: 25vw;" src="../../../assets/images/chatbot.png">
+        </div>
+      </div>
+
+      <div *ngFor="let chat of chats">
+        <div class="my-msg" *ngIf="chat.type!=='bot' && chat.isMe">
+          <div class="metadata">
+            <div class="time">{{chat.createdAt | date: 'HH:mm'}}</div>
+          </div>
+          <div class="message" [ngClass]="{'sent'   : chat.sent === true,
+                                           'unsent' : chat.sent === false}">
+            {{chat.message}}
+          </div>
+          
+        </div>
+
+        <div class="bot-msg" *ngIf="chat.type =='bot' && !chat.isMe">
+          <div class="bot-avatar">
+            <img src="../../../assets/images/chatbot_avatar.png">
+          </div>
+          <div class="message received">
+            {{chat.message}}
+          </div>
+          <div class="metadata">
+            <div class="time">{{chat.createdAt | date: 'HH:mm'}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="flex-items ion-no-padding">
+      <ion-textarea rows="1" placeholder="Digite sua mensagem ..." enterkeyhint="send" autocapitalize="true"
+          type="text" required="true" [(ngModel)]="newMsg" class="message-input"></ion-textarea>
+      <div class="msg-btn-container">
+        <ion-button  fill="clear" [disabled]="newMsg === ''" class="msg-btn" slot="icon-only" (click)="sendMessage()">
+          <ion-icon name="send" slot="icon-only" class="send-icon"></ion-icon>
+        </ion-button>
+      </div>
+  </div>
+</ion-footer>

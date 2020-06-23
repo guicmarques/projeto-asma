@@ -1,0 +1,160 @@
+.profile-title {
+    padding-top: 15%;
+    padding-left: 8%;
+    background-color: #2dd2c2;
+}
+
+.title-text{
+    font-size: 26px;
+    font-weight: 700;
+    color: white;  
+}
+
+.profile-header {
+    padding-bottom: 10%;
+    background-color: #2dd2c2;
+}
+
+ion-content {
+    --background: #2dd2c2;
+}
+
+.profile-background {
+    background-color: white;
+    position: absolute;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-block {
+    width: 100%;
+    height: 10%;
+    background-color: #2dd2c2;
+}
+
+.achievements-title {
+    font-size: 23px;
+    text-align: center;
+    color: #474a51;
+    bottom: 10px;
+}
+
+.float-btn-profile {
+    --background: #2dd2c2;
+}
+
+
+.page-text {
+    font-size: large;
+    font-weight: 100;
+    margin-top: 0;
+}
+
+.line-skip{
+   height: 10px;
+   width: 40px; 
+
+}
+
+.toolbar {
+    background-color: rgb(162, 163, 163);
+}
+.profile-img {
+    margin: auto;
+    width: 125px;
+    height: 125px;
+    background: white;
+    border: 4px solid transparent;
+}
+.profile-forms {
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: -10%;
+    color:black;
+    overflow-y: auto;
+    z-index: 10;
+}
+.profile-username {
+    font-size: 20px;
+    text-align: center;
+   
+   
+}
+
+.button-profile {
+    margin: auto;
+    width: 150px;
+    height: 40px;
+    
+}
+ion-slides {
+    height: 120%;
+    padding-top: 20px;
+  }
+
+.achievements-card{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.achievement-img {
+  height: 100%;
+  width: auto;
+  height: 100px;
+  margin: auto;  
+}
+.achievement-button-background {
+    height: 150px;
+    
+ }
+ .achievement-title {
+    
+    text-align: center;
+    --ion-justify: center;
+    
+ }
+.achievement-name{
+    font-size:16px;
+    font-weight: bold;
+    color:black;
+
+}
+.achievement-subtitle{
+    font-size:15px;
+    color:gray;
+}
+.get-info-button{
+    --ripple-color:#2dd2c2;
+    padding-top: 0;
+    height: 18px;
+
+}
+.get-info-arrow{
+    color:#2dd2c2;
+
+}
+
+
+ ion-fab-button[data-desc] {
+    position: relative;
+}
+  
+ion-fab-button[data-desc]::after {
+    position: absolute;
+    content: attr(data-desc);
+    z-index: 1;
+    right: 50px;
+    bottom: 4px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 9px;
+    border-radius: 15px;
+    color: black;
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
+}
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+  }

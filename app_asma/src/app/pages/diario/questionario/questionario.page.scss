@@ -1,0 +1,148 @@
+.btnContainer {
+    position: absolute; 
+    top: 9%; 
+    left: -1.4%;
+}
+
+.backBtn {
+    --background: rgba(0, 0, 0, 0);
+    --box-shadow: 0;
+}
+
+.questionnaireHeader {
+    --background: #05b5a3;
+    --color: white;
+    text-align: center;
+}
+
+.questionnaireTitle {
+    font-size: 14px;
+}
+
+.questionnaireContent {
+    --background: linear-gradient(180deg, rgba(5,181,163,1) 0%, rgba(125,218,193,1) 40%, rgb(255, 255, 255) 100%);
+}
+
+.swiper-slide {
+    z-index: 1;
+    ion-card {
+        transform: scale(0.85);
+        opacity: 0.8;
+    }
+}
+
+.swiper-slide-active {
+    z-index: 3;
+    ion-card {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+ion-slides {
+    --bullet-background-active: #f3943c;
+    --bullet-background: rgba(125,218,193,1);
+}
+
+ion-card {
+    border-radius: 25px;
+    min-height: 83vh;
+    max-height: 83vh;
+    margin-top: 10%;
+    position: relative;
+}
+
+.introCardHeader {
+    margin: 15% 5% 0 5%;
+}
+
+.introCardContent {
+    padding-top: 30%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.introText {
+    font-size: 16px;
+    padding-bottom: 15%;
+}
+
+.cardHeader {
+    padding: 0;
+}
+
+.cardTitle {
+    font-size: 16px;
+    text-align: justify;
+    padding: 10% 10% 10% 10%;
+    font-weight: 700;
+}
+
+.cardAnswers {
+    border-radius: 25px;
+}
+
+.answersContainer {
+    padding: 0;
+    border-radius: 25px;
+    overflow-y: auto; 
+    max-height: 50vh;
+}
+
+.answer {
+    font-size: 14px;
+    --min-height: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+
+ion-radio {
+    --color: lightgray;
+    --color-checked: #d57b29;
+
+    .radio-checked {
+        --color: #d57b29;
+    }
+}
+
+.item-radio-checked {
+    --background: #f0892a;
+    color: white;
+}
+
+.btnGroup {
+    position: absolute;
+    bottom: 1%;
+    width: 100%;
+    text-align: center;
+}
+
+.startBtn {
+    --background: #f0892a;
+}
+
+.previousBtn {
+    --color: #f0892a;
+    --background: rgba(255, 255, 255, 0);
+    --box-shadow: 0;
+    font-size: 12px;
+    margin-right: 20%;
+
+}
+
+.nextBtn {
+    --color: #f0892a;
+    --background: rgba(255, 255, 255, 0);
+    --box-shadow: 0;
+    margin-left: 20%;
+    font-size: 12px;
+}
+
+.sendBtn {
+    --background: #f0892a;
+    margin-left: 6%;
+    font-size: 12px;
+}
