@@ -38,6 +38,12 @@ $ python manage.py createsuperuser
 $ python manage.py runsslserver 0.0.0.0:8000
 ```
 
+## Modelos de FAQ e Exercícios
+Para que o aplicativo consiga identificar corretamente o FAQ e os exercícios, deve ser incluído um arquivo ```exercicios.json``` e outro ```faq.json```, que será lido pela aplicação quando necessário. A descrição do formato do arquivo se encontra nos seguintes links:
+
+- [Exercício](modelo_exercicio.md)
+- [FAQ](modelo_FAQ.md)
+
 
 ## API description /rest
 ### POST requests:

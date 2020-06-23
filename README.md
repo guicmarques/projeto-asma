@@ -8,4 +8,5 @@ Cada aplicação tem o próprio README.md, que engloba todas as instruções de 
 
 ## Arquitetura
 A arquitetura do projeto é apresentada à seguir:
+
 ![arquitetura](diagrama_final_redes.jpg)
