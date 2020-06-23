@@ -66,42 +66,44 @@
             </div>
             </nav>            
             <div class="container col-md-12" id="graph">
-                <div class="tableFixHead table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info" style="tbody{overflow-y: scroll;height: 200px; width: 100%;position: absolute;}">
-                    <table class="table dataTable my-0" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th>Atividade</th>
-                                <th>Quantidade</th>
-                                <th>Unidade</th>
-                                <th>Dado Inicio</th>
-                                <th>Dado Fim</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for linha in metasDadosLista %}
+                <div class="card-body bg-white">
+                    <div class="tableFixHead table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info" style="tbody{overflow-y: scroll;height: 200px; width: 100%;position: absolute;}">
+                        <table class="table dataTable my-0" id="dataTable">
+                            <thead>
                                 <tr>
-                                    <td>{{linha.0}}<br></td>
-                                    <td>{{linha.1}}<br></td>
-                                    <td>{{linha.2}}<br></td>
-                                    <td>{{linha.3}}</td>
-                                    <td>{{linha.4}}<br></td>
+                                    <th>Atividade</th>
+                                    <th>Quantidade</th>
+                                    <th>Unidade</th>
+                                    <th>Dado Inicio</th>
+                                    <th>Dado Fim</th>
                                 </tr>
-                            {% endfor %}
-                        </tbody>
-                        <tfoot>
-                            <tr></tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <div class="container col-xs-12" id="cadastroPaciente">
-                    <h3 class="text-dark mb-1">Cadastro de Pacientes</h3>
-                    <form class="form-horizontal"enctype="multipart/form-data" method="POST">
-                        {% csrf_token %}
-                        {{ goalform.as_p }}
+                            </thead>
+                            <tbody>
+                                {% for linha in metasDadosLista %}
+                                    <tr>
+                                        <td>{{linha.0}}<br></td>
+                                        <td>{{linha.1}}<br></td>
+                                        <td>{{linha.2}}<br></td>
+                                        <td>{{linha.3}}</td>
+                                        <td>{{linha.4}}<br></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="container col-xs-12" id="cadastroPaciente">
+                        <h3 class="text-dark mb-1">Cadastro de Pacientes</h3>
+                        <form class="form-horizontal"enctype="multipart/form-data" method="POST">
+                            {% csrf_token %}
+                            {{ goalform.as_p }}
 
-                        <input hidden type="submit" name="" value="Cadastrar">
-                        <div class="text-right"><button class="btn btn-primary" type="submit" name="">Cadastrar Paciente</button></div>
-                    </form>
+                            <input hidden type="submit" name="" value="Cadastrar">
+                            <div class="text-right"><button class="btn btn-primary" type="submit" name="">Cadastrar Paciente</button></div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
