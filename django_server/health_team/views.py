@@ -1326,7 +1326,19 @@ def pageMetas(request,username):
                                 daylistVerify.append((metaDados[3] + datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
                         else:
                             daylistVerify.append(metaDados[3].strftime("%Y-%m-%d"))
-                        metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"SIM"))
+
+                        try:
+                            dadosFITBIT = getFitbitData(user=User.objects.get(id=username),dates=daylistVerify)
+                            soma = 0
+                            for day in sorted(dadosFITBIT.keys(),reverse=True):
+                                soma += dadosFITBIT[day]["summary"]["steps"]
+
+                            metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"{}%".format(soma/float(metaDados[1]))))
+
+                        except:
+                            metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"Nenhuma fitbit cadastrada"))
+
+                        
 
                     else:
                         metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],None))
