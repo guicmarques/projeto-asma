@@ -1294,7 +1294,7 @@ def pageMetas(request,username):
             goalformD.user = User.objects.get(id=username)
             goalformD.save()
             print("T2")
-            return HttpResponseRedirect(request.path)
+            #return HttpResponseRedirect(request.path)
         else:
             print("T1")
             testeExec = True
