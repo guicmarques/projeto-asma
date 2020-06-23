@@ -1291,8 +1291,8 @@ def pageMetas(request,username):
         goalform = GoalForm(data=request.POST)
         if goalform.is_valid():
             goalformD = goalform.save(commit=False)
-            goalformD.user = User.objects.get(id=username).id
-            print(User.objects.get(id=username).id)
+            goalformD.user = User.objects.get(id=username)
+            print(User.objects.get(id=username),User.objects.get(id=username))
             goalformD.save()
             print("T2")
             return HttpResponseRedirect(request.path)
