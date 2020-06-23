@@ -21,4 +21,4 @@ urlpatterns = [
 
 ]
 
-#url(r'^table_test.html$', views.tableTest, name='table_test'),
+

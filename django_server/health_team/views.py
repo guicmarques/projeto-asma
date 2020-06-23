@@ -1437,12 +1437,4 @@ def downloadUserProfileInfo(request):
     response['Content-Disposition'] = 'attachment; filename="user_profile_info.csv"'
     return response
 
-def tableTest(request):
-    #return render(request, 'logged/table_test.html', {})
-    Goal.objects.get(id=28).delete()
-    return HttpResponse("You are logged in !")
 
-
-def tableTest2(request,username):
-    print(username)
-    return render(request, 'logged/table_test.html', {})
