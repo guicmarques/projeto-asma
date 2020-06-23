@@ -1314,6 +1314,8 @@ def pageMetas(request,username):
                 metadados_lista_sup = []
                 for metaDados in metasDadosLista:
                     if metaDados[1].isdigit() and metaDados[2]=="passos" and metaDados[3]!=None and metaDados[4]!=None and metaDados[3]<=metaDados[4] and metaDados[3]<=datetime.datetime.today().date():
+
+                        print(metaDados[3],datetime.datetime.today().date(),metaDados[3]<=datetime.datetime.today().date())
                         
                         if metaDados[4]>datetime.datetime.today().date():
                             difDays = (metaDados[4]-metaDados[3]).days
