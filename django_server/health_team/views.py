@@ -1286,6 +1286,7 @@ def estats(request):
 
 
 def pageMetas(request,username):
+    user_data = UserProfileInfo.objects.get(user_id=username)
     testeExec = False
     if request.method == 'POST':
         #print("T", username)
@@ -1360,7 +1361,7 @@ def pageMetas(request,username):
         #print(metasDadosLista)
         goalform = GoalForm()
     #print("T3")
-    return render(request, 'logged/metas.html',{'metasDadosLista':metasDadosLista,'goalform':goalform})
+    return render(request, 'logged/metas.html',{'metasDadosLista':metasDadosLista,'goalform':goalform,'user_data':user_data})
 ####################### Downloads #######################
 @login_required
 def downloadBarreiras(request):
