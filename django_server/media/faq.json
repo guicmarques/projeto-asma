@@ -46,42 +46,42 @@
     },
     "9": {
         "id": 9,
-        "pergunta": "",
-        "resposta": ""
-    },
-    "10": {
-        "id": 10,
         "pergunta": "Por que devo me preocupar com o ambiente para o asmático?",
         "resposta": "Porque é principalmente no ambiente onde habita que ele estará mais exposto aos agentes causadores dos sintomas asmáticos. O quarto é o principal foco de atenção, já que é o local onde o asmático passa a maior parte de seu dia."
     },
-    "11": {
-        "id": 11,
+    "10": {
+        "id": 10,
         "pergunta": "O que são ácaros?",
         "resposta": "São organismos microscópicos que se alimentam de descamação da pele humana, de pêlos de animais e também do mofo. Habitam locais onde há acúmulo de poeira como: colchões e travesseiros, carpetes, bichos de pelúcia, estantes, papéis e até animais de pêlo. Os ácaros e seus excrementos são os maiores agentes causadores de alergias respiratórias."
     },
-    "12": {
-        "id": 12,
+    "11": {
+        "id": 11,
         "pergunta": "Exercício faz bem?",
         "resposta": "A prática de esportes é importante no tratamento da asma, tanto em favorecer uma melhor capacidade respiratória, como também, no aspecto psicológico e social do portador de asma brônquica."
     },
-    "13": {
-        "id": 13,
+    "12": {
+        "id": 12,
         "pergunta": "Como Diagnosticar a Asma?",
         "resposta": "Uma história clínica bem feita por um médico especialista (Pneumologista), pesquisando os sintomas de tosse, falta de ar, chiado e aperto no peito ou desconforto torácico; tentando identificar os fatores desencadeantes ou agravantes alérgicos ou não, tais como: pó, ácaros, pêlo de animais, fumaça de cigarro, poluição, cheiros de produtos químicos, variação de temperatura, exercícios físicos, alteração emocional."
     },
-    "14": {
-        "id": 14,
+    "13": {
+        "id": 13,
         "pergunta": "Como tratar a asma?",
         "resposta": "O tratamento da asma é um programa de parceria dos profissionais de saúde e o paciente e, ou seus familiares. Orientar o paciente e seus familiares a identificar e evitar os fatores agravantes e desencadeantes especialmente no ambiente domiciliar. Educar e orientar sobre sua doença para que possa entender o processo de inflamação e a broncoconstrição (estreitamento do brônquico), ensinar ao paciente a usar adequadamente a medicação e outros tratamentos não medicamentosos."
     },
-    "15": {
-        "id": 15,
+    "14": {
+        "id": 14,
         "pergunta": "Por que sinto falta de ar quando faço atividade física como correr?",
         "resposta": "Exercícios intensos realizados por pessoas com asma não controlada pode desencadear a falta de ar e outros sintomas da asma. Provavelmente o esforço está muito acima do seu condicionamento físico, você deve procurar manter um controle, intensidade de exercício adequada para evitar a crise de asma."
     },
+    "15": {
+        "id": 15,
+        "pergunta": "Minha asma irá melhorar se praticar natação e outros esportes?",
+        "resposta": "Praticar esportes e/ou ter estilo de vida mais ativo, promove a melhora do sistema cardiorrespiratório, diminuindo o número de crises e também a sua intensidade."
+    },
     "16": {
         "id": 16,
-        "pergunta": "Minha asma irá melhorar se praticar natação e outros esportes?",
+        "pergunta": " O que devo fazer antes de praticar atividade física?",
         "resposta": "- Identificar os fatores desencadeantes da sua asma e evitá-los. Por exemplo, se o frio desencadeia sua asma, tente utilizar lenço ou máscara sobre nariz e boca para aquecer o ar, e sempre respire pelo nariz.\n- Ter disponível o medicamento orientado pelo seu médico para uso antes do esforço, atividade física. Você deve usar o seu broncodilatador de curta duração (bombinha) de 15-30 minutos antes de começar a se exercitar e sua ação não dura mais do que 2-4 horas.\n- Fazer aquecimento antes do exercício. Aquecer o corpo de 5-10 minutos é importante para prevenir os sintomas da asma durante o exercício principal. Um exercício de aquecimento simples pode ser andar devagar e aumentar lentamente a velocidade. Você também pode fazer polichinelos começando com os braços e só então acrescentar o movimento de suas pernas.\n- Finalizar sua atividade com um exercício de relaxamento. Deve diminuir a intensidade do exercício aos poucos"
     },
     "17": {
