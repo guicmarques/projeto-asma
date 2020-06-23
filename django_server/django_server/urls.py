@@ -38,7 +38,7 @@ urlpatterns = [
     url(r'^404$', views.erro_404, name='erro_404'), 
     # Uso Interno 
     re_path(r'^favicon\.ico$', favicon_view),
-    url(r'^2$', views.index, name='index2'),
+    #url(r'^2$', views.index, name='index2'),
     url(r'^special/', views.special, name='special'),
     url(r'^health_team/', include('health_team.urls')),
     url(r'^rest/', include('server.urls')),
