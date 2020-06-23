@@ -14,6 +14,7 @@ class GoalForm(forms.ModelForm):
             'endDate': forms.DateInput(attrs={'class': 'form-control form-control-user','type':'date'})
             
         }
+        exclude = ["user"]
         
 
 
