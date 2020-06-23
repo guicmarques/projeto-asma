@@ -146,6 +146,7 @@ def cadastroPaciente(request):
             #print(user)
             profile = profile_form.save(commit=False)
             profile.user = user
+            print(user)
             profile.save()
             registered = True
             return HttpResponseRedirect(reverse('table'))
@@ -1290,7 +1291,7 @@ def pageMetas(request,username):
         print("T", username)
         goalform = GoalForm(data=request.POST)
         if goalform.is_valid():
-            goalformD = goalform.save(commit=False)
+            goalformD = goalform.save()
             goalformD.user = User.objects.get(id=username)
             print(User.objects.get(id=username),User.objects.get(id=username))
             goalformD.save()
