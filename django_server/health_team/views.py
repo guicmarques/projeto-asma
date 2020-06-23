@@ -1341,9 +1341,12 @@ def pageMetas(request,username):
                             metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[3],metaDados[4],"Nenhuma fitbit cadastrada"))
 
                         
-
+                    elif metaDados[2]=="passos":
+                        metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"-"))
                     else:
-                        metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],None))
+                        pass
+                        #Foi optado por demonstrar somente valores que sejam passos
+                        #metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],None))
             else:
                 metasDadosLista =[('Vazio',0,'Vazio','0000-00-00','0000-00-00',"None")]
 
