@@ -1308,7 +1308,7 @@ def pageMetas(request,username):
     if testeExec:
         try:
             date60dayback = (datetime.datetime.today() - datetime.timedelta(days=60))
-            metasDados = Goal.objects.all().filter(user_id=username).filter(startDate__gte=date60dayback)
+            metasDados = Goal.objects.all().filter(user_id=username)#.filter(startDate__gte=date60dayback)
             if len(metasDados)!=0:
                 metasDadosLista = metasDados.values_list('activity','quantity','unit','startDate','endDate')
             else:
