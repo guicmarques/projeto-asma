@@ -14,7 +14,6 @@ urlpatterns = [
     url(r'^user_login/register2.html$', views.register_account2, name='register_account2'),
     url(r'^table.html$', views.table, name='table'),
     url(r'^blank-1.html$', views.cadastroPaciente, name='cadastroPaciente'),
-    url(r'^pacienteGraficos.html$', views.pacienteGraficos, name='pacienteGraficos'),
     
     path('graphs/<slug:username>', views.pacienteGraficos2, name='table_test2'),
     path('metas/<slug:username>', views.pageMetas, name='metas'),
