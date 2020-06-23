@@ -1311,13 +1311,29 @@ def pageMetas(request,username):
             metasDados = Goal.objects.all().filter(user_id=username)#.filter(startDate__gte=date60dayback)
             if len(metasDados)!=0:
                 metasDadosLista = metasDados.values_list('activity','quantity','unit','startDate','endDate')
+                metadados_lista_sup = []
+                for metaDados in metasDadosLista:
+                    if metaDados[1].isdigit() and metaDados[2]=="passos" and metaDados[3]!=None and metaDados[4]!=None and metaDados[3]<=metaDados[4] and metaDados[3]<=datetime.datetime.today().date():
+                        
+                        if metaDados[4]>datetime.datetime.today().date():
+                            difDays = (metaDados[4]-metaDados[3]).days
+                        else:
+                            difDays = (datetime.datetime.today().date()-metaDados[3]).days
+
+                        daylistVerify = []
+                        if difDays>0:
+                            for i in range(0,difDays,1):
+                                daylistVerify.append((metaDados[3] + datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
+                        else:
+                            daylistVerify.append(metaDados[3].strftime("%Y-%m-%d")
+                        metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"SIM"))
+                        
+                    else:
+                        metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],None))
             else:
                 metasDadosLista =[('Vazio',0,'Vazio','0000-00-00','0000-00-00',"None")]
 
-            metadados_lista_sup = []
-            for metaDados in metasDadosLista:
-                if metaDados[1].isdigit() and metaDados[2]=="passos" and metaDados[3]!=None and metaDados[4]!=None and metaDados[4]<=datetime.datetime.today().date():
-                    metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"SIM"))
+            
             metasDadosLista = metadados_lista_sup[:]
             print(metasDadosLista, metadados_lista_sup)
         except Exception:
