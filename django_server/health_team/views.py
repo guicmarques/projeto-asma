@@ -1317,8 +1317,8 @@ def pageMetas(request,username):
             metadados_lista_sup = []
             for metaDados in metasDadosLista:
                 if metaDados[1].isdigit() and metaDados[2]=="passos" and metaDados[3]!=None and metaDados[4]!=None and metaDados[4]<=datetime.datetime.today().date():
-                    metadados_lista_sup.append(metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"SIM")
-            metasDadosLista = metadados_lista_sup
+                    metadados_lista_sup.append([metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"SIM"])
+            metasDadosLista = metadados_lista_sup[:]
             print(metasDadosLista)
         except Exception:
             traceback.print_exc()
