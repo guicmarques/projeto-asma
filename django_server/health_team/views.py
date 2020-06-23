@@ -1332,7 +1332,7 @@ def pageMetas(request,username):
                             soma = 0
                             for day in sorted(dadosFITBIT.keys(),reverse=True):
                                 soma += dadosFITBIT[day]["summary"]["steps"]
-
+                            print(soma, metaDados[1])
                             metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"{:.2f}%".format(soma*100/float(metaDados[1]))))
 
                         except:
