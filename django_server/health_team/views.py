@@ -1312,11 +1312,17 @@ def pageMetas(request,username):
             if len(metasDados)!=0:
                 metasDadosLista = metasDados.values_list('activity','quantity','unit','startDate','endDate')
             else:
-                metasDadosLista =[('Vazio',0,'Vazio','0000-00-00','0000-00-00')]
+                metasDadosLista =[('Vazio',0,'Vazio','0000-00-00','0000-00-00',"None")]
+
+            metadados_lista_sup = []
+            for metaDados in metasDadosLista:
+                if metaDados[1].isdigit() and metaDados[2]=="passos" and metaDados[3]!=None and metaDados[4]!=None and metaDados[4]<=datetime.datetime.today():
+                    metadados_lista_sup.append(metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"SIM")
+            metasDadosLista = metadados_lista_sup
             print(metasDadosLista)
         except Exception:
             traceback.print_exc()
-            metasDadosLista =[('Falha',0,'Falha','0000-00-00','0000-00-00')]
+            metasDadosLista =[('Falha',0,'Falha','0000-00-00','0000-00-00',"None")]
             
         print(metasDadosLista)
         goalform = GoalForm()
