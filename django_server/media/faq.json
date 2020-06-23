@@ -1,37 +1,132 @@
 {
     "0": {
         "id": 0,
-        "pergunta": "Eu sinto asma quando corro. Devo evitar essa atividade?",
-        "resposta": "De jeito nenhum! Frequentente apenas se preparar para uma caminhada de forma diferente pode ajudar. Há duas coisas que você deve lembrar. Primeiramente, use sua bombinha 15 minutos antes de começar. Além disso, não se esqueça de se aquecer quando for uma atividade mais intensa."
+        "pergunta": "O que é Asma?",
+        "resposta": "É uma doença pulmonar inflamatória crônica, com episódios recorrentes de: falta de ar, tosse crônica, chiado e aperto no peito, que se agrava à noite e nas primeiras horas da manhã.\nA gravidade da asma varia de pessoa a pessoa, daí a classificação de leve, moderada e grave.\nAssista o vídeo educacional, de apenas 1 minuto, para entender mais: https://sbpt.org.br/portal/videos/asma-orientacoes/"
     },
     "1": {
         "id": 1,
-        "pergunta": "Existem exercícios mais apropriados para pacientes com asma?",
-        "resposta": "Exercícios aeróbicos como a natação são uma atividade efetiva, eles permitem exercitar-se em uma variedade de intesidades. O objetivo desse tipo de treino é desenvolver sua respiração e capacidade card?aca. Aquecimentos como uma corrida leve, onde se aumenta a intensidade por alguns minutos, depois a dimuinui, e aumenta novamente. \n A coisa mais importante é escolher uma atividade que voce aproveite, se não se torna muito fácil de evita-la. É importante encontrar uma atividade que combine com você! "
+        "pergunta": "Quais os principais sintomas?",
+        "resposta": "Nos adultos são: falta de ar, inclusive durante o exercício, tosse, chiado e aperto no peito. Sendo piores pela manhã a ao deitar. Nas crianças, o diagnóstico de asma é mais difícil, já que há outras causas para o chiado, principalmente nos bebês. Muitas vezes a tosse pode ser o único sintoma."
     },
     "2": {
         "id": 2,
-        "pergunta": "O quão intensamente devo me exercitar?",
-        "resposta": "O seu treino deve lhe ajudar a ficar em forma gradualmente, mas lembre-se leva tempo. Lembre-se que você deve se não deve se sentir mal após uma sessão de exercícios. É importante que voce não tente fazer treinos excessivos. Você não deve se sentir exausto por horas depois de cada treino. \n Se você tem sintomas de asma enquanto se exercita intensamente, talvez seja um indicativo de que é nescessário maior quantidade de medicação ou pode indicar que sua asma não permite tipos de execícios com tanta intesidade. Neste caso, fale com ser médico para ver o que se deve fazer. "
+        "pergunta": "Quem tem asma?",
+        "resposta": "A asma pode se manifestar em qualquer idade desde o nascimento até a idade adulta. Em geral aparece durante a infância melhorando após a adolescência. É uma doença muito comum e está associada a outros casos de alergia (ex. alergia a medicamentos, alimentos, etc.. ).É o que chamamos de “atopia”, mas não se trata de doença contagiosa."
     },
     "3": {
         "id": 3,
-        "pergunta": "A asma de todas as pessoas é igual?",
-        "resposta": "A asma varia muito de pessoa para pessoa e num mesmo indivíduo. Tem épocas que pode ser muito leve e os sintomas desaparecerem e tem momentos em que pode piorar muito, necessitando atendimentos de emergência e até mesmo internação.  As crises de asma também podem variar, umas sendo mais fortes do que as outras."
+        "pergunta": "Como eu identifico a crise de asma?",
+        "resposta": "As características da crise variam de pessoa para pessoa, podendo iniciar-se com sintomas leves como tosse e aperto no peito e ir se agravando com chiado, falta de ar, tosse com catarro, mal-estar, dificuldade na realização de atividades cotidianas e acordar durante a noite com sintomas respiratórios."
     },
     "4": {
         "id": 4,
-        "pergunta": "O que são bombinhas?",
-        "resposta": "Bombinha é a maneira que as pessoas chamam todas as medicações inalatórias usadas no tratamento da asma. Esse nome vem dos primeiros dispositivos que surgiram e ainda existem. Na verdade, bombinha quer dizer o recipiente que é utilizado para armazenar os diferentes tipos de remédios (broncodilatadores e corticóides inalatórios). Hoje existem dispositivos com medicação na forma líquida (aerossol) e em pó. Uma mesma substância pode vir sob aerossol ou sob pó. Os médicos preferem usar o termo dispositivo porque retira a ideia de que o remédio é ruim (bomba). Também faz o paciente entender melhor que dispositivo é a maneira como o medicamento será aplicado, tipo comprimido ou supositório. Dentro dele pode vir qualquer tipo de tratamento para a asma."
+        "pergunta": "Quais são as causas da crise de asma?",
+        "resposta": "Cada pessoa pode ter um ou mais fatores que causam a crise de asma. Esses fatores incluem:\n- Mudanças de temperatura\n- Infecção de vias respiratórias, como gripe e sinusite\n- Reação alérgica a outras medicações\n- Aspectos emocionais\n- Exposição ao pó, poluição, fumaça de cigarro, odores fortes, spray, e pêlos de animais\n- Esforço físico intenso"
     },
     "5": {
         "id": 5,
-        "pergunta": " Bombinhas fazem mal para o coração?",
-        "resposta": "Não. Quando surgiram os primeiros remédios broncodilatadores para asma, eram substâncias que tinham como efeito colateral aceleração do coração (taquicardia). A sensação era bem desconfortável e as pessoas começaram a achar que o remédio atacava o coração. Com as novas e melhores drogas broncodilatadoras e os novos e melhores dispositivos, esse efeito foi desaparecendo. Algumas pessoas ainda têm a sensação de palpitação mas quando isso acontece é porque provavelmente estão inalando os remédios com a técnica errada. Ou porque estão usando na dose errada. Se você engolir 25 comprimidos de dipirona ou paracetamol, vai passar mal e ter muitos efeitos colaterais. Isso não significa que estes remédios fazem mal: você é que usou na dose errada!\n O que faz muito mal para o coração é falta de oxigênio. E uma asma não controlada e em crise causa exatamente essa dificuldade de entregar oxigênio para o coração funcionar. Portanto, as medicações inalatórias para controle da asma são – ao contrário – amigas do coração!"
+        "pergunta": "Quais são as características de crise grave de asma?",
+        "resposta": "- Não melhora do quadro apesar do uso do medicamento apropriado\n- Dificuldade para falar, andar ou comer\n- Lábios ou unhas arroxeados\n- Narinas se abrem durante a respiração\n- Pele do pescoço e ao redor das costelas se esticam durante a respiração\n- Batimento cardíaco acelerado\n- Suores frios"
     },
     "6": {
         "id": 6,
-        "pergunta": "Qual a causa da asma?",
-        "resposta": "A causa exata da asma ainda não é conhecida, mas acredita-se que é causada por um conjunto de fatores: genéticos (história familiar de alergias respiratórias – asma ou rinite) e ambientais."
+        "pergunta": "Como devo proceder durante uma crise?",
+        "resposta": "O paciente deve identificar as causas e procurar afastá-las e então, iniciar o tratamento para crises que seu médico orientou. A pessoa não deve subestimar a crise, mesmo que os sintomas sejam leves, para evitar a piora do quadro.\nQuanto maior o número de crises, maior a irritação do pulmão e assim, mesmo estímulos menores desencadearão novas crises. É importante manter a calma nessas ocasiões, uma vez que ficou provado a importância do fator emocional na crise da asma. Deve-se contatar o médico para receber orientação adequada."
+    },
+    "7": {
+        "id": 7,
+        "pergunta": "O que são as “bombinhas”?",
+        "resposta": "“Bombinha” é maneira popular de chamar os medicamentos para asma brônquica na forma inalatória oral. Há vários tipos de inaladores, a maioria em sprays e alguns em pó seco. Esta forma é usada tanto para os medicamentos para crises como para os de uso preventivo, não havendo riscos de “viciar” ou “fazer” mal para o coração."
+    },
+    "8": {
+        "id": 8,
+        "pergunta": "Como usar a bombinha?",
+        "resposta": "O uso correto da bombinha é fundamental para o que o medicamento faça efeito. A técnica correta deve ser ensinada pelo profissional de saúde, caso haja alguma dúvida assista esse vídeo:\nhttps://www.youtube.com/watch?v=NXvRIOp8GrY "
+    },
+    "9": {
+        "id": 9,
+        "pergunta": "",
+        "resposta": ""
+    },
+    "10": {
+        "id": 10,
+        "pergunta": "Por que devo me preocupar com o ambiente para o asmático?",
+        "resposta": "Porque é principalmente no ambiente onde habita que ele estará mais exposto aos agentes causadores dos sintomas asmáticos. O quarto é o principal foco de atenção, já que é o local onde o asmático passa a maior parte de seu dia."
+    },
+    "11": {
+        "id": 11,
+        "pergunta": "O que são ácaros?",
+        "resposta": "São organismos microscópicos que se alimentam de descamação da pele humana, de pêlos de animais e também do mofo. Habitam locais onde há acúmulo de poeira como: colchões e travesseiros, carpetes, bichos de pelúcia, estantes, papéis e até animais de pêlo. Os ácaros e seus excrementos são os maiores agentes causadores de alergias respiratórias."
+    },
+    "12": {
+        "id": 12,
+        "pergunta": "Exercício faz bem?",
+        "resposta": "A prática de esportes é importante no tratamento da asma, tanto em favorecer uma melhor capacidade respiratória, como também, no aspecto psicológico e social do portador de asma brônquica."
+    },
+    "13": {
+        "id": 13,
+        "pergunta": "Como Diagnosticar a Asma?",
+        "resposta": "Uma história clínica bem feita por um médico especialista (Pneumologista), pesquisando os sintomas de tosse, falta de ar, chiado e aperto no peito ou desconforto torácico; tentando identificar os fatores desencadeantes ou agravantes alérgicos ou não, tais como: pó, ácaros, pêlo de animais, fumaça de cigarro, poluição, cheiros de produtos químicos, variação de temperatura, exercícios físicos, alteração emocional."
+    },
+    "14": {
+        "id": 14,
+        "pergunta": "Como tratar a asma?",
+        "resposta": "O tratamento da asma é um programa de parceria dos profissionais de saúde e o paciente e, ou seus familiares. Orientar o paciente e seus familiares a identificar e evitar os fatores agravantes e desencadeantes especialmente no ambiente domiciliar. Educar e orientar sobre sua doença para que possa entender o processo de inflamação e a broncoconstrição (estreitamento do brônquico), ensinar ao paciente a usar adequadamente a medicação e outros tratamentos não medicamentosos."
+    },
+    "15": {
+        "id": 15,
+        "pergunta": "Por que sinto falta de ar quando faço atividade física como correr?",
+        "resposta": "Exercícios intensos realizados por pessoas com asma não controlada pode desencadear a falta de ar e outros sintomas da asma. Provavelmente o esforço está muito acima do seu condicionamento físico, você deve procurar manter um controle, intensidade de exercício adequada para evitar a crise de asma."
+    },
+    "16": {
+        "id": 16,
+        "pergunta": "Minha asma irá melhorar se praticar natação e outros esportes?",
+        "resposta": "- Identificar os fatores desencadeantes da sua asma e evitá-los. Por exemplo, se o frio desencadeia sua asma, tente utilizar lenço ou máscara sobre nariz e boca para aquecer o ar, e sempre respire pelo nariz.\n- Ter disponível o medicamento orientado pelo seu médico para uso antes do esforço, atividade física. Você deve usar o seu broncodilatador de curta duração (bombinha) de 15-30 minutos antes de começar a se exercitar e sua ação não dura mais do que 2-4 horas.\n- Fazer aquecimento antes do exercício. Aquecer o corpo de 5-10 minutos é importante para prevenir os sintomas da asma durante o exercício principal. Um exercício de aquecimento simples pode ser andar devagar e aumentar lentamente a velocidade. Você também pode fazer polichinelos começando com os braços e só então acrescentar o movimento de suas pernas.\n- Finalizar sua atividade com um exercício de relaxamento. Deve diminuir a intensidade do exercício aos poucos"
+    },
+    "17": {
+        "id": 17,
+        "pergunta": "Quem fuma pode desenvolver a asma?",
+        "resposta": "Não, o ato de fumar não torna a pessoa asmática. A asma é uma doença que provavelmente, tem uma base genética, isto é, a pessoa nasceria com uma alteração dos seus genes, o que poderia predispô-la a ter crises de falta de ar e chiado. Assim, a pessoa nasceria com uma predisposição à ter a doença e as crises poderiam ser desencadeadas em qualquer época da sua vida, dependendo dos estímulos a que estivesse submetido (cheiros fortes, infecções virais, fumaça ).\nPortanto, apesar do cigarro não levar a pessoa a ser asmática, por outro lado, em pessoas asmáticas a fumaça do cigarro é um dos fatores desencadeantes de crises e por isso o tabagismo deve ser evitado."
+    },
+    "18": {
+        "id": 18,
+        "pergunta": "Qual o principal fator das crises de asma?",
+        "resposta": "O ácaro é o maior responsável pelas alergias respiratórias. O ácaro é um bichinho muito pequeno que vive na poeira acumulada dentro dos ambientes domésticos, invisível à visão normal, alimenta-se da descamação de pele humana e de animais, e restos de alimentos. Os locais onde eles residem são: travesseiros, camas e colchões, estofados, bichos de pelúcia, carpetes, estantes de livros e cortinas."
+    },
+    "19": {
+        "id": 19,
+        "pergunta": "Como posso reduzir a quantidade de ácaros e pó em casa?",
+        "resposta": "Devemos concentrar a limpeza da casa, por exemplo, no quarto de dormir, na sala, escritório, biblioteca e salas de TV, onde você passa a maior parte do tempo. Para a limpeza, devemos usar aspirador de pó e pano úmido, deixar a casa arejada e retirar objetos que acumulam poeira como tapetes, almofadas e etc."
+    },
+    "20": {
+        "id": 20,
+        "pergunta": "Posso tomar medicação para asma quando estiver grávida?",
+        "resposta": "Não só pode como deve. Principalmente quando esses medicamentos é que estão controlando sua asma adequadamente. Agora, qual o medicamento que você deve ou pode tomar, deve ser decidido pelo seu médico."
+    },
+    "21": {
+        "id": 22,
+        "pergunta": "Se estou me sentindo bem de saúde, não preciso mais tomar medicamentos para asma?",
+        "resposta": "Se você está bem significa que está controlado não curado! A asma e a rinite são doenças crônicas e portanto exigem tratamento contínuo, ou seja, durante toda a vida. Os hipertensos e os diabéticos também utilizam seus medicamentos diariamente mesmo que não sintam nada. O que pode ser feito é diminuir as doses ou fazer um esquema "mais leve" em alguns períodos do ano quando a doença tende a estabilizar-se; mas só o seu médico pode definir se esta possibilidade é adequada ao seu caso."
+    },
+    "22": {
+        "id": 22,
+        "pergunta": "Qual a relação entre sinusite e asma? Uma pode prejudicar a outra?",
+        "resposta": "Os asmáticos podem ter mais sinusite do que a população geral. A sinusite é a principal consequência da rinite mal controlada, e a rinite está presente em cerca de 90% dos indivíduos com asma.\nFonte 1: http://www.abrasaopaulo.org/perguntas.asp\nFonte 2: https://www.thoracic.org/patients/patient-resources/resources/portuguese/asthma-and-exercise.pdf"
+    },
+    "23": {
+        "id": 23,
+        "pergunta": "Preciso pagar pelos medicamentos para asma?",
+        "resposta": "Todo cidadão portador de asma tem direito a retirar gratuitamente seus medicamentos pelo SUS ou em qualquer farmácia credenciada no Programa "Aqui tem Farmácia Popular". Os medicamentos disponíveis gratuitamente são: Brometo de Ipratrópio, Diproprionato de Beclometasona e Sulfato de Salbutamol."
+    },
+    "24": {
+        "id": 24,
+        "pergunta": "Onde posso retirar os medicamentos?",
+        "resposta": "Os medicamentos para asma podem ser retirados em Unidades Básicas de Saúde (UBS) ou qualquer Farmácia credenciada no Programa Farmácia Popular do Brasil. Basta verificar se há, na frente do estabelecimento, o banner oficial do programa.\nhttps://www.saude.gov.br/acoes-e-programas/farmacia-popular/farmacias-credenciadas"
+    },
+    "25": {
+        "id": 25,
+        "pergunta": "Quais documentos preciso levar para buscar os medicamentos?",
+        "resposta": "É necessário apresentar na farmácia um Documento com foto e CPF, e a receita médica. Para retirar na UBS (Unidade Básica de Saúde) basta um documento com foto, receita médica e o cartão SUS.\nA receita usada pode ser prescrita pelo médico do SUS ou por um médico privado.\nFonte: http://www.furp.sp.gov.br/cidadao/como_retirar.aspx#:~:text=A%20retirada%20dos%20medicamentos%20%C3%A9,medicamento(s)%20e%20posologia."
     }
 }
