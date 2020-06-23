@@ -1288,22 +1288,22 @@ def estats(request):
 def pageMetas(request,username):
     testeExec = False
     if request.method == 'POST':
-        print("T", username)
+        #print("T", username)
         goalform = GoalForm(data=request.POST)
         if goalform.is_valid():
             goalformD = goalform.save(commit=False)
             goalformD.user = User.objects.get(id=username)
-            print(User.objects.get(id=username),User.objects.get(id=username).id)
+            #print(User.objects.get(id=username),User.objects.get(id=username).id)
             goalformD.save()
 
-            print("T2", goalformD,goalformD.user)
+            #print("T2", goalformD,goalformD.user)
             return HttpResponseRedirect(request.path)
         else:
-            print("T1")
+            
             testeExec = True
     else:
         testeExec = True
-    print(testeExec)
+    
 
     if testeExec:
         try:
@@ -1315,7 +1315,7 @@ def pageMetas(request,username):
                 for metaDados in metasDadosLista:
                     if metaDados[1].isdigit() and metaDados[2]=="passos" and metaDados[3]!=None and metaDados[4]!=None and metaDados[3]<=metaDados[4] and metaDados[3]<=datetime.datetime.today().date():
 
-                        print(metaDados[3],datetime.datetime.today().date(),metaDados[3]<=datetime.datetime.today().date())
+                        #print(metaDados[3],datetime.datetime.today().date(),metaDados[3]<=datetime.datetime.today().date())
                         
                         if metaDados[4]>datetime.datetime.today().date():
                             difDays = (metaDados[4]-metaDados[3]).days
@@ -1334,11 +1334,11 @@ def pageMetas(request,username):
                             soma = 0
                             for day in sorted(dadosFITBIT.keys(),reverse=True):
                                 soma += dadosFITBIT[day]["summary"]["steps"]
-                            print(soma, metaDados[1],daylistVerify)
-                            metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"{:.2f}%".format(soma*100/float(metaDados[1]))))
+                            #print(soma, metaDados[1],daylistVerify)
+                            metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[3],metaDados[4],"{:.2f}%".format(soma*100/float(metaDados[1]))))
 
                         except:
-                            metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"Nenhuma fitbit cadastrada"))
+                            metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[3],metaDados[4],"Nenhuma fitbit cadastrada"))
 
                         
 
@@ -1349,14 +1349,14 @@ def pageMetas(request,username):
 
             
             metasDadosLista = metadados_lista_sup[:]
-            print(metasDadosLista, metadados_lista_sup)
+            #print(metasDadosLista, metadados_lista_sup)
         except Exception:
             traceback.print_exc()
             metasDadosLista =[('Falha',0,'Falha','0000-00-00','0000-00-00',"None")]
             
-        print(metasDadosLista)
+        #print(metasDadosLista)
         goalform = GoalForm()
-    print("T3")
+    #print("T3")
     return render(request, 'logged/metas.html',{'metasDadosLista':metasDadosLista,'goalform':goalform})
 ####################### Downloads #######################
 @login_required
