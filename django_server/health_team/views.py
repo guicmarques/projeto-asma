@@ -129,9 +129,6 @@ def profile(request):
     return render(request, 'logged/profile.html', {})
 
 
-@login_required
-def cadastroPaciente2(request):
-    return render(request, 'logged/blank-1.html', {})
 
 @login_required
 def cadastroPaciente(request):
