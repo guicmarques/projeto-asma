@@ -13,7 +13,6 @@ urlpatterns = [
     url(r'^user_login/register.html$', views.register_account, name='register_account'),
     url(r'^user_login/register2.html$', views.register_account2, name='register_account2'),
     url(r'^table.html$', views.table, name='table'),
-    url(r'^profile.html$', views.profile, name='profile'),
     url(r'^blank-1.html$', views.cadastroPaciente, name='cadastroPaciente'),
     url(r'^pacienteGraficos.html$', views.pacienteGraficos, name='pacienteGraficos'),
     

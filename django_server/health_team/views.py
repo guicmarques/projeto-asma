@@ -124,9 +124,6 @@ def table(request):
     return render(request, 'logged/table2.html', {'lista':lista})
 
 
-@login_required
-def profile(request):
-    return render(request, 'logged/profile.html', {})
 
 
 
