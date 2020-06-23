@@ -1325,9 +1325,9 @@ def pageMetas(request,username):
                             for i in range(0,difDays,1):
                                 daylistVerify.append((metaDados[3] + datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
                         else:
-                            daylistVerify.append(metaDados[3].strftime("%Y-%m-%d")
+                            daylistVerify.append(metaDados[3].strftime("%Y-%m-%d"))
                         metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"SIM"))
-                        
+
                     else:
                         metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],None))
             else:
