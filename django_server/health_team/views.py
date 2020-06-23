@@ -1338,7 +1338,7 @@ def pageMetas(request,username):
                             metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[3],metaDados[4],"{:.2f}%".format(soma*100/float(metaDados[1]))))
 
                         except:
-                            metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[3],metaDados[4],"Nenhuma fitbit cadastrada"))
+                            metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[3],metaDados[4],"Erro ou fitbit não cadastrada"))
 
                         
                     elif metaDados[2]=="passos":
