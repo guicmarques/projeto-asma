@@ -1287,11 +1287,11 @@ def estats(request):
 def pageMetas(request,username):
     testeExec = False
     if request.method == 'POST':
-        print("T")
+        print("T", username)
         goalform = GoalForm(data=request.POST)
         if goalform.is_valid():
             goalformD = goalform.save(commit=False)
-            goalformD.user = User.objects.get(user=username)
+            goalformD.user = User.objects.get(id=username)
             goalformD.save()
             print("T2")
             return HttpResponseRedirect(request.path)
