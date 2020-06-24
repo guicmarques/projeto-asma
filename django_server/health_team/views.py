@@ -1212,7 +1212,8 @@ def estats(request):
             listaData2 = ["0000-00-00"]
 
 
-    except:
+    except Exception:
+        traceback.print_exc()
         listaquestion1 = [0]
         listaquestion2 = [0]
         listaquestion3 = [0]
