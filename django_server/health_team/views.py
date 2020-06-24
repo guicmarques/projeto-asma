@@ -1245,8 +1245,9 @@ def estats(request):
     print("Lista ",listaquestion72)
     # Create figure
     fig = make_subplots(
-        rows=7, cols=1,
+        rows=4, cols=2,
         specs=
+<<<<<<< HEAD
             [[{}],
             [{}],
             [{}],
@@ -1255,6 +1256,13 @@ def estats(request):
             [{}],
             [{}]],
         shared_xaxes=False,
+=======
+            [[{}, {}],
+            [{}, {}],
+            [{}, {}],
+            [{"colspan": 2}, None]],
+        shared_xaxes=True,
+>>>>>>> parent of fb5989b1... Update views.py
         subplot_titles=(
             "Quão frequentemente você acordou por causa de sua asma?",
             "Quão ruins foram os seus sintomas ao acordar?",
@@ -1271,27 +1279,27 @@ def estats(request):
     )
 
     fig.add_trace(
-        go.Bar(x=["Sem sintomas", " Muito leves","Leves","Moderados","Tanto graves","Graves","Muito graves"], y=listaquestion22, name='Pergunta 2'),row=2, col=1
+        go.Bar(x=["Sem sintomas", " Muito leves","Leves","Moderados","Tanto graves","Graves","Muito graves"], y=listaquestion22, name='Pergunta 2'),row=1, col=2
     )
 
     fig.add_trace(
-        go.Bar(x=["Nada limitado", "Muito pouco","Pouco","Moderadamente","Muito","Extremamente","Totalmente"], y=listaquestion32, name='Pergunta 3'),row=3, col=1
+        go.Bar(x=["Nada limitado", "Muito pouco","Pouco","Moderadamente","Muito","Extremamente","Totalmente"], y=listaquestion32, name='Pergunta 3'),row=2, col=1
     )
 
     fig.add_trace(
-        go.Bar(x=["Nenhuma", "Muito pouca","Alguma","Moderada","Bastante","Muita","Muitíssima"], y=listaquestion42, name='Pergunta 4'),row=4, col=1
+        go.Bar(x=["Nenhuma", "Muito pouca","Alguma","Moderada","Bastante","Muita","Muitíssima"], y=listaquestion42, name='Pergunta 4'),row=2, col=2
     )
 
     fig.add_trace(
-        go.Bar(x=["Nunca", "Quase nunca","Pouco tempo","Algum tempo","Bastante tempo","Quase sempre","Sempre"], y=listaquestion52, name='Pergunta 5'),row=5, col=1
+        go.Bar(x=["Nunca", "Quase nunca","Pouco tempo","Algum tempo","Bastante tempo","Quase sempre","Sempre"], y=listaquestion52, name='Pergunta 5'),row=3, col=1
     )
 
     fig.add_trace(
-        go.Bar(x=["Nenhum", "1-2 jatos","3-4 jatos","5-8 jatos","9-12 jatos","13-16 jatos","+ 16 jatos"], y=listaquestion62, name='Pergunta 6'),row=6, col=1
+        go.Bar(x=["Nenhum", "1-2 jatos","3-4 jatos","5-8 jatos","9-12 jatos","13-16 jatos","+ 16 jatos"], y=listaquestion62, name='Pergunta 6'),row=3, col=2
     )
 
     fig.add_trace(
-        go.Bar(x=["> 95% do previsto", "95-90% do previsto","89-80% do previsto","79-70% do previsto","69-60% do previsto","59-50% do previsto","< 50% do previsto"], y=listaquestion72, name='Pergunta 7'),row=7, col=1
+        go.Bar(x=["> 95% do previsto", "95-90% do previsto","89-80% do previsto","79-70% do previsto","69-60% do previsto","59-50% do previsto","< 50% do previsto"], y=listaquestion72, name='Pergunta 7'),row=4, col=1
     )
 
     
