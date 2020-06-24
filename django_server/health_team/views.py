@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from health_team.forms import UserForm, UserProfileInfoForm, UserFormForProfile, GoalForm
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 from plotly.offline import plot
 from plotly.graph_objs import Scatter
@@ -16,6 +17,7 @@ import datetime
 import time
 import traceback
 import csv
+import os
 
 from server.handleUserData import getFitbitData
 
@@ -1624,5 +1626,14 @@ def downloadUserProfileInfo(request):
 
     response['Content-Disposition'] = 'attachment; filename="user_profile_info.csv"'
     return response
+
+def downloadAPK(request):
+    file_path = os.path.join(settings.MEDIA_ROOT,'app-debug.apk')
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh, content_type="application/vnd.android.package-archive")
+            response['Content-Disposition'] = 'attachment; filename={}'.format(os.path.basename(file_path))
+            return response
+    raise Http404
 
 
