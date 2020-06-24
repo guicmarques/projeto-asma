@@ -1242,7 +1242,7 @@ def estats(request):
         listaquestion52.append(listaquestion5.count(k))
         listaquestion62.append(listaquestion6.count(k))
         listaquestion72.append(listaquestion7.count(k))
-    print(listaquestion72)
+    print("Lista ",listaquestion72)
     # Create figure
     fig = make_subplots(
         rows=4, cols=2,
