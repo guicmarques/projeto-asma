@@ -1083,6 +1083,243 @@ def estats(request):
         lista_quase =[0 for x in listaBarreiraNames]
         lista_sempre =[0 for x in listaBarreiraNames]
 
+    
+    try:
+        listaInteresse = []
+        listaTempo = []
+        listaEnergia = []
+        listaFaltaAr = []
+        listaCompanhia = []
+        listaDinheiro = []
+        listaCoisa = []
+        listaSeguranca = []
+        listaClima = []
+        listaEquipamentos = []
+
+
+
+        barreiras_list = PracticeBarriers.objects.all().filter(date__gte=date30dayback)
+        if len(barreiras_list)!=0:
+            for barreiras in barreiras_list:
+
+                if barreiras.interesse != None:
+                    listaInteresse.append(barreiras.interesse)
+                else:
+                    listaInteresse.append('0')
+                
+                if barreiras.tempo != None:
+                    listaTempo.append(barreiras.tempo)
+                else:
+                    listaTempo.append('0')
+
+                if barreiras.energia != None:
+                    listaEnergia.append(barreiras.energia)
+                else:
+                    listaEnergia.append('0')
+
+                if barreiras.faltaAr != None:
+                    listaFaltaAr.append(barreiras.faltaAr)
+                else:
+                    listaFaltaAr.append('0')
+                
+                if barreiras.companhia != None:
+                    listaCompanhia.append(barreiras.companhia)
+                else:
+                    listaCompanhia.append('0')
+                
+                if barreiras.dinheiro != None:
+                    listaDinheiro.append(barreiras.dinheiro)
+                else:
+                    listaDinheiro.append('0')
+                
+                if barreiras.coisas != None:
+                    listaCoisa.append(barreiras.coisas)
+                else:
+                    listaCoisa.append('0')
+
+                if barreiras.seguranca != None:
+                    listaSeguranca.append(barreiras.seguranca)
+                else:
+                    listaSeguranca.append('0')
+
+                if barreiras.clima != None:
+                    listaClima.append(barreiras.clima)
+                else:
+                    listaClima.append('0')
+
+                if barreiras.equipamentos != None:
+                    listaEquipamentos.append(barreiras.equipamentos)
+                else:
+                    listaEquipamentos.append('0')
+
+        else:
+            print("Não tem - Barreiras")
+            listaInteresse = [1]
+            listaTempo = [1]
+            listaEnergia = [1]
+            listaFaltaAr = [1]
+            listaCompanhia = [1]
+            listaDinheiro = [1]
+            listaCoisa = [1]
+            listaSeguranca = [1]
+            listaClima = [1]
+            listaEquipamentos = [1]
+
+    except:
+        print("Falha - Barreiras")
+        listaInteresse = [1]
+        listaTempo = [1]
+        listaEnergia = [1]
+        listaFaltaAr = [1]
+        listaCompanhia = [1]
+        listaDinheiro = [1]
+        listaCoisa = [1]
+        listaSeguranca = [1]
+        listaClima = [1]
+        listaEquipamentos = [1]
+    try:
+        listaquestion1 = []
+        listaquestion2 = []
+        listaquestion3 = []
+        listaquestion4 = []
+        listaquestion5 = []
+        listaquestion6 = []
+        listaquestion7 = []
+        listaData2 = []
+
+        questionario = AsthmaControlQuestionnaire.objects.all().filter(date__gte=date30dayback)
+        if len(questionario)!=0:
+            for day in questionario:
+                print("Certo - Questionario")
+                listaData2.append(day.date.strftime("%Y-%m-%d"))
+                listaquestion1.append(day.question1)
+                listaquestion2.append(day.question2)
+                listaquestion3.append(day.question3)
+                listaquestion4.append(day.question4)
+                listaquestion5.append(day.question5)
+                listaquestion6.append(day.question6)
+                listaquestion7.append(day.question7)
+
+        else:
+            print("Errado")
+            listaquestion1 = [0]
+            listaquestion2 = [0]
+            listaquestion3 = [0]
+            listaquestion4 = [0]
+            listaquestion5 = [0]
+            listaquestion6 = [0]
+            listaquestion7 = [0]
+            listaData2 = ["0000-00-00"]
+
+
+    except:
+        listaquestion1 = [0]
+        listaquestion2 = [0]
+        listaquestion3 = [0]
+        listaquestion4 = [0]
+        listaquestion5 = [0]
+        listaquestion6 = [0]
+        listaquestion7 = [0]
+        listaData2 = ["0000-00-00"]
+
+    listaquestion12 = []
+    listaquestion22 = []
+    listaquestion32 = []
+    listaquestion42 = []
+    listaquestion52 = []
+    listaquestion62 = []
+    listaquestion72 = []
+
+    listaValores = ['1','2','3','4','5','6']
+
+
+
+    a = listaquestion1
+    for k in listaValores:
+        listaquestion12.append(a.count(k))
+
+    a = listaquestion2
+    for k in listaValores:
+        listaquestion22.append(a.count(k))
+
+    a = listaquestion3
+    for k in listaValores:
+        listaquestion32.append(a.count(k))
+        
+    a = listaquestion4
+    for k in listaValores:
+        listaquestion42.append(a.count(k))
+
+    a = listaquestion5
+    for k in listaValores:
+        listaquestion52.append(a.count(k))
+
+    a = listaquestion6
+    for k in listaValores:
+        listaquestion62.append(a.count(k))
+
+    a = listaquestion7
+    for k in listaValores:
+        listaquestion72.append(a.count(k))
+
+
+        # Create figure
+    fig = make_subplots(
+        rows=4, cols=2,
+        specs=
+            [[{}, {}],
+            [{}, {}],
+            [{}, {}],
+            [{"colspan": 2}, None]],
+        shared_xaxes=True,
+        subplot_titles=(
+            "Quão frequentemente você acordou por causa de sua asma?",
+            "Quão ruins foram os seus sintomas ao acordar?",
+            "Quão limitado você tem estado em suas atividades?",
+            "O quanto de falta de ar você teve?",
+            "Quanto tempo você teve chiado?",
+            "Quantos jatos de broncodilatador foram usado por dia?",
+            "VEF1 % previsto?"
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(x=["Nunca", "Quase nunca","Poucas vezes","Várias vezes","Muitas vezes","Muitíssimas vezes","Incapaz de dormir"], y=listaquestion12, name='Pergunta 1'),row=1, col=1
+    )
+
+    fig.add_trace(
+        go.Scatter(x=["Sem sintomas", " Muito leves","Leves","Moderados","Tanto graves","Graves","Muito graves"], y=listaquestion22, name='Pergunta 2'),row=1, col=2
+    )
+
+    fig.add_trace(
+        go.Scatter(x=["Nada limitado", "Muito pouco","Pouco","Moderadamente","Muito","Extremamente","Totalmente"], y=listaquestion32, name='Pergunta 3'),row=2, col=1
+    )
+
+    fig.add_trace(
+        go.Scatter(x=["Nenhuma", "Muito pouca","Alguma","Moderada","Bastante","Muita","Muitíssima"], y=listaquestion42, name='Pergunta 4'),row=2, col=2
+    )
+
+    fig.add_trace(
+        go.Scatter(x=["Nunca", "Quase nunca","Pouco tempo","Algum tempo","Bastante tempo","Quase sempre","Sempre"], y=listaquestion52, name='Pergunta 5'),row=3, col=1
+    )
+
+    fig.add_trace(
+        go.Scatter(x=["Nenhum", "1-2 jatos","3-4 jatos","5-8 jatos","9-12 jatos","13-16 jatos","+ 16 jatos"], y=listaquestion62, name='Pergunta 6'),row=3, col=2
+    )
+
+    fig.add_trace(
+        go.Scatter(x=["> 95% do previsto", "95-90% do previsto","89-80% do previsto","79-70% do previsto","69-60% do previsto","59-50% do previsto","< 50% do previsto"], y=listaquestion72, name='Pergunta 7'),row=4, col=1
+    )
+
+    
+    fig['layout'].update(
+        height=1000
+    )
+    fig.update_xaxes(matches='x')
+    figQuestSemanal = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
+
+
     # 7 days
     fig = go.Figure()
 
@@ -1321,7 +1558,12 @@ def pageMetas(request,username):
         #print(metasDadosLista)
         goalform = GoalForm()
     #print("T3")
-    return render(request, 'logged/metas.html',{'metasDadosLista':metasDadosLista,'goalform':goalform,'user_data':user_data})
+    return render(request, 'logged/metas.html',{
+        'metasDadosLista':metasDadosLista,
+        'goalform':goalform,
+        'user_data':user_data,
+        'figQuestSemanal':figQuestSemanal
+    })
 ####################### Downloads #######################
 @login_required
 def downloadBarreiras(request):
