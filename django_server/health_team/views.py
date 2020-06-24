@@ -1254,7 +1254,7 @@ def estats(request):
             [{}],
             [{}],
             [{}]],
-        shared_xaxes=False,
+        shared_xaxes=True,
         subplot_titles=(
             "Quão frequentemente você acordou por causa de sua asma?",
             "Quão ruins foram os seus sintomas ao acordar?",
