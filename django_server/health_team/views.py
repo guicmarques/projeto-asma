@@ -1295,7 +1295,7 @@ def estats(request):
     fig['layout'].update(
         height=1000
     )
-    fig.update_xaxes(matches='x')
+
     figQuestSemanal = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
 
 
