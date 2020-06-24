@@ -1458,7 +1458,8 @@ def estats(request):
     return render(request, 'logged/estats.html', context={
         'fitbit7dias':fitbit7dias,
         'stacked' : stacked,
-        'barreiras':barreiras
+        'barreiras':barreiras,
+        'figQuestSemanal':figQuestSemanal
     })
 
 
@@ -1541,8 +1542,7 @@ def pageMetas(request,username):
     return render(request, 'logged/metas.html',{
         'metasDadosLista':metasDadosLista,
         'goalform':goalform,
-        'user_data':user_data,
-        'figQuestSemanal':figQuestSemanal
+        'user_data':user_data
     })
 ####################### Downloads #######################
 @login_required
