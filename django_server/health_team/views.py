@@ -1185,13 +1185,12 @@ def estats(request):
         listaquestion5 = []
         listaquestion6 = []
         listaquestion7 = []
-        listaData2 = []
+
 
         questionario = AsthmaControlQuestionnaire.objects.all().filter(date__gte=date30dayback)
         if len(questionario)!=0:
             for day in questionario:
                 print("Certo - Questionario")
-                listaData2.append(day.date.strftime("%Y-%m-%d"))
                 listaquestion1.append(day.question1)
                 listaquestion2.append(day.question2)
                 listaquestion3.append(day.question3)
@@ -1209,7 +1208,6 @@ def estats(request):
             listaquestion5 = [0]
             listaquestion6 = [0]
             listaquestion7 = [0]
-            listaData2 = ["0000-00-00"]
 
 
     except Exception:
@@ -1221,7 +1219,7 @@ def estats(request):
         listaquestion5 = [0]
         listaquestion6 = [0]
         listaquestion7 = [0]
-        listaData2 = ["0000-00-00"]
+
 
     listaquestion12 = []
     listaquestion22 = []
@@ -1237,34 +1235,15 @@ def estats(request):
 
     a = listaquestion1
     for k in listaValores:
-        listaquestion12.append(a.count(k))
-
-    a = listaquestion2
-    for k in listaValores:
-        listaquestion22.append(a.count(k))
-
-    a = listaquestion3
-    for k in listaValores:
-        listaquestion32.append(a.count(k))
-        
-    a = listaquestion4
-    for k in listaValores:
-        listaquestion42.append(a.count(k))
-
-    a = listaquestion5
-    for k in listaValores:
-        listaquestion52.append(a.count(k))
-
-    a = listaquestion6
-    for k in listaValores:
-        listaquestion62.append(a.count(k))
-
-    a = listaquestion7
-    for k in listaValores:
-        listaquestion72.append(a.count(k))
-
-
-        # Create figure
+        listaquestion12.append(listaquestion1.count(k))
+        listaquestion22.append(listaquestion2.count(k))
+        listaquestion32.append(listaquestion3.count(k))
+        listaquestion42.append(listaquestion4.count(k))
+        listaquestion52.append(listaquestion5.count(k))
+        listaquestion62.append(listaquestion6.count(k))
+        listaquestion72.append(listaquestion7.count(k))
+    print(listaquestion72)
+    # Create figure
     fig = make_subplots(
         rows=4, cols=2,
         specs=
