@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>{{user_data.nome}}</title>
+    <title>Estatísticas Gerais</title>
     <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="/static/assets/fonts/fontawesome-all.min.css">
@@ -40,15 +40,6 @@
                             </div>
                         </form>
                         <ul class="nav navbar-nav flex-nowrap ml-auto">
-                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-search"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" role="menu" aria-labelledby="searchDropdown">
-                                    <form class="form-inline mr-auto navbar-search w-100">
-                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
-                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
                             <li class="nav-item dropdown no-arrow mx-1" role="presentation"></li>
                             <li class="nav-item dropdown no-arrow mx-1" role="presentation">
                                 <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown"></div>
@@ -57,7 +48,7 @@
                             <li class="nav-item dropdown no-arrow" role="presentation">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">{{ user.username }}</span></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"
-                                        role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
+                                        role="menu"><a class="dropdown-item" role="presentation" href="/admin/"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
                                         <div
                                             class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
                     </div>
@@ -74,11 +65,25 @@
                             {% endautoescape %}
                         </div>
                     </div>
+                    <div class="card-body bg-white">
+                        <div class="row mt-3">
+                            <div class="col">
+                                <h3 class="text-center text-dark mb-1">Questionário diário por resposta - últimos 30 dias</h3>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm">
                             {% autoescape off %}
                             {{ stacked }}
                             {% endautoescape %}
+                        </div>
+                    </div>
+                    <div class="card-body bg-white">
+                        <div class="row mt-3">
+                            <div class="col">
+                                <h3 class="text-center text-dark mb-1">Questionário de barreiras - últimos 30 dias</h3>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -87,6 +92,71 @@
                             {{ barreiras }}
                             {% endautoescape %}
                         </div>
+                    </div>
+                    <div class="card-body bg-white">
+                        <div class="row mt-3">
+                            <div class="col">
+                                <h3 class="text-center text-dark mb-1">Questionário de Controle da Asma - últimos 30 dias</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            {% autoescape off %}
+                            {{ figQuestSemanal }}
+                            {% endautoescape %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body bg-white">
+                    <div class="row mt-3">
+                        <div class="col">
+                            <h3 class="text-center text-dark mb-1">Dados para download</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body bg-white">
+                    <div class="tableFixHead table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info" style="tbody{overflow-y: scroll;height: 200px; width: 100%;position: absolute;}">
+                        <table class="table dataTable my-0" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Nome da tabela</th>
+                                    <th>Descrição</th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td>Questionário diário</td>
+                                        <td>Dados de resposta do questionário diário<br></td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="/dailycontrolCSV"><i class="fas fa-download fa-sm text-white-50"></i> Download Report</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Questionário de barreiras</td>
+                                        <td>Dados de respostas do questionário de barreiras<br></td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="/barreirasCSV"><i class="fas fa-download fa-sm text-white-50"></i> Download Report</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Questionário de controle de asma</td>
+                                        <td>Dados de respostas do questionário de controle de asma<br></td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="/AsthmaControlQuestionnaireCSV"><i class="fas fa-download fa-sm text-white-50"></i> Download Report</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Informações de usuários</td>
+                                        <td>Dados de informações de usuário<br></td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="/UserProfileInfoCSV"><i class="fas fa-download fa-sm text-white-50"></i> Download Report</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dados FitBit</td>
+                                        <td>Dados da fitbit de todos os usuários<br></td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="/FitBitDataCSV"><i class="fas fa-download fa-sm text-white-50"></i> Download Report</a></td>
+                                    </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr></tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>

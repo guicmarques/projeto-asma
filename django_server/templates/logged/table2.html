@@ -76,20 +76,11 @@
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <ul class="nav navbar-nav flex-nowrap ml-auto">
-                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-search"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" role="menu" aria-labelledby="searchDropdown">
-                                    <form class="form-inline mr-auto navbar-search w-100">
-                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
-                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow" role="presentation">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">{{ user.username }}</span></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"
-                                        role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
+                                    role="menu"><a class="dropdown-item" role="presentation" href="/admin/"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
                                         <div
                                             class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
                     </div>
@@ -106,10 +97,10 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 text-nowrap">
-                                <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label>Show&nbsp;<select class="form-control form-control-sm custom-select custom-select-sm"><option value="10" selected="">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>&nbsp;</label></div>
+                                <div class="text-md-left dataTables_filter" id="dataTable_filter"><label><input type="search" id="myInput" onkeyup="myFunction()" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
                             </div>
                             <div class="col-md-6">
-                                <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" id="myInput" onkeyup="myFunction()" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
+                                
                             </div>
                         </div>
                         <div class="tableFixHead table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info" style="tbody{overflow-y: scroll;height: 200px; width: 100%;position: absolute;}">

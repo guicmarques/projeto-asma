@@ -219,6 +219,7 @@ class FitbitAuth(APIView):
             if created:
                 _, fitbitData = fitbitHandler.getActivities(user)
                 return Response(fitbitData)
+                # return render(request, 'health_team/index.html')
         else:
             logging.warn(f"error gathering fitbit tokens: {userId}")
         text = userId

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from health_team.forms import UserForm, UserProfileInfoForm
+from health_team.forms import UserForm, UserProfileInfoForm, UserFormForProfile, GoalForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -19,7 +19,7 @@ import csv
 
 from server.handleUserData import getFitbitData
 
-from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, DailyControl, PracticeBarriers,FitbitProfile
+from server.models import User, UserProfileInfo, AsthmaControlQuestionnaire, FitbitFile, DailyControl, PracticeBarriers,FitbitProfile,Goal
 
 def index(request):
     return render(request, 'health_team/index.html')
@@ -83,6 +83,11 @@ def forgot_password(request):
     return render(request, 'health_team/forgot-password.html', {})
 
 def register_account2(request):
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+    
+
     return render(request, 'health_team/register.html', {})
 
 def register_account(request):
@@ -119,33 +124,30 @@ def table(request):
     return render(request, 'logged/table2.html', {'lista':lista})
 
 
-@login_required
-def profile(request):
-    return render(request, 'logged/profile.html', {})
 
 
-@login_required
-def cadastroPaciente2(request):
-    return render(request, 'logged/blank-1.html', {})
 
 @login_required
 def cadastroPaciente(request):
     registered = False
     if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
+        user_form = UserFormForProfile(data=request.POST)
         profile_form = UserProfileInfoForm(data=request.POST)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
+            #print(user)
             profile = profile_form.save(commit=False)
             profile.user = user
+            print(user)
             profile.save()
             registered = True
+            return HttpResponseRedirect(reverse('table'))
         else:
             print(user_form.errors, profile_form.errors)
     else:
-        user_form = UserForm()
+        user_form = UserFormForProfile()
         profile_form = UserProfileInfoForm()
     return render(request, 'logged/blank-12.html',
                   {'user_form': user_form,
@@ -154,40 +156,6 @@ def cadastroPaciente(request):
     #return render(request, 'logged/blank-12.html', {})
 
 
-@login_required
-def pacienteGraficos(request):
-    #https://www.youtube.com/watch?v=vCX6Tpb9sP8
-    #https://www.youtube.com/watch?v=B4Vmm3yZPgc
-    #https://stackoverflow.com/questions/55832576/how-to-integrate-chart-js-in-django
-    #https://www.codingwithricky.com/2019/08/28/easy-django-plotly/
-
-
-    
-    #Grafico Demo
-    x_data = [0,1,2,3]
-    y_data = [x**2 for x in x_data]
-    """plot_div = plot([Scatter(x=x_data, y=y_data,
-                        mode='lines', name='test',
-                        opacity=0.8, marker_color='green')],
-               output_type='div', include_plotlyjs=False, show_link=False, link_text="", auto_open=False)"""
-
-    labels = ['Fuera del intervalo','Quema de grasas','Zona cardio','Zona máxima']
-    values = [462, 84, 3, 0]
-
-    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
-    plot_div = plot(go.Figure(data=[go.Pie(labels=labels, values=values, title = "Tempo de atividades (minutos)")]),
-               output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
-    ##################
-    fig2 = go.Bar(y=[7, 5, 4], x=["Dormindo","Exercicio","Parado"])
-    fig2 = plot([fig2],
-               output_type='div', include_plotlyjs=False, show_link=False, link_text="", auto_open=False)
-
-    ##################
-    fig3 = go.Bar(y=[240, 659, 881], x=["activityCalories","caloriesBMR","caloriesOut"])
-    fig3 = plot([fig3],
-               output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
-    
-    return render(request, "logged/view-graph.html", context={'plot_div': plot_div, 'fig':fig2, 'fig3':fig3})
 
 @login_required
 def pacienteGraficos2(request,username):
@@ -314,16 +282,57 @@ def pacienteGraficos2(request,username):
         barreiras_list = PracticeBarriers.objects.all().filter(user_id=username)
         if len(barreiras_list)!=0:
             for barreiras in barreiras_list:
-                listaInteresse.append(barreiras.interesse)
-                listaTempo.append(barreiras.tempo)
-                listaEnergia.append(barreiras.energia)
-                listaFaltaAr.append(barreiras.faltaAr)
-                listaCompanhia.append(barreiras.companhia)
-                listaDinheiro.append(barreiras.dinheiro)
-                listaCoisa.append(barreiras.coisas)
-                listaSeguranca.append(barreiras.seguranca)
-                listaClima.append(barreiras.clima)
-                listaEquipamentos.append(barreiras.equipamentos)
+
+                if barreiras.interesse != None:
+                    listaInteresse.append(barreiras.interesse)
+                else:
+                    listaInteresse.append('0')
+                
+                if barreiras.tempo != None:
+                    listaTempo.append(barreiras.tempo)
+                else:
+                    listaTempo.append('0')
+
+                if barreiras.energia != None:
+                    listaEnergia.append(barreiras.energia)
+                else:
+                    listaEnergia.append('0')
+
+                if barreiras.faltaAr != None:
+                    listaFaltaAr.append(barreiras.faltaAr)
+                else:
+                    listaFaltaAr.append('0')
+                
+                if barreiras.companhia != None:
+                    listaCompanhia.append(barreiras.companhia)
+                else:
+                    listaCompanhia.append('0')
+                
+                if barreiras.dinheiro != None:
+                    listaDinheiro.append(barreiras.dinheiro)
+                else:
+                    listaDinheiro.append('0')
+                
+                if barreiras.coisas != None:
+                    listaCoisa.append(barreiras.coisas)
+                else:
+                    listaCoisa.append('0')
+
+                if barreiras.seguranca != None:
+                    listaSeguranca.append(barreiras.seguranca)
+                else:
+                    listaSeguranca.append('0')
+
+                if barreiras.clima != None:
+                    listaClima.append(barreiras.clima)
+                else:
+                    listaClima.append('0')
+
+                if barreiras.equipamentos != None:
+                    listaEquipamentos.append(barreiras.equipamentos)
+                else:
+                    listaEquipamentos.append('0')
+
                 listaDate3.append(barreiras.date.strftime("%Y-%m-%d"))
         else:
             print("Não tem - Barreiras")
@@ -875,6 +884,7 @@ def pacienteGraficos2(request,username):
 
 
 #####################################################################################################################
+@login_required
 def estats(request):
     #Numero de respostas - Questionario diário
     usuariosAtivosUltimos7Dias = []
@@ -1073,6 +1083,223 @@ def estats(request):
         lista_quase =[0 for x in listaBarreiraNames]
         lista_sempre =[0 for x in listaBarreiraNames]
 
+    
+    try:
+        listaInteresse = []
+        listaTempo = []
+        listaEnergia = []
+        listaFaltaAr = []
+        listaCompanhia = []
+        listaDinheiro = []
+        listaCoisa = []
+        listaSeguranca = []
+        listaClima = []
+        listaEquipamentos = []
+
+
+
+        barreiras_list = PracticeBarriers.objects.all().filter(date__gte=date30dayback)
+        if len(barreiras_list)!=0:
+            for barreiras in barreiras_list:
+
+                if barreiras.interesse != None:
+                    listaInteresse.append(barreiras.interesse)
+                else:
+                    listaInteresse.append('0')
+                
+                if barreiras.tempo != None:
+                    listaTempo.append(barreiras.tempo)
+                else:
+                    listaTempo.append('0')
+
+                if barreiras.energia != None:
+                    listaEnergia.append(barreiras.energia)
+                else:
+                    listaEnergia.append('0')
+
+                if barreiras.faltaAr != None:
+                    listaFaltaAr.append(barreiras.faltaAr)
+                else:
+                    listaFaltaAr.append('0')
+                
+                if barreiras.companhia != None:
+                    listaCompanhia.append(barreiras.companhia)
+                else:
+                    listaCompanhia.append('0')
+                
+                if barreiras.dinheiro != None:
+                    listaDinheiro.append(barreiras.dinheiro)
+                else:
+                    listaDinheiro.append('0')
+                
+                if barreiras.coisas != None:
+                    listaCoisa.append(barreiras.coisas)
+                else:
+                    listaCoisa.append('0')
+
+                if barreiras.seguranca != None:
+                    listaSeguranca.append(barreiras.seguranca)
+                else:
+                    listaSeguranca.append('0')
+
+                if barreiras.clima != None:
+                    listaClima.append(barreiras.clima)
+                else:
+                    listaClima.append('0')
+
+                if barreiras.equipamentos != None:
+                    listaEquipamentos.append(barreiras.equipamentos)
+                else:
+                    listaEquipamentos.append('0')
+
+        else:
+            print("Não tem - Barreiras")
+            listaInteresse = [1]
+            listaTempo = [1]
+            listaEnergia = [1]
+            listaFaltaAr = [1]
+            listaCompanhia = [1]
+            listaDinheiro = [1]
+            listaCoisa = [1]
+            listaSeguranca = [1]
+            listaClima = [1]
+            listaEquipamentos = [1]
+
+    except:
+        print("Falha - Barreiras")
+        listaInteresse = [1]
+        listaTempo = [1]
+        listaEnergia = [1]
+        listaFaltaAr = [1]
+        listaCompanhia = [1]
+        listaDinheiro = [1]
+        listaCoisa = [1]
+        listaSeguranca = [1]
+        listaClima = [1]
+        listaEquipamentos = [1]
+    try:
+        listaquestion1 = []
+        listaquestion2 = []
+        listaquestion3 = []
+        listaquestion4 = []
+        listaquestion5 = []
+        listaquestion6 = []
+        listaquestion7 = []
+
+
+        questionario = AsthmaControlQuestionnaire.objects.all().filter(date__gte=date30dayback)
+        if len(questionario)!=0:
+            for day in questionario:
+                print("Certo - Questionario")
+                listaquestion1.append(day.question1)
+                listaquestion2.append(day.question2)
+                listaquestion3.append(day.question3)
+                listaquestion4.append(day.question4)
+                listaquestion5.append(day.question5)
+                listaquestion6.append(day.question6)
+                listaquestion7.append(day.question7)
+
+        else:
+            print("Errado")
+            listaquestion1 = [0]
+            listaquestion2 = [0]
+            listaquestion3 = [0]
+            listaquestion4 = [0]
+            listaquestion5 = [0]
+            listaquestion6 = [0]
+            listaquestion7 = [0]
+
+
+    except Exception:
+        traceback.print_exc()
+        listaquestion1 = [0]
+        listaquestion2 = [0]
+        listaquestion3 = [0]
+        listaquestion4 = [0]
+        listaquestion5 = [0]
+        listaquestion6 = [0]
+        listaquestion7 = [0]
+
+
+    listaquestion12 = []
+    listaquestion22 = []
+    listaquestion32 = []
+    listaquestion42 = []
+    listaquestion52 = []
+    listaquestion62 = []
+    listaquestion72 = []
+
+    listaValores = ['1','2','3','4','5','6']
+
+
+
+    a = listaquestion1
+    for k in listaValores:
+        listaquestion12.append(listaquestion1.count(k))
+        listaquestion22.append(listaquestion2.count(k))
+        listaquestion32.append(listaquestion3.count(k))
+        listaquestion42.append(listaquestion4.count(k))
+        listaquestion52.append(listaquestion5.count(k))
+        listaquestion62.append(listaquestion6.count(k))
+        listaquestion72.append(listaquestion7.count(k))
+    print("Lista ",listaquestion72)
+    # Create figure
+    fig = make_subplots(
+        rows=4, cols=2,
+        specs=
+            [[{}, {}],
+            [{}, {}],
+            [{}, {}],
+            [{"colspan": 2}, None]],
+        shared_xaxes=False,
+        subplot_titles=(
+            "Quão frequentemente você acordou por causa de sua asma?",
+            "Quão ruins foram os seus sintomas ao acordar?",
+            "Quão limitado você tem estado em suas atividades?",
+            "O quanto de falta de ar você teve?",
+            "Quanto tempo você teve chiado?",
+            "Quantos jatos de broncodilatador foram usado por dia?",
+            "VEF1 % previsto?"
+        )
+    )
+
+    fig.add_trace(
+        go.Bar(x=["Nunca", "Quase nunca","Poucas vezes","Várias vezes","Muitas vezes","Muitíssimas vezes","Incapaz de dormir"], y=listaquestion12, name='Pergunta 1'),row=1, col=1
+    )
+
+    fig.add_trace(
+        go.Bar(x=["Sem sintomas", " Muito leves","Leves","Moderados","Tanto graves","Graves","Muito graves"], y=listaquestion22, name='Pergunta 2'),row=1, col=2
+    )
+
+    fig.add_trace(
+        go.Bar(x=["Nada limitado", "Muito pouco","Pouco","Moderadamente","Muito","Extremamente","Totalmente"], y=listaquestion32, name='Pergunta 3'),row=2, col=1
+    )
+
+    fig.add_trace(
+        go.Bar(x=["Nenhuma", "Muito pouca","Alguma","Moderada","Bastante","Muita","Muitíssima"], y=listaquestion42, name='Pergunta 4'),row=2, col=2
+    )
+
+    fig.add_trace(
+        go.Bar(x=["Nunca", "Quase nunca","Pouco tempo","Algum tempo","Bastante tempo","Quase sempre","Sempre"], y=listaquestion52, name='Pergunta 5'),row=3, col=1
+    )
+
+    fig.add_trace(
+        go.Bar(x=["Nenhum", "1-2 jatos","3-4 jatos","5-8 jatos","9-12 jatos","13-16 jatos","+ 16 jatos"], y=listaquestion62, name='Pergunta 6'),row=3, col=2
+    )
+
+    fig.add_trace(
+        go.Bar(x=["> 95% do previsto", "95-90% do previsto","89-80% do previsto","79-70% do previsto","69-60% do previsto","59-50% do previsto","< 50% do previsto"], y=listaquestion72, name='Pergunta 7'),row=4, col=1
+    )
+
+    
+    fig['layout'].update(
+        height=1000
+    )
+
+    figQuestSemanal = plot({"data":fig},output_type='div', include_plotlyjs=True, show_link=False, link_text="", auto_open=False)
+
+
+
     # 7 days
     fig = go.Figure()
 
@@ -1231,10 +1458,94 @@ def estats(request):
     return render(request, 'logged/estats.html', context={
         'fitbit7dias':fitbit7dias,
         'stacked' : stacked,
-        'barreiras':barreiras
+        'barreiras':barreiras,
+        'figQuestSemanal':figQuestSemanal
     })
 
+
+def pageMetas(request,username):
+    user_data = UserProfileInfo.objects.get(user_id=username)
+    testeExec = False
+    if request.method == 'POST':
+        #print("T", username)
+        goalform = GoalForm(data=request.POST)
+        if goalform.is_valid():
+            goalformD = goalform.save(commit=False)
+            goalformD.user = User.objects.get(id=username)
+            #print(User.objects.get(id=username),User.objects.get(id=username).id)
+            goalformD.save()
+
+            #print("T2", goalformD,goalformD.user)
+            return HttpResponseRedirect(request.path)
+        else:
+            
+            testeExec = True
+    else:
+        testeExec = True
+    
+
+    if testeExec:
+        try:
+            date60dayback = (datetime.datetime.today() - datetime.timedelta(days=60))
+            metasDados = Goal.objects.all().filter(user_id=username)#.filter(startDate__gte=date60dayback)
+            if len(metasDados)!=0:
+                metasDadosLista = metasDados.values_list('activity','quantity','unit','startDate','endDate')
+                metadados_lista_sup = []
+                for metaDados in metasDadosLista:
+                    if metaDados[1].isdigit() and metaDados[2]=="passos" and metaDados[3]!=None and metaDados[4]!=None and metaDados[3]<=metaDados[4] and metaDados[3]<=datetime.datetime.today().date():
+
+                        #print(metaDados[3],datetime.datetime.today().date(),metaDados[3]<=datetime.datetime.today().date())
+                        
+                        if metaDados[4]>datetime.datetime.today().date():
+                            difDays = (metaDados[4]-metaDados[3]).days
+                        else:
+                            difDays = (datetime.datetime.today().date()-metaDados[3]).days
+
+                        daylistVerify = []
+                        if difDays>0:
+                            for i in range(0,difDays,1):
+                                daylistVerify.append((metaDados[3] + datetime.timedelta(days=i)).strftime("%Y-%m-%d"))
+                        else:
+                            daylistVerify.append(metaDados[3].strftime("%Y-%m-%d"))
+
+                        try:
+                            dadosFITBIT = getFitbitData(user=User.objects.get(id=username),dates=daylistVerify)
+                            soma = 0
+                            for day in sorted(dadosFITBIT.keys(),reverse=True):
+                                soma += dadosFITBIT[day]["summary"]["steps"]
+                            #print(soma, metaDados[1],daylistVerify)
+                            metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[3],metaDados[4],"{:.2f}%".format(soma*100/float(metaDados[1]))))
+
+                        except:
+                            metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[3],metaDados[4],"Erro ou fitbit não cadastrada"))
+
+                        
+                    elif metaDados[2]=="passos":
+                        metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],"-"))
+                    else:
+                        pass
+                        #Foi optado por demonstrar somente valores que sejam passos
+                        #metadados_lista_sup.append((metaDados[0],metaDados[1],metaDados[2],metaDados[4],metaDados[4],None))
+            else:
+                metadados_lista_sup =[('Vazio',0,'Vazio','0000-00-00','0000-00-00',"None")]
+
+            
+            metasDadosLista = metadados_lista_sup[:]
+            #print(metasDadosLista, metadados_lista_sup)
+        except Exception:
+            traceback.print_exc()
+            metasDadosLista =[('Falha',0,'Falha','0000-00-00','0000-00-00',"None")]
+            
+        #print(metasDadosLista)
+        goalform = GoalForm()
+    #print("T3")
+    return render(request, 'logged/metas.html',{
+        'metasDadosLista':metasDadosLista,
+        'goalform':goalform,
+        'user_data':user_data
+    })
 ####################### Downloads #######################
+@login_required
 def downloadBarreiras(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1247,6 +1558,7 @@ def downloadBarreiras(request):
     response['Content-Disposition'] = 'attachment; filename="barreiras.csv"'
     return response
 
+@login_required
 def downloadDaily(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1256,9 +1568,10 @@ def downloadDaily(request):
     for row in DailyControl.objects.all().values_list('user_id','date','pico1','pico2','pico3','tosse','chiado','faltaDeAr','acordar','bombinha','notes'):
         writer.writerow(row)
 
-    response['Content-Disposition'] = 'attachment; filename="dailycontrol.csv"'
+    response['Content-Disposition'] = 'attachment; filename="daily_control.csv"'
     return response
 
+@login_required
 def downloadAsthmaControlQuestionnaire(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1268,9 +1581,10 @@ def downloadAsthmaControlQuestionnaire(request):
     for row in AsthmaControlQuestionnaire.objects.all().values_list('user_id','date','question1','question2','question3','question4','question5','question6','question7'):
         writer.writerow(row)
 
-    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    response['Content-Disposition'] = 'attachment; filename="asthma_control_questionnaire.csv"'
     return response
 
+@login_required
 def downloadFitBitData(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1295,10 +1609,10 @@ def downloadFitBitData(request):
             traceback.print_exc()
 
     print(usuariosFitBit)
-    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    response['Content-Disposition'] = 'attachment; filename="fitbit_dados.csv"'
     return response
 
-
+@login_required
 def downloadUserProfileInfo(request):
     response = HttpResponse(content_type = 'text/csv')
 
@@ -1308,13 +1622,7 @@ def downloadUserProfileInfo(request):
     for row in UserProfileInfo.objects.all().values_list('user_id','user','nome','sobrenome','rg','altura','peso','token','nascimento'):
         writer.writerow(row)
 
-    response['Content-Disposition'] = 'attachment; filename="AsthmaControlQuestionnaire.csv"'
+    response['Content-Disposition'] = 'attachment; filename="user_profile_info.csv"'
     return response
 
-def tableTest(request):
-    return render(request, 'logged/table_test.html', {})
 
-
-def tableTest2(request,username):
-    print(username)
-    return render(request, 'logged/table_test.html', {})
