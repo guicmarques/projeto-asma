@@ -17,7 +17,7 @@ $ npm install -g @ionic/cli
 **Observação:** Para mais informações, acesse https://ionicframework.com/docs/intro/cli.
 
 ### No celular
-Fazer o download do arquivo ```app-debug.apk``` no aparelho.
+Fazer o download do arquivo ```app-debug.apk``` no aparelho. Este arquivo está presente na pasta ```projeto-asma```.
 
 ## Execução
 
