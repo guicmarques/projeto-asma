@@ -59,3 +59,8 @@ $ npm install @ionic-native/base64
 
 ### No celular
 Instale o arquivo .apk.
+
+
+## Usuário para teste:
+**CPF:** 12345678912
+**Senha:** 12345678
