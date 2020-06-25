@@ -3,12 +3,7 @@ Projeto do Laboratório de Engenharia de Software da Poli-USP em parceria com a 
 
 ## Requerimentos
 
-Para executar esse programa, é necessário ter alguma versão de python > 3.7. Em seguida, basta instalar os pacotes com o seguinte comando:
-```
-$ pip install -r requirements.txt
-```
-
-É necessário instalar a biblioteca responsável pela conexão à fitbit.
+Para executar esse programa, é necessário ter alguma versão de python >= 3.7. Primeiro é necessário instalar a biblioteca responsável pela conexão à fitbit.
 
 - À partir da pasta projeto-asma, insira os seguintes comandos
 ```
@@ -17,6 +12,13 @@ $ cd fitbit
 ```
 $ python setup.py install
 ```
+
+Em seguida, basta instalar os outros pacotes com o seguinte comando:
+
+```
+$ pip install -r requirements.txt
+```
+
 
 ## Rodar o servidor
 - na primeira vez, rode os seguintes comandos:
