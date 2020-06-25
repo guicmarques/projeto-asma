@@ -13,7 +13,7 @@ $ cd fitbit
 $ python setup.py install
 ```
 
-Em seguida, basta instalar os outros pacotes com o seguinte comando:
+- Na pasta django_server, basta instalar os outros pacotes com o seguinte comando:
 
 ```
 $ pip install -r requirements.txt
