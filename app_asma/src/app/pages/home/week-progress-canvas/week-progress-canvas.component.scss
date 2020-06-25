@@ -1,0 +1,49 @@
+
+canvas {
+    position: relative;
+    width: 86% !important;
+    height: 100% !important;
+}
+
+.chart {
+    margin: 0 auto;
+}
+
+.dias-label {
+    display: inline-flex;
+    margin-left: 19%;
+}
+
+.labels {
+    position: relative;
+    left: -7%;
+    font-size: 10px;
+}
+
+.today-label {
+    font-weight: 700;
+    color: black;
+}
+
+.other-label {
+    font-weight: 600;
+}
+
+.meta-text {
+    font-size: 110%;
+    padding-left: 5%;
+    font-weight: 700;
+}
+
+.my-goals-img {
+    width: 7%;
+    height: 7%;
+}
+
+ion-card {
+    border-radius: 25px;
+    width: 90%;
+    position: relative;
+    left: 2%;
+    top: 3%;
+}

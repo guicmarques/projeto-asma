@@ -1,0 +1,14 @@
+<ion-fab vertical="bottom" horizontal="end">
+  <ion-fab-button (click)="clickAnimation()">
+    <img src="../../../../assets/images/save_icon.png" #saveIcon style="z-index: 10; width: 24px;">
+    <div class="rect" style="width: 50px; height: 50px; background-color: #FFB000; position: absolute; left: -50px;" #loadingBack></div>
+    <div #checkIcon style="position: absolute; display: inline-block; height: 24px; width: 12px; background-color: #FFB000; transform: rotate(45deg);">
+      <div #firstLine style="display: inline-block; height: 5px; width: 12px; background-color: white;"></div>
+      <div #secondLine style="display: inline-block; height: 24px; width: 5px; background-color: white;"></div>
+      
+    </div>
+    <!--<img src="../../../../assets/images/tick_icon.png" #checkIcon style="position: absolute; top: 50px; width: 24px;"> -->
+  </ion-fab-button>
+  
+</ion-fab>
+

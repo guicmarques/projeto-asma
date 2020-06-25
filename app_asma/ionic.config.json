@@ -1,0 +1,7 @@
+{
+  "name": "app_asma",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

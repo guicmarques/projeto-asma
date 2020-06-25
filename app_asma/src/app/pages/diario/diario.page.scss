@@ -1,0 +1,272 @@
+.diaryHeader {
+    background-color: rgb(241, 241, 241);
+}
+
+.dateDescr {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-size: 5.4vw;
+}
+
+.daysName {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.weekdays {
+    text-align: center;
+}
+
+.availDay {
+    display: inline-block;
+    font-size: 15px;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    background-color: white;
+    border-radius: 50%;
+    color: black;
+    border: 2px solid #76F4ED;
+    font-weight: 600;
+}
+
+.selected {
+    display: inline-block;
+    font-size: 15px;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    background-color: #76F4ED;
+    border-radius: 50%;
+    color: white;
+    font-weight: 600;
+}
+
+.unavDay {
+    display: inline-block;
+    font-size: 15px;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    background-color: white;
+    border-radius: 50%;
+    color: black;
+    border: 2px solid lightgray;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+button {
+    outline: none;
+}
+
+.yesIcon {
+    color: rgb(70, 228, 220);
+}
+
+.yesChecked {
+    --background: #cbf1ff;
+    border-radius: 15px;
+}
+
+.noChecked {
+    --background: #ffe59f;
+    border-radius: 15px;
+}
+
+.noIcon {
+    color: orange;
+}
+
+.infoCard {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ffb546;
+    color: white;
+    text-align: center;
+    position: absolute;
+    z-index: 3;
+    top: -10px;
+    right: 0;
+}
+
+.QACard {
+    border-radius: 25px;
+    margin-top: 30px;
+}
+
+.questionnaire {
+    background-color: rgb(5, 181, 163);
+}
+
+.barrier {
+    background-color: #ff7868;
+}
+
+.barrierCard {
+    padding-bottom: 0;
+}
+
+.QAHeader {
+    padding-right: 5px;
+}
+
+.QAContainer {
+    display: flex;
+    align-items: flex-start;
+}
+
+.QATitle {
+    font-weight: 700;
+    font-size: 19px;
+    margin-top: 4px;
+    color: white;
+}
+
+.questionnaireImg {
+    padding-right: 0px;
+    padding-left: 10px;
+    padding-bottom: 0px;
+    padding-top: 9%;
+}
+
+.barrierImg {
+    width: 90%;
+}
+
+.gif {
+    width: 10vw;
+    position: absolute;
+    bottom: 3vw;
+}
+
+.sympCard {
+    border-radius: 25px;
+    margin-top: 30px;
+}
+
+.sympTitle {
+    font-weight: 800;
+    font-size: 22px;
+    margin-top: 4px;
+}
+
+.sympHeader {
+    padding-bottom: 0px;
+}
+
+.sympIcon {
+    width: 80%;
+}
+
+.sympSubt {
+    margin-top: 4px;
+    text-align: justify;
+}
+
+.yesSymp {
+    --color-checked: rgb(70, 228, 220);
+}
+
+.noSymp {
+    --color-checked: orange;
+}
+
+.peakSlide {
+    --knob-size: 4vh;
+    --bar-background-active: rgb(102, 201, 255);
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.peakRange {
+    font-size: 16px;
+}
+
+.peakValueContainer {
+    width: 100%;
+    text-align: end;
+}
+
+.peakValue {
+    font-size: 26px;
+    --padding-start: 23vw;
+    --padding-top: 0;
+    --padding-bottom: 0;
+}
+
+.peakUnit {
+    margin: 0 23vw 0 3vw;
+}
+
+.peakCheck {
+    --background-checked: rgb(102, 201, 255);
+    --border-color-checked: rgb(102, 201, 255);
+}
+
+/*
+.peakLabel {
+    display: inline-block;
+    margin-left: 50px;
+    margin-right: 5px;
+}
+
+
+.peakValue {
+    text-align: center;
+    margin-right: 10px;
+}
+
+.peakUnit {
+    display: inline-block;
+    margin-top: 10px;
+}*/
+
+ion-fab-button {
+    --background: #FFC619;
+    width: 50px;
+    height: 50px;
+}
+
+.saveIcon {
+    z-index: 10; 
+    width: 24px;
+}
+
+.rect {
+    width: 50px; 
+    height: 50px; 
+    background-color: #FFB000; 
+    position: absolute; 
+    left: -50px;
+}
+
+.checkIcon {
+    position: absolute; 
+    top: 50px; 
+    width: 24px;
+}
+
+.calendar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -207px;
+    z-index: 5;
+}
+
+ion-backdrop {
+    animation-name: backdrop;
+    animation-duration: 0.6s;
+    animation-timing-function: ease-out;
+    opacity: 0.4;
+}
+
+@keyframes backdrop {
+    from {opacity: 0;}
+    to {opacity: 0.4;}
+  }

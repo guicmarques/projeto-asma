@@ -1,0 +1,64 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="exercise-header">Exercicios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="filter-btns">
+    <button (click)="selectFilter('slides')" [ngClass]="{'slides-selected' : this.filterMode === 'slides',
+                                                        'slide-filter-btn' : this.filterMode === 'grid'}">
+      <ion-icon name="book-outline" class="filter-icon"></ion-icon>
+    </button>
+    <button (click)="selectFilter('grid')" [ngClass]="{'grid-selected' : this.filterMode === 'grid',
+                                                        'grid-filter-btn' : this.filterMode === 'slides'}">
+      <ion-icon name="grid-outline" class="filter-icon"></ion-icon>
+    </button>
+  </div>
+
+  <ion-slides pager="false" [options]="slideOpts" *ngIf="filterMode === 'slides'">
+    <ion-slide class="exercise-slide" *ngFor="let exercicio of this.exercicios">
+      <ion-card class="slide-card">
+        <ion-card-header class="exercise-card-header">
+          <iframe width="100%" height="300" [src]="exercicio.trustedVideoUrl" frameborder="0" 
+            allow="autoplay; encrypted-media" allowfullscreen>
+          </iframe>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-card-title class="exercise-name">{{ exercicio.nome }}</ion-card-title>
+          <div class="exercise-infos">
+            <span class="exercise-infos-key">Repetições: </span>
+            <span class="exercise-infos-value">{{ exercicio.repeticoes }}</span> <br>
+
+            <span class="exercise-infos-key">Duração: </span>
+            <span class="exercise-infos-value">{{ exercicio.tempo }}</span> minutos
+          </div>
+          <button *ngIf="exercicio.id !== null" class="saiba-mais-btn" [routerLink]="['./', exercicio.id]">
+            <ion-icon name="ellipsis-vertical"></ion-icon>
+          </button>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+  <div class="grid" *ngIf="filterMode === 'grid'">
+    <ion-grid>
+      <ion-row *ngFor="let line of gridExercises; let i = index">
+        <ion-col *ngFor="let exercise of line" size="6">
+          <ion-card>
+            <iframe width="100%" height="170" [src]="exercise.trustedVideoUrl" frameborder="0" 
+            allow="encrypted-media" style="display: block;" allowfullscreen>
+            </iframe>
+          </ion-card>
+          <div class="grid-exercise-name">
+            {{ exercise.nome }}
+            <button *ngIf="exercise.id !== null" class="grid-info-btn" [routerLink]="['./', exercise.id]">
+              <ion-icon name="ellipsis-vertical"></ion-icon>
+            </button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

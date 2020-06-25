@@ -1,0 +1,160 @@
+.profile-title {
+       padding-left: 15%;
+    
+}
+
+.title-text{
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0;
+   
+}
+
+.profile-header {
+    padding-bottom: 10%;
+   
+}
+.image-padding{
+
+    padding-top: 10px;
+}
+.edit{
+    padding-top: 20px;
+}
+
+.backbtn{
+    --ripple-color: #2dd2c2;
+}
+
+
+
+.back-arrow {
+    
+    color: #2dd2c2;
+    }
+
+.page-text {
+    font-size: large;
+    font-weight: 100;
+    margin-top: 0;
+}
+
+.line-skip{
+   height: 10px;
+   width: 40px; 
+
+}
+
+
+
+ ion-fab-button[data-desc] {
+    position: relative;
+}
+  
+ion-fab-button[data-desc]::after {
+    position: absolute;
+    content: attr(data-desc);
+    z-index: 1;
+    right: 50px;
+    bottom: 4px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 9px;
+    border-radius: 15px;
+    color: black;
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
+}
+.edit-image{
+    margin: auto;
+    width: 125px;
+    height: 125px;
+    box-shadow: 3px  rgba(0,0,0,0.2);
+  
+    background-color: rgba(255,255,255,0.8);
+
+    //gray border-box;
+    border: transparent white;
+    border-style: outset;
+    
+    
+
+
+}
+.imageborder   {
+    margin: auto;
+    box-shadow: 3px  rgba(0,0,0,0.2);
+    border: transparent 10px;
+    border-style: outset;
+
+
+}
+.camera-btn{
+    position: absolute;
+    top:0%;
+    right: -10px;
+    --border-radius: 10px;
+    --background: linear-gradient(315deg, rgba(0,252,198,1) 0%, rgba(0,252,233,1) 35%, rgba(0,166,235,1) 100%);
+
+
+}
+.camera-logo{
+    color:white;
+}
+.edit-input {
+    padding-left: 10%;
+    padding-bottom: 18px;
+ }
+ .edit-input-with-warning {
+    padding-left: 10%;
+    padding-bottom: 2px;
+ }
+
+.edit-field {
+    text-align: center;
+    height: 46px;
+    width: 80%;
+    display: inline-block;
+    box-sizing: border-box;
+    outline: none;
+    --padding-start: 50px;
+    --padding-end: 50px;
+    --padding-top: 14px;
+    text-align: start;
+    background: 
+     linear-gradient(rgb(255, 255, 255),rgb(255, 255, 255)) padding-box,
+     linear-gradient(315deg, rgba(0,252,198,1) 0%, rgba(0,252,233,1) 35%, rgba(0,166,235,1) 100%) border-box;
+    border: 2px solid transparent;
+    border-radius: 23px;
+}
+.edit-field-empty {
+    text-align: center;
+    height: 46px;
+    width: 80%;
+    display: inline-block;
+    box-sizing: border-box;
+    outline: none;
+    --padding-start: 50px;
+    --padding-end: 50px;
+    --padding-top: 14px;
+    text-align: start;
+    background:
+    linear-gradient(rgb(255, 255, 255),rgb(255, 255, 255)) padding-box,
+    gray border-box;
+    border: 2px solid transparent;
+    border-radius: 23px;
+}
+.warning{
+    font-size: 12px;
+    visibility: hidden;
+
+}
+
+.field-title{
+    padding-left: 15px;
+    font-size: 12px;
+    color: gray;
+    
+}
+.save-button{
+    --background:#FFB347;
+}
+

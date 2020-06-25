@@ -1,0 +1,341 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="diaryHeader">
+      <div class="dateDescr"><b>{{this.dayName}}</b>,  {{this.day}}  de  {{this.month}}</div>
+    
+      <ion-grid class="viewDays">
+        <ion-row>
+          <ion-col *ngFor="let wDay of this.week; let i = index" size="1" class="weekdays">
+            <div class="daysName"> {{this.daysName[i]}} </div>
+            <button (click)="getDiaryPage(wDay)" [ngClass]="{'availDay'  : wDay[3] === 'before',
+                                                             'selected'  : wDay[3] === 'selected',
+                                                             'unavDay'   : wDay[3] === 'after'}"> {{wDay[0]}} </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<app-calendario class="calendar"></app-calendario>
+
+<ion-backdrop tappable="false" *ngIf="calendarView"></ion-backdrop>
+<ion-content>
+  
+
+  <div *ngIf="showACQ && pageView[0].padStart(2, '0') == this.day">
+    <ion-card class="QACard questionnaire" routerLink="./questionario">
+      <ion-card-header class="QAHeader">
+        <img src="../../../assets/images/bell_ACQ.gif" class="gif">
+        <ion-grid>
+          <ion-row class="QAContainer">
+              <ion-col>
+                <ion-card-title class="QATitle">Questionário de Controle da Asma (ACQ)</ion-card-title>
+              </ion-col>
+
+              <ion-col class="questionnaireImg">
+                <img src="../../../assets/images/survey_flat.png">
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+        
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <div *ngIf="showBarriers && pageView[0].padStart(2, '0') == this.day">
+    <ion-card class="QACard barrier" routerLink="./barreiras">
+      <ion-card-header class="QAHeader barrierCard">
+        <img src="../../../assets/images/bell_barriers.gif" class="gif">
+        <ion-grid>
+          <ion-row class="QAContainer">
+              <ion-col>
+                <ion-card-title class="QATitle">Questionário de Barreiras</ion-card-title>
+              </ion-col>
+
+              <ion-col>
+                <img src="../../../assets/images/barriers_flat.png" class="barrierImg">
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+        
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <div style="position: relative;">
+    <button class="infoCard" (click)="presentPopUp('Tosse', 'tosse')">?</button>
+    <ion-card class="sympCard">
+      <ion-card-header class="sympHeader">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+              <img src="../../../assets/images/cough_icon.png" class="sympIcon">
+            </ion-col>
+            
+            <ion-col size="9">
+              <ion-card-title class="sympTitle">Tosse</ion-card-title>
+              <ion-card-subtitle class="sympSubt">Você teve tosse hoje?</ion-card-subtitle>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-radio-group [(ngModel)]="diaryPage.tosse">
+            <ion-item [ngClass]="{'yesChecked' : diaryPage.tosse === 'true'}" lines="none">
+              <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
+              <ion-label>Sim</ion-label>
+              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
+            </ion-item>
+    
+            <ion-item [ngClass]="{'noChecked' : diaryPage.tosse === 'false'}" lines="none">
+              <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
+              <ion-label>Não</ion-label>
+              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+          
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+  <div style="position: relative;">
+    <button class="infoCard" (click)="presentPopUp('Chiado', 'chiado')">?</button>
+    <ion-card class="sympCard">
+      <ion-card-header class="sympHeader">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+              <img src="../../../assets/images/lungs_icon.png" class="sympIcon">
+            </ion-col>
+            
+            <ion-col size="9">
+              <ion-card-title class="sympTitle">Chiado</ion-card-title>
+              <ion-card-subtitle class="sympSubt">Você sentiu chiados no peito hoje?</ion-card-subtitle>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-radio-group [(ngModel)]="diaryPage.chiado">
+            <ion-item [ngClass]="{'yesChecked' : diaryPage.chiado === 'true'}" lines="none">
+              <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
+              <ion-label>Sim</ion-label>
+              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
+            </ion-item>
+
+            <ion-item [ngClass]="{'noChecked' : diaryPage.chiado === 'false'}" lines="none">
+              <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
+              <ion-label>Não</ion-label>
+              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+          
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div style="position: relative;">
+    <button class="infoCard" (click)="presentPopUp('Falta de ar', 'faltaAr')">?</button>
+    <ion-card class="sympCard">
+      <ion-card-header class="sympHeader">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+              <img src="../../../assets/images/air_icon.png" class="sympIcon">
+            </ion-col>
+            
+            <ion-col size="9">
+              <ion-card-title class="sympTitle">Falta de ar</ion-card-title>
+              <ion-card-subtitle class="sympSubt">Você teve falta de ar hoje?</ion-card-subtitle>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-radio-group [(ngModel)]="diaryPage.faltaAr">
+            <ion-item [ngClass]="{'yesChecked' : diaryPage.faltaAr === 'true'}" lines="none">
+              <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
+              <ion-label>Sim</ion-label>
+              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
+            </ion-item>
+    
+            <ion-item [ngClass]="{'noChecked' : diaryPage.faltaAr === 'false'}" lines="none">
+              <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
+              <ion-label>Não</ion-label>
+              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+          
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div style="position: relative;">
+    <button class="infoCard" (click)="presentPopUp('Acordar', 'acordar')">?</button>
+    <ion-card class="sympCard">
+      <ion-card-header class="sympHeader">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+              <img src="../../../assets/images/sleep_icon.png" class="sympIcon">
+            </ion-col>
+            
+            <ion-col size="9">
+              <ion-card-title class="sympTitle">Acordar</ion-card-title>
+              <ion-card-subtitle class="sympSubt">Você teve dificuldade para dormir e/ou acordou por causa da asma hoje?</ion-card-subtitle>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-radio-group [(ngModel)]="diaryPage.acordar"> 
+            <ion-item [ngClass]="{'yesChecked' : diaryPage.acordar === 'true'}" lines="none">
+              <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
+              <ion-label>Sim</ion-label>
+              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
+            </ion-item>
+
+            <ion-item [ngClass]="{'noChecked' : diaryPage.acordar === 'false'}" lines="none">
+              <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
+              <ion-label>Não</ion-label>
+              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+          
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div style="position: relative;">
+    <button class="infoCard" (click)="presentPopUp('Bombinha', 'bombinha')">?</button>
+    <ion-card class="sympCard">
+      <ion-card-header class="sympHeader">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+              <img src="../../../assets/images/inhaler_icon.png" class="sympIcon">
+            </ion-col>
+            
+            <ion-col size="9">
+              <ion-card-title class="sympTitle">Bombinha</ion-card-title>
+              <ion-card-subtitle class="sympSubt">Você usou a bombinha hoje?</ion-card-subtitle>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-radio-group [(ngModel)]="diaryPage.bombinha">
+            <ion-item [ngClass]="{'yesChecked' : diaryPage.bombinha === 'true'}" lines="none">
+              <ion-icon class="yesIcon" name="checkmark-circle" slot="start"></ion-icon>
+              <ion-label>Sim</ion-label>
+              <ion-radio slot="end" class="yesSymp" value="true" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
+            </ion-item>
+    
+            <ion-item [ngClass]="{'noChecked' : diaryPage.bombinha === 'false'}" lines="none">
+              <ion-icon class="noIcon" name="close-circle-outline" slot="start"></ion-icon>
+              <ion-label>Não</ion-label>
+              <ion-radio slot="end" class="noSymp" value="false" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+          
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div style="position: relative;">
+    <button class="infoCard" (click)="presentPopUp('Pico de fluxo', 'pico')">?</button>
+    <ion-card class="sympCard">
+      <ion-card-header class="sympHeader">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+              <img src="../../../assets/images/peak_icon.png" class="sympIcon">
+            </ion-col>
+            
+            <ion-col size="9">
+              <ion-card-title class="sympTitle">Pico de fluxo</ion-card-title>
+              <ion-card-subtitle class="sympSubt">Coloque o valor indicado no seu medidor de fluxo expiratório.</ion-card-subtitle>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item lines="none">
+            <ion-input type="number" min="150" max="600" [(ngModel)]="peakVal"
+            [disabled]="!peakEnable || pageView[0].padStart(2, '0') !== this.day ? true : false"
+            class="peakValue" (ionBlur)="checkPeakValue()"></ion-input>
+            <ion-label class="peakUnit">L/min</ion-label>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-range min="150" max="600" class="peakSlide" [(ngModel)]="peakVal" 
+            [disabled]="!peakEnable || pageView[0].padStart(2, '0') !== this.day ? true : false">
+              <ion-label slot="start" class="peakRange">150</ion-label>
+              <ion-label slot="end" class="peakRange">600</ion-label>
+            </ion-range>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>Realizei a medição hoje</ion-label>    
+            <ion-checkbox slot="start" mode="ios" [(ngModel)]="peakEnable" class="peakCheck"
+            [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-checkbox>
+          </ion-item>
+          
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div style="position: relative;">
+    <button class="infoCard" (click)="presentPopUp('Anotações', 'note')">?</button>
+    <ion-card class="sympCard">
+      <ion-card-header class="sympHeader">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+              <img src="../../../assets/images/sticky_note_icon.png" class="sympIcon">
+            </ion-col>
+            
+            <ion-col size="9">
+              <ion-card-title class="sympTitle">Anotações</ion-card-title>
+              <ion-card-subtitle class="sympSubt">Você gostaria de fazer mais alguma observação?</ion-card-subtitle>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-textarea placeholder="Até 100 caracteres" inputmode="text" maxlength="100" rows="2" 
+          [(ngModel)]="diaryPage.note" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false"></ion-textarea>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="setDiaryPage()" [disabled]="pageView[0].padStart(2, '0') !== this.day ? true : false">
+      <img src="../../../../assets/images/save_icon.png" #saveIcon class="saveIcon">
+      <div class="rect" #loadingBack></div>
+      <img src="../../../../assets/images/tick_icon.png" #checkIcon class="checkIcon"> 
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

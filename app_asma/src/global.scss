@@ -1,0 +1,298 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+.signUpAlert .alert-wrapper {
+    border-radius: 5vw;
+}
+
+.signUpAlert .alert-head {
+    background-color: white;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left: 1px;
+    border-right: 1px;
+    margin-left: 12px;
+    margin-right: 12px;
+
+    h2 {        
+        font-size: 5vw;
+        font-weight: 700;
+        color: black;
+    } 
+}
+
+.signUpAlert .alert-message {
+    margin-top: 10px;
+    background-color: white;
+    font-size: 4vw;
+    text-align: center;
+    color: #a09a9a;
+}
+
+.signUpAlert .alert-button-group {
+    justify-content: space-evenly;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 5%;
+
+    .alert-button {
+        width: 37%;
+        margin-right: 0; 
+        
+        span {
+            justify-content: center;
+        }
+    }
+
+    .signUpNoBtn {
+        color: orange;
+        border: 2px solid orange;
+        border-radius: 6vw;
+
+        span {
+            text-align: center;
+        }
+    }
+
+    .signUpYesBtn {
+        background-color: orange;
+        color: white;
+        border: 1px solid orange;
+        border-radius: 6vw;
+    }
+}
+
+.popUp .alert-wrapper {
+    border-radius: 5vw;
+}
+
+.popUp .alert-head {
+    background-color: white;
+    text-align: center;
+
+    h2 {        
+        font-size: 5vw;
+        font-weight: 700;
+        color: black;
+    }
+}
+
+.popUp .alert-message {
+    margin-top: 6px;
+    background-color: white;
+    font-size: 4vw;
+    text-align: center;
+    color: #a09a9a;
+
+    h2 {        
+        font-size: 5vw;
+        font-weight: 700;
+        color: black;
+    }
+
+    img {
+        width: 40vw;
+        height: 40vw;
+    }
+}
+
+.popUp .alert-button-group {
+    justify-content: space-evenly;
+    padding-bottom: 5%;
+
+    .alert-button {
+        width: 60%;
+        margin-right: 0; 
+        
+        span {
+            justify-content: center;
+        }
+    }
+
+    .popUpBtn {
+        background-color: orange;
+        color: white;
+        border: 1px solid orange;
+        border-radius: 6vw;
+    }
+
+}
+
+.noButtonPopUp .alert-wrapper {
+    text-align: justify;
+    border-radius: 5%;
+}
+
+.noButtonPopUp .alert-head {
+    font-size: 22px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid lightgray;
+    margin: 0px 10px 10px 10px;
+    padding: 20px 13px 5px 13px;
+}
+
+.noButtonPopUp .alert-message {
+    font-size: 14px;
+}
+
+.questionnaireSlides .swiper-pagination {
+    bottom: 97%;
+}
+
+.QAAlert .alert-wrapper {
+    border-radius: 5vw;
+}
+
+.QAAlert .alert-head {
+    background-color: white;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left: 1px;
+    border-right: 1px;
+    margin-left: 12px;
+    margin-right: 12px;
+
+    h2 {        
+        font-size: 5vw;
+        font-weight: 700;
+        color: black;
+    }   
+}
+
+.QAAlert .alert-message {
+    margin-top: 10px;
+    background-color: white;
+    font-size: 4vw;
+    text-align: center;
+    color: #a09a9a;
+}
+
+.QAAlert .alert-button-group {
+    justify-content: space-evenly;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 5%;
+
+    .alert-button {
+        width: 37%;
+        margin-right: 0; 
+        
+        span {
+            justify-content: center;
+        }
+    }
+
+    .QANoBtn {
+        color: orange;
+        border: 2px solid orange;
+        border-radius: 6vw;
+
+        span {
+            text-align: center;
+        }
+    }
+
+    .QAYesBtn {
+        background-color: orange;
+        color: white;
+        border: 1px solid orange;
+        border-radius: 6vw;
+    }
+}
+
+.loading-class {
+    .loading-wrapper {
+        border-radius: 25px;
+        flex-direction: column;
+    }
+}
+
+.searchbar {
+    .searchbar-input-container{
+        .searchbar-input{
+            border-radius: 50px !important;
+            --background: rgb(221, 221, 221);
+            font-size: 5vw;
+        }
+    }
+    --box-shadow: 0;
+    width: 90vw;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.searching {
+    .searchbar-input-container{
+        .searchbar-input{
+            border-radius: 50px !important;
+            --background: rgb(64, 196, 248);
+            color:white;
+            font-size: 5vw;
+        }
+        --cancel-button-color: white;
+    }
+    --icon-color: white;
+    --box-shadow: 0;
+    width: 90vw;
+    left: 50%;
+    transform: translate(-50%);
+}
+.popUpNoButtonWithImg .alert-wrapper {
+    border-radius: 5vw;
+}
+
+.popUpNoButtonWithImg .alert-head {
+    background-color: white;
+    text-align: center;
+
+    h2 {        
+        font-size: 5vw;
+        font-weight: 700;
+        color: black;
+    }
+}
+
+.popUpNoButtonWithImg .alert-message {
+    margin-top: 6px;
+    background-color: white;
+    font-size: 4vw;
+    text-align: center;
+    color: #a09a9a;
+
+    h2 {        
+        font-size: 5vw;
+        font-weight: 700;
+        color: black;
+    }
+
+    img {
+        width: 24vw;
+        height: 24vw;
+    }
+}

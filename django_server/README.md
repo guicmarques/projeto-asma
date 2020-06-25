@@ -40,6 +40,12 @@ $ python manage.py createsuperuser
 $ python manage.py runsslserver 0.0.0.0:8000
 ```
 
+## Modelos de FAQ e Exercícios
+Para que o aplicativo consiga identificar corretamente o FAQ e os exercícios, deve ser incluído um arquivo ```exercicios.json``` e outro ```faq.json```, que será lido pela aplicação quando necessário. A descrição do formato do arquivo se encontra nos seguintes links:
+
+- [Exercício](modelo_exercicio.md)
+- [FAQ](modelo_FAQ.md)
+
 
 ## API description /rest
 ### POST requests:
@@ -89,7 +95,7 @@ $ python manage.py runsslserver 0.0.0.0:8000
     - Body: ```{"name": nome da conquista, "level": nivel da conquista (máx. 10 digitos), "quantity": quantidade para obter a conquista (máx. 10 digitos)}```
     - Response ```{"created": True ou mensagem de erro}```
 
--/rest/barriers/ - Cria uma nova entrada de barreiras para a prática. São aceitos valores de 1 a 5, correspondentes a Nunca, Raramente, Às vezes, Quase Sempre e Sempre, respectivamente. Os motivos são representados por uma palavra chave, como pode ser visto a seguir.
+- /rest/barriers/ - Cria uma nova entrada de barreiras para a prática. São aceitos valores de 1 a 5, correspondentes a Nunca, Raramente, Às vezes, Quase Sempre e Sempre, respectivamente. Os motivos são representados por uma palavra chave, como pode ser visto a seguir.
     - Authentication: Bearer ```access_token```
     - Body: ```{"interesse": valor, "tempo": valor, "energia": valor, "faltaAr": valor, "companhia": valor, "dinheiro": valor, "coisas": valor, "seguranca": valor, "clima": valor, "equipamentos": valor}```
     - Response ```{"created": True ou mensagem de erro}```
