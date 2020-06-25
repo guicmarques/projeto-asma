@@ -21,6 +21,8 @@ $ pip install -r requirements.txt
 
 
 ## Rodar o servidor
+O servidor se encontra na pasta django_server, portanto todos os comandos a seguir se referem a esse diretório.
+
 - na primeira vez, rode os seguintes comandos:
 
 ```
